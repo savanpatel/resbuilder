@@ -6,3 +6,27 @@
 {
     margin-bottom:80px;
 }
+
+#mycontent-left {
+    float: left;
+    height: 200px;
+    width: 100%;
+}
+#mycontent-right:after {
+    content: "";
+    background-color: #000;
+    position: absolute;
+    width: 1px;
+    height: 1200px;
+    display: block;
+}
+#mycontent-right {
+    background-color: brown;
+    float: right;
+    width: 100%;
+}
+
+.margin-top-pb
+{
+    margin-top: 100px;
+}
