@@ -1,6 +1,10 @@
- <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 text-center"><i class="fa fa-snowflake-o fa-5x" aria-hidden="true"></i></div>
+<div ng-include="'./views/menu/menu.view.client.html'"></div>
+
+<div class="container-fluid container-if-fixed-header">
+
+    <div class="row">
+
+        <div class="col-sm-12 text-center"><i class="fa fa-snowflake-o fa-5x" aria-hidden="true"></i></div>
         </div>
         <div class="row">
             <div class="col-sm-12 text-center"><h1>Login</h1></div>
@@ -17,6 +21,6 @@
             <input type="password" ng-model="user.password" class="form-control" id="password" placeholder="password">
         </div>
 
-        <a class="btn btn-primary btn-block btn-success" ng-click="model.login(user)">Login</a>
+        <a class="btn btn-primary btn-block btn-success">Login</a>
         <a class="btn btn-success btn-block btn-danger" href="#/register">Register</a>
-    </div>
+</div>
