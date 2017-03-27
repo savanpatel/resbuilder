@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("WebAppMaker", ["ngRoute", "ngSanitize", "textAngular"]);
+        .module("ResumeBuilder", ["ngRoute", "ngSanitize", "textAngular"]);
 })();
