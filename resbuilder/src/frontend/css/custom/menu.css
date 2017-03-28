@@ -134,5 +134,11 @@
 .dropdown-menu-1
 {
     margin-left: 0px;
-   padding-left: 23px;
+   padding-left: 0px;
+}
+
+
+.list-group-submenu li a
+{
+    padding-top: 10px;
 }
