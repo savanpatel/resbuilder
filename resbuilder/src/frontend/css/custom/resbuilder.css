@@ -52,3 +52,9 @@ tags-input .tags input
     float: right;
     width: 95%;
 }
+
+.url-pb-class
+{
+    margin-left: 30px;
+    margin-right: 30px;
+}

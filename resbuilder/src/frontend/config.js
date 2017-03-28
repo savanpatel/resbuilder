@@ -25,6 +25,11 @@
                 controller: "DashBoardController",
                 controllerAs: "model"
             })
+            .when("/user/dashboard/resumes", {
+                templateUrl: "views/resumes/resumes.view.client.html",
+                controller: "ResumesController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/basicprofile", {
                 templateUrl: "views/user/user.basicprofile.edit.view.client.html",
                 controller: "BasicProfileEditController",
