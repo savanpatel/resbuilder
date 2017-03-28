@@ -1,7 +1,6 @@
 
 <script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
 
-
 <div ng-include="'./views/menu/menu.view.client.html'"></div>
 <div class="container-if-fixed-header">
     <div class="container mt40">
@@ -10,22 +9,20 @@
             <article class="col-xs-12 col-sm-6 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <a href="" title="Nature Portfolio" data-title="Amazing Nature" data-footer="The beauty of nature" data-type="image" data-toggle="lightbox">
-                            <img src="http://lorempixel.com/350/350/nature/4" alt="Nature Portfolio" />
-
-                        </a>
+                        <ng-pdf template-url="views/dashboard/viewer.html" canvasid="pdf"></ng-pdf>
                     </div>
                 </div>
                     <div class="pb-dash-dropdown container-fluid panel-footer">
                         <div uib-dropdown aria-hidden="true">
                         <a class="btn-block dropdown-toggle dropdown-menu-1" uib-dropdown-toggle data-toggle="dropdown">
                             <span class="glyphicon glyphicon-option-vertical pull-right">
-                            </span></a>
-
+                                <button ng-click="zoomOut()">-</button>
+                            </span>
+                        </a>
                         <ul class="pb-dash-menu btn-block dropdown-menu well well-sm" uib-dropdown-menu>
-                            <li><a href="#">HTML</a></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="">HTML</a></li>
+                            <li><a href="">CSS</a></li>
+                            <li><a href="">JavaScript</a></li>
                         </ul>
                         </div>
                     </div>
@@ -110,3 +107,17 @@
 
 
 </div>
+
+<script>
+
+    function invokeZoom()  {
+        a = 10;
+        while(a>0)
+        {
+            zoomOut();
+            a = a - 1;
+        }
+    }
+    window.onload=invokeZoom();
+
+</script>
