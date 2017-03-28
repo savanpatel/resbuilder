@@ -1,5 +1,5 @@
 (function () {
     angular
-        .module("ResumeBuilder", ["ngRoute", "ngSanitize", "ui.bootstrap", "toggle-switch", "ngTagsInput","pdf"]);
+        .module("ResumeBuilder", ["ngRoute", "ngSanitize", "ui.bootstrap", "toggle-switch", "ngTagsInput","angular-thumbnails"]);
 
 })();
