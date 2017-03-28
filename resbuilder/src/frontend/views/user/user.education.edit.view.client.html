@@ -10,14 +10,43 @@
                    <fieldset>
                        <legend>Education</legend>
 
-                       <div class="form-group">
-                           <label class="col-lg-2 control-label" for="username">Username</label>
-                           <div class="col-lg-10">
-                             <input class="form-control" id="username" type="text" placeholder="username" ng-model="model.user.username" disabled="">
-                           </div>
+                       <div class="list-group">
+                           <a href="#" class="list-group-item">
+                               <h3 class="list-group-item-heading">Northeastern University</h3>
+                               <h4 class="list-group-item-text">Masters, Computer Science</h4>
+                               <h5 class="list-group-item-text">2016-2018</h5>
+                               <br/>
+                               <div>
+                                   <label>Courses</label>
+                                   <p>Computer Systems, Algorithms</p>
+                               </div>
+                               <div>
+                                   <label>Grade</label>
+                                   <p>4</p>
+                               </div>
+                               <span class="glyphicon glyphicon-cog pull-right"></span>
+                               <br/>
+                           </a>
+                           <br/>
+
+                           <a href="#" class="list-group-item">
+                               <h3 class="list-group-item-heading">Northeastern University</h3>
+                               <h4 class="list-group-item-text">Masters, Computer Science</h4>
+                               <h5 class="list-group-item-text">2016-2018</h5>
+                               <br/>
+                               <div>
+                                   <label>Courses</label>
+                                   <p>Computer Systems, Algorithms</p>
+                               </div>
+                               <div>
+                                   <label>Grade</label>
+                                   <p>4</p>
+                               </div>
+                               <span class="glyphicon glyphicon-cog pull-right"></span>
+                               <br/>
+                           </a>
+                           <br/>
                        </div>
-
-
 
 
                        <div class="form-group hidden-md visible-xs visible-sm">
@@ -25,14 +54,20 @@
                                <button type="button" class="btn btn-block center-block btn-primary" ng-click="isCollapsed = !isCollapsed">Add Education</button>
                            </div>
                        </div>
+
+
                    </fieldset>
                </form>
 
                <hr/>
                <br/>
-               <div class="hidden-md visible-xs visible-sm" ng-include="'./views/user/user.addeducation.form.view.client.html'">
+               <div uib-collapse="isCollapsed">
 
+                 <div class="hidden-md visible-xs visible-sm" ng-include="'./views/user/user.addeducation.form.view.client.html'">
+
+                 </div>
                </div>
+
            </div>
         </div>
 
