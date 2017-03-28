@@ -6,11 +6,14 @@
 (function () {
 
     angular
-        .module("WebAppMaker")
+        .module("ResumeBuilder")
         .directive("dashboardDirectives", dashboardDirectives);
     
     
     function dashboardDirectives() {
+
+        function linkFunc(scope, element)
+        {
 
         $(document).ready(function() {
             $('i.glyphicon-thumbs-up, i.glyphicon-thumbs-down').click(function(){
@@ -26,5 +29,12 @@
                 $(this).ekkoLightbox();
             });
         });
+
     }
+
+    return {
+            link: linkFunc
+        }
+    }
+
 })();

@@ -10,6 +10,5 @@
 
     function DashBoardController($sce, $scope, $location) {
 
-
     }
 })();
