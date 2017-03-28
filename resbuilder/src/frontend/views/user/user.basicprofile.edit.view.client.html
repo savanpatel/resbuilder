@@ -1,0 +1,94 @@
+<div ng-include="'./views/menu/menu.view.client.html'"></div>
+
+<div class="container container-if-fixed-header">
+
+
+       <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
+           <div id="">
+               <form class="form-horizontal">
+                   <fieldset>
+                       <legend>Basic Information</legend>
+
+                       <div class="form-group">
+                           <label class="col-lg-2 control-label" for="username">Username</label>
+                           <div class="col-lg-10">
+                             <input class="form-control" id="username" type="text" placeholder="username" ng-model="model.user.username" disabled="">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="firstname" class="col-lg-2 control-label">First Name</label>
+                           <div class="col-lg-10">
+                               <input type="text" class="form-control" id="firstname" ng-model="model.user.firstName" placeholder="First Name">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="lastname" class="col-lg-2 control-label">Last Name</label>
+                           <div class="col-lg-10">
+                               <input type="text" class="form-control" id="lastname" ng-model="model.user.lastName" placeholder="Last Name">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                           <div class="col-lg-10">
+                               <input type="email" class="form-control" id="inputEmail" ng-model="model.user.email" placeholder="Email">
+                           </div>
+                       </div>
+
+
+                       <div class="form-group">
+                           <label for="textArea" class="col-lg-2 control-label">Address</label>
+                           <div class="col-lg-10">
+                               <textarea class="form-control" rows="3" id="textArea" ng-model="model.user.address"></textarea>
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="contact" class="col-lg-2 control-label">Contact</label>
+                           <div class="col-lg-10">
+                               <input type="number" class="form-control" id="contact" ng-model="model.user.contact" placeholder="Contact Number">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="github" class="col-lg-2 control-label">Github</label>
+                           <div class="col-lg-10">
+                               <input type="text" class="form-control" id="github" ng-model="model.user.githubUrl" placeholder="GitHub Url">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="personalurl" class="col-lg-2 control-label">Personal Website</label>
+                           <div class="col-lg-10">
+                               <input type="text" class="form-control" id="personalurl" ng-model="model.user.personalWebsite" placeholder="Personal Website Url">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label class="col-lg-2 control-label">Import from LinkedIn</label>
+                           <div class="col-lg-10">
+                               <a href="#" class="btn btn-linkedin btn-block btn-info">Import from LinkedIn</a>
+                           </div>
+                       </div>
+                       <div class="form-group">
+                           <label class="col-lg-2 control-label">Make Profile Public</label>
+                           <div class="col-lg-10">
+                               <toggle-switch ng-model="model.user.isPublic" class="switch-primary"></toggle-switch>
+                           </div>
+                       </div>
+
+                       <hr/>
+                       <br/>
+                       <br/>
+                       <div class="form-group">
+                           <div class="col-lg-10 col-lg-offset-2">
+                               <button type="submit" class="btn btn-block btn-primary">Save</button>
+                           </div>
+                       </div>
+                   </fieldset>
+               </form>
+           </div>
+        </div>
+</div>

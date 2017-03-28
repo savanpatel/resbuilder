@@ -25,9 +25,9 @@
                 controller: "DashBoardController",
                 controllerAs: "model"
             })
-            .when("/user/:uid", {
-                templateUrl: "views/user/profile.view.client.html",
-                controller: "ProfileController",
+            .when("/user/:uid/basicprofile", {
+                templateUrl: "views/user/user.basicprofile.edit.view.client.html",
+                controller: "BasicProfileEditController",
                 controllerAs: "model"
             })
             .when("/user/:uid/website/new", {

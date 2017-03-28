@@ -10,5 +10,7 @@
 
     function DashBoardController($sce, $scope, $location) {
 
+        var vm = this;
+        vm.isCollapsed = false;
     }
 })();

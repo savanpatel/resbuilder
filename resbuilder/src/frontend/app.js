@@ -1,5 +1,5 @@
 (function () {
     angular
-        .module("ResumeBuilder", ["ngRoute", "ngSanitize", "textAngular", "ui.bootstrap"]);
+        .module("ResumeBuilder", ["ngRoute", "ngSanitize", "textAngular", "ui.bootstrap", "toggle-switch"]);
 
 })();

@@ -29,20 +29,20 @@
                 <li>
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span><font color="#337AB7"> ADMINISTRATION</font>
                 </li>
+
                 <li class="btn-block" uib-dropdown aria-hidden="true">
-                    <a class="btn-block dropdown-toggle dropdown-menu-1" uib-dropdown-toggle data-toggle="dropdown">
+                    <a class="btn-block dropdown-toggle dropdown-menu-1" uib-dropdown-toggle data-toggle="dropdown" data-target="submenu1">
                         <span class="glyphicon glyphicon-pencil"></span> Edit Profile
                         <span class="caret"></span></a>
 
-                    <ul class="btn-block dropdown-menu list-group-submenu" uib-dropdown-menu>
-                        <li><a href="#">Basic Info</a></li>
+                    <ul id="submenu1"class="btn-block list-group-submenu panel-collapse collapse" uib-dropdown-menu>
+                        <li><a href="#/user/123/basicprofile">Basic Info</a></li>
                         <li><a href="#">Education</a></li>
                         <li><a href="#">Skills</a></li>
                         <li><a href="#">Projects</a></li>
                         <li><a href="#">Work Experience</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a>
                 </li>

@@ -9,6 +9,7 @@
             var vm = this;
 
             vm.error = null;
+            vm.isCollapsed = false;
 
         $scope.content = undefined;
         $scope.contentToggle = function(name){
