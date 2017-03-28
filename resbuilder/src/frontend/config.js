@@ -30,6 +30,11 @@
                 controller: "BasicProfileEditController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/education", {
+                templateUrl: "views/user/user.education.edit.view.client.html",
+                controller: "EducationController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/website/new", {
                 templateUrl: "views/website/website-new.view.client.html",
                 controller: "NewWebsiteController",

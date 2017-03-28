@@ -21,7 +21,6 @@
     display: block;
 }
 #mycontent-right {
-    background-color: brown;
     float: right;
     width: 100%;
 }
@@ -29,4 +28,27 @@
 .margin-top-pb
 {
     margin-top: 100px;
+}
+
+tags-input .tags .tag-item
+{
+    display: inline-block;
+    padding-left:10px;
+    padding-right: 10px;
+    margin:2px;
+    margin-top: 10px;
+    background: #2c3e50 !important;
+    float: left;
+}
+tags-input .tags input
+{
+    display: inline-block;
+    margin:5px;
+    line-height:2 !important;
+}
+
+.addeducation-large
+{
+    float: right;
+    width: 95%;
 }

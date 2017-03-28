@@ -1,0 +1,65 @@
+<form class="form-horizontal">
+    <fieldset>
+        <div>
+            <hr/><br/>
+
+            <div uib-collapse="isCollapsed">
+
+                <div class="form-group">
+                    <label for="school" class="col-lg-3 control-label">School/University</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="school" ng-model="model.school.name" placeholder="School/University">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="startyear" class="col-lg-3 control-label">Start Year</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="startyear" ng-model="model.school.startYear" placeholder="Start Year">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="endyear" class="col-lg-3 control-label">End Year</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="endyear" ng-model="model.school.endYear" placeholder="End/Expected Year">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Courses</label>
+                    <div class="col-lg-9">
+                        <tags-input type="text" ng-model="model.school.courses" placeholder="Course Name"></tags-input>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="degree" class="col-lg-3 control-label">Degree</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="degree" ng-model="model.school.degree" placeholder="Degree">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="field" class="col-lg-3 control-label">Field</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="field" ng-model="model.school.filed" placeholder="Field">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="grade" class="col-lg-3 control-label">Grade</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="grade" ng-model="model.school.grade" placeholder="Grade">
+                    </div>
+                </div>
+                   <br/>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <a type="submit" class="btn center-block btn-primary">Save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
