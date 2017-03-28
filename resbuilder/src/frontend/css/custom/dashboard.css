@@ -37,6 +37,17 @@
 .modal-title { font: 400 normal 1.625em "Roboto",Arial,Verdana,sans-serif; }
 .modal-footer { font: 400 normal 1.125em "Roboto",Arial,Verdana,sans-serif; }
 
+.pb-dash-dropdown
+{
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+.pb-dash-menu
+{
+    background-color: white;
+    color: black;
+}
+
 /*!
  * Lightbox for Bootstrap 3 by @ashleydw
  * https://github.com/ashleydw/lightbox

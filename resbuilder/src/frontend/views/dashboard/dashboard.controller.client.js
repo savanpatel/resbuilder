@@ -8,9 +8,7 @@
         .module("ResumeBuilder")
         .controller("DashBoardController", DashBoardController);
 
-    function DashBoardController($scope, $location) {
-
-
+    function DashBoardController($sce, $scope, $location) {
 
 
     }
