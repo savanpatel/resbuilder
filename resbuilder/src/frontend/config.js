@@ -36,8 +36,23 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/education", {
-                templateUrl: "views/user/user.education.edit.view.client.html",
+                templateUrl: "views/user/user.education.list.view.client.html",
                 controller: "EducationController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/education/:eid", {
+                templateUrl: "views/user/user.education.edit.view.client.html",
+                controller: "EditEducationController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/project", {
+                templateUrl: "views/user/user.project.list.view.client.html",
+                controller: "ProjectController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/project/:pid", {
+                templateUrl: "views/user/user.project.edit.view.client.html",
+                controller: "EditProjectController",
                 controllerAs: "model"
             })
             .when("/user/:uid/website/new", {

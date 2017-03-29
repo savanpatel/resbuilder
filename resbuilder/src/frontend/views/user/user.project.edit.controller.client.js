@@ -3,9 +3,9 @@
 
     angular
         .module("ResumeBuilder")
-        .controller("EditEducationController", EditEducationController);
+        .controller("EditProjectController", EditProjectController);
 
-    function EditEducationController($scope, $location) {
+    function EditProjectController($scope, $location) {
         var vm = this;
         function init() {
             $scope.isCollapsed = false;
@@ -20,6 +20,8 @@
                 personalWebsite:'http://www.savanpatel.in',
                 isPublic:true
             };
+
+            vm.skills=["C", "C++", "Java", "AngularJS"];
 
         }
 

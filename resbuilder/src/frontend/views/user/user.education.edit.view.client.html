@@ -2,88 +2,74 @@
 
 <div class="container container-if-fixed-header">
 
-
+    <div class="row">
        <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
 
            <div id="mycontent-left">
+               <br/>
+               <br/>
                <form class="form-horizontal">
                    <fieldset>
-                       <legend>Education</legend>
+                       <legend>Edit Education</legend>
 
-                       <div class="list-group">
-                           <a href="#" class="list-group-item">
-                               <h3 class="list-group-item-heading">Northeastern University</h3>
-                               <h4 class="list-group-item-text">Masters, Computer Science</h4>
-                               <h5 class="list-group-item-text">2016-2018</h5>
-                               <br/>
-                               <div>
-                                   <label>Courses</label>
-                                   <p>Computer Systems, Algorithms</p>
-                               </div>
-                               <div>
-                                   <label>Grade</label>
-                                   <p>4</p>
-                               </div>
-                               <span class="glyphicon glyphicon-cog pull-right"></span>
-                               <br/>
-                           </a>
-                           <br/>
-
-                           <a href="#" class="list-group-item">
-                               <h3 class="list-group-item-heading">Northeastern University</h3>
-                               <h4 class="list-group-item-text">Masters, Computer Science</h4>
-                               <h5 class="list-group-item-text">2016-2018</h5>
-                               <br/>
-                               <div>
-                                   <label>Courses</label>
-                                   <p>Computer Systems, Algorithms</p>
-                               </div>
-                               <div>
-                                   <label>Grade</label>
-                                   <p>4</p>
-                               </div>
-                               <span class="glyphicon glyphicon-cog pull-right"></span>
-                               <br/>
-                           </a>
-                           <br/>
-                       </div>
-
-
-                       <div class="form-group hidden-md visible-xs visible-sm">
-                           <div class="col-lg-10 col-lg-offset-1">
-                               <button type="button" class="btn btn-block center-block btn-primary" ng-click="isCollapsed = !isCollapsed">Add Education</button>
+                       <div class="form-group">
+                           <label for="school" class="col-lg-3 control-label">School/University</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="school" ng-model="model.school.name" placeholder="School/University">
                            </div>
                        </div>
 
+                       <div class="form-group">
+                           <label for="startyear" class="col-lg-3 control-label">Start Year</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="startyear" ng-model="model.school.startYear" placeholder="Start Year">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="endyear" class="col-lg-3 control-label">End Year</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="endyear" ng-model="model.school.endYear" placeholder="End/Expected Year">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label class="col-lg-3 control-label">Courses</label>
+                           <div class="col-lg-9">
+                               <tags-input type="text" ng-model="model.school.courses" placeholder="Course Name"></tags-input>
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="degree" class="col-lg-3 control-label">Degree</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="degree" ng-model="model.school.degree" placeholder="Degree">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="field" class="col-lg-3 control-label">Field</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="field" ng-model="model.school.filed" placeholder="Field">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="grade" class="col-lg-3 control-label">Grade</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="grade" ng-model="model.school.grade" placeholder="Grade">
+                           </div>
+                       </div>
+                       <br/>
+                       <div class="form-group">
+                           <div class="col-lg-10 col-lg-offset-1">
+                               <a type="submit" class="btn center-block btn-primary">Save</a>
+                           </div>
+                       </div>
 
                    </fieldset>
                </form>
-
-               <hr/>
-               <br/>
-               <div uib-collapse="isCollapsed">
-
-                 <div class="hidden-md visible-xs visible-sm" ng-include="'./views/user/user.addeducation.form.view.client.html'">
-
-                 </div>
-               </div>
-
            </div>
-        </div>
-
-    <div class="col-lg-6 col-md-6 hidden-xs hidden-sm pull-right">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div id="mycontent-right" class="row">
-            <div class="col-lg-12 addeducation-large">
-                <legend class="col-lg-12 col-lg-offset-1">Add Education</legend>
-                <div  class="addeducation-large" ng-include="'./views/user/user.addeducation.form.view.client.html'">
-
-                </div>
-
-            </div>
         </div>
     </div>
 </div>

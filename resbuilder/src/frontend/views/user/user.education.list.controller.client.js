@@ -3,9 +3,9 @@
 
     angular
         .module("ResumeBuilder")
-        .controller("EditEducationController", EditEducationController);
+        .controller("EducationController", EducationController);
 
-    function EditEducationController($scope, $location) {
+    function EducationController($scope, $location) {
         var vm = this;
         function init() {
             $scope.isCollapsed = false;

@@ -1,0 +1,62 @@
+<form class="form-horizontal">
+    <fieldset>
+        <div>
+                <div class="form-group">
+                    <label for="title" class="col-lg-3 control-label">Title</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="title" ng-model="model.project.title" placeholder="Project Title">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="textArea" class="col-lg-3 control-label">Descrition</label>
+                    <div class="col-lg-9">
+                        <textarea class="form-control" rows="3" id="textArea" ng-model="model.project.description"></textarea>
+                        <span class="help-block">It is better to have short descriptive sentences. Like: <br/><br/> Wrote stats scrapper to analyze trending actors in R. Designed and wrote test cases in JUnit.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="startdate" class="col-lg-3 control-label">Start Date</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="startdate" ng-model="model.project.startDate" placeholder="MM/YYYY">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="enddate" class="col-lg-3 control-label">End Date</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="enddate" ng-model="model.project.endDate" placeholder="MM/YYYY">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Team Members</label>
+                    <div class="col-lg-9">
+                        <tags-input type="text" ng-model="model.project.teammates" placeholder="Teammates"></tags-input>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="degree" class="col-lg-3 control-label">School</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="degree" ng-model="model.project.organization" placeholder="School/Organization">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="field" class="col-lg-3 control-label">Project Url</label>
+                    <div class="col-lg-9">
+                        <input type="text" class="form-control" id="field" ng-model="model.project.projectUrl" placeholder="Link to project url">
+                    </div>
+                </div>
+
+                <br/>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <a type="submit" class="btn center-block btn-primary">Save</a>
+                    </div>
+                </div>
+            </div>
+    </fieldset>
+</form>
