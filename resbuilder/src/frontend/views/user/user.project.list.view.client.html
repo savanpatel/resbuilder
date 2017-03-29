@@ -5,16 +5,45 @@
        <div class="row">
            <div class="col-lg-12">
                <div class="col-lg-8">
-                   <legend>Skills</legend>
+                   <legend>Technical-Skills</legend>
                    <hr/>
                    <div class="form-group">
                        <div>
-                           <tags-input type="text" ng-model="model.skills" placeholder="Course Name"></tags-input>
+                           <tags-input type="text" ng-model="model.languages" placeholder="Languages"></tags-input>
                        </div>
                        <br/>
+
+                   </div>
+                   <div class="form-group">
                        <div>
-                         <a class="btn btn-block btn-primary">Save</a>
+                           <tags-input type="text" ng-model="model.technologies" placeholder="Technologies"></tags-input>
                        </div>
+                       <br/>
+
+                   </div>
+                   <div class="form-group">
+                       <div>
+                           <tags-input type="text" ng-model="model.database" placeholder="Database and other skills"></tags-input>
+                       </div>
+                       <br/>
+
+                   </div>
+                   <div class="form-group">
+                       <div>
+                           <tags-input type="text" ng-model="model.software" placeholder="Software"></tags-input>
+                       </div>
+                       <br/>
+
+                   </div>
+                   <div class="form-group">
+                       <div>
+                           <tags-input type="text" ng-model="model.os" placeholder="Operating System"></tags-input>
+                       </div>
+                       <br/>
+
+                   </div>
+                   <div>
+                       <a class="btn btn-block btn-primary">Save</a>
                    </div>
                </div>
            </div>
@@ -42,6 +71,15 @@
                                </div>
                                <br/>
                                <div>
+                               <label>Technologies</label>
+                               <p>
+                                   <span ng-repeat="tech in model.project.technologies">
+                                        {{tech}} {{$last ? '' : ($index==model.project.technologies.length-2) ? ' and ' : ', '}}
+                                    </span>
+                               </p>
+                               </div>
+                               <br/>
+                               <div>
                                    <label>Project Url</label>
                                    <p>http://www.github.com/savanpatel/ resbuilder</p>
                                </div>
@@ -59,6 +97,15 @@
                                <div>
                                    <label>Team Members</label>
                                    <p></p>
+                               </div>
+                               <br/>
+                               <div>
+                                   <label>Technologies</label>
+                                   <p>
+                                   <span ng-repeat="tech in model.project.technologies">
+                                        {{tech}} {{$last ? '' : ($index==model.project.technologies.length-2) ? ' and ' : ', '}}
+                                    </span>
+                                   </p>
                                </div>
                                <br/>
                                <div>

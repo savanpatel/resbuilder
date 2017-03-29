@@ -69,3 +69,9 @@ tags-input .tags input
 {
     border: 1px solid #cccccc;
 }
+
+.pb-margin-resume-data
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

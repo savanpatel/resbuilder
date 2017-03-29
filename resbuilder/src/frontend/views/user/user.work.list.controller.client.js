@@ -21,6 +21,11 @@
                 isPublic:true
             };
 
+            vm.work =
+                {
+                    technologies : ["AngularJS","NodeJS","ExpressJS","Mongo"]
+                };
+
         }
 
 

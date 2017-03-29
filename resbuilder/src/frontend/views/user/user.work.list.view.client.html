@@ -15,6 +15,11 @@
                                <h3 class="list-group-item-heading">Software Design Engineer Level 2</h3>
                                <h4 class="list-group-item-text">Sokrati, Pune</h4>
                                <h5 class="list-group-item-text">Responsible for writing microservices in Java.</h5>
+                               <h6 class="list-group-item-text">
+                                   <span ng-repeat="tech in model.work.technologies">
+                                        {{tech}} {{$last ? '' : ($index==model.work.technologies.length-2) ? ' and ' : ', '}}
+                                    </span>
+                               </h6>
                                <br/>
                                <a href="#/user/123/workexp/1"><i class="fa fa-cog pull-right fa-2x"></i></a>
                                <br/>
@@ -26,6 +31,11 @@
                                <h3 class="list-group-item-heading">Software Design Intern</h3>
                                <h4 class="list-group-item-text">Sokrati, Pune</h4>
                                <h5 class="list-group-item-text">Responsible for writing microservices in Java.</h5>
+                               <h6 class="list-group-item-text">
+                                   <span ng-repeat="tech in model.work.technologies">
+                                        {{tech}} {{$last ? '' : ($index==model.work.technologies.length-2) ? ' and ' : ', '}}
+                                    </span>
+                               </h6>
                                <br/>
                                <a href="#/user/123/workexp/1"><i class="fa fa-cog pull-right fa-2x"></i></a>
                                <br/>

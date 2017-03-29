@@ -18,10 +18,15 @@
                 contact:8577076117,
                 githubUrl:'https://www.github.com/savanpatel',
                 personalWebsite:'http://www.savanpatel.in',
-                isPublic:true
+                isPublic:true,
+                technologies:["AngularJS","NodeJS","MongoDB","AWS"]
             };
 
-            vm.skills=["C", "C++", "Java", "AngularJS"];
+            vm.languages=["C", "C++", "Java"];
+            vm.technologies = ["AngularJS","NodeJS","ExpressJS"];
+            vm.database = ["MongoDB","SQL"]
+            vm.software = ["WebStorm"]
+            vm.os = ["Linux","Windows"]
 
         }
 

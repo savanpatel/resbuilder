@@ -21,8 +21,15 @@
                 isPublic:true
             };
 
-            vm.skills=["C", "C++", "Java", "AngularJS"];
-
+            vm.project =
+                {
+                    technologies : ["JAVA","AngularJS","NodeJS","ExpressJS","Mongo"]
+                };
+            vm.languages=["C", "C++", "Java"];
+            vm.technologies = ["AngularJS","NodeJS","ExpressJS"];
+            vm.database = ["MongoDB","SQL"]
+            vm.software = ["WebStorm"]
+            vm.os = ["Linux","Windows"]
         }
 
 
