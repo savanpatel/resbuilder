@@ -18,15 +18,17 @@
         vm.database = ["MongoDB","SQL"]
         vm.software = ["WebStorm"]
         vm.os = ["Linux","Windows"]
-    }
-    vm.project =
-        {
-            technologies : ["AngularJS","NodeJS","ExpressJS","Mongo"]
-        };
 
-    vm.work =
-        {
-            technologies : ["AngularJS","NodeJS","ExpressJS","Mongo"]
-        };
+        vm.project =
+            {
+                technologies : ["AngularJS","NodeJS","ExpressJS","Mongo"]
+            };
+
+        vm.work =
+            {
+                technologies : ["AngularJS","NodeJS","ExpressJS","Mongo"]
+            };
+    }
+
 
 })();

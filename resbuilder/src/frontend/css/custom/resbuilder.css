@@ -75,3 +75,8 @@ tags-input .tags input
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.pb-div-center
+{
+    text-align: center;
+}

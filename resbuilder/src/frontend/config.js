@@ -35,6 +35,11 @@
                 controller: "ResumeDataController",
                 controllerAs: "model"
             })
+            .when("/user/dashboard/resumeEdit", {
+                templateUrl: "views/resume-edit/resume-edit.view.client.html",
+                controller: "ResumeEditController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/basicprofile", {
                 templateUrl: "views/user/user.basicprofile.edit.view.client.html",
                 controller: "BasicProfileEditController",
