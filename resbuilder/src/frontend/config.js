@@ -55,6 +55,16 @@
                 controller: "EditProjectController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/workexp", {
+                templateUrl: "views/user/user.work.list.view.client.html",
+                controller: "WorkExpController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/workexp/:wexpid", {
+                templateUrl: "views/user/user.work.edit.view.client.html",
+                controller: "EditWorkExpController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/website/new", {
                 templateUrl: "views/website/website-new.view.client.html",
                 controller: "NewWebsiteController",

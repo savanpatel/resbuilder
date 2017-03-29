@@ -1,0 +1,64 @@
+<div ng-include="'./views/menu/menu.view.client.html'"></div>
+
+<div class="container container-if-fixed-header">
+
+    <div class="row">
+       <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
+
+           <div id="mycontent-left">
+               <br/>
+               <br/>
+               <form class="form-horizontal">
+                   <fieldset>
+                       <legend>Edit Work Experience</legend>
+
+                       <div class="form-group">
+                           <label for="title" class="col-lg-3 control-label">Job Title</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="title" ng-model="model.workexp.title" placeholder="Job Title">
+                           </div>
+                       </div>
+
+
+                       <div class="form-group">
+                           <label for="textArea" class="col-lg-3 control-label">Description</label>
+                           <div class="col-lg-9">
+                               <textarea class="form-control" rows="3" id="textArea" ng-model="model.workexp.description"></textarea>
+                               <span class="help-block">It is better to have short descriptive sentences. Like: <br/><br/> Wrote stats scrapper to analyze trending actors in R. Designed and wrote test cases in JUnit.</span>
+                           </div>
+                       </div>
+                       <div class="form-group">
+                           <label for="startdate" class="col-lg-3 control-label">Start Date</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="startdate" ng-model="model.workexp.startDate" placeholder="MM/YYYY">
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <label for="enddate" class="col-lg-3 control-label">End Date</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="enddate" ng-model="model.workexp.endDate" placeholder="MM/YYYY">
+                           </div>
+                       </div>
+
+
+                       <div class="form-group">
+                           <label for="location" class="col-lg-3 control-label">Location</label>
+                           <div class="col-lg-9">
+                               <input type="text" class="form-control" id="location" ng-model="model.workexp.location" placeholder="Location">
+                           </div>
+                       </div>
+
+
+                       <br/>
+                       <div class="form-group">
+                           <div class="col-lg-10 col-lg-offset-1">
+                               <a type="submit" class="btn center-block btn-primary">Save</a>
+                           </div>
+                       </div>
+                   </fieldset>
+               </form>
+           </div>
+        </div>
+    </div>
+</div>
