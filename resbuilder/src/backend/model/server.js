@@ -23,9 +23,6 @@ module.exports = function (app) {
 
     var api = {
         userModelAPI : userModelAPI,
-        websiteModelAPI: websiteModelAPI,
-        pageModelAPI: pageModelAPI,
-        widgetModelAPI: widgetModelAPI
     };
 
     return api;
