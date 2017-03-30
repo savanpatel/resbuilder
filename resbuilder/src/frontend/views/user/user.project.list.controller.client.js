@@ -23,7 +23,7 @@
 
             vm.project =
                 {
-                    technologies : ["JAVA","AngularJS","NodeJS","ExpressJS","Mongo"]
+                    technologies : []
                 };
             vm.languages=["C", "C++", "Java"];
             vm.technologies = ["AngularJS","NodeJS","ExpressJS"];
