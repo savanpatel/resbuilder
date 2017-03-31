@@ -21,10 +21,15 @@ module.exports = function (app) {
     require('./user/user.schema.server')(app, mongoose);
     var userModelAPI = require('./user/user.model.server')(app, mongoose, logger);
 
+    require('./project/project.schema.server')(app, mongoose);
+    var projectModelAPI = require('./project/project.model.server')(app, mongoose, logger);
+
+
 
 
     var api = {
-        userModelAPI : userModelAPI
+        userModelAPI : userModelAPI,
+        projectModelAPI:projectModelAPI
     };
 
     return api;

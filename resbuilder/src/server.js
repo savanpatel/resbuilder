@@ -9,8 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/frontend'));
 
 //require ("./test/app.js")(app);
-//var mongooseAPI = require("./model/server")(app);
-var mongooseAPI = null;
+var mongooseAPI = require("./backend/model/server")(app);
+
 require("./backend/app.js")(app, mongooseAPI);
 
 var port = process.env.PORT || 3000;
