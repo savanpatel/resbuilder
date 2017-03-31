@@ -22,8 +22,8 @@ module.exports = function (app, mongoose, logger) {
 
 
     /*
-     * createWorkExp: Creates a new WorkExp in mongo db.
-     * params: userId, WorkExp object created similar to WorkExpSchema.
+     * createWorkExp: Creates a new workexp in mongo db.
+     * params: userId, workexp object created similar to WorkExpSchema.
      * returns: promise.
      */
 

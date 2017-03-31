@@ -17,20 +17,31 @@ module.exports = function (app) {
     var logger = require('../logger/logger.server')(app);
 
 
-    // user schema and model
     require('./user/user.schema.server')(app, mongoose);
     var userModelAPI = require('./user/user.model.server')(app, mongoose, logger);
 
     require('./project/project.schema.server')(app, mongoose);
     var projectModelAPI = require('./project/project.model.server')(app, mongoose, logger);
 
+    require('./technicalSkill/technicalSkill.schema.server')(app, mongoose);
+    var technicalSkillModelAPI = require('./technicalSkill/technicalSkill.model.server')(app, mongoose, logger);
 
+    require('./education/education.schema.server')(app, mongoose);
+    var educationModelAPI = require('./education/education.model.server')(app, mongoose, logger);
+
+    require('./workexp/workexp.schema.server')(app, mongoose);
+    var workExpModelAPI = require('./workexp/workexp.model.server')(app, mongoose, logger);
 
 
     var api = {
         userModelAPI : userModelAPI,
-        projectModelAPI:projectModelAPI
+        projectModelAPI:projectModelAPI,
+        technicalSkillModelAPI:technicalSkillModelAPI,
+        educationModelAPI:educationModelAPI,
+        workExpModelAPI:workExpModelAPI
     };
+
+
 
     return api;
 }
