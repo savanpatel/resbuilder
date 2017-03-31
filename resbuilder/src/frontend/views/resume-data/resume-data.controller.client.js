@@ -6,29 +6,63 @@
 
     angular
         .module("ResumeBuilder")
-        .controller("ResumeDataController", ResumeDataController);
+        .controller("ResumeDataController", ResumeDataController)
 
-    function ResumeDataController($sce, $scope, $location) {
+    function ResumeDataController($sce, $scope, $location,$uibModal,$log,ModalService) {
 
         var vm = this;
         vm.isCollapsed = false;
 
-        vm.languages=["C", "C++", "Java"];
-        vm.technologies = ["AngularJS","NodeJS"];
-        vm.database = ["MongoDB","SQL"]
+        $scope.items = ['item1', 'item2', 'item3'];
+        vm.languages = ["C", "C++", "Java"];
+        vm.technologies = ["AngularJS", "NodeJS"];
+        vm.database = ["MongoDB", "SQL"]
         vm.software = ["WebStorm"]
-        vm.os = ["Linux","Windows"]
+        vm.os = ["Linux", "Windows"]
 
         vm.project =
             {
-                technologies : ["AngularJS","NodeJS","ExpressJS","Mongo"]
+                technologies: ["AngularJS", "NodeJS", "ExpressJS", "Mongo"]
             };
 
         vm.work =
             {
-                technologies : ["AngularJS","NodeJS","ExpressJS","Mongo"]
+                technologies: ["AngularJS", "NodeJS", "ExpressJS", "Mongo"]
             };
+
+        $scope.yesNoResult = null;
+
+
+        $scope.project = ["ResumeBuilder","WebAppMaker","SearchEngine","PacMan"]
+        $scope.school = ["Northeastern","Dharmsinh","Nirma"]
+        $scope.work = ["Essar","L&T","Accenture","Infosys"]
+
+
+        $scope.showYesNo = function(sw) {
+                console.log(sw)
+                ModalService.showModal({
+                    templateUrl: "views/resume-data/yesno.html",
+                    controller: "YesNoController",
+                    scope:$scope,
+                    inputs:{
+                        s_w: sw
+                    }
+                }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function (result) {
+                        console.log(result)
+                    });
+                });
+        };
+
+
+
+
     }
+
+
+    
+
 
 
 })();

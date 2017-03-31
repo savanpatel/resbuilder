@@ -1,0 +1,30 @@
+
+
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <ul ng-repeat="i in items" class="list-group">
+                    <li class="list-group-item">
+                        <label>{{i}}</label>
+
+                        <a class="pull-right btn btn-success btn-xs" ng-click="add1(i,$index)" id="anchor_plus{{$index}}">ADD</a> &nbsp;&nbsp;
+                        <a class="pull-right btn btn-danger btn-xs" ng-click="delete1(i,$index)" style="display: none" id="anchor_minus{{$index}}">REMOVE</a>
+
+                        &nbsp;&nbsp;
+                        <label class="pull-right label label-primary" style="margin-right: 10px" class="pull-right"> {{status[$index]}}</label>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="close()" class="btn btn-default" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
