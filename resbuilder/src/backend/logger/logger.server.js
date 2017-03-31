@@ -7,7 +7,7 @@
  *  Link: https://github.com/winstonjs/winston#instantiating-your-own-logger
  *
  */
-module.exports = function (app, mongoose) {
+module.exports = function (app) {
 
     var winston = require('winston');
 
@@ -16,8 +16,7 @@ module.exports = function (app, mongoose) {
             new (winston.transports.File)({ filename: '/tmp/resbuilder.log' })
         ]
     });
-    
-    
+
     return logger;
 
 };

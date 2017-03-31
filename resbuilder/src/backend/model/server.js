@@ -14,15 +14,17 @@ module.exports = function (app) {
     var mongoose = require("mongoose");
     mongoose.connect(connectionString);
 
-    var logger = require('../logger/logger.server');
+    var logger = require('../logger/logger.server')(app);
+
 
     // user schema and model
     require('./user/user.schema.server')(app, mongoose);
     var userModelAPI = require('./user/user.model.server')(app, mongoose, logger);
 
 
+
     var api = {
-        userModelAPI : userModelAPI,
+        userModelAPI : userModelAPI
     };
 
     return api;
