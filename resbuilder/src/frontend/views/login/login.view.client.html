@@ -1,48 +1,96 @@
+<!--
 <div ng-include="'./views/menu/menu.view.client.html'"></div>
+-->
 
-<div class="container-if-fixed-header">
+<div class="container-fluid">
 
-    <div class="col-sm-6 margin-top-pb">
-        <div class="card">
-            <div class="card-block">
-                <form class="form-horizontal">
-                    <fieldset>
-                        <legend>Login</legend>
-                        <div class="form-group">
-                            <label for="inputUsername" class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label">Username</label>
-                            <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
-                                <input type="text" class="form-control" id="inputUsername" placeholder="Username">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputPassword" class="col-lg-2 col-md-2 col-sm-3 col-xs-3 control-label">Password</label>
-                            <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2 col-xs-10 col-xs-offset-2 col-sm-10 col-sm-offset-2">
-                                <a href="#/register" class="btn btn-default">Register</a>
-                                <a href="#/user/dashboard"  class="btn btn-primary">Submit</a>
-                            </div>
-                        </div>
-
-                    </fieldset>
-                </form>
-            </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <img class="center-block img-responsive" src="./../../assets/images/resbuilder.png"/>
+            <h1>ResumeBuilder</h1>
         </div>
     </div>
-    <div class="col-sm-6 margin-top-pb">
-        <div class="card">
-            <div class="card-block">
-                <div class="embed-responsive embed-responsive-16by9 col-xs-12 text-center">
-                    <iframe class="embed-responsive-item"
-                            src="http://www.youtube.com/embed/zpOULjyy-n8?rel=0"
-                            align="center" id="videothumbnail"></iframe>
+
+    <hr/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="row signin-background">
+        <div class="col-md-6 pull-left">
+
+            <div class="login-border login-box">
+               <form>
+                   <fieldset>
+                       <div class="card-header">
+                           <div class="col-sm-6">
+                               <h1 class="col-sm-offset-4">SignIn</h1>
+                               <p class="col-sm-offset-4">New user? Click Register</p>
+                           </div>
+                       </div>
+                       <br/>
+                       <div class="col-md-offset-2">
+                           <div class="form-group">
+                               <div class="input-group col-md-8">
+                                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                   <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <div class="input-group col-md-8">
+                                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                   <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                               </div>
+                           </div>
+
+
+                           <div class="form-group">
+                               <div class="col-md-8 center-block">
+
+                                   <div>
+                                       <a class="btn btn-block btn-primary" href="#/user/dashboard">Login</a>
+                                   </div>
+                                   <br/>
+                                   <div>
+                                       <a href="#/register" class="btn btn-block btn-info">Register</a>
+                                   </div>
+                                   <br/>
+                               </div>
+                           </div>
+
+
+                           <div class="form-group">
+                               <div class="col-md-8 center-block">
+                                   <div class="text-center"> Or </div>
+                                   <div>
+                                       <a class="btn btn-block btn-primary" href="#/user/dashboard"><i class="fa fa-linkedin"> SignIn with LinkedIn</i></a>
+                                   </div>
+                                   <br/>
+                               </div>
+                           </div>
+
+
+                       </div>
+                   </fieldset>
+               </form>
+           </div>
+        </div>
+        <div class="col-md-5">
+
+            <div class="col-lg-offset-2 center-block">
+                <div>
+                    <div class="embed-responsive embed-responsive-16by9 col-xs-12 text-center">
+                        <iframe width="854" height="480" src="https://www.youtube.com/embed/CFSX5fw37Is" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <br/>
+    <div class="row">
+
     </div>
 </div>
