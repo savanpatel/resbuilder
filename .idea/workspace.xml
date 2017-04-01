@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d46c08c-a22d-4eb0-8a47-6f1eace6b33a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/npm-debug.log" afterPath="$PROJECT_DIR$/npm-debug.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resbuilder/src/backend/app.js" afterPath="$PROJECT_DIR$/resbuilder/src/backend/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resbuilder/src/backend/services/document-generate/doc-generate.service.server.js" afterPath="$PROJECT_DIR$/resbuilder/src/backend/services/document-generate/doc-generate.service.server.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,8 +35,8 @@
       <file leaf-file-name="doc-generate.service.server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resbuilder/src/backend/services/document-generate/doc-generate.service.server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="30" />
+            <state relative-caret-position="259">
+              <caret line="210" column="51" lean-forward="false" selection-start-line="210" selection-start-column="51" selection-end-line="210" selection-end-column="51" />
               <folding>
                 <element signature="e#0#47#0" expanded="false" />
               </folding>
@@ -49,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/resbuilder/src/backend/services/technicalskillservice.server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="4" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+              <caret line="8" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -1234,12 +1233,12 @@
       <option name="presentableId" value="Default" />
       <updated>1490927742004</updated>
       <workItem from="1490927743729" duration="309000" />
-      <workItem from="1490928423658" duration="17613000" />
+      <workItem from="1490928423658" duration="17788000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17922000" />
+    <option name="totallyTimeSpent" value="18097000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1333,7 +1332,7 @@
         <state relative-caret-position="1215">
           <caret line="81" column="31" lean-forward="false" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="31" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1343,7 +1342,7 @@
         <state relative-caret-position="45">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="46" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2242,7 +2241,7 @@
     <entry file="file://$PROJECT_DIR$/resbuilder/src/backend/services/technicalskillservice.server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="4" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+          <caret line="8" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -2251,8 +2250,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resbuilder/src/backend/services/document-generate/doc-generate.service.server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="30" />
+        <state relative-caret-position="259">
+          <caret line="210" column="51" lean-forward="false" selection-start-line="210" selection-start-column="51" selection-end-line="210" selection-end-column="51" />
           <folding>
             <element signature="e#0#47#0" expanded="false" />
           </folding>

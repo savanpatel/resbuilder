@@ -208,7 +208,7 @@ module.exports = function (app) {
         var fs = require('fs');
         var output = fs.createWriteStream(__dirname + '/new.docx');
         exporter.local(output, doc);
-        exporter.express(res, doc, 'My first word document');
+        exporter.express(res, doc, 'template-resume');
 
 
     }
