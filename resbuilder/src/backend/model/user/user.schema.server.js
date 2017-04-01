@@ -8,11 +8,11 @@ module.exports = function (app, mongoose) {
 
         username:{type:String, required:true},
 
-        password:{type:String, required:true},
+        password:{type:String},
 
         firstName:{type:String, required:true},
 
-        lastName:{type:String, required:true},
+        lastName:{type:String},
 
         email:{type:String, required:true},
 

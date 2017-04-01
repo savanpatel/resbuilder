@@ -10,7 +10,7 @@ module.exports = function (app, mongooseAPI) {
     app.get("/api/user/:userId", findUserById);
     app.delete("/api/user/:userId", deleteUser);
     app.put("/api/user/:userId", updateUser);
-
+    app.get("/api/user/username/:username", checkUsernameAvailable);
 
 
     var UserModel = mongooseAPI.userModelAPI;
@@ -37,21 +37,38 @@ module.exports = function (app, mongooseAPI) {
             return;
         }
 
+        // if user present then just fetch and return, if not then creat one.
+        UserModel.findUserByEmail(user.email)
+                .then(function (dbUser) {
 
-        // create user in db.
-        UserModel.createUser(user)
-            .then(function (dbUser){
+                    // user is not present.
+                    if(null == dbUser)
+                    {
 
-                if(null == dbUser){
-                    res.sendStatus(500).send("Internal server error.");
-                } else {
-                    res.send(dbUser);
-                }
-            }, function (err) {
-                res.sendStatus(500).send(err);
-            });
-        
-    }
+                        // create user in db.
+                        UserModel.createUser(user)
+                            .then(function (dbUser2){
+                                if(null == dbUser2){
+                                    res.sendStatus(500).send("Internal server error.");
+                                } else {
+                                    var retUser = JSON.parse(JSON.stringify(dbUser2));
+                                    retUser['isNew'] = true;
+                                    res.send(retUser);
+                                }
+                            }, function (err) {
+                                res.sendStatus(500).send(err);
+                            });
+                    }
+                    else{
+                        var retUser = JSON.parse(JSON.stringify(dbUser));
+                        retUser['isNew'] = false;
+                        res.send(retUser);
+                    }
+
+                }, function (err) {
+                    res.sendStatus(500).send(err);
+                });
+        }
     
     
 
@@ -74,7 +91,7 @@ module.exports = function (app, mongooseAPI) {
         }
 
         UserModel
-            .findUserByCreadentials(username, password)
+            .findUserByCredentials(username, password)
             .then(function (user) {
 
                 if(null == user) {
@@ -174,4 +191,37 @@ module.exports = function (app, mongooseAPI) {
                 res.sendStatus(500).send(err);
             });
     }
+
+
+
+    /*Handler for GET call to check if username is available*/
+    function checkUsernameAvailable(req, res) {
+
+        var username = req.params.username;
+
+        if(null == username || username == ""){
+            var response = {
+                isAvailable:false
+            };
+
+            res.send(response);
+            return;
+        }
+
+
+
+        UserModel.checkUsernameAvailable(username)
+            .then(function (user) {
+                if(user){
+                    res.send({isAvailable:false});
+                } else{
+                    res.send({isAvailable:true});
+                }
+
+            }, function (err) {
+                res.send({isAvailable:false})
+            });
+
+    }
+
 }

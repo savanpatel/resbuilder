@@ -13,8 +13,11 @@ module.exports = function (app, mongoose, logger) {
         createUser:createUser,
         findUserById:findUserById,
         findUserByUsername:findUserByUsername,
+        findUserByCredentials:findUserByCredentials,
         updateUser:updateUser,
-        deleteUser:deleteUser
+        deleteUser:deleteUser,
+        checkUsernameAvailable:checkUsernameAvailable,
+        findUserByEmail:findUserByEmail
     };
 
     return api;
@@ -145,4 +148,64 @@ module.exports = function (app, mongoose, logger) {
         return deferred.promise;
     }
 
+
+
+
+    /*
+     * Find user by credentials username and password
+     *
+     */
+    function findUserByCredentials(username, password) {
+        var deferred = q.defer();
+
+        UserModel.findOne({username:username, password:password}, function (err, user) {
+
+            if(err){
+                console.log("ERROR: [findUserByCredentials]: " + err);
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
+        });
+
+
+        return deferred.promise;
+    }
+
+
+
+    function checkUsernameAvailable(username) {
+        var deferred = q.defer();
+
+        UserModel.findOne({username:username}, function (err, user) {
+
+            if(err){
+                console.log("ERROR: [checkUsernameAvailable]: " + err);
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
+        });
+
+
+        return deferred.promise;
+    }
+
+
+    function findUserByEmail(email) {
+        var deferred = q.defer();
+
+        UserModel.findOne({email:email}, function (err, user) {
+
+            if(err){
+                console.log("ERROR: [findUserByEmail]: " + err);
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
+        });
+
+
+        return deferred.promise;
+    }
 }

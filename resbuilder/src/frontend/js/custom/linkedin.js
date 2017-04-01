@@ -1,4 +1,4 @@
-    function liAuth(){
+function liAuth(){
         IN.User.authorize(function(){
         });
     }
@@ -10,6 +10,12 @@ function onLinkedInLoad() {
 // Handle the successful return from the API call
 function onSuccess(data) {
     console.log(data);
+    // pass user info to angular
+    angular.element(document.getElementById("resumeBuilderApp")).scope().$apply(
+        function($scope) {
+            $scope.signInWithLinkedIn(data);
+        }
+    );
 }
 
 // Handle an error response from the API call
@@ -19,5 +25,5 @@ function onError(error) {
 
 // Use the API call wrapper to request the member's basic profile data
 function getProfileData() {
-    IN.API.Raw("/people/~:(id,first-name,last-name,positions,specialties)").result(onSuccess).error(onError);
+    IN.API.Raw("/people/~:(id,first-name,last-name,positions,specialties,email-address)").result(onSuccess).error(onError);
 }

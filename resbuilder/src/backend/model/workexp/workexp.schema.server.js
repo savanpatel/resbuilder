@@ -14,7 +14,7 @@ module.exports = function (app, mongoose) {
 
         startDate:{type:String, required:true},
 
-        endDate:{type:String, required:true},
+        endDate:{type:String},
 
         location:{type:String}
 
