@@ -20,7 +20,7 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when("/user/dashboard", {
+            .when("/user/:uid/dashboard", {
                 templateUrl: "views/dashboard/dashboard.view.client.html",
                 controller: "DashBoardController",
                 controllerAs: "model"

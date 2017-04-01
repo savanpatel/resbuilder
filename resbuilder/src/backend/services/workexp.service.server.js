@@ -39,7 +39,7 @@ module.exports = function (app, mongooseAPI) {
 
 
         // create user in db.
-        WorkExpModel.createWorkExp(workexp)
+        WorkExpModel.createWorkExp(workexp, workexp.userId)
             .then(function (dbWorkExp){
 
                 if(null == dbWorkExp){
