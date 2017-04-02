@@ -8,11 +8,17 @@
         .module("ResumeBuilder")
         .controller("DashBoardController", DashBoardController);
 
-    function DashBoardController($sce, $scope, $location) {
+    function DashBoardController($sce, $scope, $routeParams, $location) {
 
         var vm = this;
-        vm.isCollapsed = false;
 
+        function init() {
+            vm.isCollapsed = false;
+            vm.uid = $routeParams['uid'];
+            console.log(vm.userId);
 
+        }
+
+        init();
     }
 })();

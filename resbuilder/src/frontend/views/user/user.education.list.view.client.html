@@ -1,56 +1,45 @@
 <div ng-include="'./views/menu/menu.view.client.html'"></div>
 
 <div class="container container-if-fixed-header">
+    <div class="row">
 
-
+       <div class="form-group">
+        <div class="col-lg-12">
+            <span class="form-control help-block"  ng-show="model.error" ng-model="model.error" disabled="">{{model.error}}</span>
+        </div>
+       </div>
        <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
+
 
            <div id="mycontent-left">
                <form class="form-horizontal">
                    <fieldset>
                        <legend>Education</legend>
 
+
                        <div class="list-group">
-                           <div href="#" class="list-group-item list-group-item-bordered">
-                               <h3 class="list-group-item-heading">Northeastern University</h3>
-                               <h4 class="list-group-item-text">Masters, Computer Science</h4>
-                               <h5 class="list-group-item-text">2016-2018</h5>
-                               <br/>
-                               <div>
-                                   <label>Courses</label>
-                                   <p>Computer Systems, Algorithms</p>
-                               </div>
-                               <div>
-                                   <label>Grade</label>
-                                   <p>4</p>
-                               </div>
+                           <div ng-repeat="e in model.educationList">
+                               <div href="#" class="list-group-item list-group-item-bordered">
+                                   <h3 class="list-group-item-heading">{{e.school}}</h3>
+                                   <h4 class="list-group-item-text">{{e.degree}}, {{e.field}}</h4>
+                                   <h5 class="list-group-item-text">{{e.startYear}} - {{e.endYear}}</h5>
+                                   <br/>
+                                   <div>
+                                       <label>Courses</label>
+                                       <p>{{model.arrayToString(e.courses)}}</p>
+                                   </div>
+                                   <div>
+                                       <label>Grade</label>
+                                       <p>{{e.grade}}</p>
+                                   </div>
 
-                               <a href="#/user/123/education/1"><i class="fa fa-trash pull-right fa-2x"></i></a>
-                               <a href="#/user/123/education/1"><i class="fa fa-pencil pull-right fa-2x"></i></a>
-                               <br/>
+                                   <a ng-click="model.deleteEducation(e._id)"><i class="fa fa-trash pull-right fa-2x"></i></a>
+                                   <a href="#/user/{{model.userId}}/education/{{e._id}}"><i class="fa fa-pencil pull-right fa-2x"></i></a>
+                                   <br/>
+                                   <br/>
+                               </div>
                                <br/>
                            </div>
-                           <br/>
-
-                           <div href="#" class="list-group-item list-group-item-bordered">
-                               <h3 class="list-group-item-heading">Northeastern University</h3>
-                               <h4 class="list-group-item-text">Masters, Computer Science</h4>
-                               <h5 class="list-group-item-text">2016-2018</h5>
-                               <br/>
-                               <div>
-                                   <label>Courses</label>
-                                   <p>Computer Systems, Algorithms</p>
-                               </div>
-                               <div>
-                                   <label>Grade</label>
-                                   <p>4</p>
-                               </div>
-                               <a href="#/user/123/education/1"><i class="fa fa-trash pull-right fa-2x"></i></a>
-                               <a href="#/user/123/education/1"><i class="fa fa-pencil pull-right fa-2x"></i></a>
-                               <br/>
-                               <br/>
-                           </div>
-                           <br/>
                        </div>
 
 
@@ -74,20 +63,20 @@
 
            </div>
         </div>
+        <div class="col-lg-6 col-md-6 hidden-xs hidden-sm pull-right">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div id="mycontent-right" class="row">
+                <div class="col-lg-12 addeducation-large">
+                    <legend class="col-lg-12 col-lg-offset-1">Add Education</legend>
+                    <div  class="addeducation-large" ng-include="'./views/user/user.addeducation.form.view.client.html'">
 
-    <div class="col-lg-6 col-md-6 hidden-xs hidden-sm pull-right">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div id="mycontent-right" class="row">
-            <div class="col-lg-12 addeducation-large">
-                <legend class="col-lg-12 col-lg-offset-1">Add Education</legend>
-                <div  class="addeducation-large" ng-include="'./views/user/user.addeducation.form.view.client.html'">
+                    </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
+  </div>
 </div>

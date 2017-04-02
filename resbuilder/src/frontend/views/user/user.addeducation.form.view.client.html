@@ -1,10 +1,10 @@
 <form class="form-horizontal">
     <fieldset>
-        <div>
+            <div>
                 <div class="form-group">
                     <label for="school" class="col-lg-3 control-label">School/University</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" id="school" ng-model="model.school.name" placeholder="School/University">
+                        <input type="text" class="form-control" id="school" ng-model="model.school.school" placeholder="School/University">
                     </div>
                 </div>
 
@@ -39,20 +39,20 @@
                 <div class="form-group">
                     <label for="field" class="col-lg-3 control-label">Field</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" id="field" ng-model="model.school.filed" placeholder="Field">
+                        <input type="text" class="form-control" id="field" ng-model="model.school.field" placeholder="Field">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="grade" class="col-lg-3 control-label">Grade</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" id="grade" ng-model="model.school.grade" placeholder="Grade">
+                        <input type="number" class="form-control" id="grade" ng-model="model.school.grade" placeholder="Grade">
                     </div>
                 </div>
                    <br/>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-1">
-                        <a type="submit" class="btn center-block btn-primary">Save</a>
+                        <a type="submit" ng-click="model.createEducation(model.school)" class="btn center-block btn-primary">Save</a>
                     </div>
                 </div>
             </div>

@@ -73,7 +73,7 @@
          * Updates the user with the new user information provided.
          * Returns  promise.
          */
-        function updateUser(userId, user) {
+        function updateUser(user) {
             var putRequestUrl = USER_SERVICE_URL + "/" + user._id;
             return $http.put(putRequestUrl, user);
         }
