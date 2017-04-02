@@ -33,11 +33,12 @@ module.exports = function (app, mongooseAPI) {
         var education = req.body;
 
         if(null == education){
-            req.sendStatus(500).send("null/empty project");
+            req.sendStatus(500).send("null/empty education");
             return;
         }
 
 
+        console.log(education);
         // create user in db.
         EducationModel.createEducation(education)
             .then(function (dbEducation){
@@ -57,7 +58,7 @@ module.exports = function (app, mongooseAPI) {
 
     /*
      *
-     * Handler for find project bhy project id.
+     * Handler for find education bhy education id.
      *
      */
     function findEducationById(req, res) {
@@ -115,14 +116,14 @@ module.exports = function (app, mongooseAPI) {
 
 
     /*
-     * Handler for PUT call to update the project.
+     * Handler for PUT call to update the education.
      *
      */
     function updateEducation(req, res) {
 
         var educationId = req.params.educationId;
 
-        var project = req.body;
+        var education = req.body;
 
         if(null == educationId || null == education ||
           "" == educationId)

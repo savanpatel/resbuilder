@@ -27,16 +27,14 @@ module.exports = function (app, mongoose, logger) {
      * returns: promise.
      */
 
-    function createEducation(userId, education) {
-
-        education.userId = userId;
+    function createEducation(education) {
 
         var deferred = q.defer();
 
         EducationModel.create(education, function (err, dbEducation) {
 
             if(err){
-                logger.error('Unable to create education.');
+                logger.error('Unable to create education.' + err);
                 deferred.reject(err);
             } else {
                 deferred.resolve(dbEducation);
@@ -109,7 +107,7 @@ module.exports = function (app, mongoose, logger) {
         var deferred = q.defer();
         EducationModel.update({_id:educationId},{$set:education}, function (err, dbEducation) {
             if(err) {
-                logger.erro("Can not update education with id " + educationId  + " Error: " + err);
+                logger.error("Can not update education with id " + educationId  + " Error: " + err);
                 deferred.reject(err);
             }
             else {

@@ -5,26 +5,59 @@
         .module("ResumeBuilder")
         .controller("BasicProfileEditController", BasicProfileEditController);
 
-    function BasicProfileEditController($scope, $location) {
+    function BasicProfileEditController($scope, $location, $routeParams, UserService) {
         var vm = this;
         function init() {
 
-            vm.user = {
-                username:'savanpatel3',
-                email:'savanpatel3@gmail.com',
-                address:'75 Saint Alphansus Street, 1115 Citiview at Longwood Apartments, Boston MA 02120, USA',
-                firstName:'Savan',
-                lastName:'Patel',
-                contact:8577076117,
-                githubUrl:'https://www.github.com/savanpatel',
-                personalWebsite:'http://www.savanpatel.in',
-                isPublic:true
-            };
+            vm.userId = $routeParams['uid'];
+
+            vm.updateUser = updateUser;
+
+            var promise = UserService.findUserById(vm.userId);
+
+            promise.success(onFindUserSuccess);
+            promise.error(onFindUserError);
+
 
         }
 
 
         init();
+
+
+
+        function updateUser(user) {
+            vm.error = null;
+            var promise = UserService.updateUser(user);
+            promise.success(onUpdateSuccess);
+            promise.error(onUpdateError);
+        }
+
+
+
+
+
+
+
+        /*---- Promise functions*/
+        function onFindUserSuccess(response) {
+
+            vm.user = response;
+        }
+
+        function onFindUserError(err) {
+            vm.error = "Could not fetch data. Try after sometime.";
+        }
+
+
+        function onUpdateSuccess(response) {
+            vm.user = response;
+            vm.error = "Update successful!";
+        }
+
+        function onUpdateError(err) {
+            vm.error = "Could not update user. Try after sometime.";
+        }
 
     }
 })();

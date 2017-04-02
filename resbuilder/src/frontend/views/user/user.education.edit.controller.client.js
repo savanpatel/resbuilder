@@ -5,26 +5,71 @@
         .module("ResumeBuilder")
         .controller("EditEducationController", EditEducationController);
 
-    function EditEducationController($scope, $location) {
+    function EditEducationController($scope, $location, $routeParams, EducationService) {
         var vm = this;
         function init() {
-            $scope.isCollapsed = false;
-            vm.user = {
-                username:'savanpatel3',
-                email:'savanpatel3@gmail.com',
-                address:'75 Saint Alphansus Street, 1115 Citiview at Longwood Apartments, Boston MA 02120, USA',
-                firstName:'Savan',
-                lastName:'Patel',
-                contact:8577076117,
-                githubUrl:'https://www.github.com/savanpatel',
-                personalWebsite:'http://www.savanpatel.in',
-                isPublic:true
-            };
+            vm.isCollapsed = false;
+            vm.userId = $routeParams['uid'];
+            vm.error = null;
+            vm.educationId = $routeParams['eid'];
 
+            findEducationById(vm.educationId);
+
+            vm.updateEducation = updateEducation;
         }
 
 
         init();
 
+
+
+        function updateEducation(education) {
+            if(null != vm.userId && null != education){
+                education.userId = vm.userId;
+
+                var newEducation = angular.copy(education);
+                newEducation.courses = [];
+                for(c in education.courses){
+                    newEducation.courses.push(education.courses[c].text);
+                }
+                var promise = EducationService.updateEducation(newEducation, vm.educationId);
+
+                promise.success(onUpdateEducationSuccess);
+                promise.error(onUpdateEducationError);
+            }
+        }
+
+
+
+        function findEducationById(educationId){
+
+            var promise = EducationService.findEducationById(educationId);
+
+            promise.success(onFindEducationByIdSuccess);
+            promise.error(onFindEducationByIdError);
+        }
+
+
+
+
+        /*Promise functions.*/
+        function onFindEducationByIdSuccess(response) {
+             vm.school = response;
+        }
+
+        function onFindEducationByIdError(err) {
+            vm.error = "Can not find education. Please try after sometime.";
+        }
+
+
+
+        function onUpdateEducationSuccess(response) {
+            vm.error = "Updated successfully";
+            $location.url("/user/" + vm.userId + "/education");
+        }
+
+        function onUpdateEducationError(err) {
+            vm.error = "Update failed!. Please try after sometimes.";
+        }
     }
 })();
