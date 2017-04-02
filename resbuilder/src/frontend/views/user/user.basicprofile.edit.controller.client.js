@@ -10,7 +10,7 @@
         function init() {
 
             vm.userId = $routeParams['uid'];
-
+            vm.uid = $routeParams['uid'];
             vm.updateUser = updateUser;
 
             var promise = UserService.findUserById(vm.userId);

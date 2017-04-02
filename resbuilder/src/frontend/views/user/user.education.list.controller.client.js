@@ -9,7 +9,8 @@
         var vm = this;
         function init() {
             vm.isCollapsed = false;
-            vm.userId = $routeParams['uid'];
+            vm.userId = $routeParams["uid"];
+            vm.uid = $routeParams["uid"]; // for menu
             vm.error = null;
 
             vm.createEducation = createEducation;
@@ -42,7 +43,6 @@
          */
         function createEducation(education) {
             if(null != vm.userId){
-                console.log("creating education");
                 var newEducation = angular.copy(education);
                 var courses = [];
                 for (c in education.courses){

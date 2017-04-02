@@ -2,6 +2,7 @@
 
 <div class="container container-if-fixed-header">
 
+    <div class="row">
 
        <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
 
@@ -11,40 +12,24 @@
                        <legend>Work Experience</legend>
 
                        <div class="list-group">
-                           <div href="#" class="list-group-item list-group-item-bordered">
-                               <h3 class="list-group-item-heading">Software Design Engineer Level 2</h3>
-                               <h4 class="list-group-item-text">Sokrati, Pune</h4>
-                               <h5 class="list-group-item-text">Responsible for writing microservices in Java.</h5>
-                               <h5 class="list-group-item-text">
-                                   <span ng-repeat="tech in model.work.technologies">
-                                        {{tech}} {{$last ? '' : ($index==model.work.technologies.length-2) ? ' and ' : ', '}}
-                                    </span>
-                               </h5>
-                               <br/>
-                               <a href="#/user/123/workexp/1"><i class="fa fa-trash pull-right fa-2x"></i></a>
-                               <a href="#/user/123/workexp/1"><i class="fa fa-pencil pull-right fa-2x"></i></a>
-                               <br/>
-                               <br/>
-                           </div>
-                           <br/>
 
-                           <div href="#" class="list-group-item list-group-item-bordered">
-                               <h3 class="list-group-item-heading">Software Design Intern</h3>
-                               <h4 class="list-group-item-text">Sokrati, Pune</h4>
-                               <h5 class="list-group-item-text">Responsible for writing microservices in Java.</h5>
-                               <h5 class="list-group-item-text">
-                                   <span ng-repeat="tech in model.work.technologies">
-                                        {{tech}} {{$last ? '' : ($index==model.work.technologies.length-2) ? ' and ' : ', '}}
-                                    </span>
-                               </h5>
-                               <br/>
-                               <a href="#/user/123/workexp/1"><i class="fa fa-trash pull-right fa-2x"></i></a>
-                               <a href="#/user/123/workexp/1"><i class="fa fa-pencil pull-right fa-2x"></i></a>
-                               <br/>
+                           <div ng-repeat="w in model.workExpList">
+                               <div href="#" class="list-group-item list-group-item-bordered">
+                                   <h3 class="list-group-item-heading">{{w.jobTitle}}</h3>
+                                   <h4 class="list-group-item-text">{{w.location}}</h4>
+                                   <h5 class="list-group-item-text">{{w.startDate}} - {{w.endDate}}</h5>
+                                   <h5 class="list-group-item-text">{{w.description}}</h5>
+                                   <h5><strong>Technologies</strong></h5>
+                                   <h5 class="list-group-item-text">{{w.technologies.join(",")}}</h5>
+                                   <br/>
+                                   <a ng-click="model.deleteWorkExp(w._id)"><i class="fa fa-trash pull-right fa-2x"></i></a>
+                                   <a href="#/user/{{model.uid}}/workexp/{{w._id}}"><i class="fa fa-pencil pull-right fa-2x"></i></a>
+                                   <br/>
+                                   <br/>
+                               </div>
                                <br/>
                            </div>
-                           <br/>
-                           <br/>
+
                        </div>
 
 
@@ -69,18 +54,19 @@
            </div>
         </div>
 
-    <div class="col-lg-6 col-md-6 hidden-xs hidden-sm pull-right">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <div id="mycontent-right" class="row">
-            <div class="col-lg-12 addeducation-large">
-                <legend class="col-lg-12 col-lg-offset-1">Add Work Experience</legend>
-                <div  class="addeducation-large" ng-include="'./views/user/user.addworkexp.form.view.client.html'">
+        <div class="col-lg-6 col-md-6 hidden-xs hidden-sm pull-right">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div id="mycontent-right" class="row">
+                <div class="col-lg-12 addeducation-large">
+                    <legend class="col-lg-12 col-lg-offset-1">Add Work Experience</legend>
+                    <div  class="addeducation-large" ng-include="'./views/user/user.addworkexp.form.view.client.html'">
+
+                    </div>
 
                 </div>
-
             </div>
         </div>
     </div>

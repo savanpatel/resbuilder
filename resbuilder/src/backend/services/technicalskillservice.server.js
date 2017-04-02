@@ -93,7 +93,7 @@ module.exports = function (app, mongooseAPI) {
     function findTechnicalSkillForUser(req, res) {
         
         var userId = req.params.userId;
-        
+
         if(null == userId){
             res.sendStatus(500).send("null/empty userId");
             return;
@@ -103,8 +103,27 @@ module.exports = function (app, mongooseAPI) {
 
         TechnicalSkillModel.findTechnicalSkillForUser(userId)
             .then(function (technicalSkill) {
+
                 if(null == technicalSkill){
-                    res.sendStatus(500).send("can not find technical skill for user.");
+
+                    var newTechnicalSkill = {
+                        userId: userId,
+                        languages:[],
+                        technologies:[],
+                        database:[],
+                        softwares:[],
+                        operatingSystems:[]
+                    };
+
+
+                    TechnicalSkillModel.createTechnicalSkill(userId,newTechnicalSkill)
+                        .then(function (dbTechnicalSkill) {
+
+                            res.send(dbTechnicalSkill);
+                        }, function (err) {
+                            res.sendStatus(500).send(err);
+                        });
+
                 } else{
                     res.send(technicalSkill);
                 }

@@ -9,7 +9,7 @@ module.exports = function (app, mongooseAPI) {
     app.get("/api/workexp/:workexpId", findWorkExpById);
     app.get("/api/workexp/user/:userId", getWorkExpForUser);
     app.put("/api/workexp/:workexpId", updateWorkExp);
-    app.delete("/api/workexp/:workexp", deleteWorkExp);
+    app.delete("/api/workexp/:workexpId", deleteWorkExp);
 
 
 

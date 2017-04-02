@@ -10,9 +10,11 @@ module.exports = function (app, mongoose) {
 
         jobTitle:{type:String, required:true},
 
-        description: {type:String, required:true},
+        description: {type:String},
 
-        startDate:{type:String, required:true},
+        technologies: [{type:String}],
+
+        startDate:{type:String},
 
         endDate:{type:String},
 

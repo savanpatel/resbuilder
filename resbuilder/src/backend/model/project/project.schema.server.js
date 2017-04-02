@@ -22,7 +22,7 @@ module.exports = function (app, mongoose) {
 
         school:{type:String},
 
-        projectUrl:{type:Number}
+        projectUrl:{type:String}
 
     });
 

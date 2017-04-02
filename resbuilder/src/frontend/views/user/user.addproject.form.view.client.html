@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="degree" class="col-lg-3 control-label">School</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" id="degree" ng-model="model.project.organization" placeholder="School/Organization">
+                        <input type="text" class="form-control" id="degree" ng-model="model.project.school" placeholder="School/Organization">
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
                 <br/>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-1">
-                        <a type="submit" class="btn center-block btn-primary">Save</a>
+                        <a type="submit" ng-click="model.createProject(model.project)" class="btn center-block btn-primary">Save</a>
                     </div>
                 </div>
             </div>

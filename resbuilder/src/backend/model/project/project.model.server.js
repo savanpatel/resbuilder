@@ -36,7 +36,7 @@ module.exports = function (app, mongoose, logger) {
         ProjectModel.create(project, function (err, dbProject) {
 
             if(err){
-                logger.error('Unable to create project.');
+                logger.error('Unable to create project.' + err);
                 deferred.reject(err);
             } else {
                 deferred.resolve(dbProject);
@@ -109,7 +109,7 @@ module.exports = function (app, mongoose, logger) {
         var deferred = q.defer();
         ProjectModel.update({_id:projectId},{$set:project}, function (err, dbProject) {
             if(err) {
-                logger.erro("Can not update project with id " + projectId  + " Error: " + err);
+                logger.error("Can not update project with id " + projectId  + " Error: " + err);
                 deferred.reject(err);
             }
             else {

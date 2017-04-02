@@ -70,7 +70,7 @@
                 controller: "WorkExpController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/workexp/:wexpid", {
+            .when("/user/:uid/workexp/:wid", {
                 templateUrl: "views/user/user.work.edit.view.client.html",
                 controller: "EditWorkExpController",
                 controllerAs: "model"
