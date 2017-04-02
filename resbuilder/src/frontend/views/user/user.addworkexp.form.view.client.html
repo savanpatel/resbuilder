@@ -4,7 +4,7 @@
                 <div class="form-group">
                     <label for="title" class="col-lg-3 control-label">Job Title</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" id="title" ng-model="model.workexp.title" placeholder="Job Title">
+                        <input type="text" class="form-control" id="title" ng-model="model.workexp.jobTitle" placeholder="Job Title">
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                 <br/>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-1">
-                        <a type="submit" class="btn center-block btn-primary">Save</a>
+                        <a type="submit" ng-click="model.createWorkExp(model.workexp)" class="btn center-block btn-primary">Save</a>
                     </div>
                 </div>
             </div>

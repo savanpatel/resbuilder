@@ -39,7 +39,7 @@ module.exports = function (app, mongooseAPI) {
 
 
         // create user in db.
-        ProjectModel.createProject(project)
+        ProjectModel.createProject(project.userId, project)
             .then(function (dbProject){
 
                 if(null == dbProject){

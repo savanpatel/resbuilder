@@ -3,14 +3,18 @@
         .module("ResumeBuilder")
         .factory("WorkExpService", WorkExpService);
 
-    var USER_SERVICE_URL = "/api/workexp";
+    var WORKEXP_SERVICE_URL = "/api/workexp";
 
 
     function WorkExpService($http) {
 
 
         var api = {
-            "createWorkExp": createWorkExp
+            "createWorkExp": createWorkExp,
+            "findWorkExpForUser":findWorkExpForUser,
+            "deleteWorkExp":deleteWorkExp,
+            "updateWorkExp":updateWorkExp,
+            "findWorkExpById":findWorkExpById
         };
 
         return api;
@@ -23,73 +27,45 @@
 
         function createWorkExp(workexp)
         {
-            var createWorkExpUrl = USER_SERVICE_URL;
+            var createWorkExpUrl = WORKEXP_SERVICE_URL;
             return $http.post(createWorkExpUrl, workexp);
         }
 
 
 
         /*
-         * Finds user by userid, returns promise.
-         *
+         * Find workexp for user.
          */
-        function findUserById(id) {
-
-            var findUserByIdUrl = USER_SERVICE_URL + "/" + id;
-            return $http.get(findUserByIdUrl);
-        }
-
-
-
-        /*
-         * Finds user by username, returns promise.
-         *
-         */
-        function findUserByUsername(username){
-            var findUserUrl = USER_SERVICE_URL + "?username="+username;
-            return $http.get(findUserUrl);
+        function findWorkExpForUser(userId) {
+            var findWorkExpForUserUrl = WORKEXP_SERVICE_URL + "/user/" + userId;
+            return $http.get(findWorkExpForUserUrl);
         }
 
 
         /*
-         * returns promise.
-         *
+         * delete work experience.
          */
-        function findUserByCredentials(username, password){
-
-            var getRequestUrl =
-                USER_SERVICE_URL + "?username=" + username + "&password="+password;
-            return $http.get(getRequestUrl);
+        function deleteWorkExp(workexpId) {
+            var deleteWorkExpUrl = WORKEXP_SERVICE_URL + "/" + workexpId;
+            return $http.delete(deleteWorkExpUrl);
         }
 
 
         /*
-         * Updates the user with the new user information provided.
-         * Returns  promise.
+         * update work experience.
          */
-        function updateUser(userId, user) {
-            var putRequestUrl = USER_SERVICE_URL + "/" + user._id;
-            return $http.put(putRequestUrl, user);
+        function updateWorkExp(workexp, workexpId) {
+            var updateWorkExpUrl = WORKEXP_SERVICE_URL + "/" + workexpId;
+            return $http.put(updateWorkExpUrl, workexp);
         }
-
-
 
 
         /*
-         *
-         *  Deletes the user from the list.
-         *  returns promise.
+         * find work exp by work exp id.
          */
-        function deleteUser(userId) {
-
-            var deleteUserUrl = USER_SERVICE_URL + "/" + userId;
-            return $http.delete(deleteUserUrl);
-        }
-
-
-        function checkUsernameAvailable(username) {
-            var checkUsernameAvail = USER_SERVICE_URL + "/" + "username/" + username;
-            return $http.get(checkUsernameAvail);
+        function findWorkExpById(workexpId) {
+            var findWorkExpByIdUrl = WORKEXP_SERVICE_URL + "/" + workexpId;
+            return $http.get(findWorkExpByIdUrl);
         }
     }
 })();

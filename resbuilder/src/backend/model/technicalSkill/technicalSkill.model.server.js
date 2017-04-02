@@ -83,12 +83,13 @@ module.exports = function (app, mongoose, logger) {
 
         var deferred = q.defer();
 
-        TechnicalSkillModel.find({userId:userId}, function (err, dbTechnicalSkill) {
+        TechnicalSkillModel.findOne({userId:userId}, function (err, dbTechnicalSkill) {
 
             if(err){
                 logger.error("Can not find technicalSkill for user " + userId + " Error: "+ err);
                 deferred.reject(err);
             } else {
+
                 deferred.resolve(dbTechnicalSkill);
             }
         });
@@ -109,7 +110,7 @@ module.exports = function (app, mongoose, logger) {
         var deferred = q.defer();
         TechnicalSkillModel.update({_id:technicalSkillId},{$set:technicalSkill}, function (err, dbTechnicalSkill) {
             if(err) {
-                logger.erro("Can not update technicalSkill with id " + technicalSkillId  + " Error: " + err);
+                logger.error("Can not update technicalSkill with id " + technicalSkillId  + " Error: " + err);
                 deferred.reject(err);
             }
             else {
