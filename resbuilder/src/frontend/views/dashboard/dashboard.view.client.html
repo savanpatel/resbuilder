@@ -1,21 +1,67 @@
 
-<script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
+<script src="http://rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
 
 <div ng-include="'./views/menu/menu.view.client.html'"></div>
-<div class="container-if-fixed-header">
-    <div class="form-group url-pb-class">
-        <label class="control-label">Job Description URL:</label>
-        <div class="input-group">
-            <input type="text" class="form-control">
-            <span class="input-group-btn">
-                <a href="#/user/dashboard/resumeData">
-      <button class="btn btn-success" type="button">Get Resume Data</button>
+
+
+<div class="container container-if-fixed-header">
+
+    <div class="row">
+        <div class="form-group url-pb-class">
+            <label class="control-label">Job Description URL:</label>
+            <div class="input-group">
+                <input type="text" class="form-control">
+                <span class="input-group-btn">
+                    <a href="#/user/dashboard/resumeData">
+                        <button class="btn btn-success" type="button">Get Resume Data</button>
                     </a>
-    </span>
+                </span>
+            </div>
         </div>
     </div>
-    <div class="container mt40">
-        <section class="row">
+
+    <br/>
+
+    <div class="row">
+        <div class="alert alert-dismissible alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Heads up!</strong> <h3>Your profile is incomplete. Completing profile helps you to build resumes better.</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <legend>Jobs You May Like (from GitHub Jobs)</legend>
+        </div>
+        <br/>
+        <div>
+            <div class="col-md-5 job-box" ng-repeat="j in model.jobList">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <img class="img-responsive pull-left" src="{{j.company_logo}}" height=64 width=64/>
+                    </div>
+                    <br/>
+                      <h4>{{j.title}}</h4>
+                </div>
+                <div class="col-md-12">
+                    <div>
+                        <a href="{{j.url}}">{{j.url}}</a>
+                        <hr/>
+                        <a class="btn btn-primary btn-sm">Generate Resume</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <br/>
+    <hr/>
+    <div class="row mt40">
+        <div class="col-md-12">
+            <legend> Your Recent Resumes</legend>
+        </div>
+        <section>
             <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
             <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
             <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>

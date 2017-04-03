@@ -105,3 +105,11 @@ tags-input .tags input
 .login-box{
     background-color: white;
 }
+.job-box{
+    padding-top:10px;
+    padding-bottom:10px;
+    background-color: #ecf0f1;
+    margin-left:5px;
+    margin-top:5px;
+    word-wrap: break-word;
+}
