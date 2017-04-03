@@ -1,65 +1,52 @@
+<div id="wrapper">
+    <div class="overlay"></div>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div>
-            <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="fa fa-bars" aria-hidden="true"></span></a>
-        </div>
-        <div>
-            <a class="navbar-brand"><span>ResumeBuilder</span></a>
-        </div>
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    ResumeBuilder
+                </a>
+            </li>
+            <li>
+                <a href="#/user/{{model.uid}}/dashboard">Dashboard</a>
+            </li>
+            <li>
+                <a href="#/user/dashboard/resumes">All Resumes</a>
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" uib-dropdown>Edit Profile<span class="caret"></span></a>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                    <li class="dropdown-header">Edit Profile Options</li>
+                    <li><a href="#/user/{{model.uid}}/basicprofile">Basic Info</a></li>
+                    <li><a href="#/user/{{model.uid}}/education">Education</a></li>
+                    <li><a href="#/user/{{model.uid}}/project">Project And Skills</a></li>
+                    <li><a href="#/user/{{model.uid}}/workexp">Work Experience</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Logout</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="custom-menu">
+        <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+        </button>
     </div>
-</nav>
+    <!-- /#page-content-wrapper -->
 
-<div id="wrapper" class="toggled">
-    <div class="container-fluid">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <br>
-                </li>
-                <li class="sidebar-brand">
-                    <a href="#" class="navbar-brand">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile
-                    </a>
-                </li>
-                <li>
-                    <a href="#/user/{{model.uid}}/dashboard"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Dashboard</a>
-                </li>
-                <li>
-                    <a href="#/user/dashboard/resumes"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>All Resumes</a>
-                </li>
-                <li>
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span><font color="#337AB7"> ADMINISTRATION</font>
-                </li>
-
-                <li class="btn-block" uib-dropdown aria-hidden="true">
-                    <a class="btn-block dropdown-toggle dropdown-menu-1" data-toggle="dropdown" data-target="submenu1">
-                        <span class="glyphicon glyphicon-pencil"></span> Edit Profile
-                        <span class="caret"></span></a>
-
-                    <ul id="submenu1"class="btn-block list-group-submenu" uib-dropdown-menu>
-                        <li><a href="#/user/{{model.uid}}/basicprofile">Basic Info</a></li>
-                        <li><a href="#/user/{{model.uid}}/education">Education</a></li>
-                        <li><a href="#/user/{{model.uid}}/project">Projects and Skills</a></li>
-                        <li><a href="#/user/{{model.uid}}/workexp">Work Experience</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a>
-                </li>
-
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- /#page-content-wrapper -->
-    </div>
 </div>
+<script src="js/custom/menu.js"></script>
 <!-- /#wrapper -->
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
