@@ -4,11 +4,11 @@
 
 module.exports = function (app) {
 
-    // var fs = require('fs');
-    //
-    // app.get("/api/process/job-descriotion/:uid", createDoc);
-    //
-    // function createDoc(req,res) {
+    var fs = require('fs');
+
+    app.get("/api/process/job-descriotion/:uid", createDoc);
+
+    function createDoc(req,res) {
 
 
         var PythonShell = require('python-shell');
@@ -22,5 +22,5 @@ module.exports = function (app) {
             if (err) throw err;
             console.log(results[0]);
         });
-    // }
+    }
 }
