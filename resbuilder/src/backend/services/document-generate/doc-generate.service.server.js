@@ -6,10 +6,11 @@
 
 module.exports = function (app) {
 
+    var fs = require('fs');
 
     app.get("/api/generate/doc", createDoc);
 
-    function createDoc(req,res) {
+    function createDoc(req, res) {
 
         var officeClippy = require('office-clippy');
         var docx = officeClippy.docx;
@@ -76,8 +77,6 @@ module.exports = function (app) {
         doc.addParagraph(paragraph);
 
 
-
-
         // Technical knowledge added
         var education = docx.createText("TECHNICHAL KNOWLEGDE")
         education.bold()
@@ -116,7 +115,6 @@ module.exports = function (app) {
         doc.addParagraph(paragraph)
 
 
-
         //Work Experience
         var education = docx.createText("WORK EXPERIENCE")
         education.bold()
@@ -151,9 +149,6 @@ module.exports = function (app) {
         var paragraph = docx.createParagraph().bullet();
         paragraph.addText(text)
         doc.addParagraph(paragraph);
-
-
-
 
 
         //Project
@@ -205,13 +200,47 @@ module.exports = function (app) {
         paragraph.addText(text)
         doc.addParagraph(paragraph);
 
-        var fs = require('fs');
+
+
         var output = fs.createWriteStream(__dirname + '/new.docx');
         exporter.local(output, doc);
-        exporter.express(res, doc, 'template-resume');
+
+
+        var liveDocx = require('node-livedocx')
+
+        createPDF();
+
+        //exporter.express(res, doc, 'template-resume');
 
 
     }
 
+    function createPDF() {
+
+    var req = require('request');
+    var r = req.post('http://mirror1.convertonlinefree.com', {
+        encoding: null,
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.94 Safari/537.36'
+        }
+    }, function(err, res) {
+        if (err) return callback(err);
+        fs.writeFileSync(__dirname +'/test.pdf',res.body);
+    });
+
+    var form = r.form();
+    form.append('__EVENTTARGET', '');
+    form.append('__EVENTARGUMENT', '');
+    form.append('__VIEWSTATE', '');
+    console.log(__dirname)
+    form.append('ctl00$MainContent$fu', fs.readFileSync(__dirname + '/new.docx'), {
+        filename: 'output.docx',
+        contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    });
+
+    form.append('ctl00$MainContent$btnConvert', 'Convert');
+    form.append('ctl00$MainContent$fuZip', '');
+
+    }
 }
 
