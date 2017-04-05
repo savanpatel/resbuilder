@@ -21,12 +21,6 @@
 
         return api;
 
-
-        /*
-         * creates new user, returns promise.
-         *
-         */
-
         function createUser(user)
         {
             var createUserUrl = USER_SERVICE_URL;

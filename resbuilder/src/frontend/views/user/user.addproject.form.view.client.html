@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Technologies</label>
                     <div class="col-lg-9">
-                        <tags-input type="text" ng-model="model.project.technologies" placeholder="Technologies"></tags-input>
+                        <tags-input replace-spaces-with-dashes="false" min-length="2" type="text" ng-model="model.project.technologies" placeholder="Technologies"></tags-input>
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Team Members</label>
                     <div class="col-lg-9">
-                        <tags-input type="text" ng-model="model.project.teammates" placeholder="Teammates"></tags-input>
+                        <tags-input replace-spaces-with-dashes="false" min-length="2" type="text" ng-model="model.project.teammates" placeholder="Teammates"></tags-input>
                     </div>
                 </div>
 

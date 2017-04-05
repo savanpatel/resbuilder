@@ -72,6 +72,11 @@
                 newTechnicalSkill.operatingSystems.push(technicalSkill.operatingSystems[o].text);
             }
 
+            newTechnicalSkill.technologies = [];
+            for(var t in technicalSkill.operatingSystems){
+                newTechnicalSkill.technologies.push(technicalSkill.technologies[t].text);
+            }
+
             var promise = TechnicalSkillService.updateTechnicalSkill(newTechnicalSkill, newTechnicalSkill._id);
             promise.success(onUpdateTechnicalSkillUpdateSuccess);
             promise.error(onUpdateTechnicalSkillUpdateError);

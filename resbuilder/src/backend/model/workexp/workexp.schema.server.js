@@ -10,6 +10,8 @@ module.exports = function (app, mongoose) {
 
         jobTitle:{type:String, required:true},
 
+        companyName:{type:String, required:true},
+
         description: {type:String},
 
         technologies: [{type:String}],

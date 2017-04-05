@@ -8,13 +8,14 @@
         .module("ResumeBuilder")
         .controller("DashBoardController", DashBoardController);
 
-    function DashBoardController($sce, $scope, $routeParams, $location, TechnicalSkillService, JobSuggestionService) {
+    function DashBoardController($sce, $scope, $routeParams, $location,ResumeDataService, TechnicalSkillService, JobSuggestionService) {
 
         var vm = this;
 
         function init() {
             vm.isCollapsed = false;
             vm.error = null;
+            vm.GetResumeData = GetResumeData;
 
             console.log("in init of dashboard controller");
             vm.uid = $routeParams['uid'];
@@ -78,6 +79,25 @@
             var technicalSkillList = ['Java', 'Ruby', 'Python', 'MySQL'];
 
             fetchJob(technicalSkillList);
+        }
+
+
+        function GetResumeData() {
+
+            console.log("GEt data")
+            var url = vm.JobURL
+            var promise = ResumeDataService.getResumeData(vm.uid);
+
+            promise.success(onGettingResumeData)
+            promise.error(OnErrorGettingResumeData)
+
+
+        }
+        function onGettingResumeData() {
+            console.log("Done")
+        }
+        function OnErrorGettingResumeData() {
+            console.log("Error")
         }
 
 
