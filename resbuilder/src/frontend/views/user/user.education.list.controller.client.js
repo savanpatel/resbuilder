@@ -12,26 +12,19 @@
             vm.userId = $routeParams["uid"];
             vm.uid = $routeParams["uid"]; // for menu
             vm.error = null;
-
             vm.createEducation = createEducation;
             vm.deleteEducation = deleteEducation;
             vm.arrayToString = arrayToString;
-
             findEducationForUser();
-
         }
-
-
         init();
-
-
         /*
          * finds the education for user.
          */
         function findEducationForUser() {
             if(null != vm.userId){
-                var promise = EducationService.findEducationForUser(vm.userId);
 
+                var promise = EducationService.findEducationForUser(vm.userId);
                 promise.success(onFindEducationForUserSuccess);
                 promise.error(onFindEducationForUserError);
             }
@@ -112,7 +105,7 @@
 
 
         function arrayToString(array) {
-            return array.join(',');
+            return array.join(', ');
         }
     }
 })();

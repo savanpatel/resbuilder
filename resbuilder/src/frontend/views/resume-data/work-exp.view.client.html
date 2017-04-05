@@ -1,20 +1,16 @@
+<div ng-repeat="w in model.workExpList">
 <div class="col-sm-6">
     <div class="card">
         <div class="card-block">
-<div href="#" class="list-group-item list-group-item-bordered">
-    <h3 class="list-group-item-heading">Software Design Intern</h3>
-    <h4 class="list-group-item-text">Sokrati, Pune</h4>
-    <h5 class="list-group-item-text">Responsible for writing microservices in Java.</h5>
-    <h6 class="list-group-item-text">
-                                   <span ng-repeat="tech in model.work.technologies">
-                                        {{tech}} {{$last ? '' : ($index==model.work.technologies.length-2) ? ' and ' : ', '}}
-                                    </span>
-    </h6>
-    <br/>
-    <a href="#/user/123/workexp/1"><i class="fa fa-cog pull-right fa-2x"></i></a>
-    <br/>
-    <br/>
-</div>
+                <div href="#" class="list-group-item list-group-item-bordered">
+                    <h3 class="list-group-item-heading">{{w.jobTitle}}</h3>
+                    <h4 class="list-group-item-text">{{w.companyName}},&nbsp;{{w.location}}</h4>
+                    <h5 class="list-group-item-text">{{w.startDate}} - {{w.endDate}}</h5>
+                    <h5 class="list-group-item-text">{{w.description}}</h5>
+                    <h5><strong>Technologies</strong></h5>
+                    <h5 class="list-group-item-text">{{w.technologies.join(",")}}</h5>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -85,16 +85,13 @@
         function GetResumeData() {
 
             console.log("GEt data")
-            var url = vm.JobURL
-            var promise = ResumeDataService.getResumeData(vm.uid);
+            ResumeDataService.setUrl(vm.JobURL);
 
-            promise.success(onGettingResumeData)
-            promise.error(OnErrorGettingResumeData)
-
+            $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
 
         }
-        function onGettingResumeData() {
-            console.log("Done")
+        function onGettingResumeData(data) {
+            console.log(data)
         }
         function OnErrorGettingResumeData() {
             console.log("Error")

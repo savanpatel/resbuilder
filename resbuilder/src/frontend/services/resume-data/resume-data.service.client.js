@@ -12,13 +12,24 @@
     function ResumeDataService($http) {
 
         var api = {
-            "getResumeData": getResumeData
+            "getResumeData": getResumeData,
+            "setUrl" : setUrl,
+            "getUrl":getUrl
         };
 
         return api
 
-        function getResumeData(uid) {
-            return $http.post("/api/getResumeData/"+uid);
+        this.jobDesURl = ""
+        function getResumeData(uid,url) {
+            return $http.get("/api/getResumeData/"+uid+"/?url="+url);
+        }
+
+        function setUrl(url) {
+            this.jobDesURl = url;
+        }
+
+        function getUrl() {
+            return this.jobDesURl;
         }
     }
 })();

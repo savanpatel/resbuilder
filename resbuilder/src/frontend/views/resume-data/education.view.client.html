@@ -1,23 +1,21 @@
-<div class="col-sm-6">
-    <div class="card">
-        <div class="card-block">
-
-            <div href="#" class="list-group-item list-group-item-bordered">
-                <h3 class="list-group-item-heading">Northeastern University</h3>
-                <h4 class="list-group-item-text">Masters, Computer Science</h4>
-                <h5 class="list-group-item-text">2016-2018</h5>
-                <br/>
-                <div>
-                    <label>Courses</label>
-                    <p>Computer Systems, Algorithms</p>
+<div ng-repeat="e in model.educationList">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-block">
+                <div href="#" class="list-group-item list-group-item-bordered">
+                    <h3 class="list-group-item-heading">{{e.school}}</h3>
+                    <h4 class="list-group-item-text">{{e.degree}}, {{e.field}}</h4>
+                    <h5 class="list-group-item-text">{{e.startYear}} - {{e.endYear}}</h5>
+                    <br/>
+                    <div>
+                        <label>Courses</label>
+                        <p>{{model.arrayToString(e.courses)}}</p>
+                    </div>
+                    <div>
+                        <label>Grade</label>
+                        <p>{{e.grade}}</p>
+                    </div>
                 </div>
-                <div>
-                    <label>Grade</label>
-                    <p>4</p>
-                </div>
-                <a href="#/user/123/education/1"><i class="fa fa-cog pull-right fa-2x"></i></a>
-                <br/>
-                <br/>
             </div>
         </div>
     </div>

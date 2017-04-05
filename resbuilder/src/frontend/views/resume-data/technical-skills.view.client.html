@@ -2,28 +2,29 @@
     <div class="card">
         <div class="card-block">
             <p><b>Languages:</b>
+
                 <span ng-repeat="language in model.languages">
-            {{language}} {{$last ? '' : ($index==model.languages.length-2) ? ' and ' : ', '}}
+            {{language}} {{$last ? '' : ($index==model.languages.length-2) ? ', ' : ', '}}
                 </span>
             </p>
             <p><b>Technologies:</b>
                 <span ng-repeat="tech in model.technologies">
-            {{tech}} {{$last ? '' : ($index==model.technologies.length-2) ? ' and ' : ', '}}
+            {{tech}} {{$last ? '' : ($index==model.technologies.length-2) ? ', ' : ', '}}
                 </span>
             </p>
             <p><b>Databases and other skills:</b>
                 <span ng-repeat="data in model.database">
-            {{data}} {{$last ? '' : ($index==model.database.length-2) ? ' and ' : ', '}}
+            {{data}} {{$last ? '' : ($index==model.database.length-2) ? ', ' : ', '}}
                 </span>
             </p>
             <p><b>Softwares:</b>
                 <span ng-repeat="soft in model.software">
-            {{soft}} {{$last ? '' : ($index==model.software.length-2) ? ' and ' : ', '}}
+            {{soft}} {{$last ? '' : ($index==model.software.length-2) ? ', ' : ', '}}
                 </span>
             </p>
             <p><b>Operating System:</b>
                 <span ng-repeat="os in model.os">
-            {{os}} {{$last ? '' : ($index==model.os.length-2) ? ' and ' : ', '}}
+            {{os}} {{$last ? '' : ($index==model.os.length-2) ? ', ' : ', '}}
                 </span>
             </p>
         </div>

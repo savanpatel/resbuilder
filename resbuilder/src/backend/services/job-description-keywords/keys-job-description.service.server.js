@@ -6,50 +6,110 @@ module.exports = function (app,mongooseAPI) {
 
     var fs = require('fs');
     var q = require('q');
+
     var Sync = require('sync');
     var Promise = require('es6-promise').Promise;
 
-    app.post("/api/getResumeData/:userId", createDoc);
+    app.get("/api/getResumeData/:userId", createDoc);
     var userId;
     var EducationModel = mongooseAPI.educationModelAPI;
     var ProjectModel = mongooseAPI.projectModelAPI;
     var TechnicalSkillModel = mongooseAPI.technicalSkillModelAPI;
     var UserModel = mongooseAPI.userModelAPI;
     var WorkExpModel = mongooseAPI.workExpModelAPI;
-
+    var url;
     var educationDetails;
     var projectDetails;
     var technicalSkillDetails;
     var userDetails;
     var workDetails;
     var output;
+    var Project = [];
+    var Work = [];
 
     function createDoc(req,res) {
 
         userId = req.params.userId;
+        var newParams = req.query;
+        url = newParams['url'];
 
-        createDoc1()
+
+        getKeyWords()
+            .then(getData)
             .then(getDataAccToKeyWords)
-            .then(print)
+            .then(function () {
+                var ProjectDetails = []
+                if(Project.length <= 4)
+                {
+                    for(var p in Project)
+                    {
+                        ProjectDetails.push(Project[p].details);
+                    }
+                }
+                else
+                {
+                    for(var i =0;i<=3 ; i++)
+                    {
+                        ProjectDetails.push(Project[i].details)
+                    }
+                }
+                var WorkDetails = []
+                if(Work.length <= 2)
+                {
+                    for(var w in Work)
+                    {
+                        WorkDetails.push(Work[w].details);
+                    }
+                }
+                else
+                {
+                    for(var i =0;i<=1 ; i++)
+                    {
+                        WorkDetails.push(Work[i].details)
+                    }
+                }
+
+                var EducationDetails = []
+                if(educationDetails.length <= 2)
+                {
+                    for(var e in educationDetails)
+                    {
+                        EducationDetails.push(educationDetails[e]);
+                    }
+                }
+                else
+                {
+                    for(var i =0;i<=1 ; i++)
+                    {
+                        EducationDetails.push(educationDetails[i])
+                    }
+                }
+                var data = {
+                    "education":EducationDetails,
+                    "project":ProjectDetails,
+                    "work":WorkDetails,
+                    "technical":technicalSkillDetails
+                }
+
+                res.send(data);
+                return true;
+            },function (err) {
+                res.sendStatus(404);
+            });
 
     }
 
-    function executeAsynchronously(functions, timeout) {
-        for(var i = 0; i < functions.length; i++) {
-            setTimeout(functions[i], timeout);
-            timeout += timeout
-        }
-    }
 
-    function createDoc1() {
+    function getKeyWords() {
 
-        return new Promise(function (resolve) {
+        return new Promise(function (resolve,reject) {
             console.log("In server")
             console.log(userId)
             var PythonShell = require('python-shell');
 
             var options = {
-                args: ['https://boards.greenhouse.io/endurance/jobs/645924#.WOL6CxLyto4'],
+                //args: ['https://boards.greenhouse.io/endurance/jobs/645924#.WOL6CxLyto4'],
+                args:[url],
                 scriptPath: __dirname
             };
 
@@ -67,23 +127,75 @@ module.exports = function (app,mongooseAPI) {
 
     }
 
-    function print(){
+    function getDataAccToKeyWords(){
 
-            console.log(output[0])
 
+        return new Promise(function (resolve,reject) {
+            var a = output[0].substring(1,output[0].length)
+            a = a + " " + "python" + " " + "c";
+            var res = a.split(" ")
 
             for (var a in projectDetails) {
-                console.log(projectDetails[a].technologies);
+
+                var tech = projectDetails[a].technologies
+
+                var hit = 0
+                var i;
+                for (i = 0; i < tech.length; i++) {
+                    var new_tech = tech[i].toLowerCase();
+                    var new_tech = new_tech.replace(/[^a-z]+/g, "")
+                    var index = res.indexOf(new_tech);
+                    if (index > 0) {
+                        hit += 1
+                    }
+                }
+
+                var jsonProject = {
+                    "details": projectDetails[a],
+                    "hit": hit
+                }
+                Project.push(jsonProject)
             }
-            for (var a in workDetails) {
-                console.log(workDetails[a].technologies);
+        //console.log(Project)
+
+
+        for (var b in workDetails) {
+
+            var tech = workDetails[b].technologies
+
+            var hit = 0
+            var i;
+            for (i = 0; i < tech.length; i++) {
+                var new_tech = tech[i].toLowerCase();
+                var new_tech = new_tech.replace(/[^a-z]+/g, "")
+                var index = res.indexOf(new_tech);
+                if (index > 0) {
+                    hit += 1
+                }
             }
 
+            var jsonWork = {
+                "details": workDetails[b],
+                "hit": hit
+            }
+            Work.push(jsonWork)
+        }
+
+
+            Work.sort(function(a, b) {
+                return  parseFloat(b.hit) - parseFloat(a.hit);
+            });
+            Project.sort(function(a, b) {
+                return  parseFloat(b.hit) - parseFloat(a.hit);
+            });
+
+        resolve()
+        });
     }
 
-    function getDataAccToKeyWords() {
+    function getData() {
 
-        return new Promise(function (resolve) {
+        return new Promise(function (resolve,reject) {
 
 
             console.log("get data")
@@ -91,7 +203,7 @@ module.exports = function (app,mongooseAPI) {
                 .then(function (education) {
                     //console.log(education)
                     if (education == null) {
-                        logger.error("education not found");
+
                         reject(err)
 
                     }
@@ -101,7 +213,7 @@ module.exports = function (app,mongooseAPI) {
                             .then(function (project) {
                                 //console.log(project)
                                 if (project == null) {
-                                    logger.error("Project not found");
+
                                     reject(err)
 
                                 }
@@ -113,7 +225,7 @@ module.exports = function (app,mongooseAPI) {
                                         .then(function (techSkill) {
                                             //console.log(techSkill)
                                             if (techSkill == null) {
-                                                logger.error("technical skill not found");
+
                                                 reject(err)
 
                                             }
@@ -123,7 +235,7 @@ module.exports = function (app,mongooseAPI) {
                                                     .then(function (user) {
                                                         //console.log(user)
                                                         if (user == null) {
-                                                            logger.error("user not found");
+
                                                             reject(err)
 
                                                         }
@@ -133,7 +245,7 @@ module.exports = function (app,mongooseAPI) {
                                                                 .then(function (work) {
                                                                     //console.log(work)
                                                                     if (work == null) {
-                                                                        logger.error("work Experience not found");
+
                                                                         reject(err)
 
                                                                     }
@@ -142,32 +254,27 @@ module.exports = function (app,mongooseAPI) {
                                                                         resolve()
                                                                     }
                                                                 }, function (err) {
-                                                                    logger.error("Can not fetch Work Experience for user. Error: " + err);
                                                                     reject(err)
                                                                 });
 
                                                         }
                                                     }, function (err) {
-                                                        logger.error("Can not fetch details for user. Error: " + err);
                                                         reject(err)
                                                     });
 
                                             }
                                         }, function (err) {
-                                            logger.error("Can not fetch technical skill for user. Error: " + err);
                                             reject(err)
 
                                         });
                                 }
 
                             }, function (err) {
-                                logger.error("Can not fetch project for user. Error: " + err);
                                 reject(err)
 
                             });
                     }
                 }, function (err) {
-                    logger.error("Can not fetch education for user. Error: " + err);
                     reject(err)
 
                 });
