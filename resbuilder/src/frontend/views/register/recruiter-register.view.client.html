@@ -1,0 +1,99 @@
+<div class="container-fluid container-if-fixed-header signin-background">
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-3">
+            <div class="login-border login-box">
+                <form>
+                    <fieldset>
+                        <div class="card-header card-recruiter">
+                            <div class="col-sm-6">
+                                <h1 class="col-sm-offset-4">Register</h1>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <div ng-show="model.error" class="alert alert-danger" role="alert">
+                                        {{model.error}}
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" ng-model="recruiter.username" ng-change="model.checkUsernameAvailability(recruiter.username)" class="form-control" id="inputUsername" placeholder="Username">
+                                </div>
+                                <span class="help-block" ng-show="model.checkUsername">{{model.checkUsername}}</span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-circle"></i></span>
+                                    <input type="text" ng-model="recruiter.companyname" required class="form-control" id="inputCompanyName" placeholder="Company Name">
+                                </div>
+                                <span class="help-block" ng-show="model.checkCompanyName">{{model.checkCompanyName}}</span>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input type="password" ng-model="recruiter.password" class="form-control" id="inputPassword" placeholder="Password">
+                                </div>
+                                <span class="help-block" ng-show="model.checkPassword">{{model.checkPassword}}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input type="password" ng-model="recruiter.repassword" class="form-control" id="inputRePassword" placeholder="Retype Password">
+                                </div>
+                                <span class="help-block" ng-show="model.checkRePassword">{{model.checkRePassword}}</span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                                    <input type="text" ng-model="recruiter.website" class="form-control" id="inputWebsite" placeholder="Company Website Url">
+                                </div>
+                                <span class="help-block" ng-show="model.checkWebsite">{{model.checkWebsite}}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                                    <textarea type="text" ng-model="recruiter.description" rows="3" class="form-control" id="inputDescription" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                    <input type="email" ng-model="recruiter.email" class="form-control" placeholder="Email">
+                                </div>
+                                <span class="help-block" ng-show="model.checkEmail">{{model.checkEmail}}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8 center-block">
+
+                                    <div>
+                                        <a ng-click="model.registerRecruiter(recruiter)" class="btn btn-block btn-info">Register</a>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+    </div> <!-- End row-->
+</div>

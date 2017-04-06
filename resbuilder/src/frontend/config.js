@@ -20,6 +20,16 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
+            .when("/recruiter-register", {
+                templateUrl: "views/register/recruiter-register.view.client.html",
+                controller: "RecruiterRegisterController",
+                controllerAs: "model"
+            })
+            .when("/recruiter/:rid/dashboard", {
+                templateUrl: "views/dashboard/recruiter-dashboard.view.client.html",
+                controller: "RecruiterDashBoardController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/dashboard", {
                 templateUrl: "views/dashboard/dashboard.view.client.html",
                 controller: "DashBoardController",

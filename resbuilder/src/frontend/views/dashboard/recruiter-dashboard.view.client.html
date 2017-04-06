@@ -1,0 +1,56 @@
+
+<script src="http://rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
+
+<div ng-include="'./views/menu/recruiter-menu.view.client.html'"></div>
+
+
+<div class="container container-if-fixed-header">
+
+    <div class="row">
+        <div class="form-group url-pb-class">
+            <label class="control-label"><h3>Search By Skills:</h3></label>
+            <div class="input-group">
+                <input ng-model="model.skill" type="text" class="form-control">
+                <span class="input-group-btn">
+                    <a class="btn btn-success btn-block" ng-click="model.getUsersForSkill(model.skill)">
+                        Search
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="alert alert-dismissible alert-danger" ng-show="model.error">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Oh snap!</strong> {{model.error}}
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="row">
+        <div ng-repeat="u in model.userList">
+                <div href="#" class="list-group-item col-md-3 custom-card custom-card-1">
+                    <h3 class="list-group-item-heading">{{u.firstName}} {{u.lastName}}</h3>
+                    <h5 class="list-group-item-text">{{u.email}}</h5>
+                    <br/>
+                    <div>
+                        <label>Links</label>
+                        <h5 class="list-group-item-text">{{u.githubUrl}}</h5>
+                        <h5 class="list-group-item-text">{{u.personalWebsite}}</h5>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="pull-left">
+                        <a class="btn btn-primary btn-xs" ng-click="model.sendMessage(u._id)">Send Message</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+</div>
