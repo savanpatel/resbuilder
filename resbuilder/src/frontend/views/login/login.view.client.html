@@ -7,7 +7,7 @@
 
     <div class="row text-center">
         <div class="col-md-12">
-            <img class="center-block img-responsive" src="./../../assets/images/resbuilder.png"/>
+            <img class="center-block img-responsive" src="./../../assets/images/resbuilder.png" height=128 width=128/>
             <h1>ResumeBuilder</h1>
         </div>
     </div>
@@ -15,17 +15,15 @@
     <hr/>
     <br/>
     <br/>
-    <br/>
 
     <div class="row signin-background">
         <div class="col-md-6 pull-left">
-
             <div class="login-border login-box">
                <form>
                    <fieldset>
                        <div class="card-header">
                            <div class="col-sm-6">
-                               <h1 class="col-sm-offset-4">SignIn</h1>
+                               <h1 class="col-sm-offset-4">User SignIn</h1>
                                <p class="col-sm-offset-4">New user? Click Register</p>
                            </div>
                        </div>
@@ -89,7 +87,76 @@
                </form>
            </div>
         </div>
-        <div class="col-md-5">
+
+
+        <div class="col-md-6 pull-left">
+            <div class="login-border login-box">
+                <form>
+                    <fieldset>
+                        <div class="card-header card-recruiter">
+                            <div class="col-sm-6">
+                                <h1 class="col-sm-offset-4">Recruiter SignIn</h1>
+                                <p class="col-sm-offset-4">New recruiter? Click Register</p>
+                            </div>
+                        </div>
+                        <br/>
+
+
+                        <div class="col-md-offset-2">
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <div ng-show="model.recruiterError" class="alert alert-danger" role="alert">
+                                        {{model.recruiterError}}
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" ng-model="recruiter.username" class="form-control" id="inputUsername" placeholder="Username">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input type="password" class="form-control" ng-model="recruiter.password" id="inputPassword" placeholder="Password">
+                                </div>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div class="form-group">
+                                <div class="col-md-8 center-block">
+
+                                    <div>
+                                        <a class="btn btn-block btn-primary" ng-click="model.loginRecruiter(recruiter)">Login</a>
+                                    </div>
+                                    <br/>
+                                    <div>
+                                        <a href="#/recruiter-register" class="btn btn-block btn-info">Register</a>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row signin-background">
+
+        <div class="col-md-5 col-md-offset-3">
 
             <div class="col-lg-offset-2 center-block">
                 <div>

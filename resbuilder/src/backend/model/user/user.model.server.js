@@ -17,7 +17,8 @@ module.exports = function (app, mongoose, logger) {
         updateUser:updateUser,
         deleteUser:deleteUser,
         checkUsernameAvailable:checkUsernameAvailable,
-        findUserByEmail:findUserByEmail
+        findUserByEmail:findUserByEmail,
+        findUsersForIds:findUsersForIds
     };
 
     return api;
@@ -113,7 +114,7 @@ module.exports = function (app, mongoose, logger) {
         var deferred = q.defer();
         UserModel.update({_id:userId},{$set:user}, function (err, dbUser) {
             if(err) {
-                logger.erro("Can not update user with id " + userId  + " Error: " + err);
+                logger.error("Can not update user with id " + userId  + " Error: " + err);
                 deferred.reject(err);
             }
             else {
@@ -161,7 +162,7 @@ module.exports = function (app, mongoose, logger) {
         UserModel.findOne({username:username, password:password}, function (err, user) {
 
             if(err){
-                console.log("ERROR: [findUserByCredentials]: " + err);
+                logger.error("ERROR: [findUserByCredentials]: " + err);
                 deferred.reject(err);
             } else {
                 deferred.resolve(user);
@@ -180,7 +181,7 @@ module.exports = function (app, mongoose, logger) {
         UserModel.findOne({username:username}, function (err, user) {
 
             if(err){
-                console.log("ERROR: [checkUsernameAvailable]: " + err);
+                logger.error("ERROR: [checkUsernameAvailable]: " + err);
                 deferred.reject(err);
             } else {
                 deferred.resolve(user);
@@ -198,7 +199,7 @@ module.exports = function (app, mongoose, logger) {
         UserModel.findOne({email:email}, function (err, user) {
 
             if(err){
-                console.log("ERROR: [findUserByEmail]: " + err);
+                logger.error("ERROR: [findUserByEmail]: " + err);
                 deferred.reject(err);
             } else {
                 deferred.resolve(user);
@@ -208,4 +209,31 @@ module.exports = function (app, mongoose, logger) {
 
         return deferred.promise;
     }
+
+
+
+
+    /*
+     *
+     *
+     */
+    function findUsersForIds(userIdList) {
+
+        var deferred = q.defer();
+
+        console.log(userIdList);
+        UserModel.find({$and: [{_id:{$in: userIdList}}, {isPublic:true}]}, function (err, users) {
+
+            if(err){
+                logger.error("Error: Can not find users from list. " + err);
+                deferred.reject(err);
+            } else{
+
+                deferred.resolve(users);
+            }
+        });
+
+        return deferred.promise;
+    }
+
 }

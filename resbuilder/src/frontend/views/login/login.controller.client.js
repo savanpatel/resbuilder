@@ -4,14 +4,18 @@
         .module("ResumeBuilder")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope, $location, UserService, WorkExpService) {
+    function LoginController($scope, $location, UserService, WorkExpService, RecruiterService) {
 
             var vm = this;
 
             function init() {
                 vm.error = null;
+                vm.recruiterError = null;
+
+                //functions
                 vm.login = login;
                 vm.signInWithLinkedIn = signInWithLinkedIn;
+                vm.loginRecruiter = loginRecruiter;
 
                 $scope.signInWithLinkedIn = signInWithLinkedIn;
             }
@@ -32,9 +36,25 @@
                 promise.success(onLoginSuccess);
                 promise.error(onLoginFailure);
             }
-            
 
-            function signInWithLinkedIn(data) {
+
+
+            function loginRecruiter(recruiter) {
+
+                if(null == recruiter || null == recruiter.username || null == recruiter.password){
+                    vm.recruiterError = "Empty username/password.";
+                    return;
+                }
+
+                var promise = RecruiterService.findRecruiterByCredentials(recruiter.username, recruiter.password);
+
+                promise.success(onRecruiterLoginSuccess);
+                promise.error(onRecruiterLoginFailure);
+            }
+
+
+
+        function signInWithLinkedIn(data) {
 
                 console.log("In sign in with linked in");
                 vm.linkedInUser = data;
@@ -101,6 +121,22 @@
             }
 
 
+
+            /*recruiter login promise handlers*/
+            function onRecruiterLoginSuccess(response) {
+
+                var user = response;
+                if(user){
+                    $location.url("/recruiter/" + user._id + "/dashboard")
+                } else{
+                    vm.recruiterError = "Invalid Credentials.";
+                }
+
+            }
+
+            function onRecruiterLoginFailure(response) {
+                vm.recruiterError = "Could not find user. Error: " + response;
+            }
 
             /*redirects to dashboard on successful registration.*/
             function onCreateUserSuccessLinkedIn(response) {

@@ -50,31 +50,32 @@
          */
         function updateTechnicalSkill(technicalSkill) {
 
+            console.log(technicalSkill);
             var newTechnicalSkill = angular.copy(technicalSkill);
 
             newTechnicalSkill.languages = [];
             for(var l in technicalSkill.languages){
-                newTechnicalSkill.languages.push(technicalSkill.languages[l].text);
+                newTechnicalSkill.languages.push(technicalSkill.languages[l].text.toLowerCase());
             }
 
             newTechnicalSkill.database = [];
             for(var d in technicalSkill.database){
-                newTechnicalSkill.database.push(technicalSkill.database[d].text);
+                newTechnicalSkill.database.push(technicalSkill.database[d].text.toLowerCase());
             }
 
             newTechnicalSkill.softwares = [];
             for(var s in technicalSkill.softwares){
-                newTechnicalSkill.softwares.push(technicalSkill.softwares[s].text);
+                newTechnicalSkill.softwares.push(technicalSkill.softwares[s].text.toLowerCase());
             }
 
             newTechnicalSkill.operatingSystems = [];
             for(var o in technicalSkill.operatingSystems){
-                newTechnicalSkill.operatingSystems.push(technicalSkill.operatingSystems[o].text);
+                newTechnicalSkill.operatingSystems.push(technicalSkill.operatingSystems[o].text.toLowerCase());
             }
 
             newTechnicalSkill.technologies = [];
-            for(var t in technicalSkill.operatingSystems){
-                newTechnicalSkill.technologies.push(technicalSkill.technologies[t].text);
+            for(var t in technicalSkill.technologies){
+                newTechnicalSkill.technologies.push(technicalSkill.technologies[t].text.toLowerCase());
             }
 
             var promise = TechnicalSkillService.updateTechnicalSkill(newTechnicalSkill, newTechnicalSkill._id);
