@@ -6,11 +6,10 @@ module.exports = function (app,mongooseAPI) {
 
     var fs = require('fs');
     var q = require('q');
-
     var Sync = require('sync');
     var Promise = require('es6-promise').Promise;
-
     app.get("/api/getResumeData/:userId", createDoc);
+
     var userId;
     var EducationModel = mongooseAPI.educationModelAPI;
     var ProjectModel = mongooseAPI.projectModelAPI;
@@ -85,6 +84,7 @@ module.exports = function (app,mongooseAPI) {
                     }
                 }
                 var data = {
+                    "user":userDetails,
                     "education":EducationDetails,
                     "project":ProjectDetails,
                     "work":WorkDetails,
@@ -103,8 +103,7 @@ module.exports = function (app,mongooseAPI) {
     function getKeyWords() {
 
         return new Promise(function (resolve,reject) {
-            console.log("In server")
-            console.log(userId)
+
             var PythonShell = require('python-shell');
 
             var options = {
@@ -115,7 +114,6 @@ module.exports = function (app,mongooseAPI) {
 
             PythonShell.run('crawl.py', options, function (err, results) {
                 if (err) {
-
                     reject(err)
                 }
                 else {
@@ -156,7 +154,7 @@ module.exports = function (app,mongooseAPI) {
                 }
                 Project.push(jsonProject)
             }
-        //console.log(Project)
+
 
 
         for (var b in workDetails) {
@@ -197,25 +195,19 @@ module.exports = function (app,mongooseAPI) {
 
         return new Promise(function (resolve,reject) {
 
-
-            console.log("get data")
             EducationModel.findEducationForUser(userId)
                 .then(function (education) {
-                    //console.log(education)
+
                     if (education == null) {
-
                         reject(err)
-
                     }
                     else {
                         educationDetails = education;
                         ProjectModel.findProjectForUser(userId)
                             .then(function (project) {
-                                //console.log(project)
+
                                 if (project == null) {
-
                                     reject(err)
-
                                 }
                                 else
                                 {
@@ -223,7 +215,7 @@ module.exports = function (app,mongooseAPI) {
 
                                     TechnicalSkillModel.findTechnicalSkillForUser(userId)
                                         .then(function (techSkill) {
-                                            //console.log(techSkill)
+
                                             if (techSkill == null) {
 
                                                 reject(err)
@@ -233,7 +225,7 @@ module.exports = function (app,mongooseAPI) {
                                                 technicalSkillDetails = techSkill;
                                                 UserModel.findUserById(userId)
                                                     .then(function (user) {
-                                                        //console.log(user)
+
                                                         if (user == null) {
 
                                                             reject(err)
@@ -243,7 +235,7 @@ module.exports = function (app,mongooseAPI) {
                                                             userDetails = user;
                                                             WorkExpModel.findWorkExpForUser(userId)
                                                                 .then(function (work) {
-                                                                    //console.log(work)
+
                                                                     if (work == null) {
 
                                                                         reject(err)
@@ -276,12 +268,8 @@ module.exports = function (app,mongooseAPI) {
                     }
                 }, function (err) {
                     reject(err)
-
                 });
-
         });
-
-
     }
 
 
