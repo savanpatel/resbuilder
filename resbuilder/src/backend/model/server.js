@@ -33,6 +33,14 @@ module.exports = function (app) {
     require('./resume/resume.schema.server')(app,mongoose);
     var resumeModelAPI = require('./resume/resume.model.server')(app,mongoose,logger);
 
+    require('./recruiter/recruiter.schema.server')(app, mongoose);
+    var recruiterModelAPI = require('./recruiter/recruiter.model.server')(app, mongoose, logger);
+
+
+    require('./message/message.schema.server')(app, mongoose);
+    var messageModelAPI = require('./message/message.model.server')(app, mongoose, logger);
+
+
     var api = {
         userModelAPI : userModelAPI,
         projectModelAPI:projectModelAPI,
@@ -40,6 +48,8 @@ module.exports = function (app) {
         educationModelAPI:educationModelAPI,
         workExpModelAPI:workExpModelAPI,
         resumeModelAPI:resumeModelAPI
+        recruiterModelAPI:recruiterModelAPI,
+        messageModelAPI:messageModelAPI
     };
     return api;
 }

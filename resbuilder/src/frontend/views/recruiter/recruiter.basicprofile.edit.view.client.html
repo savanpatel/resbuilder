@@ -1,0 +1,73 @@
+<div ng-include="'./views/menu/recruiter-menu.view.client.html'"></div>
+
+<div class="container container-if-fixed-header">
+
+      <div class="row">
+           <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
+               <div id="">
+                   <form class="form-horizontal">
+                       <fieldset>
+                           <legend>Recruiter Information</legend>
+                           <div class="form-group">
+                               <div class="col-lg-12">
+                                   <span class="form-control help-block"  ng-show="model.error" ng-model="model.error" disabled="">{{model.error}}</span>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-2 control-label" for="username">Username</label>
+                               <div class="col-lg-10">
+                                 <input class="form-control" id="username" type="text" placeholder="username" ng-model="model.recruiter.username" disabled="">
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label for="password" class="col-lg-2 control-label">Company Name</label>
+                               <div class="col-lg-10">
+                                   <input type="text" class="form-control" id="password" ng-model="model.recruiter.companyname" placeholder="Company Name">
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label for="password" class="col-lg-2 control-label">Password</label>
+                               <div class="col-lg-10">
+                                   <input type="text" class="form-control" id="password" ng-model="model.recruiter.password" placeholder="Password">
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label for="firstname" class="col-lg-2 control-label">Website</label>
+                               <div class="col-lg-10">
+                                   <input type="text" class="form-control" id="firstname" ng-model="model.recruiter.website" placeholder="Comapny's Website">
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label for="inputDescription" class="col-lg-2 control-label">Description</label>
+                               <div class="col-lg-10">
+                                   <textarea type="text" ng-model="model.recruiter.description" rows="3" class="form-control" id="inputDescription" placeholder="Description"></textarea>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                               <div class="col-lg-10">
+                                   <input type="email" class="form-control" id="inputEmail" ng-model="model.recruiter.email" placeholder="Email">
+                               </div>
+                           </div>
+
+
+                           <hr/>
+                           <br/>
+                           <br/>
+                           <div class="form-group">
+                               <div class="col-lg-10 col-lg-offset-2">
+                                   <button type="submit" class="btn btn-block btn-primary" ng-click="model.updateRecruiter(model.recruiter)">Update</button>
+                               </div>
+                           </div>
+                       </fieldset>
+                   </form>
+               </div>
+            </div>
+      </div>
+</div>

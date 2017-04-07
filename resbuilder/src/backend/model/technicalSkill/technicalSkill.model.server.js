@@ -15,7 +15,8 @@ module.exports = function (app, mongoose, logger) {
         findTechnicalSkillById:findTechnicalSkillById,
         findTechnicalSkillForUser:findTechnicalSkillForUser,
         updateTechnicalSkill:updateTechnicalSkill,
-        deleteTechnicalSkill:deleteTechnicalSkill
+        deleteTechnicalSkill:deleteTechnicalSkill,
+        findUsersForTechnicalSkill:findUsersForTechnicalSkill
     };
 
     return api;
@@ -146,5 +147,29 @@ module.exports = function (app, mongoose, logger) {
     }
 
 
+    function findUsersForTechnicalSkill(skill) {
+        var deferred = q.defer();
+
+        TechnicalSkillModel.find({$or : [{languages:{$in:[skill]}},
+                {operatingSystems:{$in:[skill]}},
+                {database:{$in:[skill]}},
+                {technologies:{$in:[skill]}},
+                {softwares:{$in:[skill]}}]},
+            function (err, dbTechnicalSkills) {
+
+                if(err){
+
+                    deferred.reject(err);
+                }
+                else{
+                    deferred.resolve(dbTechnicalSkills);
+                }
+        });
+
+
+
+
+        return deferred.promise;
+    }
 }
 
