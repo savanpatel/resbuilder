@@ -7,7 +7,7 @@ module.exports = function (app, mongooseAPI) {
 
     app.post("/api/resume", createResume);
     app.get("/api/resume/:resumeId", findResumeById);
-    app.get("/api/resume/user/:userId/files", findResumeforUser);
+    app.get("/api/resume/user/:userId", findResumeforUser);
     app.put("/api/resume/:resumeId", updateResume);
     app.delete("/api/resume/:resumeId", deleteResume);
 
@@ -86,6 +86,9 @@ module.exports = function (app, mongooseAPI) {
     function findResumeforUser(req, res) {
 
         var userId = req.params.userId;
+
+        console.log("cftvgybhujnkm")
+        console.log(userId)
 
         if(userId == null){
             res.sendStatus(500).send("null userId");

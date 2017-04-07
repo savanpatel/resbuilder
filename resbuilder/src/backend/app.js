@@ -12,6 +12,7 @@ module.exports = function(app, mongooseAPI) {
     require("./services/display-resume/display-resume.service.server")(app,mongooseAPI)
     require("./services/recruiter/recruiter.service.server")(app,mongooseAPI);
     require("./services/message/message.service.server")(app,mongooseAPI);
+    require("./services/resume.service.server")(app,mongooseAPI);
     /*require("./services/website.service.server.js")(app, mongooseAPI);
     require("./services/page.service.server.js")(app, mongooseAPI);
     require("./services/widget.service.server.js")(app, mongooseAPI);*/

@@ -21,10 +21,6 @@ module.exports = function (app,mongooseAPI) {
 
     function createDoc(req, res) {
 
-        if(userId == null){
-            res.sendStatus(500).send("null resumeId");
-            return;
-        }
 
         var randomn = Math.random().toString(36).slice(-8);
 
@@ -52,7 +48,7 @@ module.exports = function (app,mongooseAPI) {
                             res.sendStatus(500).send("resume not found.");
                         }
                         else {
-                            res.send(resume)
+                            res.json(resume)
                         }
                     },function (err) {
                         logger.error("Can not fetch resumes for user. Error: " + err);
@@ -121,8 +117,6 @@ module.exports = function (app,mongooseAPI) {
                 doc.addParagraph(paragraph);
             }
 
-
-
             var education = docx.createText("TECHNICHAL KNOWLEGDE")
             education.bold()
             var paragraph = docx.createParagraph()
@@ -130,9 +124,7 @@ module.exports = function (app,mongooseAPI) {
             paragraph.heading1();
             doc.addParagraph(paragraph);
 
-
             var tabStop = docx.createLeftTabStop(2700);
-//Languages
             var paragraph = docx.createParagraph().addTabStop(tabStop);
             var lang = docx.createText("Languages:").bold()
             var list_lang = docx.createText(data['technical']['languages'].join(", ")).tab();
@@ -199,9 +191,6 @@ module.exports = function (app,mongooseAPI) {
 
                 }
             }
-
-
-
             //Project
             var education = docx.createText("PROJECT")
             education.bold()
@@ -230,11 +219,9 @@ module.exports = function (app,mongooseAPI) {
                 }
 
             }
-
             var output = fs.createWriteStream(__dirname + '/../../uploads/docx/'+filename+'.docx');
             exporter.local(output, doc);
             resolve()
-
         });
 
     }
@@ -244,14 +231,10 @@ module.exports = function (app,mongooseAPI) {
     function createPDF() {
 
         return new Promise(function (resolve) {
-
             var req = require('request');
-
             req = req.defaults({
                 agent: false
             });
-
-
             function a(buf, callback) {
                 console.log("hello1")
                 var r = req.post('http://mirror1.convertonlinefree.com', {
@@ -276,7 +259,6 @@ module.exports = function (app,mongooseAPI) {
                 form.append('ctl00$MainContent$btnConvert', 'Convert');
                 form.append('ctl00$MainContent$fuZip', '');
             };
-
             a(fs.readFileSync(__dirname + '/../../uploads/docx/'+filename+'.docx'), function (err, data) {
                 console.log("hello2")
                 fs.writeFileSync(__dirname+'/../../uploads/pdf/' + filename + '.pdf', data);

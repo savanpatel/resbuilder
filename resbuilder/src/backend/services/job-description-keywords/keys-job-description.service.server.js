@@ -102,15 +102,12 @@ module.exports = function (app,mongooseAPI) {
     function getKeyWords() {
 
         return new Promise(function (resolve,reject) {
-
             var PythonShell = require('python-shell');
-
             var options = {
                 //args: ['https://boards.greenhouse.io/endurance/jobs/645924#.WOL6CxLyto4'],
                 args:[url],
                 scriptPath: __dirname
             };
-
             PythonShell.run('crawl.py', options, function (err, results) {
                 if (err) {
                     reject(err)
@@ -121,12 +118,9 @@ module.exports = function (app,mongooseAPI) {
                 }
             });
         });
-
     }
 
     function getDataAccToKeyWords(){
-
-
         return new Promise(function (resolve,reject) {
             var a = output[0].substring(1,output[0].length)
             a = a + " " + "python" + " " + "c";

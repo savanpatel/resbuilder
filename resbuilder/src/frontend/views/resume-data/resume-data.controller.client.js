@@ -74,11 +74,12 @@
 
         }
         
-        function renderResume(rid) {
-            
+        function renderResume(resume) {
+            $location.url('/user/'+ vm.uid +'/dashboard/resumeEdit/'+resume._id);
         }
         
-        function errorRenderingResume() {
+        function errorRenderingResume(error) {
+            vm.error = error;
             
         }
 

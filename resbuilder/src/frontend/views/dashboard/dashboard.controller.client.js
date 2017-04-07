@@ -8,10 +8,11 @@
         .module("ResumeBuilder")
         .controller("DashBoardController", DashBoardController);
 
-    function DashBoardController($sce, $scope, $routeParams, $location,ResumeDataService, TechnicalSkillService, JobSuggestionService) {
+
+    function DashBoardController($sce, $scope, $routeParams, $location,ResumeDataService,ResumeService, TechnicalSkillService, JobSuggestionService) {
+
 
         var vm = this;
-
         function init() {
             vm.isCollapsed = false;
             vm.error = null;
@@ -22,6 +23,39 @@
 
             findJobSuggestions(vm.uid);
 
+            console.log("ghbjnkml")
+            var promise = ResumeService.findResumeforUser(vm.uid);
+
+            promise
+                .success(renderAllResume)
+                .error(errorRenderAllResume)
+
+        }
+
+        function renderAllResume(resumes) {
+            var urls = []
+            var loop = -1;
+            if(resumes.length < 4)
+            {
+                loop = resumes.length;
+            }
+            else
+            {
+                loop = 4;
+            }
+
+            for(var j = 0;j<loop;j++){
+                urls.push("http://localhost:3000/api/displayResumePDF/" + resumes[j]["_id"])
+            }
+
+            console.log(urls)
+            vm.allResumeUrls = urls;
+            console.log(vm.allResumeUrls);
+
+        }
+        
+        function errorRenderAllResume() {
+            
         }
 
         init();
