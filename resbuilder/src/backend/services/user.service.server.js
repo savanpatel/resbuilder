@@ -64,6 +64,7 @@ module.exports = function (app, mongooseAPI) {
 
 
     function serializeUser(user, done) {
+        console.log(user)
         done(null, user);
     }
 

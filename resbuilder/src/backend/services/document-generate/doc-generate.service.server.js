@@ -15,41 +15,59 @@ module.exports = function (app,mongooseAPI) {
     var exporter = officeClippy.exporter;
     var data;
     var ResumeModel = mongooseAPI.resumeModelAPI;
+    var filename;
 
     app.post("/api/generateResume/:uid", createDoc);
 
     function createDoc(req, res) {
 
+        if(userId == null){
+            res.sendStatus(500).send("null resumeId");
+            return;
+        }
+
+        var randomn = Math.random().toString(36).slice(-8);
 
         userId = req.params.uid;
+
+        filename = userId.toString() + randomn.toString();
         data = req.body;
         var promise = createDocHelper();
 
         promise
-            .then(getlength)
             .then(sleepthread)
             .then(createPDF)
             .then(function () {
 
+                console.log("fguhijokpgvhbjnkmgvhbjn")
+                var resume = {
+                    "filename": filename
+                }
+
+                ResumeModel
+                    .createResume(userId,resume)
+                    .then(function (resume) {
+
+                        if(null == resume){
+                            res.sendStatus(500).send("resume not found.");
+                        }
+                        else {
+                            res.send(resume)
+                        }
+                    },function (err) {
+                        logger.error("Can not fetch resumes for user. Error: " + err);
+                        res.send(err);
+                    });
 
             })
     }
 
-    function getlength() {
-
-        ResumeModel.findResumeDOCXforUser(userId,function (pdfs) {
-
-
-
-        })
-
-    }
 
     function sleepthread() {
         return new Promise(function (resolve) {
             setTimeout(function () {
                 resolve()
-            },2000)
+            },1000)
         });
     }
 
@@ -58,7 +76,7 @@ module.exports = function (app,mongooseAPI) {
         return new Promise(function (resolve,reject) {
 
 
-            console.log(data)
+
             var title = docx.createText(data['user']['firstName'] + " " + data['user']['lastName']);
             title.bold();
             var paragraph = docx.createParagraph();
@@ -103,7 +121,7 @@ module.exports = function (app,mongooseAPI) {
                 doc.addParagraph(paragraph);
             }
 
-            console.log("education done")
+
 
             var education = docx.createText("TECHNICHAL KNOWLEGDE")
             education.bold()
@@ -122,7 +140,7 @@ module.exports = function (app,mongooseAPI) {
             paragraph.addText(list_lang);
 
 
-            console.log("languages");
+
 //
 //Web Technologies
             var lang = docx.createText("Web Technologies:").bold().break()
@@ -153,26 +171,24 @@ module.exports = function (app,mongooseAPI) {
             paragraph.heading1();
             doc.addParagraph(paragraph);
             //
-            console.log("work Experience")
+
 
             for(var j1=0;j1<data['work'].length;j1++)
             {
-                console.log(j1)
+
                 var tabStop = docx.createMaxRightTabStop();
                 var paragraph = docx.createParagraph().addTabStop(tabStop);
                 var leftText = docx.createText(data['work'][j1]['companyName']+", " + data['work'][j1]['location']).bold();
                 var rightText = docx.createText(data['work'][j1]['startDate']+ " – " + data['work'][j1]['endDate']).tab();
                 paragraph.addText(leftText);
                 paragraph.addText(rightText);
-                console.log(data['work'][j1]['companyName']+", " + data['work'][j1]['location'])
-                console.log(data['work'][j1]['startDate']+ " – " + data['work'][j1]['endDate'])
 
                 var position = docx.createText(data['work'][j1]['jobTitle']).bold().break();
                 paragraph.addText(position);
                 doc.addParagraph(paragraph);
 
                 var listDes = data['work'][j1]['description'].split("\n")
-                console.log(listDes)
+
 
                 for(var k =0;k<listDes.length;k++)
                 {
@@ -185,7 +201,7 @@ module.exports = function (app,mongooseAPI) {
             }
 
 
-            console.log("project")
+
             //Project
             var education = docx.createText("PROJECT")
             education.bold()
@@ -197,14 +213,14 @@ module.exports = function (app,mongooseAPI) {
 
             for(var j =0;j<data['project'].length;j++)
             {
-                console.log(j);
+
                 var paragraph = docx.createParagraph();
                 var project_name = docx.createText(data['project'][j]['title']+ " (" + data['project'][j]['technologies'].join(" ")+")").bold().break();
                 paragraph.addText(project_name);
                 doc.addParagraph(paragraph);
 
                 var proDes = data['project'][j]['description'].split("\n")
-                console.log(proDes)
+
                 for(var k=0;k<proDes.length;k++)
                 {
                     var text = docx.createText(proDes[k])
@@ -215,7 +231,7 @@ module.exports = function (app,mongooseAPI) {
 
             }
 
-            var output = fs.createWriteStream(__dirname + '/../../uploads/docx/new.docx');
+            var output = fs.createWriteStream(__dirname + '/../../uploads/docx/'+filename+'.docx');
             exporter.local(output, doc);
             resolve()
 
@@ -229,7 +245,6 @@ module.exports = function (app,mongooseAPI) {
 
         return new Promise(function (resolve) {
 
-            console.log("fghjkl")
             var req = require('request');
 
             req = req.defaults({
@@ -238,7 +253,7 @@ module.exports = function (app,mongooseAPI) {
 
 
             function a(buf, callback) {
-                console.log("hello2")
+                console.log("hello1")
                 var r = req.post('http://mirror1.convertonlinefree.com', {
                     encoding: null,
                     headers: {
@@ -262,8 +277,9 @@ module.exports = function (app,mongooseAPI) {
                 form.append('ctl00$MainContent$fuZip', '');
             };
 
-            a(fs.readFileSync(__dirname + '/../../uploads/docx/new.docx'), function (err, data) {
-                fs.writeFileSync(__dirname+"/../../uploads/pdf/test.pdf", data);
+            a(fs.readFileSync(__dirname + '/../../uploads/docx/'+filename+'.docx'), function (err, data) {
+                console.log("hello2")
+                fs.writeFileSync(__dirname+'/../../uploads/pdf/' + filename + '.pdf', data);
                 resolve()
             });
         });

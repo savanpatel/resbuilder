@@ -39,8 +39,6 @@
             return $http.get(findUserByIdUrl);
         }
 
-
-
         /*
          * Finds user by username, returns promise.
          *
@@ -57,29 +55,26 @@
          */
         function findUserByCredentials(username, password){
 
-           /* var reqBody = {
+            var reqBody = {
                 username:username,
                 password:password
             };
             var postRequestUrl = USER_SERVICE_URL + "/login";
-            return $http.post(postRequestUrl, reqBody);*/
-            var getRequestUrl =
-                USER_SERVICE_URL + "?username=" + username + "&password="+password;
-            return $http.get(getRequestUrl);
+            return $http.post(postRequestUrl, reqBody);
+            // var getRequestUrl =
+            //     USER_SERVICE_URL + "?username=" + username + "&password="+password;
+            // return $http.get(getRequestUrl);
         }
-
 
         /*
          * Updates the user with the new user information provided.
          * Returns  promise.
          */
+
         function updateUser(user) {
             var putRequestUrl = USER_SERVICE_URL + "/" + user._id;
             return $http.put(putRequestUrl, user);
         }
-
-
-
 
         /*
          *
