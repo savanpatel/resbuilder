@@ -37,13 +37,18 @@ module.exports = function (app) {
     var recruiterModelAPI = require('./recruiter/recruiter.model.server')(app, mongoose, logger);
 
 
+    require('./message/message.schema.server')(app, mongoose);
+    var messageModelAPI = require('./message/message.model.server')(app, mongoose, logger);
+
+
     var api = {
         userModelAPI : userModelAPI,
         projectModelAPI:projectModelAPI,
         technicalSkillModelAPI:technicalSkillModelAPI,
         educationModelAPI:educationModelAPI,
         workExpModelAPI:workExpModelAPI,
-        recruiterModelAPI:recruiterModelAPI
+        recruiterModelAPI:recruiterModelAPI,
+        messageModelAPI:messageModelAPI
     };
 
 

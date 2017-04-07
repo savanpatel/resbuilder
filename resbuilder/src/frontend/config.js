@@ -30,6 +30,26 @@
                 controller: "RecruiterDashBoardController",
                 controllerAs: "model"
             })
+            .when("/recruiter/:rid/profile", {
+                templateUrl: "views/recruiter/recruiter.basicprofile.edit.view.client.html",
+                controller: "RecruiterBasicProfileEditController",
+                controllerAs: "model"
+            })
+            .when("/recruiter/:rid/messages", {
+                templateUrl: "views/message/recruiter.message.list.view.client.html",
+                controller: "MessageListController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/messages", {
+                templateUrl: "views/message/user.message.list.view.client.html",
+                controller: "UserMessageListController",
+                controllerAs: "model"
+            })
+            .when("/recruiter/:rid/:uid/:firstName/:companyName/newmessage", {
+                templateUrl: "views/message/recruiter.message.send.view.client.html",
+                controller: "MessageSendController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/dashboard", {
                 templateUrl: "views/dashboard/dashboard.view.client.html",
                 controller: "DashBoardController",

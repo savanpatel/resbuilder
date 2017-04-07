@@ -5,7 +5,15 @@
 
 module.exports = function (app, mongooseAPI) {
 
+    var passport      = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+    var auth = authorized;
+
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
     app.post("/api/user", createUser);
+    app.post("/api/user/login", passport.authenticate('local'), login);
     app.get("/api/user", findUserByCredentials);
     app.get("/api/user/:userId", findUserById);
     app.delete("/api/user/:userId", deleteUser);
@@ -15,9 +23,69 @@ module.exports = function (app, mongooseAPI) {
 
     var UserModel = mongooseAPI.userModelAPI;
 
+    passport.use(new LocalStrategy(localStrategy));
+
+    /*Passport related functions*/
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    }
     
-    
-    
+    /*
+     * 
+     */
+    function localStrategy(username, password, done) {
+        if(null == username || null == password ||
+            "" == username || "" == password){
+            res.sendStatus(500).send("null/empty username or password");
+            return;
+        }
+
+
+        UserModel
+            .findUserByCredentials(username, password)
+            .then(function (user) {
+
+                if(!user) {
+                    return done(null, false);
+                }
+
+                return done(null, user);
+
+
+            }, function (err) {
+                return done(err);
+            });
+    }
+
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+
+    function deserializeUser(user, done) {
+
+         UserModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    return done(err, null);
+                }
+            );
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
     /*
      *  Handlers
      */

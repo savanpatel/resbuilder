@@ -14,6 +14,8 @@ module.exports = function (app, mongoose) {
 
         website: {type:String},
 
+        email:{type:String},
+
         /* description about the company*/
         description:{type:String, required:true}
     });

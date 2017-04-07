@@ -82,7 +82,7 @@ module.exports = function (app, mongoose, logger) {
     function updateRecruiter(recruiterId, recruiter) {
 
         var deferred = q.defer();
-        ProjectModel.update({_id:recruiterId},{$set:recruiter}, function (err, dbRecruiter) {
+        RecruiterModel.update({_id:recruiterId},{$set:recruiter}, function (err, dbRecruiter) {
             if(err) {
                 logger.error("Can not update recruiter with id " + recruiterId  + " Error: " + err);
                 deferred.reject(err);
