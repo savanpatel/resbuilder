@@ -20,7 +20,7 @@
 
         return api
 
-        this.jobDesURl = ""
+        this.jobDesURl = "";
         function getResumeData(uid,url) {
             return $http.get("/api/getResumeData/"+uid+"/?url="+url);
         }

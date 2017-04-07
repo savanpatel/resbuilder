@@ -7,8 +7,9 @@ module.exports = function(app, mongooseAPI) {
     require("./services/education.service.server.js")(app, mongooseAPI);
     require("./services/technicalskillservice.server.js")(app, mongooseAPI);
     require("./services/workexp.service.server")(app, mongooseAPI);
-    require("./services/document-generate/doc-generate.service.server")(app);
+    require("./services/document-generate/doc-generate.service.server")(app,mongooseAPI);
     require("./services/job-description-keywords/keys-job-description.service.server")(app,mongooseAPI);
+    require("./services/display-resume/display-resume.service.server")(app,mongooseAPI)
     /*require("./services/website.service.server.js")(app, mongooseAPI);
     require("./services/page.service.server.js")(app, mongooseAPI);
     require("./services/widget.service.server.js")(app, mongooseAPI);*/

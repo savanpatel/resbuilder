@@ -25,6 +25,5 @@ module.exports = function (app, mongoose) {
         projectUrl:{type:String}
 
     });
-
     return ProjectSchema;
 }

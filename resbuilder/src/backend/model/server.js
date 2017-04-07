@@ -13,9 +13,7 @@ module.exports = function (app) {
 
     var mongoose = require("mongoose");
     mongoose.connect(connectionString);
-
     var logger = require('../logger/logger.server')(app);
-
 
     require('./user/user.schema.server')(app, mongoose);
     var userModelAPI = require('./user/user.model.server')(app, mongoose, logger);
@@ -32,16 +30,16 @@ module.exports = function (app) {
     require('./workexp/workexp.schema.server')(app, mongoose);
     var workExpModelAPI = require('./workexp/workexp.model.server')(app, mongoose, logger);
 
+    require('./resume/resume.schema.server')(app,mongoose);
+    var resumeModelAPI = require('./resume/resume.model.server')(app,mongoose,logger);
 
     var api = {
         userModelAPI : userModelAPI,
         projectModelAPI:projectModelAPI,
         technicalSkillModelAPI:technicalSkillModelAPI,
         educationModelAPI:educationModelAPI,
-        workExpModelAPI:workExpModelAPI
+        workExpModelAPI:workExpModelAPI,
+        resumeModelAPI:resumeModelAPI
     };
-
-
-
     return api;
 }

@@ -32,7 +32,6 @@ module.exports = function (app,mongooseAPI) {
         var newParams = req.query;
         url = newParams['url'];
 
-
         getKeyWords()
             .then(getData)
             .then(getDataAccToKeyWords)
@@ -143,7 +142,7 @@ module.exports = function (app,mongooseAPI) {
                     var new_tech = tech[i].toLowerCase();
                     var new_tech = new_tech.replace(/[^a-z]+/g, "")
                     var index = res.indexOf(new_tech);
-                    if (index > 0) {
+                    if (index > -1) {
                         hit += 1
                     }
                 }
@@ -167,7 +166,7 @@ module.exports = function (app,mongooseAPI) {
                 var new_tech = tech[i].toLowerCase();
                 var new_tech = new_tech.replace(/[^a-z]+/g, "")
                 var index = res.indexOf(new_tech);
-                if (index > 0) {
+                if (index > -1) {
                     hit += 1
                 }
             }
@@ -178,8 +177,6 @@ module.exports = function (app,mongooseAPI) {
             }
             Work.push(jsonWork)
         }
-
-
             Work.sort(function(a, b) {
                 return  parseFloat(b.hit) - parseFloat(a.hit);
             });

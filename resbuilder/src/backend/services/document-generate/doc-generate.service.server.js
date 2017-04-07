@@ -4,246 +4,270 @@
 
 
 
-module.exports = function (app) {
+module.exports = function (app,mongooseAPI) {
 
     var fs = require('fs');
+    var Promise = require('es6-promise').Promise;
+    var officeClippy = require('office-clippy');
+    var docx = officeClippy.docx;
+    var doc = docx.create();
+    var userId;
+    var exporter = officeClippy.exporter;
+    var data;
+    var ResumeModel = mongooseAPI.resumeModelAPI;
 
     app.post("/api/generateResume/:uid", createDoc);
 
     function createDoc(req, res) {
 
-        var officeClippy = require('office-clippy');
-        var docx = officeClippy.docx;
-        var doc = docx.create();
-        var exporter = officeClippy.exporter;
 
-        var title = docx.createText("Pankti Bhalani");
-        title.bold();
-        var paragraph = docx.createParagraph();
-        paragraph.addText(title)
-        paragraph.title().center();
-        doc.addParagraph(paragraph);
+        userId = req.params.uid;
+        data = req.body;
+        var promise = createDocHelper();
 
-        var info = docx.createText("Boston MA | 857-407-9390 | panktibhalani@gmail.com | https://github.com/pankti11")
-
-        var paragraph = docx.createParagraph()
-        paragraph.addText(info);
-        paragraph.center().thematicBreak();
-        doc.addParagraph(paragraph);
-
-        // Education added
-
-        var education = docx.createText("EDUCATION")
-        education.bold()
-        var paragraph = docx.createParagraph()
-        paragraph.addText(education).thematicBreak();
-        paragraph.heading1();
-        doc.addParagraph(paragraph);
-
-        // First College
-        var tabStop = docx.createMaxRightTabStop();
-        var paragraph = docx.createParagraph().addTabStop(tabStop);
-        var leftText = docx.createText("Northeastern University, Boston, MA").bold();
-        var rightText = docx.createText("Sept 2016 – Present").tab();
-        paragraph.addText(leftText);
-        paragraph.addText(rightText);
-        var college = docx.createText("College of Computer and Information Science")
-        var degree_date = docx.createText("GPA: 3.7/4.0").tab();
-        college.break();
-        paragraph.addText(college);
-        paragraph.addText(degree_date);
-        var degree = docx.createText("Candidate for Master of Science in Computer Science")
-        degree.break()
-        paragraph.addText(degree)
-        var course = docx.createText("Relevant Course Work: Algorithms, Information Retrieval,Natural Language Processing, Map Reduce, Web Development, Program Design Paradigm");
-        course.break();
-        paragraph.addText(course)
-        doc.addParagraph(paragraph);
-
-        // Second College
-        var paragraph = docx.createParagraph().addTabStop(tabStop);
-        var leftText = docx.createText("Dharmsinh Desai University, Gujarat, India").bold();
-        var rightText = docx.createText("June 2011 – May 2015").tab();
-        paragraph.addText(leftText);
-        paragraph.addText(rightText);
-        var college = docx.createText("Bachelor of Technology in Computer Engineering")
-        var degree_date = docx.createText("GPA: 8.2/10.0").tab();
-        college.break();
-        paragraph.addText(college);
-        paragraph.addText(degree_date);
-        var course = docx.createText("Relevant Course Work: Data Structure and Algorithm, Database Management System, Artificial Intelligence, Web Development in .NET, Software Engineering, Data Mining.");
-        course.break();
-        paragraph.addText(course)
-        doc.addParagraph(paragraph);
+        promise
+            .then(getlength)
+            .then(sleepthread)
+            .then(createPDF)
+            .then(function () {
 
 
-        // Technical knowledge added
-        var education = docx.createText("TECHNICHAL KNOWLEGDE")
-        education.bold()
-        var paragraph = docx.createParagraph()
-        paragraph.addText(education).thematicBreak();
-        paragraph.heading1();
-        doc.addParagraph(paragraph);
+            })
+    }
 
-        var tabStop = docx.createLeftTabStop(2700);
+    function getlength() {
 
-        //Languages
-        var paragraph = docx.createParagraph().addTabStop(tabStop);
-        var lang = docx.createText("Languages:").bold()
-        var list_lang = docx.createText("Python, JAVA, C#, PHP, Racket, Objective-C.").tab()
-        paragraph.addText(lang);
-        paragraph.addText(list_lang);
-
-        //Web Technologies
-        var lang = docx.createText("Web Technologies:").bold().break()
-        var list_lang = docx.createText("Angular.JS, Node.JS, Express.JS, ASP.NET, HTML, CSS, JavaScript").tab()
-        paragraph.addText(lang);
-        paragraph.addText(list_lang);
-
-        //software
-        var lang = docx.createText("Software:").bold().break()
-        var list_lang = docx.createText("Dream-Weaver, Net-Beans, X-Code, Web-Storm, GitHub").tab()
-        paragraph.addText(lang);
-        paragraph.addText(list_lang);
-
-        //Database
-        var lang = docx.createText("Databases and Other Skills:").bold().break()
-        var list_lang = docx.createText("SQL, MySQL, MongoDB.").tab()
-        paragraph.addText(lang);
-        paragraph.addText(list_lang);
-
-        doc.addParagraph(paragraph)
-
-
-        //Work Experience
-        var education = docx.createText("WORK EXPERIENCE")
-        education.bold()
-        var paragraph = docx.createParagraph()
-        paragraph.addText(education).thematicBreak();
-        paragraph.heading1();
-        doc.addParagraph(paragraph);
-
-        //First Experience
-        var tabStop = docx.createMaxRightTabStop();
-        var paragraph = docx.createParagraph().addTabStop(tabStop);
-        var leftText = docx.createText("ESSAR POWER, Hazira, India").bold();
-        var rightText = docx.createText("Aug 2015 – February 2016").tab();
-        paragraph.addText(leftText);
-        paragraph.addText(rightText);
-
-        var position = docx.createText("Software Engineer co-op").bold().break();
-        paragraph.addText(position);
-        doc.addParagraph(paragraph);
-
-        var text = docx.createText("Developed and Designed a Transmission Tower Management System for EPTCL (ESSAR POWER TRANSMISSION COMPANY LIMITED) using technologies C#, ASP.NET, SAP Crystal Reports, Google Maps API, Microsoft SQL Database and Open XML SDK which manages data for technical, legal, land ownership and maintenance details.")
-        var paragraph = docx.createParagraph().bullet();
-        paragraph.addText(text)
-        doc.addParagraph(paragraph);
-
-        var text = docx.createText("Implemented features to export reports to EXCEL, update data through EXCEL, view Tower Location in Google Maps and notify users through email for any updates or insertion in modules.");
-        var paragraph = docx.createParagraph().bullet();
-        paragraph.addText(text)
-        doc.addParagraph(paragraph);
-
-        var text = docx.createText("Corresponded with clients to gather the requirements and an overview of the functionalities for the application.");
-        var paragraph = docx.createParagraph().bullet();
-        paragraph.addText(text)
-        doc.addParagraph(paragraph);
-
-
-        //Project
-        var education = docx.createText("PROJECT")
-        education.bold()
-        var paragraph = docx.createParagraph()
-        paragraph.addText(education).thematicBreak();
-        paragraph.heading1();
-        doc.addParagraph(paragraph);
-
-        var paragraph = docx.createParagraph();
-        var project_name = docx.createText("Search Engine Implementation (Python, NLKT, Beautiful Soup)").bold().break();
-        paragraph.addText(project_name);
-        doc.addParagraph(paragraph);
-
-        var text = docx.createText("Developed an indexer to store the token of 3000 Documents which were created by crawling websites.")
-        var paragraph = docx.createParagraph().bullet();
-        paragraph.addText(text)
-        doc.addParagraph(paragraph);
-
-        var text = docx.createText("Implemented BM25, cosine and tf-idf similarity model to extract top 100 documents for a query.")
-        var paragraph = docx.createParagraph().bullet();
-        paragraph.addText(text)
-        doc.addParagraph(paragraph);
-
-        var text = docx.createText("Expanded the Query using Pseudo Relevance Model by implementing rocchio algorithm and obtained 20% better search results.")
-        var paragraph = docx.createParagraph().bullet();
-        paragraph.addText(text)
-        doc.addParagraph(paragraph);
-
-
-        var paragraph = docx.createParagraph();
-        var project_name = docx.createText("Road Trip Planer (Python, Google Maps API, JSON, Android)").bold().break();
-        paragraph.addText(project_name);
-        doc.addParagraph(paragraph);
-
-        var text = docx.createText("Developed a Mobile application by using Android programming and integrating Python, JSON, Google Maps and Geocoding API which recommends different routes based on the vicinity of the traveler’s current location for the Road trip and the relevant places the traveler can visit during the trip.")
-        var paragraph = docx.createParagraph().bullet();
-        paragraph.addText(text)
-        doc.addParagraph(paragraph);
-
-        var paragraph = docx.createParagraph();
-        var project_name = docx.createText("Movie Rater (JAVA, POS-Tagger, Senti-word, SQL)").bold().break();
-        paragraph.addText(project_name);
-        doc.addParagraph(paragraph);
-
-        var text = docx.createText("Researched seven papers to develop the website which rates the movies based on the comments given by the users using Unsupervised Feature Based Sentimental Analysis using JAVA, Pos-Tagger, Senti-Word and SQL.")
-        var paragraph = docx.createParagraph().bullet();
-        paragraph.addText(text)
-        doc.addParagraph(paragraph);
+        ResumeModel.findResumeDOCXforUser(userId,function (pdfs) {
 
 
 
-        var output = fs.createWriteStream(__dirname + '/new.docx');
-        exporter.local(output, doc);
-
-
-        var liveDocx = require('node-livedocx')
-
-        createPDF();
-
-        //exporter.express(res, doc, 'template-resume');
-
+        })
 
     }
 
+    function sleepthread() {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve()
+            },2000)
+        });
+    }
+
+    function createDocHelper() {
+
+        return new Promise(function (resolve,reject) {
+
+
+            console.log(data)
+            var title = docx.createText(data['user']['firstName'] + " " + data['user']['lastName']);
+            title.bold();
+            var paragraph = docx.createParagraph();
+            paragraph.addText(title)
+            paragraph.title().center();
+            doc.addParagraph(paragraph);
+
+            var info = docx.createText(data['user']['contact'] + " | " + data['user']['email']+ " | " +data['user']['githubUrl'])
+
+            var paragraph = docx.createParagraph()
+            paragraph.addText(info);
+            paragraph.center().thematicBreak();
+            doc.addParagraph(paragraph);
+
+            // Education added
+
+            var education = docx.createText("EDUCATION")
+            education.bold()
+            var paragraph = docx.createParagraph()
+            paragraph.addText(education).thematicBreak();
+            paragraph.heading1();
+            doc.addParagraph(paragraph);
+
+                // First College
+
+            for(var i=0;i<data['education'].length;i++)
+            {
+                var tabStop = docx.createMaxRightTabStop();
+                var paragraph = docx.createParagraph().addTabStop(tabStop);
+                var leftText = docx.createText(data['education'][i]['school']).bold();
+                var rightText = docx.createText(data['education'][i]['startYear'] +" – " + data['education'][i]['endYear']).tab();
+                paragraph.addText(leftText);
+                paragraph.addText(rightText);
+                var college = docx.createText(data['education'][i]['degree'] + " in "+ data['education'][i]['field'])
+                var degree_date = docx.createText("GPA: "+data['education'][i]['grade']).tab();
+                college.break();
+                paragraph.addText(college);
+                paragraph.addText(degree_date);
+                var course = docx.createText("Relevant Courses: "+data['education'][i]['courses'].join(", "));
+                course.break();
+                paragraph.addText(course)
+                doc.addParagraph(paragraph);
+            }
+
+            console.log("education done")
+
+            var education = docx.createText("TECHNICHAL KNOWLEGDE")
+            education.bold()
+            var paragraph = docx.createParagraph()
+            paragraph.addText(education).thematicBreak();
+            paragraph.heading1();
+            doc.addParagraph(paragraph);
+
+
+            var tabStop = docx.createLeftTabStop(2700);
+//Languages
+            var paragraph = docx.createParagraph().addTabStop(tabStop);
+            var lang = docx.createText("Languages:").bold()
+            var list_lang = docx.createText(data['technical']['languages'].join(", ")).tab();
+            paragraph.addText(lang);
+            paragraph.addText(list_lang);
+
+
+            console.log("languages");
+//
+//Web Technologies
+            var lang = docx.createText("Web Technologies:").bold().break()
+            var list_lang = docx.createText(data['technical']['technologies'].join(", ")).tab();
+            paragraph.addText(lang);
+            paragraph.addText(list_lang);
+
+// //software
+            var lang = docx.createText("Software:").bold().break()
+            var list_lang = docx.createText(data['technical']['softwares'].join(",")).tab();
+            paragraph.addText(lang);
+            paragraph.addText(list_lang);
+
+
+//Database
+
+            var lang = docx.createText("Software:").bold().break()
+            var list_lang = docx.createText(data['technical']['database'].join(",")).tab();
+            paragraph.addText(lang);
+            paragraph.addText(list_lang);
+            doc.addParagraph(paragraph)
+
+            //Work Experience
+            var education = docx.createText("WORK EXPERIENCE")
+            education.bold()
+            var paragraph = docx.createParagraph()
+            paragraph.addText(education).thematicBreak();
+            paragraph.heading1();
+            doc.addParagraph(paragraph);
+            //
+            console.log("work Experience")
+
+            for(var j1=0;j1<data['work'].length;j1++)
+            {
+                console.log(j1)
+                var tabStop = docx.createMaxRightTabStop();
+                var paragraph = docx.createParagraph().addTabStop(tabStop);
+                var leftText = docx.createText(data['work'][j1]['companyName']+", " + data['work'][j1]['location']).bold();
+                var rightText = docx.createText(data['work'][j1]['startDate']+ " – " + data['work'][j1]['endDate']).tab();
+                paragraph.addText(leftText);
+                paragraph.addText(rightText);
+                console.log(data['work'][j1]['companyName']+", " + data['work'][j1]['location'])
+                console.log(data['work'][j1]['startDate']+ " – " + data['work'][j1]['endDate'])
+
+                var position = docx.createText(data['work'][j1]['jobTitle']).bold().break();
+                paragraph.addText(position);
+                doc.addParagraph(paragraph);
+
+                var listDes = data['work'][j1]['description'].split("\n")
+                console.log(listDes)
+
+                for(var k =0;k<listDes.length;k++)
+                {
+                    var text = docx.createText(listDes[k]);
+                    var paragraph = docx.createParagraph().bullet();
+                    paragraph.addText(text)
+                    doc.addParagraph(paragraph);
+
+                }
+            }
+
+
+            console.log("project")
+            //Project
+            var education = docx.createText("PROJECT")
+            education.bold()
+            var paragraph = docx.createParagraph()
+            paragraph.addText(education).thematicBreak();
+            paragraph.heading1();
+            doc.addParagraph(paragraph);
+
+
+            for(var j =0;j<data['project'].length;j++)
+            {
+                console.log(j);
+                var paragraph = docx.createParagraph();
+                var project_name = docx.createText(data['project'][j]['title']+ " (" + data['project'][j]['technologies'].join(" ")+")").bold().break();
+                paragraph.addText(project_name);
+                doc.addParagraph(paragraph);
+
+                var proDes = data['project'][j]['description'].split("\n")
+                console.log(proDes)
+                for(var k=0;k<proDes.length;k++)
+                {
+                    var text = docx.createText(proDes[k])
+                    var paragraph = docx.createParagraph().bullet();
+                    paragraph.addText(text)
+                    doc.addParagraph(paragraph);
+                }
+
+            }
+
+            var output = fs.createWriteStream(__dirname + '/../../uploads/docx/new.docx');
+            exporter.local(output, doc);
+            resolve()
+
+        });
+
+    }
+
+        //exporter.express(res, doc, 'template-resume');
+
     function createPDF() {
 
-        var fs = require('fs');
+        return new Promise(function (resolve) {
 
-        var req = require('request');
+            console.log("fghjkl")
+            var req = require('request');
 
-        var r = req.post('http://mirror1.convertonlinefree.com', {
-            encoding: null,
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.94 Safari/537.36'
-            }
-        }, function(err, res) {
-            console.log(res.body);
-            if (err) {
-                return console.log(err);
-            }
-            fs.writeFileSync(__dirname +'/test.pdf',res.body);
+            req = req.defaults({
+                agent: false
+            });
+
+
+            function a(buf, callback) {
+                console.log("hello2")
+                var r = req.post('http://mirror1.convertonlinefree.com', {
+                    encoding: null,
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.94 Safari/537.36'
+                    }
+                }, function (err, res) {
+                    if (err) return callback(err);
+
+                    callback(null, res.body);
+                });
+
+                var form = r.form();
+                form.append('__EVENTTARGET', '');
+                form.append('__EVENTARGUMENT', '');
+                form.append('__VIEWSTATE', '');
+                form.append('ctl00$MainContent$fu', buf, {
+                    filename: 'output.docx',
+                    contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                });
+                form.append('ctl00$MainContent$btnConvert', 'Convert');
+                form.append('ctl00$MainContent$fuZip', '');
+            };
+
+            a(fs.readFileSync(__dirname + '/../../uploads/docx/new.docx'), function (err, data) {
+                fs.writeFileSync(__dirname+"/../../uploads/pdf/test.pdf", data);
+                resolve()
+            });
         });
 
-        var form = r.form();
-        form.append('__EVENTTARGET', '');
-        form.append('__EVENTARGUMENT', '');
-        form.append('__VIEWSTATE', '');
-        var buf = fs.readFileSync(__dirname+'/new.docx');
-        form.append('ctl00$MainContent$fu', buf, {
-            filename: 'new.docx',
-            contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        });
-        form.append('ctl00$MainContent$btnConvert', 'Convert');
-        form.append('ctl00$MainContent$fuZip', '');
+
     }
 }
