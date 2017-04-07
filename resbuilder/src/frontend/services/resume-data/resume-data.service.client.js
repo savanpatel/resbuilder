@@ -14,23 +14,28 @@
         var api = {
             "getResumeData": getResumeData,
             "setUrl" : setUrl,
-            "getUrl":getUrl
+            "getUrl":getUrl,
+            "getResumePDF":getResumePDF
         };
 
         return api
 
-        this.jobDesURl = ""
+        this.jobDesURl = "";
         function getResumeData(uid,url) {
             return $http.get("/api/getResumeData/"+uid+"/?url="+url);
         }
-
         function setUrl(url) {
             this.jobDesURl = url;
         }
-
         function getUrl() {
             return this.jobDesURl;
         }
+        function getResumePDF(uid,data) {
+            console.log("In client Service")
+            console.log(data)
+            return $http.post("/api/generateResume/"+uid,data);
+        }
+
     }
 })();
     

@@ -16,10 +16,12 @@
             vm.isCollapsed = false;
             vm.uid = $routeParams['uid'];
             var url = ResumeDataService.getUrl();
+
             var promise = ResumeDataService.getResumeData(vm.uid,url);
             promise.success(onGettingResumeData)
             promise.error(OnErrorGettingResumeData)
             $scope.yesNoResult = null;
+            vm.getResumePdf = getResumePdf;
 
             var promiseEdu = EducationService.findEducationForUser(vm.uid);
             promiseEdu.success(getAllEducationDetails)
@@ -41,38 +43,60 @@
         init();
 
         function getAllEducationDetails(educationList) {
-            var edu = []
-            for(var i = 0;i<educationList.length;i++)
-            {
-                edu.push(educationList[i].school)
-            }
-            $scope.school = edu;
+            $scope.school = educationList;
         }
 
         function getAllProjectDetails(projectList) {
-            var pro = []
-            for(var i = 0;i<projectList.length;i++)
-            {
-                pro.push(projectList[i].title)
-            }
-            $scope.project = pro;
+            $scope.project = projectList;
         }
 
         function getAllWorkExpDetails(workList) {
-            var wor = []
-            for(var i = 0;i<workList.length;i++)
-            {
-                wor.push(workList[i].companyName)
+            $scope.work = workList;
+        }
+
+        function getResumePdf() {
+
+            var resumeData = {
+                "user": vm.userList,
+                "technical":vm.technicalSkillList,
+                "work":vm.workExpList,
+                "project":vm.projectList,
+                "education":vm.educationList
             }
-            $scope.work = wor;
+
+            console.log("In button clicked");
+            console.log(resumeData);
+            var promise = ResumeDataService.getResumePDF(vm.uid,resumeData);
+
+            promise
+                .success(renderResume)
+                .error(errorRenderingResume)
+
+        }
+        
+        function renderResume(rid) {
+            
+        }
+        
+        function errorRenderingResume() {
+            
         }
 
         function onGettingResumeData(data) {
 
-            console.log(data)
-            vm.educationList = data['education']
-            vm.projectList = data['project']
-            vm.workExpList = data['work']
+            console.log(data);
+
+            vm.educationList = data['education'];
+            vm.projectList = data['project'];
+            vm.workExpList = data['work'];
+            vm.userList = data['user'];
+            vm.technicalSkillList = data['technical'];
+
+            $scope.resumeEducation1 = vm.educationList;
+            $scope.resumeProject1 = vm.projectList;
+            $scope.resumeWork1 = vm.workExpList;
+
+
             vm.languages = data['technical']['languages']
             vm.technologies = data['technical']['technologies']
             vm.database = data['technical']['database']
@@ -90,6 +114,8 @@
         function arrayToString(array) {
             return array.join(', ');
         }
+
+
         function showModal(sw) {
             console.log(sw)
             ModalService.showModal({
@@ -102,7 +128,8 @@
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    console.log(result)
+
+
                 });
             });
 

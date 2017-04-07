@@ -11,14 +11,10 @@
                 </a>
             </h3>
         </div>
-
         <div class="panel-body pb-margin-resume-data">
             <ng-include src="'views/resume-data/education.view.client.html'"></ng-include>
         </div>
     </div>
-
-    <pre ng-show="yesNoResult">{{yesNoResult}}</pre>
-
     <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">Technical Skills
@@ -57,5 +53,5 @@
     </div>
 </div>
 <div class="text-center">
-<a href="#/user/dashboard/resumeEdit" class="btn btn-primary btn-lg">Create Resume</a>
+<a href="" ng-click="model.getResumePdf()" class="btn btn-primary btn-lg">Create Resume</a>
 </div>

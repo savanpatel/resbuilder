@@ -6,11 +6,10 @@ module.exports = function (app,mongooseAPI) {
 
     var fs = require('fs');
     var q = require('q');
-
     var Sync = require('sync');
     var Promise = require('es6-promise').Promise;
-
     app.get("/api/getResumeData/:userId", createDoc);
+
     var userId;
     var EducationModel = mongooseAPI.educationModelAPI;
     var ProjectModel = mongooseAPI.projectModelAPI;
@@ -32,7 +31,6 @@ module.exports = function (app,mongooseAPI) {
         userId = req.params.userId;
         var newParams = req.query;
         url = newParams['url'];
-
 
         getKeyWords()
             .then(getData)
@@ -85,6 +83,7 @@ module.exports = function (app,mongooseAPI) {
                     }
                 }
                 var data = {
+                    "user":userDetails,
                     "education":EducationDetails,
                     "project":ProjectDetails,
                     "work":WorkDetails,
@@ -103,8 +102,7 @@ module.exports = function (app,mongooseAPI) {
     function getKeyWords() {
 
         return new Promise(function (resolve,reject) {
-            console.log("In server")
-            console.log(userId)
+
             var PythonShell = require('python-shell');
 
             var options = {
@@ -115,7 +113,6 @@ module.exports = function (app,mongooseAPI) {
 
             PythonShell.run('crawl.py', options, function (err, results) {
                 if (err) {
-
                     reject(err)
                 }
                 else {
@@ -145,7 +142,7 @@ module.exports = function (app,mongooseAPI) {
                     var new_tech = tech[i].toLowerCase();
                     var new_tech = new_tech.replace(/[^a-z]+/g, "")
                     var index = res.indexOf(new_tech);
-                    if (index > 0) {
+                    if (index > -1) {
                         hit += 1
                     }
                 }
@@ -156,7 +153,7 @@ module.exports = function (app,mongooseAPI) {
                 }
                 Project.push(jsonProject)
             }
-        //console.log(Project)
+
 
 
         for (var b in workDetails) {
@@ -169,7 +166,7 @@ module.exports = function (app,mongooseAPI) {
                 var new_tech = tech[i].toLowerCase();
                 var new_tech = new_tech.replace(/[^a-z]+/g, "")
                 var index = res.indexOf(new_tech);
-                if (index > 0) {
+                if (index > -1) {
                     hit += 1
                 }
             }
@@ -180,8 +177,6 @@ module.exports = function (app,mongooseAPI) {
             }
             Work.push(jsonWork)
         }
-
-
             Work.sort(function(a, b) {
                 return  parseFloat(b.hit) - parseFloat(a.hit);
             });
@@ -197,25 +192,19 @@ module.exports = function (app,mongooseAPI) {
 
         return new Promise(function (resolve,reject) {
 
-
-            console.log("get data")
             EducationModel.findEducationForUser(userId)
                 .then(function (education) {
-                    //console.log(education)
+
                     if (education == null) {
-
                         reject(err)
-
                     }
                     else {
                         educationDetails = education;
                         ProjectModel.findProjectForUser(userId)
                             .then(function (project) {
-                                //console.log(project)
+
                                 if (project == null) {
-
                                     reject(err)
-
                                 }
                                 else
                                 {
@@ -223,7 +212,7 @@ module.exports = function (app,mongooseAPI) {
 
                                     TechnicalSkillModel.findTechnicalSkillForUser(userId)
                                         .then(function (techSkill) {
-                                            //console.log(techSkill)
+
                                             if (techSkill == null) {
 
                                                 reject(err)
@@ -233,7 +222,7 @@ module.exports = function (app,mongooseAPI) {
                                                 technicalSkillDetails = techSkill;
                                                 UserModel.findUserById(userId)
                                                     .then(function (user) {
-                                                        //console.log(user)
+
                                                         if (user == null) {
 
                                                             reject(err)
@@ -243,7 +232,7 @@ module.exports = function (app,mongooseAPI) {
                                                             userDetails = user;
                                                             WorkExpModel.findWorkExpForUser(userId)
                                                                 .then(function (work) {
-                                                                    //console.log(work)
+
                                                                     if (work == null) {
 
                                                                         reject(err)
@@ -276,12 +265,8 @@ module.exports = function (app,mongooseAPI) {
                     }
                 }, function (err) {
                     reject(err)
-
                 });
-
         });
-
-
     }
 
 
