@@ -47,7 +47,7 @@ module.exports = function (app) {
         technicalSkillModelAPI:technicalSkillModelAPI,
         educationModelAPI:educationModelAPI,
         workExpModelAPI:workExpModelAPI,
-        resumeModelAPI:resumeModelAPI
+        resumeModelAPI:resumeModelAPI,
         recruiterModelAPI:recruiterModelAPI,
         messageModelAPI:messageModelAPI
     };
