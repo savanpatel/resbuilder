@@ -40,6 +40,8 @@
         }
 
 
+
+
         function getUsersForSkill(skill) {
             console.log(skill);
             var promise = RecruiterService.findUsersBySkill(vm.rid, skill);

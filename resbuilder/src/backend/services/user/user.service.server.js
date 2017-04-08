@@ -187,6 +187,7 @@ module.exports = function (app, mongooseAPI, passport) {
 
 
     function serializeUser(user, done) {
+        console.log(user)
         done(null, user);
     }
 

@@ -1,27 +1,21 @@
 
 <script src="http://rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
-
 <div ng-include="'./views/menu/menu.view.client.html'"></div>
-
-
 <div class="container container-if-fixed-header">
-
     <div class="row">
         <div class="form-group url-pb-class">
             <label class="control-label">Job Description URL:</label>
             <div class="input-group">
                 <input ng-model="model.JobURL" type="text" class="form-control">
                 <span class="input-group-btn">
-                    <a class="btn btn-success btn-block" ng-click="model.GetResumeData()">
+                    <a class="btn btn-success btn-block" ng-click="model.GetResumeData(0)">
                         Get Resume Data
                     </a>
                 </span>
             </div>
         </div>
     </div>
-
     <br/>
-
     <div class="row">
         <div class="alert alert-dismissible alert-warning">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -46,14 +40,11 @@
                     <div>
                         <a href="{{j.url}}">{{j.url}}</a>
                         <hr/>
-                        <a class="btn btn-primary btn-sm">Generate Resume</a>
+                        <a ng-click="model.GetResumeData(j.url)"  class="btn btn-primary btn-sm">Generate Resume</a>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
     </div>
     <br/>
     <hr/>
@@ -63,13 +54,6 @@
         </div>
         <section>
             <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-            <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-            <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-            <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-            <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
         </section>
     </div>
-
-
-
 </div>

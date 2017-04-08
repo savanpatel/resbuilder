@@ -12,8 +12,8 @@ module.exports = function (app, mongoose, logger) {
     var api = {
         createResume:createResume,
         findResumeById:findResumeById,
-        findResumePDFforUser:findResumePDFforUser,
-        findResumeDOCXforUser:findResumeDOCXforUser,
+        findResumeforUser:findResumeforUser,
+
         updateResume:updateResume,
         deleteResume:deleteResume
     };
@@ -27,10 +27,14 @@ module.exports = function (app, mongoose, logger) {
 
     function createResume(userId, resume) {
 
+        console.log("createResume")
+        console.log(resume)
+        console.log(userId)
         resume.userId = userId;
         var deferred = q.defer();
 
-        ResumeModel.create(project, function (err, dbResume) {
+        ResumeModel.create(resume, function (err, dbResume) {
+            console.log(dbResume)
 
             if(err){
                 logger.error('Unable to create resume.' + err);
@@ -46,13 +50,15 @@ module.exports = function (app, mongoose, logger) {
     function findResumeById(resumeId) {
 
         var deferred = q.defer();
-
+        console.log(resumeId)
         ResumeModel.findById(resumeId, function (err, dbResume) {
 
             if(err){
+                console.log(err)
                 logger.error('Unable to find project. Id: ' + resumeId + "Error: " + err);
                 deferred.reject(err);
             } else {
+                console.log(dbResume)
                 deferred.resolve(dbResume);
             }
         });
@@ -60,11 +66,11 @@ module.exports = function (app, mongoose, logger) {
         return deferred.promise;
     }
 
-    function findResumePDFforUser(userId) {
+    function findResumeforUser(userId) {
 
         var deferred = q.defer();
 
-        ResumeModel.find({userId:userId},['urlPdf'],function (err, dbResumePDF) {
+        ResumeModel.find({userId:userId},['filename'],function (err, dbResumePDF) {
 
             if(err){
                 logger.error("Can not find resume pdf for user " + userId + " Error: "+ err);
@@ -76,18 +82,7 @@ module.exports = function (app, mongoose, logger) {
         return deferred.promise;
     }
 
-    function findResumeDOCXforUser(userId) {
-        var deferred = q.defer();
-        ResumeModel.find({userId:userId},['urlDocx'],function (err, dbResumeDOCX) {
-            if(err){
-                logger.error("Can not find resume Docx for user " + userId + " Error: "+ err);
-                deferred.reject(err);
-            } else {
-                deferred.resolve(dbResumeDOCX);
-            }
-        });
-        return deferred.promise;
-    }
+
 
     function updateResume(resumeID, resume) {
         var deferred = q.defer();
