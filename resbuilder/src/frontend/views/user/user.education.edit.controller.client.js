@@ -5,8 +5,11 @@
         .module("ResumeBuilder")
         .controller("EditEducationController", EditEducationController);
 
-    function EditEducationController($scope, $location, $routeParams, EducationService) {
+    function EditEducationController($location, $routeParams, EducationService) {
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
             vm.isCollapsed = false;
             vm.userId = $routeParams['uid'];
@@ -59,6 +62,9 @@
 
         function onFindEducationByIdError(err) {
             vm.error = "Can not find education. Please try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -70,6 +76,9 @@
 
         function onUpdateEducationError(err) {
             vm.error = "Update failed!. Please try after sometimes.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
     }
 })();

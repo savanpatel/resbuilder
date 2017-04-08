@@ -58,9 +58,13 @@
          */
         function findRecruiterByCredentials(username, password){
 
-            var getRequestUrl =
-                RECRUITER_SERVICE_URL + "?username=" + username + "&password="+password;
-            return $http.get(getRequestUrl);
+            var reqBody = {
+                username:username,
+                password:password,
+                isRecruiter: true
+            };
+            var postRequestUrl = RECRUITER_SERVICE_URL + "/login";
+            return $http.post(postRequestUrl, reqBody);
         }
 
 

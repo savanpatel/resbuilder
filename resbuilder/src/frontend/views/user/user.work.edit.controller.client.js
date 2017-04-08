@@ -5,8 +5,12 @@
         .module("ResumeBuilder")
         .controller("EditWorkExpController", EditWorkExpController);
 
-    function EditWorkExpController($scope, $location, $routeParams, WorkExpService) {
+    function EditWorkExpController($location, $routeParams, WorkExpService) {
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
+
         function init() {
             vm.isCollapsed = false;
             vm.uid = $routeParams['uid'];
@@ -58,6 +62,9 @@
 
         function onFindWorkExpByIdError(err) {
             vm.error = "Could not fetch work experience. Error: " + err;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
         function onUpdateWorkExpSuccess(resposne) {
@@ -66,6 +73,9 @@
 
         function onUpdateWorkExpError(err) {
             vm.error = "Could not update work experience. Try after sometime. Error:" + err;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
     }
 })();

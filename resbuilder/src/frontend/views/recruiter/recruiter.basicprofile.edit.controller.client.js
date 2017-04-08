@@ -5,8 +5,11 @@
         .module("ResumeBuilder")
         .controller("RecruiterBasicProfileEditController", RecruiterBasicProfileEditController);
 
-    function RecruiterBasicProfileEditController($scope, $location, $routeParams, RecruiterService) {
+    function RecruiterBasicProfileEditController($location, $routeParams, RecruiterService) {
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
 
             vm.recruiterId = $routeParams['rid'];
@@ -18,8 +21,6 @@
 
             promise.success(onFindRecruiterByIdSuccess);
             promise.error(onFindRecruiterByIdError);
-
-
         }
 
 
@@ -48,6 +49,9 @@
 
         function onFindRecruiterByIdError(err) {
             vm.error = "Could not fetch data. Try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -58,6 +62,9 @@
 
         function onUpdateError(err) {
             vm.error = "Could not update user. Try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
     }

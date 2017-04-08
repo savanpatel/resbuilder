@@ -5,20 +5,27 @@
 
 module.exports = function (app, mongooseAPI) {
 
-    app.post("/api/technicalskill", createTechnicalSkill);
+    app.post("/api/technicalskill",checkAuthorizedUser, createTechnicalSkill);
     
-    app.get("/api/technicalskill/:technicalSkillId", findTechnicalSkillById);
-    app.get("/api/technicalskill/user/:userId", findTechnicalSkillForUser);
-    app.put("/api/technicalskill/:technicalskillId", updateTechnicalSkill);
-    app.delete("/api/technicalskill/:technicalskillId", deleteTechnicalSkill);
+    app.get("/api/technicalskill/:technicalSkillId",checkAuthorizedUser, findTechnicalSkillById);
+    app.get("/api/technicalskill/user/:userId",checkAuthorizedUser, findTechnicalSkillForUser);
+    app.put("/api/technicalskill/:technicalskillId", checkAuthorizedUser, updateTechnicalSkill);
+    app.delete("/api/technicalskill/:technicalskillId", checkAuthorizedUser, deleteTechnicalSkill);
 
 
 
     var TechnicalSkillModel = mongooseAPI.technicalSkillModelAPI;
 
-    
-    
-    
+
+
+
+    function checkAuthorizedUser (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
     /*
      *  Handlers
      */

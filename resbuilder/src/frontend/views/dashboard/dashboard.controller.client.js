@@ -11,7 +11,8 @@
     function DashBoardController($routeParams, $location, ResumeDataService, TechnicalSkillService, JobSuggestionService) {
 
         var vm = this;
-
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
         function init() {
             vm.isCollapsed = false;
             vm.error = null;
@@ -28,7 +29,6 @@
 
         function findJobSuggestions(userId) {
 
-            console.log("in find job suggestions");
             var promise = TechnicalSkillService.findTechnicalSkillForUser(userId);
             promise.success(onFindTechnicalSkillForUserSuccess);
             promise.error(onFindTechnicalSkillForUserError);
@@ -74,14 +74,18 @@
         function onFindTechnicalSkillForUserError(response) {
 
             var technicalSkillList = ['Java', 'Ruby', 'Python', 'MySQL'];
+            if(response == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else {
 
-            fetchJob(technicalSkillList);
+                fetchJob(technicalSkillList);
+            }
         }
 
 
         function GetResumeData() {
 
-            console.log("GEt data")
+            console.log("Get data")
             ResumeDataService.setUrl(vm.JobURL);
 
             $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
@@ -92,7 +96,7 @@
         function onGettingResumeData(data) {
             console.log(data)
         }
-        function OnErrorGettingResumeData() {
+        function OnErrorGettingResumeData(err) {
             console.log("Error")
         }
 
@@ -109,6 +113,9 @@
         function onFetchJobError(err) {
             console.log(err);
             vm.jobList = null;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 

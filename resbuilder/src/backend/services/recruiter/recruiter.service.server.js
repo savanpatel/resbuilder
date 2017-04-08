@@ -5,20 +5,34 @@
 
 module.exports = function (app, mongooseAPI) {
 
+
+
     app.post("/api/recruiter", createRecruiter);
-    app.get("/api/recruiter/:recruiterId", findRecruiterById);
-    app.put("/api/recruiter/:recruiterId", updateRecruiter);
-    app.delete("/api/recruiter/:recruiterId", deleteRecruiter);
-    app.get("/api/recruiter/:recruiterId/user/skill", findUsersBySkill);
-    app.get("/api/recruiter", findRecruiterByCredentials);
+    app.get("/api/recruiter/:recruiterId", checkAuthorizedUser, findRecruiterById);
+    app.put("/api/recruiter/:recruiterId", checkAuthorizedUser, updateRecruiter);
+    app.delete("/api/recruiter/:recruiterId", checkAuthorizedUser, deleteRecruiter);
+    app.get("/api/recruiter/:recruiterId/user/skill", checkAuthorizedUser, findUsersBySkill);
     app.get("/api/recruiter/username/:username", checkUsernameAvailable);
+
 
 
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
     var UserModel = mongooseAPI.userModelAPI;
     var TechnicalSkillModel = mongooseAPI.technicalSkillModelAPI;
-    
-    
+
+
+
+    function checkAuthorizedUser (req, res, next) {
+        console.log(req.isAuthenticated());
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
+
+
+
     /*
      *  Handlers
      */

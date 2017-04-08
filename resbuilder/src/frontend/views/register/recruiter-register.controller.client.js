@@ -142,14 +142,14 @@
         function onCreateRecruiterSuccess(response) {
 
             var recruiter = response;
-            var redirectUrl = "/user/" + recruiter._id + "/dashboard";
-            $location.url(redirectUrl);
+            vm.success = "Registration Successful! Goto home page to login.";
+            vm.error = null;
         }
 
 
         function onCreateRecruiterFailure(err) {
 
-            vm.error = "Failed to create user. Please try again after sometime.";
+            vm.error = "Failed to create user. Please try again after sometime." + err;
         }
 
     }

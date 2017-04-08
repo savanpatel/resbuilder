@@ -5,8 +5,11 @@
         .module("ResumeBuilder")
         .controller("MessageListController", MessageListController);
 
-    function MessageListController($filter, $routeParams, MessageService) {
+    function MessageListController($filter, $location, $routeParams, MessageService) {
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
 
             vm.recruiterId = $routeParams['rid'];
@@ -18,9 +21,6 @@
 
             promise.success(onFindMessageByRecruiterIdSuccess);
             promise.error(onFindMessageByRecruiterIdError);
-
-
-
         }
 
 
@@ -37,6 +37,9 @@
 
         function onFindMessageByRecruiterIdError(err) {
             vm.error = "Could not fetch data. Try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 

@@ -13,6 +13,9 @@
 
         function init() {
 
+            vm.error = null;
+            vm.success = null;
+
             vm.checkUsername = null;
             vm.checkPassword = null;
             vm.checkRePassword = null;
@@ -132,8 +135,7 @@
         function onCreateUserSuccess(response) {
 
             var user = response;
-            var redirectUrl = "/user/" + user._id + "/dashboard";
-            $location.url(redirectUrl);
+            vm.success = "Registration Successful! Goto home page to login.";
         }
 
 

@@ -5,8 +5,11 @@
         .module("ResumeBuilder")
         .controller("EducationController", EducationController);
 
-    function EducationController($scope, $location, $routeParams, UserService, EducationService) {
+    function EducationController($location, $routeParams, EducationService) {
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
             vm.isCollapsed = false;
             vm.userId = $routeParams["uid"];
@@ -79,17 +82,23 @@
 
         function onFindEducationForUserError(err) {
             vm.error = response;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
 
-        function onCreateEducationSuccess() {
+        function onCreateEducationSuccess(response) {
             vm.error = "Education Added!";
             findEducationForUser();
         }
 
-        function onCreateEducationError() {
+        function onCreateEducationError(err) {
             vm.error = "Error! Could not add education. Please try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 

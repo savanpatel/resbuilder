@@ -5,17 +5,26 @@
 
 module.exports = function (app, mongooseAPI) {
 
-    app.post("/api/resume", createResume);
-    app.get("/api/resume/:resumeId", findResumeById);
-    app.get("/api/resume/user/:userId/pdf", findResumePDFforUser);
-    app.get("/api/resume/user/:userId/docx",findResumeDOCXforUser)
-    app.put("/api/resume/:resumeId", updateResume);
-    app.delete("/api/resume/:resumeId", deleteResume);
+    app.post("/api/resume", checkAuthorizedUser, createResume);
+    app.get("/api/resume/:resumeId", checkAuthorizedUser, findResumeById);
+    app.get("/api/resume/user/:userId/pdf", checkAuthorizedUser, findResumePDFforUser);
+    app.get("/api/resume/user/:userId/docx", checkAuthorizedUser, findResumeDOCXforUser)
+    app.put("/api/resume/:resumeId", checkAuthorizedUser, updateResume);
+    app.delete("/api/resume/:resumeId", checkAuthorizedUser, deleteResume);
 
 
 
     var ResumeModel = mongooseAPI.resumeModelAPI;
 
+
+
+    function checkAuthorizedUser (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
     /*
      *  Handlers
      */

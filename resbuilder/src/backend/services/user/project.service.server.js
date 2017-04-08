@@ -5,19 +5,29 @@
 
 module.exports = function (app, mongooseAPI) {
 
-    app.post("/api/project", createProject);
-    app.get("/api/project/:projectId", findProjectById);
-    app.get("/api/project/user/:userId", getProjectForUser);
-    app.put("/api/project/:projectId", updateProject);
-    app.delete("/api/project/:projectId", deleteProject);
+    app.post("/api/project",checkAuthorizedUser, createProject);
+    app.get("/api/project/:projectId",checkAuthorizedUser, findProjectById);
+    app.get("/api/project/user/:userId",checkAuthorizedUser, getProjectForUser);
+    app.put("/api/project/:projectId",checkAuthorizedUser, updateProject);
+    app.delete("/api/project/:projectId",checkAuthorizedUser, deleteProject);
 
 
 
     var ProjectModel = mongooseAPI.projectModelAPI;
 
-    
-    
-    
+
+
+
+
+    function checkAuthorizedUser (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
+
+
     /*
      *  Handlers
      */
