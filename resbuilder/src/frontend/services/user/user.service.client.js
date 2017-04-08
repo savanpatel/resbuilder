@@ -61,9 +61,6 @@
             };
             var postRequestUrl = USER_SERVICE_URL + "/login";
             return $http.post(postRequestUrl, reqBody);
-            // var getRequestUrl =
-            //     USER_SERVICE_URL + "?username=" + username + "&password="+password;
-            // return $http.get(getRequestUrl);
         }
 
         /*

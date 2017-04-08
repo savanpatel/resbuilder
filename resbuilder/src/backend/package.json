@@ -17,7 +17,8 @@
     "winston":"^2.3.1",
     "office-clippy":"^0.0.9",
     "sync":"^0.2.5",
-    "express-session":"^1.15.2"
+    "express-session":"^1.15.2",
+    "passport-linkedin":"^1.1.0"
   },
   "devDependencies": {},
   "scripts": {
