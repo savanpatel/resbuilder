@@ -8,19 +8,96 @@
         .module("ResumeBuilder")
         .controller("DashBoardController", DashBoardController);
 
-    function DashBoardController($routeParams, $location, ResumeDataService, TechnicalSkillService, JobSuggestionService) {
+
+    function DashBoardController($routeParams, $location, ResumeDataService, ResumeService, TechnicalSkillService, JobSuggestionService) {
 
         var vm = this;
-
         function init() {
             vm.isCollapsed = false;
             vm.error = null;
             vm.GetResumeData = GetResumeData;
+            vm.downloadResume = downloadResume;
 
             vm.uid = $routeParams['uid'];
 
             findJobSuggestions(vm.uid);
 
+            console.log("ghbjnkml")
+            var promise = ResumeService.findResumeforUser(vm.uid);
+
+            promise
+                .success(renderAllResume)
+                .error(errorRenderAllResume)
+
+            vm.deleteResume = deleteResume;
+
+        }
+
+        function downloadResume(resumeid) {
+            window.open("http://localhost:3000/api/downloadResumePDF/"+resumeid);
+        }
+
+        function deleteResume(index) {
+
+            console.log(index);
+            var array1 = vm.allResumeUrls;
+            console.log(array1);
+
+            var resume1 = array1[index]
+            var resumeId1 = resume1['_id']
+            console.log(resumeId1)
+            var promise = ResumeService.deleteResume(resumeId1)
+
+            promise
+                .success(deleted)
+                .error(unsuccessfullDeleted)
+
+        }
+
+        function deleted(status) {
+            vm.message = "Resume Deleted";
+
+            var promise = ResumeService.findResumeforUser(vm.uid);
+
+            promise
+                .success(renderAllResume)
+                .error(errorRenderAllResume)
+        }
+
+        function unsuccessfullDeleted() {
+            vm.error = "Resume not Deleted successfully"
+        }
+
+        function renderAllResume(resumes) {
+            var urls = []
+            var loop = -1;
+            console.log("All resumes");
+            console.log(resumes)
+            if(resumes.length < 4)
+            {
+                loop = resumes.length;
+            }
+            else
+            {
+                loop = 4;
+            }
+
+            for(var j = 0;j<loop;j++){
+                var jsonResume = {
+                    "url": "http://localhost:3000/api/displayResumePDF/" + resumes[j]["_id"],
+                    "_id":resumes[j]["_id"]
+                }
+                urls.push(jsonResume);
+            }
+
+            console.log(urls)
+            vm.allResumeUrls = urls;
+            console.log(vm.allResumeUrls);
+
+        }
+        
+        function errorRenderAllResume() {
+            
         }
 
         init();
@@ -79,10 +156,21 @@
         }
 
 
-        function GetResumeData() {
+        function GetResumeData(sw) {
 
-            console.log("GEt data")
-            ResumeDataService.setUrl(vm.JobURL);
+            console.log("SW")
+            console.log(sw)
+
+            if(sw === 0)
+            {
+
+                console.log(vm.JobURL)
+                ResumeDataService.setUrl(vm.JobURL);
+            }
+            else
+            {
+                ResumeDataService.setUrl(sw);
+            }
 
             $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
 

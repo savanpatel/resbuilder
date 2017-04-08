@@ -39,8 +39,6 @@
             return $http.get(findUserByIdUrl);
         }
 
-
-
         /*
          * Finds user by username, returns promise.
          *
@@ -65,18 +63,15 @@
             return $http.post(postRequestUrl, reqBody);
         }
 
-
         /*
          * Updates the user with the new user information provided.
          * Returns  promise.
          */
+
         function updateUser(user) {
             var putRequestUrl = USER_SERVICE_URL + "/" + user._id;
             return $http.put(putRequestUrl, user);
         }
-
-
-
 
         /*
          *

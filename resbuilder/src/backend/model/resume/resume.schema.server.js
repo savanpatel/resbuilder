@@ -8,9 +8,7 @@ module.exports = function (app, mongoose) {
 
         userId:{type:mongoose.Schema.Types.ObjectId, ref:'User'},
 
-        urlPdf:{type:String,required:true},
-
-        urlDocx:{type:String,required:true}
+        filename:{type:String,required:true}
 
     });
 

@@ -7,8 +7,7 @@ module.exports = function (app, mongooseAPI) {
 
     app.post("/api/resume", createResume);
     app.get("/api/resume/:resumeId", findResumeById);
-    app.get("/api/resume/user/:userId/pdf", findResumePDFforUser);
-    app.get("/api/resume/user/:userId/docx",findResumeDOCXforUser)
+    app.get("/api/resume/user/:userId", findResumeforUser);
     app.put("/api/resume/:resumeId", updateResume);
     app.delete("/api/resume/:resumeId", deleteResume);
 
@@ -84,16 +83,19 @@ module.exports = function (app, mongooseAPI) {
 
 
 
-    function findResumePDFforUser(req, res) {
+    function findResumeforUser(req, res) {
 
         var userId = req.params.userId;
+
+        console.log("cftvgybhujnkm")
+        console.log(userId)
 
         if(userId == null){
             res.sendStatus(500).send("null userId");
             return;
         }
 
-        ResumeModel.findResumePDFforUser(userId)
+        ResumeModel.findResumeforUser(userId)
             .then(function (resume) {
 
                 if(null == resume){
@@ -107,28 +109,6 @@ module.exports = function (app, mongooseAPI) {
             });
     }
 
-    function findResumeDOCXforUser(req, res) {
-
-        var userId = req.params.userId;
-
-        if(userId == null){
-            res.sendStatus(500).send("null userId");
-            return;
-        }
-
-        ResumeModel.findResumeDOCXforUser(userId)
-            .then(function (resume) {
-
-                if(null == resume){
-                    res.sendStatus(500).send("resume not found.");
-                } else{
-                    res.send(resume);
-                }
-            }, function (err) {
-                logger.error("Can not fetch resumes for user. Error: " + err);
-                res.send(err);
-            });
-    }
 
 
 

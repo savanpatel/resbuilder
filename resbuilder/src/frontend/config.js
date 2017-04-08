@@ -60,7 +60,7 @@
                 controller: "DashBoardController",
                 controllerAs: "model"
             })
-            .when("/user/dashboard/resumes", {
+            .when("/user/resumes/:uid", {
                 templateUrl: "views/resumes/resumes.view.client.html",
                 controller: "ResumesController",
                 controllerAs: "model"
@@ -70,7 +70,7 @@
                 controller: "ResumeDataController",
                 controllerAs: "model"
             })
-            .when("/user/dashboard/resumeEdit", {
+            .when("/user/:uid/dashboard/resumeEdit/:resumeid", {
                 templateUrl: "views/resume-edit/resume-edit.view.client.html",
                 controller: "ResumeEditController",
                 controllerAs: "model"

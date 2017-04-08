@@ -30,6 +30,8 @@
         function getUrl() {
             return this.jobDesURl;
         }
+
+
         function getResumePDF(uid,data) {
             console.log("In client Service")
             console.log(data)

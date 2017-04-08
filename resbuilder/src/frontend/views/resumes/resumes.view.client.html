@@ -1,26 +1,18 @@
-/**
- * Created by panktibhalani on 3/28/17.
- */
-
-
-<script src="//rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
+<script src="http://rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
 
 <div ng-include="'./views/menu/menu.view.client.html'"></div>
 
-<div class="container-if-fixed-header">
-
- <div class="container mt40">
-  <section class="row">
- <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-   <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-   <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-   <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-   <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-   <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-   <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-   <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
-  </section>
- </div>
-
-
+<div class="alert alert-dismissible alert-warning" ng-show="model.message">
+    {{model.message}}
 </div>
+<div class="alert alert-dismissible alert-danger" ng-show="model.error">
+    {{model.error}}
+</div>
+<div class="container">
+    <div class="row mt40">
+<section>
+    <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>
+</section>
+</div>
+</div>
+
