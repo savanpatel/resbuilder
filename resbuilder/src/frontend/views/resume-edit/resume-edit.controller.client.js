@@ -6,7 +6,7 @@
 
 
 
-    function ResumeEditController($sce, $scope, $location,$routeParams,ResumeService) {
+    function ResumeEditController($sce, $window, $location,$routeParams,ResumeService) {
 
         var vm=this;
 
@@ -29,14 +29,14 @@
 
         function downlaodDocx() {
             window.open("http://localhost:3000/api/downloadResumeDOCX/" + vm.resumeid);
-            $location.url('/user/' + vm.uid + '/dashboard');
+
 
         }
 
         function downloadPDF() {
 
             window.open("http://localhost:3000/api/downloadResumePDF/" + vm.resumeid);
-            $location.url('/user/' + vm.uid + '/dashboard');
+
         }
 
         function deleteResume() {

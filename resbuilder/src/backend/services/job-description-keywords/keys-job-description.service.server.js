@@ -93,7 +93,8 @@ module.exports = function (app,mongooseAPI) {
                 res.send(data);
                 return true;
             },function (err) {
-                res.sendStatus(404);
+                console.log(err);
+                res.sendStatus(404).send(err);
             });
 
     }

@@ -28,8 +28,8 @@ module.exports = function (app,mongooseAPI) {
                     res.sendStatus(500).send("null resume");
                     return;
                 }
-
-                var tempFile= '/Users/panktibhalani/project/resbuilder/resbuilder/src/backend/uploads/pdf/'+resume.filename+'.pdf'
+                var presentDir = __dirname + "/../../uploads/pdf/"
+                var tempFile= presentDir +resume.filename+'.pdf'
                 fs.readFile(tempFile, function (err,data){
 
                     if(err) {
@@ -65,7 +65,8 @@ module.exports = function (app,mongooseAPI) {
                     return;
                 }
 
-                var tempFile= '/Users/panktibhalani/project/resbuilder/resbuilder/src/backend/uploads/docx/'+resume.filename+'.docx'
+                var presentDir = __dirname + "/../../uploads/docx/"
+                var tempFile= presentDir +resume.filename+'.docx'
                 fs.readFile(tempFile, function (err,data){
 
                     if(err) {
@@ -101,8 +102,11 @@ module.exports = function (app,mongooseAPI) {
                     res.sendStatus(500).send("null resume");
                     return;
                 }
+                console.log("-----------")
+                console.log(__dirname)
 
-                var tempFile= '/Users/panktibhalani/project/resbuilder/resbuilder/src/backend/uploads/pdf/'+resume.filename+'.pdf'
+                var presentDir = __dirname + "/../../uploads/pdf/"
+                var tempFile= presentDir +resume.filename+'.pdf'
                 fs.readFile(tempFile, function (err,data){
 
                     if(err) {
@@ -136,7 +140,8 @@ module.exports = function (app,mongooseAPI) {
                     return;
                 }
 
-                var tempFile= '/Users/panktibhalani/project/resbuilder/resbuilder/src/backend/uploads/docx/'+resume.filename+'.docx'
+                var presentDir = __dirname + "/../../uploads/docx/"
+                var tempFile= presentDir +resume.filename+'.docx'
                 fs.readFile(tempFile, function (err,data){
 
                     if(err) {
