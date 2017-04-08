@@ -8,7 +8,7 @@ import sys
 
 r = urllib.urlopen(sys.argv[1]).read()
 
-soup = BeautifulSoup(r,"lxml")
+soup = BeautifulSoup(r,"html.parser")
 
 words = ["Agile","Applications","ASP.NET","Build","C#","HTML","CSS","Mongodb","AngularJS","NodeJS","ExpressJS","MEAN","ASP.NET","MySQL","Oracle","ADO.NET","Script",
 "Code",

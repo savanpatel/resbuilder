@@ -12,4 +12,6 @@ module.exports = function(app, mongooseAPI, passport) {
     require("./services/display-resume/display-resume.service.server")(app,mongooseAPI);
     require("./services/recruiter/recruiter.service.server")(app,mongooseAPI);
     require("./services/message/message.service.server")(app,mongooseAPI);
+    require("./services/user/resume.service.server")(app, mongooseAPI);
+
 };
