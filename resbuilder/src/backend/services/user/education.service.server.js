@@ -5,18 +5,24 @@
 
 module.exports = function (app, mongooseAPI) {
 
-    app.post("/api/education", createEducation);
-    app.get("/api/education/:educationId", findEducationById);
-    app.get("/api/education/user/:userId", getEducationForUser);
-    app.put("/api/education/:educationId", updateEducation);
-    app.delete("/api/education/:educationId", deleteEducation);
+    app.post("/api/education", checkAuthorizedUser, createEducation);
+    app.get("/api/education/:educationId", checkAuthorizedUser, findEducationById);
+    app.get("/api/education/user/:userId", checkAuthorizedUser, getEducationForUser);
+    app.put("/api/education/:educationId", checkAuthorizedUser, updateEducation);
+    app.delete("/api/education/:educationId", checkAuthorizedUser, deleteEducation);
 
 
 
     var EducationModel = mongooseAPI.educationModelAPI;
 
-    
-    
+
+    function checkAuthorizedUser (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
     
     /*
      *  Handlers

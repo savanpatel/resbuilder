@@ -5,8 +5,12 @@
         .module("ResumeBuilder")
         .controller("BasicProfileEditController", BasicProfileEditController);
 
-    function BasicProfileEditController($scope, $location, $routeParams, UserService) {
+    function BasicProfileEditController($location, $routeParams, UserService) {
+
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
 
             vm.userId = $routeParams['uid'];
@@ -17,8 +21,6 @@
 
             promise.success(onFindUserSuccess);
             promise.error(onFindUserError);
-
-
         }
 
 
@@ -47,7 +49,9 @@
 
         function onFindUserError(err) {
             vm.error = "Could not fetch data. Try after sometime.";
-            $location.url("/");
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -58,6 +62,9 @@
 
         function onUpdateError(err) {
             vm.error = "Could not update user. Try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
     }

@@ -5,8 +5,12 @@
         .module("ResumeBuilder")
         .controller("EditProjectController", EditProjectController);
 
-    function EditProjectController($scope, $location, $routeParams, ProjectService) {
+    function EditProjectController($location, $routeParams, ProjectService) {
         var vm = this;
+
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
             vm.isCollapsed = false;
             vm.uid = $routeParams['uid'];
@@ -65,6 +69,9 @@
 
         function onFindProjectByIdError(err) {
             vm.error = "Could not fetch project. Please try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -74,6 +81,9 @@
 
         function onUpdateProjectError(err) {
             vm.error = "Could not update project. Error: " + err;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
     }
 })();

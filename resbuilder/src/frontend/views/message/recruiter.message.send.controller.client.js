@@ -7,6 +7,9 @@
 
     function MessageSendController($location, $routeParams, MessageService) {
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
 
             vm.recruiterId = $routeParams['rid'];
@@ -45,6 +48,9 @@
         function onCreateMessageError(err) {
 
             vm.error = "Opps! Could not send message. Please try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
     }

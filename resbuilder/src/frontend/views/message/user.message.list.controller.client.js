@@ -5,8 +5,11 @@
         .module("ResumeBuilder")
         .controller("UserMessageListController", UserMessageListController);
 
-    function UserMessageListController($filter, $routeParams, MessageService) {
+    function UserMessageListController($filter, $location, $routeParams, MessageService) {
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
 
             vm.userId = $routeParams['uid'];
@@ -46,6 +49,9 @@
 
         function onFindMessageByUserIdError(err) {
             vm.error = "Could not fetch data. Try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -65,8 +71,9 @@
 
         // do nothing as of now.
         function onUpdateIsReadForMessageError(err) {
-
-            console.log(err);
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
     }
 })();

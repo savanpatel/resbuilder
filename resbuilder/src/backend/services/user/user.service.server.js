@@ -14,7 +14,8 @@ module.exports = function (app, mongooseAPI, passport) {
     passport.deserializeUser(deserializeUser);
 
     app.post("/api/user", createUser);
-    app.post("/api/user/login", passport.authenticate('local', login));
+    app.post("/api/user/login", passport.authenticate('local'), login);
+    app.post("/api/recruiter/login", passport.authenticate('local'), login);
     app.get("/api/user/:userId", auth, findUserById);
     app.delete("/api/user/:userId",auth, deleteUser);
     app.put("/api/user/:userId", auth, updateUser);
@@ -25,8 +26,9 @@ module.exports = function (app, mongooseAPI, passport) {
 
     var UserModel = mongooseAPI.userModelAPI;
     var WorkExpModel = mongooseAPI.workExpModelAPI;
+    var RecruiterModel = mongooseAPI.recruiterModelAPI;
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use(new LocalStrategy({passReqToCallback: true}, localStrategy));
 
     passport.use(new LinkedInStrategy({
             consumerKey: "86kjumoat02m2u",
@@ -36,11 +38,6 @@ module.exports = function (app, mongooseAPI, passport) {
         },
         function(token, tokenSecret, profile, done) {
             // asynchronous verification, for effect...
-
-            console.log('----------------');
-            console.log(profile);
-            console.log('authenticated');
-            console.log(token);
 
             process.nextTick(function () {
                 // To keep the example simple, the user's LinkedIn profile is returned to
@@ -52,7 +49,6 @@ module.exports = function (app, mongooseAPI, passport) {
                     res.redirect("/");
                     return;
                 }
-                console.log(linkedInUser);
 
                 // convert linked in user to user object.
                 var user =  {
@@ -65,7 +61,6 @@ module.exports = function (app, mongooseAPI, passport) {
 
                 var position = linkedInUser._json.positions.values[0];
 
-                console.log(position);
                 var workExp = {
                     userId: user._id,
                     jobTitle: position.title,
@@ -104,7 +99,6 @@ module.exports = function (app, mongooseAPI, passport) {
                                                     //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
                                                 },
                                                 function (err) {
-                                                    console.log("Error" + err);
                                                     var retUser = JSON.parse(JSON.stringify(dbUser2));
                                                     retUser['isNew'] = false;
                                                     //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
@@ -138,11 +132,8 @@ module.exports = function (app, mongooseAPI, passport) {
     /*Passport related functions*/
 
     function authorized (req, res, next) {
-        console.log(req.isAuthenticated());
         if (!req.isAuthenticated()) {
             res.sendStatus(401);
-            //res.redirect("/");
-           // return;
         } else {
             next();
         }
@@ -151,7 +142,7 @@ module.exports = function (app, mongooseAPI, passport) {
     /*
      * 
      */
-    function localStrategy(username, password, done) {
+    function localStrategy(req, username, password, done) {
         if(null == username || null == password ||
             "" == username || "" == password){
             res.sendStatus(500).send("null/empty username or password");
@@ -159,20 +150,39 @@ module.exports = function (app, mongooseAPI, passport) {
         }
 
 
-        UserModel
-            .findUserByCredentials(username, password)
-            .then(function (user) {
+        if(req.body.isRecruiter && req.body.isRecruiter == true){
+            RecruiterModel
+                .findRecruiterByCredentials(username, password)
+                .then(function (user) {
 
-                if(!user) {
-                    return done(null, false);
-                } else {
-                    return done(null, user);
-                }
+                    if(!user) {
+                        return done(null, false);
+                    } else {
+                        return done(null, user);
+                    }
 
 
-            }, function (err) {
-                return done(err);
-            });
+                }, function (err) {
+                    return done(err);
+                });
+        }
+        else {
+            UserModel
+                .findUserByCredentials(username, password)
+                .then(function (user) {
+
+                    if(!user) {
+                        return done(null, false);
+                    } else {
+                        return done(null, user);
+                    }
+
+
+                }, function (err) {
+                    return done(err);
+                });
+        }
+
     }
 
 
@@ -184,31 +194,44 @@ module.exports = function (app, mongooseAPI, passport) {
 
     function deserializeUser(user, done) {
 
-         UserModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
+        if(user.companyname){
+            RecruiterModel
+                .findRecruiterById(user._id)
+                .then(
+                    function(user){
+                        done(null, user);
+                    },
+                    function(err){
+                        done(err, null);
+                    }
+                );
+        } else {
+            UserModel
+                .findUserById(user._id)
+                .then(
+                    function(user){
+                        done(null, user);
+                    },
+                    function(err){
+                        done(err, null);
+                    }
+                );
+        }
+
     }
+
+
 
     function login(req, res) {
         var user = req.user;
         res.json(user);
     }
+
     /*
      *  Handlers
      */
-
-    
     function linkedInSignUp(req, res) {
 
-
-        console.log("After callback: " + req.isAuthenticated());
         if(req.user && req.isAuthenticated()){
             res.redirect("/#/user/" + req.user._id + "/dashboard");
             return;

@@ -5,18 +5,25 @@
 
 module.exports = function (app, mongooseAPI) {
 
-    app.post("/api/workexp", createWorkExp);
-    app.get("/api/workexp/:workexpId", findWorkExpById);
-    app.get("/api/workexp/user/:userId", getWorkExpForUser);
-    app.put("/api/workexp/:workexpId", updateWorkExp);
-    app.delete("/api/workexp/:workexpId", deleteWorkExp);
+    app.post("/api/workexp", checkAuthorizedUser, createWorkExp);
+    app.get("/api/workexp/:workexpId", checkAuthorizedUser, findWorkExpById);
+    app.get("/api/workexp/user/:userId", checkAuthorizedUser, getWorkExpForUser);
+    app.put("/api/workexp/:workexpId", checkAuthorizedUser, updateWorkExp);
+    app.delete("/api/workexp/:workexpId", checkAuthorizedUser, deleteWorkExp);
 
 
 
     var WorkExpModel = mongooseAPI.workExpModelAPI;
 
-    
-    
+
+
+    function checkAuthorizedUser (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
     
     /*
      *  Handlers

@@ -5,9 +5,17 @@
         .module("ResumeBuilder")
         .controller("ProjectController", ProjectController);
 
-    function ProjectController($scope, $location, $routeParams, TechnicalSkillService, ProjectService) {
+    function ProjectController($location, $routeParams, TechnicalSkillService, ProjectService) {
+
+
         var vm = this;
+
+        var ERR_401 = "Unauthorized";
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
+
         function init() {
+
 
             vm.isCollapsed = false;
 
@@ -140,6 +148,9 @@
 
         function onFindTechnicalSkillForUserError(error) {
             vm.error = "Could not fetch the technical skill." + error;
+            if(error == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -151,6 +162,9 @@
 
         function onUpdateTechnicalSkillUpdateError(error) {
             vm.error = "Could not update the technical skill." + error;
+            if(error == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -158,6 +172,7 @@
         function onFindProjectListForUserSuccess(response){
             vm.projectList = response;
 
+            console.log(response);
             if(null == vm.projectList || vm.projectList.length == 0){
                 vm.noprojects = "You do not have any project. Add some.";
             }
@@ -165,6 +180,9 @@
 
         function onFindProjectListForUserError(err) {
             vm.error = err;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -177,6 +195,9 @@
         function onCreateProjectError(err) {
 
             vm.error = "Could not create a project. Error: " + err;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
@@ -187,6 +208,9 @@
 
         function onDeleteProjectError(err) {
             vm.error = "Could not delete the project. Error: " + err;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
     }

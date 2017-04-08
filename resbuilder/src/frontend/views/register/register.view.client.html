@@ -17,6 +17,12 @@
                                     <div ng-show="model.error" class="alert alert-danger" role="alert">
                                         {{model.error}}
                                     </div>
+                                    <div ng-show="model.success" class="alert alert-success" role="alert">
+                                        {{model.success}}
+                                    </div>
+                                    <a href="#/login"  ng-show="model.success" class="btn btn-primary btn-block btn-sm" role="alert">
+                                        Home
+                                    </a>
                                     <br/>
                                 </div>
                             </div>

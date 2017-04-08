@@ -5,16 +5,26 @@
 
 module.exports = function (app, mongooseAPI) {
 
-    app.post("/api/resume", createResume);
-    app.get("/api/resume/:resumeId", findResumeById);
-    app.get("/api/resume/user/:userId", findResumeforUser);
-    app.put("/api/resume/:resumeId", updateResume);
-    app.delete("/api/resume/:resumeId", deleteResume);
+    app.post("/api/resume", checkAuthorizedUser, createResume);
+    app.get("/api/resume/:resumeId", checkAuthorizedUser, findResumeById);
+    app.get("/api/resume/user/:userId/pdf", checkAuthorizedUser, findResumePDFforUser);
+    app.get("/api/resume/user/:userId/docx", checkAuthorizedUser, findResumeDOCXforUser)
+    app.put("/api/resume/:resumeId", checkAuthorizedUser, updateResume);
+    app.delete("/api/resume/:resumeId", checkAuthorizedUser, deleteResume);
 
 
 
     var ResumeModel = mongooseAPI.resumeModelAPI;
 
+
+
+    function checkAuthorizedUser (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
     /*
      *  Handlers
      */
@@ -83,19 +93,16 @@ module.exports = function (app, mongooseAPI) {
 
 
 
-    function findResumeforUser(req, res) {
+    function findResumePDFforUser(req, res) {
 
         var userId = req.params.userId;
-
-        console.log("cftvgybhujnkm")
-        console.log(userId)
 
         if(userId == null){
             res.sendStatus(500).send("null userId");
             return;
         }
 
-        ResumeModel.findResumeforUser(userId)
+        ResumeModel.findResumePDFforUser(userId)
             .then(function (resume) {
 
                 if(null == resume){
@@ -109,6 +116,28 @@ module.exports = function (app, mongooseAPI) {
             });
     }
 
+    function findResumeDOCXforUser(req, res) {
+
+        var userId = req.params.userId;
+
+        if(userId == null){
+            res.sendStatus(500).send("null userId");
+            return;
+        }
+
+        ResumeModel.findResumeDOCXforUser(userId)
+            .then(function (resume) {
+
+                if(null == resume){
+                    res.sendStatus(500).send("resume not found.");
+                } else{
+                    res.send(resume);
+                }
+            }, function (err) {
+                logger.error("Can not fetch resumes for user. Error: " + err);
+                res.send(err);
+            });
+    }
 
 
 

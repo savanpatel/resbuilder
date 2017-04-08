@@ -8,9 +8,11 @@
         .module("ResumeBuilder")
         .controller("RecruiterDashBoardController", RecruiterDashBoardController);
 
-    function RecruiterDashBoardController($routeParams, RecruiterService) {
+    function RecruiterDashBoardController($location, $routeParams, RecruiterService) {
 
         var vm = this;
+        var ERROR_REDIRECT = "/";
+        var ERR_401 = "Unauthorized";
 
         function init() {
             vm.isCollapsed = false;
@@ -56,7 +58,10 @@
 
         function onFindRecruiterByIdError(err) {
 
-            vm.error = "Could not fetch info."
+            vm.error = "Could not fetch info.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
         
         
@@ -67,14 +72,15 @@
             } else {
                 vm.error = null;
             }
-            console.log(response);
         }
 
         /*
          *
          */
         function onFindUsersBySkillError(err) {
-           console.log(err);
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 
