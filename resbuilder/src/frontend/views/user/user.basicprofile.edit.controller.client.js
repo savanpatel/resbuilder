@@ -47,6 +47,7 @@
 
         function onFindUserError(err) {
             vm.error = "Could not fetch data. Try after sometime.";
+            $location.url("/");
         }
 
 

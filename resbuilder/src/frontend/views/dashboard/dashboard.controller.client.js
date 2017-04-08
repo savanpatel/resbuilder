@@ -8,7 +8,7 @@
         .module("ResumeBuilder")
         .controller("DashBoardController", DashBoardController);
 
-    function DashBoardController($sce, $scope, $routeParams, $location,ResumeDataService, TechnicalSkillService, JobSuggestionService) {
+    function DashBoardController($routeParams, $location, ResumeDataService, TechnicalSkillService, JobSuggestionService) {
 
         var vm = this;
 
@@ -17,7 +17,6 @@
             vm.error = null;
             vm.GetResumeData = GetResumeData;
 
-            console.log("in init of dashboard controller");
             vm.uid = $routeParams['uid'];
 
             findJobSuggestions(vm.uid);
@@ -40,7 +39,6 @@
 
         function fetchJob(skills) {
 
-            console.log("in fetch job");
             var promise = JobSuggestionService.findJob(skills);
             promise.success(onFetchJobSuccess);
             promise.error(onFetchJobError);
@@ -51,7 +49,6 @@
          */
         function onFindTechnicalSkillForUserSuccess(response) {
 
-            console.log("in find technical skill success");
             var technicalSkillList = [];
             var skill = response;
 
@@ -90,6 +87,8 @@
             $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
 
         }
+
+
         function onGettingResumeData(data) {
             console.log(data)
         }
@@ -101,12 +100,14 @@
 
         function onFetchJobSuccess(response) {
 
+            console.log(response);
             response = shuffle(response);
             vm.jobList = response.slice(0,4);
             console.log(vm.jobList);
         }
 
         function onFetchJobError(err) {
+            console.log(err);
             vm.jobList = null;
         }
 

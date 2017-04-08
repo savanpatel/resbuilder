@@ -32,7 +32,7 @@ app.use(express.static(__dirname + '/frontend'));
 //require ("./test/app.js")(app);
 var mongooseAPI = require("./backend/model/server")(app);
 
-require("./backend/app.js")(app, mongooseAPI);
+require("./backend/app.js")(app, mongooseAPI, passport);
 
 var port = process.env.PORT || 3000;
 app.listen(port);

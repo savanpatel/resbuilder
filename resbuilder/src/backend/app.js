@@ -1,8 +1,8 @@
 /**
  * Created by savan on 21/2/17.
  */
-module.exports = function(app, mongooseAPI) {
-    require("./services/user.service.server.js")(app, mongooseAPI);
+module.exports = function(app, mongooseAPI, passport) {
+    require("./services/user.service.server.js")(app, mongooseAPI, passport);
     require("./services/project.service.server.js")(app, mongooseAPI);
     require("./services/education.service.server.js")(app, mongooseAPI);
     require("./services/technicalskillservice.server.js")(app, mongooseAPI);

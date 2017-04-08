@@ -24,7 +24,7 @@
         function findJob(skills)
         {
             var skillString = skills.join(',');
-            var findJobUrl = JOBSUGGESTION_SERVICE_URL + "description=" + skills;
+            var findJobUrl = JOBSUGGESTION_SERVICE_URL + "description=" + skills[0];
             return $http.get(findJobUrl);
         }
     }

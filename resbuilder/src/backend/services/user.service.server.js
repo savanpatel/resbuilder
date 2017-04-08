@@ -3,33 +3,146 @@
  *
  */
 
-module.exports = function (app, mongooseAPI) {
+module.exports = function (app, mongooseAPI, passport) {
 
-    var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
+    LinkedInStrategy = require('passport-linkedin').Strategy;
+
     var auth = authorized;
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     app.post("/api/user", createUser);
-    app.post("/api/user/login", passport.authenticate('local'), login);
-    app.get("/api/user", findUserByCredentials);
-    app.get("/api/user/:userId", findUserById);
-    app.delete("/api/user/:userId", deleteUser);
-    app.put("/api/user/:userId", updateUser);
+    app.post("/api/user/login", passport.authenticate('local', login));
+    app.get("/api/user/:userId", auth, findUserById);
+    app.delete("/api/user/:userId",auth, deleteUser);
+    app.put("/api/user/:userId", auth, updateUser);
     app.get("/api/user/username/:username", checkUsernameAvailable);
+    app.get("/api/user/linkedin/callback", passport.authenticate('linkedin', { failureRedirect: '/' }), linkedInSignUp);
+    app.get('/api/user/auth/linkedin', passport.authenticate('linkedin'));
 
 
     var UserModel = mongooseAPI.userModelAPI;
+    var WorkExpModel = mongooseAPI.workExpModelAPI;
 
     passport.use(new LocalStrategy(localStrategy));
+
+    passport.use(new LinkedInStrategy({
+            consumerKey: "86kjumoat02m2u",
+            consumerSecret: "69kv8q36g55rwKtg",
+            callbackURL: "http://localhost:3000/api/user/linkedin/callback",
+            profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline','positions','specialties'],
+        },
+        function(token, tokenSecret, profile, done) {
+            // asynchronous verification, for effect...
+
+            console.log('----------------');
+            console.log(profile);
+            console.log('authenticated');
+            console.log(token);
+
+            process.nextTick(function () {
+                // To keep the example simple, the user's LinkedIn profile is returned to
+                // represent the logged-in user.  In a typical application, you would want
+                // to associate the LinkedIn account with a user record in your database,
+                // and return that user instead.
+                var linkedInUser = profile;
+                if(null == linkedInUser){
+                    res.redirect("/");
+                    return;
+                }
+                console.log(linkedInUser);
+
+                // convert linked in user to user object.
+                var user =  {
+                    username: linkedInUser._json.id,
+                    firstName: linkedInUser._json.firstName,
+                    lastName: linkedInUser._json.lastName,
+                    email:linkedInUser._json.emailAddress
+                };
+
+
+                var position = linkedInUser._json.positions.values[0];
+
+                console.log(position);
+                var workExp = {
+                    userId: user._id,
+                    jobTitle: position.title,
+                    companyName: position.company.name,
+                    description: position.summary,
+                    startDate: position.startDate.month + "/" + position.startDate.year,
+                    location: position.location.name + ", " + position.location.country.name
+                };
+
+                //TODO create user.
+
+                // if user present then just fetch and return, if not then creat one.
+                UserModel.findUserByEmail(user.email)
+                    .then(function (dbUser) {
+
+                        // user is not present.
+                        if(null == dbUser)
+                        {
+
+                            // create user in db.
+                            UserModel.createUser(user)
+                                .then(function (dbUser2){
+                                    if(null == dbUser2)
+                                    {
+                                        res.sendStatus(500).send("Internal server error.");
+                                    }
+                                    else
+                                    {
+                                        // create work exp
+                                        WorkExpModel.createWorkExp(workExp, dbUser2._id)
+                                            .then(function (dbWorkExp) {
+                                                    var retUser = JSON.parse(JSON.stringify(dbUser2));
+                                                    retUser['isNew'] = false;
+                                                    return done(null, dbUser2);
+                                                    //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
+                                                    //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
+                                                },
+                                                function (err) {
+                                                    console.log("Error" + err);
+                                                    var retUser = JSON.parse(JSON.stringify(dbUser2));
+                                                    retUser['isNew'] = false;
+                                                    //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
+                                                    //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
+                                                    return done(null, dbUser2);
+                                                });
+                                    }
+                                }, function (err) {
+                                    return done(null, false);
+                                    //res.sendStatus(500).send(err);
+                                });
+                        }
+                        else{
+                            var retUser = JSON.parse(JSON.stringify(dbUser));
+                            retUser['isNew'] = false;
+                            //console.log("redirecting to  " + "/user/" + dbUser._id + "/dashboard")
+
+                            //res.redirect("/#/user/" + dbUser._id + "/dashboard");
+                            return done(null, dbUser);
+                        }
+
+                    }, function (err) {
+                      //  res.sendStatus(500).send(err);
+                        return done(null, false);
+                    });
+              //  return done(null, user);
+            });
+        }
+    ));
 
     /*Passport related functions*/
 
     function authorized (req, res, next) {
+        console.log(req.isAuthenticated());
         if (!req.isAuthenticated()) {
-            res.send(401);
+            res.sendStatus(401);
+            //res.redirect("/");
+           // return;
         } else {
             next();
         }
@@ -52,9 +165,9 @@ module.exports = function (app, mongooseAPI) {
 
                 if(!user) {
                     return done(null, false);
+                } else {
+                    return done(null, user);
                 }
-
-                return done(null, user);
 
 
             }, function (err) {
@@ -74,10 +187,10 @@ module.exports = function (app, mongooseAPI) {
             .findUserById(user._id)
             .then(
                 function(user){
-                    return done(null, user);
+                    done(null, user);
                 },
                 function(err){
-                    return done(err, null);
+                    done(err, null);
                 }
             );
     }
@@ -91,6 +204,19 @@ module.exports = function (app, mongooseAPI) {
      */
 
     
+    function linkedInSignUp(req, res) {
+
+
+        console.log("After callback: " + req.isAuthenticated());
+        if(req.user && req.isAuthenticated()){
+            res.redirect("/#/user/" + req.user._id + "/dashboard");
+            return;
+        }
+
+        res.redirect("/");
+
+
+    }
     
 
     /*
@@ -215,6 +341,10 @@ module.exports = function (app, mongooseAPI) {
      */
     function updateUser(req, res) {
 
+        if(!req.isAuthenticated()){
+            res.redirect("/");
+            return;
+        }
         var user = req.body;
         var userId = req.params.userId;
 

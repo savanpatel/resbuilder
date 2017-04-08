@@ -36,7 +36,7 @@ module.exports = function (app, mongoose, logger) {
         WorkExpModel.create(workExp, function (err, dbWorkExp) {
 
             if(err){
-                logger.error('Unable to create workExp.');
+                logger.error('Unable to create workExp.' + err);
                 deferred.reject(err);
             } else {
                 deferred.resolve(dbWorkExp);
