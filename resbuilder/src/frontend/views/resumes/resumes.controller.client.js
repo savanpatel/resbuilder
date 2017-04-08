@@ -11,9 +11,45 @@
 
 
             vm.isCollapsed = false;
-
-            console.log("ghbjnkml")
             vm.uid = $routeParams['uid'];
+
+            vm.deleteResume = deleteResume;
+            vm.downloadResume = downloadResume;
+            var promise = ResumeService.findResumeforUser(vm.uid);
+
+            promise
+                .success(renderAllResume)
+                .error(errorRenderAllResume)
+
+        }
+
+        init()
+
+        function downloadResume(resumeid) {
+
+            window.open("http://localhost:3000/api/downloadResumePDF/"+resumeid);
+        }
+
+        function deleteResume(index) {
+
+            console.log(index);
+            var array1 = vm.allResumeUrls;
+            console.log(array1);
+
+            var resume1 = array1[index]
+            var resumeId1 = resume1['_id']
+            console.log(resumeId1)
+            var promise = ResumeService.deleteResume(resumeId1)
+
+            promise
+                .success(deleted)
+                .error(unsuccessfullDeleted)
+
+        }
+
+        function deleted(status) {
+            vm.message = "Resume Deleted";
+
             var promise = ResumeService.findResumeforUser(vm.uid);
 
             promise
@@ -21,14 +57,22 @@
                 .error(errorRenderAllResume)
         }
 
-        init()
+        function unsuccessfullDeleted() {
+            vm.error = "Resume not Deleted successfully"
+        }
+
         function renderAllResume(resumes) {
             var urls = []
             var loop = -1;
 
             console.log(resumes)
             for(var j = 0;j<resumes.length;j++){
-                urls.push("http://localhost:3000/api/displayResumePDF/" + resumes[j]["_id"])
+
+                var jsonResume = {
+                    "url": "http://localhost:3000/api/displayResumePDF/" + resumes[j]["_id"],
+                    "_id":resumes[j]["_id"]
+                }
+                urls.push(jsonResume);
             }
 
 

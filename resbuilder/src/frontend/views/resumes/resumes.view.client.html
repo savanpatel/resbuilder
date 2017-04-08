@@ -1,6 +1,13 @@
 <script src="http://rawgithub.com/ashleydw/lightbox/master/dist/ekko-lightbox.js"></script>
 
 <div ng-include="'./views/menu/menu.view.client.html'"></div>
+
+<div class="alert alert-dismissible alert-warning" ng-show="model.message">
+    {{model.message}}
+</div>
+<div class="alert alert-dismissible alert-danger" ng-show="model.error">
+    {{model.error}}
+</div>
 <div class="container">
     <div class="row mt40">
 <section>
@@ -8,3 +15,4 @@
 </section>
 </div>
 </div>
+

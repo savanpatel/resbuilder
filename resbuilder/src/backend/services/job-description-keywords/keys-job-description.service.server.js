@@ -123,7 +123,6 @@ module.exports = function (app,mongooseAPI) {
     function getDataAccToKeyWords(){
         return new Promise(function (resolve,reject) {
             var a = output[0].substring(1,output[0].length)
-            a = a + " " + "python" + " " + "c";
             var res = a.split(" ")
 
             for (var a in projectDetails) {

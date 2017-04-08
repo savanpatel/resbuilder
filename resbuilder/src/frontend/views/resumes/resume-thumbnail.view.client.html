@@ -2,16 +2,16 @@
 <article style="margin-bottom: 40px" ng-repeat="resume in model.allResumeUrls" class="col-xs-12 col-sm-6 col-md-3">
         <div class="panel panel-default">
             <div class="panel-body hidden-lg hidden-md hidden-xs">
-                <thumbnail class="text-center" class="ng-thumbnail" file-type="pdf" source="{{resume}}" max-height="500" max-width="330" scale="1"></thumbnail>
+                <thumbnail class="text-center" class="ng-thumbnail" file-type="pdf" source="{{resume.url}}" max-height="500" max-width="330" scale="1"></thumbnail>
             </div>
             <div class="panel-body hidden-md hidden-sm hidden-lg">
-                <thumbnail class="text-center" class="ng-thumbnail" file-type="pdf" source="{{resume}}" max-height="500" max-width="300" scale="1"></thumbnail>
+                <thumbnail class="text-center" class="ng-thumbnail" file-type="pdf" source="{{resume.url}}" max-height="500" max-width="300" scale="1"></thumbnail>
             </div>
             <div class="panel-body hidden-sm hidden-md hidden-xs">
-                <thumbnail class="text-center" class="ng-thumbnail" file-type="pdf" source="{{resume}}" max-height="475" max-width="280" scale="1"></thumbnail>
+                <thumbnail class="text-center" class="ng-thumbnail" file-type="pdf" source="{{resume.url}}" max-height="475" max-width="280" scale="1"></thumbnail>
             </div>
             <div class="panel-body hidden-sm hidden-lg hidden-xs">
-                <thumbnail class="text-center" class="ng-thumbnail" file-type="pdf" source="{{resume}}" max-height="400" max-width="200" scale="1"></thumbnail>
+                <thumbnail class="text-center" class="ng-thumbnail" file-type="pdf" source="{{resume.url}}" max-height="400" max-width="200" scale="1"></thumbnail>
             </div>
         </div>
         <div style="margin-top: -40px" classs="pb-dash-dropdown panel-footer">
@@ -21,11 +21,9 @@
                             </span>
                 </a>
                 <ul class="pb-dash-menu btn-block dropdown-menu well well-sm" uib-dropdown-menu>
-                    <li><a href="">HTML</a></li>
+                    <li><a ng-click="model.deleteResume($index)" href="">Delete</a></li>
                     <li class="divider"></li>
-                    <li><a href="">CSS</a></li>
-                    <li class="divider"></li>
-                    <li><a href="">JavaScript</a></li>
+                    <li><a ng-click="model.downloadResume(resume._id)">Download</a></li>
                 </ul>
             </div>
         </div>

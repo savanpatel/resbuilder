@@ -14,13 +14,19 @@
             "updateResume":updateResume,
             "deleteResume":deleteResume,
             "findResumeforUser":findResumeforUser,
-            "findResumeById":findResumeById
+            "findResumeById":findResumeById,
+            "downloadResume":downloadResume
         };
 
         return api;
 
 
+        function downloadResume(resumeId) {
 
+            console.log("/api/downloadResumePDF/"+resumeId)
+            return $http.get("/api/downloadResumePDF/"+resumeId);
+
+        }
 
         function createResume(resume) {
             return $http.post("/api/resume", resume);
@@ -38,6 +44,8 @@
 
 
         function deleteResume(resumeid) {
+
+            console.log(resumeid);
             var deleteResumeUrl = "/api/resume/" + resumeid;
             return $http.delete(deleteResumeUrl);
         }

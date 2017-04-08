@@ -11,6 +11,7 @@ module.exports = function (app,mongooseAPI) {
 
 
     function downloadPDF(req,res) {
+        console.log("download PDF")
         console.log("gvhbjnk")
         var resumeId = req.params.resumeId;
         console.log(resumeId)
@@ -32,14 +33,13 @@ module.exports = function (app,mongooseAPI) {
                 fs.readFile(tempFile, function (err,data){
 
                     if(err) {
-                        console.log("error")
-                        console.log(err)
                         res.send(err);
                     }
                     else{
                         console.log(tempFile)
+                        res.setHeader('Content-disposition', 'attachment; filename='+ resume.filename+'.pdf')
                         res.contentType("application/pdf");
-                        res.download(tempFile)
+                        res.download(tempFile);
                     }
                 });
             });
@@ -48,7 +48,7 @@ module.exports = function (app,mongooseAPI) {
     }
 
     function downloadDocx(req,res) {
-        console.log("gvhbjnk")
+
         var resumeId = req.params.resumeId;
         console.log(resumeId)
         if(resumeId == null){
@@ -120,7 +120,6 @@ module.exports = function (app,mongooseAPI) {
     }
 
     function displayDocx(req,res) {
-        console.log("gvhbjnk")
         var resumeId = req.params.resumeId;
         console.log(resumeId)
         if(resumeId == null){
