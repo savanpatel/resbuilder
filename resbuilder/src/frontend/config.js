@@ -110,49 +110,24 @@
                 controller: "EditWorkExpController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/new", {
-                templateUrl: "views/website/website-new.view.client.html",
-                controller: "NewWebsiteController",
+            .when("/admin/login", {
+                templateUrl: "views/login/admin.login.view.client.html",
+                controller: "AdminLoginController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid", {
-                templateUrl: "views/website/website-edit.view.client.html",
-                controller: "EditWebsiteController",
+            .when("/admin/:aid/dashboard", {
+                templateUrl: "views/dashboard/admin.dashboard.view.client.html",
+                controller: "AdminDashBoardController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/new", {
-                templateUrl: "views/page/page-new.view.client.html",
-                controller: "NewPageController",
+            .when("/admin/:aid/user", {
+                templateUrl: "views/admin/admin.manage.user.view.client.html",
+                controller: "AdminManageUserController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid", {
-                templateUrl: "views/page/page-edit.view.client.html",
-                controller: "EditPageController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page", {
-                templateUrl: "views/page/page-list.view.client.html",
-                controller: "PageListController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/widget", {
-                templateUrl: "views/widget/widget-list.view.client.html",
-                controller: "WidgetListController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/widget/new", {
-                templateUrl: "views/widget/widget-chooser.view.client.html",
-                controller: "NewWidgetController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/widget/:widgetid", {
-                templateUrl: "views/widget/widget-edit.view.client.html",
-                controller: "EditWidgetController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/widget/:widgetid/flickr", {
-                templateUrl: "views/widget/widget-flickr-search.view.client.html",
-                controller: "FlickrController",
+            .when("/admin/:aid/message", {
+                templateUrl: "views/admin/admin.message.list.view.client.html",
+                controller: "AdminMessageController",
                 controllerAs: "model"
             })
             .otherwise({redirectTo : '/login'});
