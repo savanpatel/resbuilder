@@ -13,6 +13,7 @@ module.exports = function (app, mongooseAPI, passport) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
+
     app.post("/api/user", createUser);
     app.post("/api/user/login", passport.authenticate('local'), login);
     app.post("/api/recruiter/login", passport.authenticate('local'), login);
@@ -44,7 +45,10 @@ module.exports = function (app, mongooseAPI, passport) {
                 // represent the logged-in user.  In a typical application, you would want
                 // to associate the LinkedIn account with a user record in your database,
                 // and return that user instead.
+
+
                 var linkedInUser = profile;
+                console.log(linkedInUser);
                 if(null == linkedInUser){
                     res.redirect("/");
                     return;
@@ -59,17 +63,25 @@ module.exports = function (app, mongooseAPI, passport) {
                 };
 
 
-                var position = linkedInUser._json.positions.values[0];
+                var workExp = null;
 
-                var workExp = {
-                    userId: user._id,
-                    jobTitle: position.title,
-                    companyName: position.company.name,
-                    description: position.summary,
-                    startDate: position.startDate.month + "/" + position.startDate.year,
-                    location: position.location.name + ", " + position.location.country.name
-                };
+                if(linkedInUser._json.positions &&
+                    linkedInUser._json.positions._total > 0){
 
+                    var position = linkedInUser._json.positions.values[0];
+
+                    workExp = {
+                        userId: user._id,
+                        jobTitle: position.title,
+                        companyName: position.company.name,
+                        description: position.summary,
+                        startDate: position.startDate.month + "/" + position.startDate.year,
+                        location: position.location.name + ", " + position.location.country.name
+                    };
+                }
+
+
+                console.log(workExp);
                 //TODO create user.
 
                 // if user present then just fetch and return, if not then creat one.
@@ -89,22 +101,29 @@ module.exports = function (app, mongooseAPI, passport) {
                                     }
                                     else
                                     {
-                                        // create work exp
-                                        WorkExpModel.createWorkExp(workExp, dbUser2._id)
-                                            .then(function (dbWorkExp) {
-                                                    var retUser = JSON.parse(JSON.stringify(dbUser2));
-                                                    retUser['isNew'] = false;
-                                                    return done(null, dbUser2);
-                                                    //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
-                                                    //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
-                                                },
-                                                function (err) {
-                                                    var retUser = JSON.parse(JSON.stringify(dbUser2));
-                                                    retUser['isNew'] = false;
-                                                    //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
-                                                    //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
-                                                    return done(null, dbUser2);
-                                                });
+                                        if(null != workExp){
+                                            // create work exp
+                                            WorkExpModel.createWorkExp(workExp, dbUser2._id)
+                                                .then(function (dbWorkExp) {
+                                                        var retUser = JSON.parse(JSON.stringify(dbUser2));
+                                                        retUser['isNew'] = false;
+                                                        return done(null, dbUser2);
+                                                        //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
+                                                        //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
+                                                    },
+                                                    function (err) {
+                                                        var retUser = JSON.parse(JSON.stringify(dbUser2));
+                                                        retUser['isNew'] = false;
+                                                        //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
+                                                        //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
+                                                        return done(null, dbUser2);
+                                                    });
+                                        } else {
+                                            console.log("CHECK1")
+                                            console.log(dbUser2);
+                                            return done(null, dbUser2);
+                                        }
+
                                     }
                                 }, function (err) {
                                     return done(null, false);
@@ -249,6 +268,8 @@ module.exports = function (app, mongooseAPI, passport) {
     function createUser(req, res) {
 
         var user = req.body;
+
+
 
         if(null == user){
             req.sendStatus(500).send("null/empty user");

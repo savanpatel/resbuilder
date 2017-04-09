@@ -20,7 +20,7 @@
 
             vm.aid = $routeParams['aid'];
 
-           // fetchStats();
+           fetchStats(vm.aid);
         }
 
 
@@ -30,17 +30,17 @@
         /*
          * Fetch the stats for admin like usercount, new messages, recruiter count etc.
          */
-        function fetchStats() {
+        function fetchStats(adminId) {
 
-            var promise = AdminService.fetchStats();
+            var promise = AdminService.fetchStats(adminId);
             promise.success(onFetchStatsSuccess);
         }
 
 
-
-
         /*Promise handlers*/
         function onFetchStatsSuccess(response) {
+
+            console.log(response)
             vm.userStats = response;
         }
 
