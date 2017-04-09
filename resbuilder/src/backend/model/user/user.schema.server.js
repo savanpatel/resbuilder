@@ -16,6 +16,10 @@ module.exports = function (app, mongoose) {
 
         email:{type:String, required:true},
 
+        is_deleted:{type:Boolean,required:true,default:false},
+
+        role:{type:String,enum:['admin','user'],default:'user'},
+
         address:{type:String},
 
         contact:{type:Number},

@@ -13,5 +13,6 @@ module.exports = function(app, mongooseAPI, passport) {
     require("./services/recruiter/recruiter.service.server")(app,mongooseAPI);
     require("./services/message/message.service.server")(app,mongooseAPI);
     require("./services/user/resume.service.server")(app, mongooseAPI);
+    require("./services/admin/admin.service.server")(app,mongooseAPI);
 
 };

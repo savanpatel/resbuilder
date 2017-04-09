@@ -14,6 +14,8 @@ module.exports = function (app, mongoose) {
 
         userId:{type:String, required:true},
 
+        adminId:{type:String},
+
         recruiterId: {type:String},
 
         jobDescriptionUrl: {type:String, required:true},
@@ -21,8 +23,6 @@ module.exports = function (app, mongoose) {
         isRead:{type:String, default:false},
 
         dateCreated: {type:Date, default:Date.now},
-
     });
-
     return MessageSchema;
 }

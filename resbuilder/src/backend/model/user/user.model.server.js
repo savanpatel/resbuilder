@@ -18,12 +18,77 @@ module.exports = function (app, mongoose, logger) {
         deleteUser:deleteUser,
         checkUsernameAvailable:checkUsernameAvailable,
         findUserByEmail:findUserByEmail,
-        findUsersForIds:findUsersForIds
+        findAllUsers:findAllUsers,
+        findBlockedUsers:findBlockedUsers,
+        findUnBlockedUsers:findUnBlockedUsers,
+        findUsersForIds:findUsersForIds,
+        isAdmin: isAdmin
     };
 
     return api;
 
+    function isAdmin(userId) {
 
+        var deferred = q.defer();
+        UserModel.findById(userId,function (err,user) {
+            if(err){
+                deferred.abort()
+            }
+            else {
+                if(user.role === "admin"){
+                    deferred.resolve(true)
+                }
+                else {
+                    deferred.resolve(false)
+                }
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findAllUsers() {
+        var deferred = q.defer();
+        UserModel.find({},function (err,users) {
+
+            console.log("in modal")
+            console.log(users)
+            if(err) {
+                deferred.abort();
+            }
+            else{
+                deferred.resolve(users)
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findBlockedUsers() {
+        var deferred = q.defer();
+        UserModel.findOne({'is_deleted':true},function (err,users) {
+
+            if(err) {
+                deferred.abort();
+            }
+            else{
+                deferred.resolve(users)
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findUnBlockedUsers() {
+        var deferred = q.defer();
+        UserModel.findOne({'is_deleted':false},function (err,users) {
+
+            if(err) {
+                deferred.abort();
+            }
+            else{
+                deferred.resolve(users)
+            }
+        });
+        return deferred.promise;
+    }
 
     /*function definitions*/
 

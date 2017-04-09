@@ -16,6 +16,8 @@ module.exports = function (app, mongoose) {
 
         email:{type:String},
 
+        is_deleted:{type:Boolean,required:true,default:false},
+
         /* description about the company*/
         description:{type:String, required:true}
     });

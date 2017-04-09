@@ -16,10 +16,62 @@ module.exports = function (app, mongoose, logger) {
         updateRecruiter:updateRecruiter,
         deleteRecruiter:deleteRecruiter,
         findRecruiterByCredentials: findRecruiterByCredentials,
+        findAllRecruiters:findAllRecruiters,
+        findBlockedRecruiters:findBlockedRecruiters,
+        findUnBlockedRecruiters:findUnBlockedRecruiters,
         checkUsernameAvailable:checkUsernameAvailable
     };
 
     return api;
+
+
+    function findAllRecruiters() {
+
+        var deferred = q.defer();
+
+        RecruiterModel.find({},function (err,recruiters) {
+
+            if(err) {
+                deferred.abort()
+            }
+            else{
+                deferred.resolve(recruiters)
+            }
+        });
+        return deferred.promise;
+
+    }
+
+    function findBlockedRecruiters() {
+
+        var deferred = q.defer();
+
+        RecruiterModel.findOne({'is_deleted':true},function (err,recruiters) {
+
+            if(err) {
+                deferred.abort()
+            }
+            else{
+                deferred.resolve(recruiters)
+            }
+        });
+        return deferred.promise;
+
+    }
+
+    function findUnBlockedRecruiters() {
+
+        var deferred = q.defer();
+        RecruiterModel.findOne({'is_deleted':false},function (err,recruiters) {
+            if(err) {
+                deferred.abort()
+            }
+            else{
+                deferred.resolve(recruiters)
+            }
+        });
+        return deferred.promise;
+    }
 
 
     /*
