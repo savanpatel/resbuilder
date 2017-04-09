@@ -16,7 +16,8 @@
             "findUserByCredentials": findUserByCredentials,
             "updateUser": updateUser,
             "deleteUser": deleteUser,
-            "checkUsernameAvailable":checkUsernameAvailable
+            "checkUsernameAvailable":checkUsernameAvailable,
+            "findAdminUserByCredentials":findAdminUserByCredentials
         };
 
         return api;
@@ -63,6 +64,18 @@
             return $http.post(postRequestUrl, reqBody);
         }
 
+
+
+        function findAdminUserByCredentials(username, password) {
+            var reqBody = {
+                username:username,
+                password:password,
+                isAdmin: true
+            };
+
+            var postRequestUrl = USER_SERVICE_URL + "/login";
+            return $http.post(postRequestUrl, reqBody);
+        }
         /*
          * Updates the user with the new user information provided.
          * Returns  promise.
