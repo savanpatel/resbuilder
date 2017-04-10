@@ -3,16 +3,34 @@ module.exports = function (app, mongooseAPI) {
     app.get('/api/admin/:adminId/recruiters',findAllRecruiters);
     app.get('/api/admin/:adminId/users',findAllUsers);
     app.get('/api/admin/:adminId/stats',getAllStats);
+    app.get('/api/admin/', getAdminInfo);
 
     var UserModel = mongooseAPI.userModelAPI;
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
-    
+
+
+    function getAdminInfo(req, res) {
+
+        UserModel.getAdminInfo()
+            .then(function (dbAdmin) {
+                if(dbAdmin){
+                    var adminInfo = {
+                        adminId: dbAdmin._id,
+                    };
+
+                    res.send(adminInfo);
+                } else{
+                    res.sendStatus(500).send("Could not fetch admin info");
+                }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+
     function getAllStats(req,res) {
 
-
-
         var adminId = req.params.adminId;
-
 
         var promise = UserModel.isAdmin(adminId);
 

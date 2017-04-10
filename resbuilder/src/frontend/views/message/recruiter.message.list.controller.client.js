@@ -3,9 +3,9 @@
 
     angular
         .module("ResumeBuilder")
-        .controller("MessageListController", MessageListController);
+        .controller("RecruiterMessageListController", RecruiterMessageListController);
 
-    function MessageListController($filter, $location, $routeParams, MessageService) {
+    function RecruiterMessageListController($filter, $location, $routeParams, MessageService) {
         var vm = this;
         var ERROR_REDIRECT = "/";
         var ERR_401 = "Unauthorized";
