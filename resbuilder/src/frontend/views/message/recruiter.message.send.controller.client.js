@@ -20,11 +20,12 @@
 
             vm.message = {
                 companyName: vm.companyName,
-                userId: vm.uid,
-                recruiterId: vm.rid
+                receiverId: vm.uid,
+                senderId: vm.rid
             };
 
             vm.sendMessage = sendMessage;
+
             vm.error = null;
         }
 

@@ -1,0 +1,86 @@
+<div class="row">
+    <div ng-show="model.selectedMessage" class="col-md-6 message-read-background custom-card-2" style="background: #f9f9f9;">
+        <div>
+            <h3 class="col-sm-12 message-header"> {{model.selectedMessage.subject}}</h3>
+            <br/>
+            <br/>
+            <br/>
+
+            <h5>{{model.formatDate(model.selectedMessage.dateCreated)}}</h5>
+            <hr ng-show="model.selectedMessage"/>
+            <p>{{model.selectedMessage.message}}</p>
+
+            <br/>
+            <br/>
+            <div ng-show="model.selectedMessage.jobDescriptionUrl">
+                <p ng-show="model.selectedMessage.jobDescriptionUrl">Job Description Url</p>
+                <h6>{{model.selectedMessage.jobDescriptionUrl}}</h6>
+                <a  ng-show="model.selectedMessage.jobDescriptionUrl" class="btn btn-primary btn-xs">Create Resume</a>
+            </div>
+        </div>
+
+        <hr/>
+        <br/>
+        <br/>
+        <br/>
+
+        <div class="col-sm-12" ng-show="model.selectedMessage && model.currentUID != model.selectedMessage.senderId">
+            <h5>Reply</h5>
+            <div class="col-sm-12">
+                <textarea class="col-sm-12" rows="5" ng-model="model.replyMessage.message"></textarea>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <div class="col-sm-12">
+                <a class="btn btn-primary btn-sm" ng-click="model.sendMessage(model.replyMessage)">Send</a>
+            </div>
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+        </div>
+
+        <h5 ng-show="model.currentUID == model.selectedMessage.senderId" class="label label-info">Sent by You.</h5>
+        <br/><br/>
+
+    </div>
+    <div class="col-md-6">
+        <br/>
+        <h3>Messages</h3>
+        <h5 ng-show="model.messageList == null"> No messages to show!</h5>
+        <ul class="list-group" ng-repeat="m in model.messageList">
+            <li class="list-group-item list-group-item-bordered">
+                <p>
+                    <a class="btn btn-success btn-xs" ng-click="model.selectMessage(m)">Open</a>
+
+                    <span ng-show="m.senderId == model.currentUID">
+                         <span class="label label-info">Sent By You</span>
+                         <span ng-switch="{{m.isRead}}">
+                             <span ng-switch-when='false'> <span class="label label-warning">Not Read</span></span>
+                              <span ng-switch-default><span class="label label-success">Read</span></span>
+                        </span>
+                         <span>{{m.subject}}</span>
+                    </span>
+
+
+                    <span ng-show="m.senderId != model.currentUID">
+                        <span ng-switch="{{m.isRead}}">
+                              <span ng-switch-when='false'> <span class="label label-info">New</span>
+                                  <strong>{{m.subject}}</strong></span>
+                              <span ng-switch-default>{{m.subject}}</span>
+                        </span>
+                    </span>
+
+
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -8,8 +8,8 @@ module.exports = function (app, mongooseAPI) {
     app.post("/api/message", createMessage);
     app.get("/api/message/:messageId", findMessageById);
     app.put("/api/message/:messageId", updateIsReadForMessage);
-    app.get("/api/message/user/:userId", findMessageByUserId);
-    app.get("/api/message/recruiter/:recruiterId", findMessageByRecruiterId);
+    app.get("/api/message/sender/:senderId", findMessageBySenderId);
+    app.get("/api/message/receiver/:receiverId", findMessageByReceiverId);
 
 
 
@@ -84,20 +84,20 @@ module.exports = function (app, mongooseAPI) {
 
     /*
      *
-     * Handler for find education by education id.
+     * Handler for find messages by senderId.
      *
      */
-    function findMessageByUserId(req, res) {
+    function findMessageBySenderId(req, res) {
 
-        var userId = req.params.userId;
+        var senderId = req.params.senderId;
 
 
-        if(userId == null){
-            res.sendStatus(500).send("null userId.");
+        if(senderId == null){
+            res.sendStatus(500).send("null senderId.");
             return;
         }
 
-        MessageModel.findMessageByUserId(userId)
+        MessageModel.findMessageBySenderId(senderId)
             .then(function (dbMessage) {
 
                 if(null == dbMessage){
@@ -115,20 +115,20 @@ module.exports = function (app, mongooseAPI) {
 
     /*
      *
-     * Handler for find education by education id.
+     * Handler for find  messages by receiver id.
      *
      */
-    function findMessageByRecruiterId(req, res) {
+    function findMessageByReceiverId(req, res) {
 
-        var recruiterId = req.params.recruiterId;
+        var receiverId = req.params.receiverId;
 
 
-        if(recruiterId == null){
-            res.sendStatus(500).send("null recruiterId.");
+        if(receiverId == null){
+            res.sendStatus(500).send("null receiverId.");
             return;
         }
 
-        MessageModel.findMessageByRecruiterId(recruiterId)
+        MessageModel.findMessageByReceiverId(receiverId)
             .then(function (dbMessage) {
 
                 if(null == dbMessage){
@@ -169,6 +169,6 @@ module.exports = function (app, mongooseAPI) {
                 }
             }, function (err) {
                 res.sendStatus(500).send(err);
-            })
+            });
     }
 }

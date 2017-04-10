@@ -11,8 +11,8 @@
 
         var api = {
             "createMessage":createMessage,
-            "findMessageByRecruiterId":findMessageByRecruiterId,
-            "findMessageByUserId":findMessageByUserId,
+            "findMessageByReceiverId":findMessageByReceiverId,
+            "findMessageBySenderId":findMessageBySenderId,
             "updateIsReadForMessage":updateIsReadForMessage,
             "findMessageById":findMessageById
 
@@ -57,18 +57,18 @@
         /*
          * finds messages for user
          */
-        function findMessageByUserId(userId) {
-            var findMessageByUserIdUrl = MESSAGE_SERVICE_URL + "/user/" + userId;
-            return $http.get(findMessageByUserIdUrl);
+        function findMessageBySenderId(senderId) {
+            var findMessageBySenderIdUrl = MESSAGE_SERVICE_URL + "/sender/" + senderId;
+            return $http.get(findMessageBySenderIdUrl);
         }
 
 
         /*
          * finds messages for recruiter
          */
-        function findMessageByRecruiterId(recruiterId) {
-            var findMessageByRecruiterIdUrl = MESSAGE_SERVICE_URL + "/recruiter/" + recruiterId;
-            return $http.get(findMessageByRecruiterIdUrl);
+        function findMessageByReceiverId(receiverId) {
+            var findMessageByReceiverIdIdUrl = MESSAGE_SERVICE_URL + "/receiver/" + receiverId;
+            return $http.get(findMessageByReceiverIdIdUrl);
         }
 
     }
