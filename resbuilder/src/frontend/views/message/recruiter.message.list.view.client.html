@@ -2,24 +2,15 @@
 
 <div class="container container-if-fixed-header">
 
-      <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-              <h3>Message History</h3>
-              <ul class="list-group" ng-repeat="m in model.messageList">
-                  <li class="list-group-item list-group-item-bordered">
-                      <h4>{{m.subject}}</h4>
-                      <h5>{{m.message}}</h5>
-                      <h6>Date Sent: {{model.formatDate(m.dateCreated)}}</h6>
-                      <span ng-switch="{{m.isRead}}">
-                          <span ng-switch-when='true' class="label label-info">Read</span>
-                          <span ng-switch-default class="label label-warning">Unread</span>
-                      </span>
-
-                  </li>
-              </ul>
-          </div>
-      </div>
-
-
-
+    <div class="row">
+        <div class="alert alert-dismissible alert-danger" ng-show="model.error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <a class="alert-link">{{model.error}}</a>.
+        </div>
+        <div class="alert alert-dismissible alert-success" ng-show="model.success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Yay!</strong>  <a class="alert-link">Sent message Successfully.</a>.
+        </div>
+    </div>
+    <div ng-include="'./views/message/message.view.client.html'"></div>
 </div>

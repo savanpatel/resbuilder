@@ -14,8 +14,8 @@ module.exports = function (app, mongoose, logger) {
 
         createMessage:createMessage,
         findMessageById:findMessageById,
-        findMessageByUserId:findMessageByUserId,
-        findMessageByRecruiterId:findMessageByRecruiterId,
+        findMessageBySenderId:findMessageBySenderId,
+        findMessageByReceiverId:findMessageByReceiverId,
         updateIsReadForMessage: updateIsReadForMessage
     };
 
@@ -28,14 +28,19 @@ module.exports = function (app, mongoose, logger) {
      */
 
     function createMessage(message) {
+
+
         var deferred = q.defer();
+
         MessageModel.create(message, function (err, dbMessage) {
+
             if(err){
                 logger.error('Unable to create message.' + err);
                 deferred.reject(err);
             } else {
                 deferred.resolve(dbMessage);
             }
+
         });
 
         return deferred.promise;
@@ -66,16 +71,19 @@ module.exports = function (app, mongoose, logger) {
         return deferred.promise;
     }
 
-    /* find messages by user id.*/
-    function findMessageByUserId(userId){
 
+
+    /* find messages by user id.*/
+    function findMessageBySenderId(senderId){
         var deferred = q.defer();
-        MessageModel.find({userId:userId}, function (err, dbMessage) {
+
+        MessageModel.find({senderId:senderId}, function (err, dbMessage) {
 
             if(err){
-                logger.error('Unable to find message by user id'  + userId + ". Error: " + err);
+                logger.error('Unable to find message by user id'  + senderId + ". Error: " + err);
                 deferred.reject(err);
             } else {
+
                 deferred.resolve(dbMessage);
             }
         });
@@ -85,13 +93,13 @@ module.exports = function (app, mongoose, logger) {
 
 
     /* find messages by recruiter id.*/
-    function findMessageByRecruiterId(recruiterId){
+    function findMessageByReceiverId(receiverId){
         var deferred = q.defer();
 
-        MessageModel.find({recruiterId:recruiterId}, function (err, dbMessage) {
+        MessageModel.find({receiverId:receiverId}, function (err, dbMessage) {
 
             if(err){
-                logger.error('Unable to find message by recruiter id'  + recruiterId + ". Error: " + err);
+                logger.error('Unable to find message by recruiter id'  + receiverId + ". Error: " + err);
                 deferred.reject(err);
             } else {
 
