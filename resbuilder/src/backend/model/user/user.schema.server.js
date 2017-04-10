@@ -18,7 +18,7 @@ module.exports = function (app, mongoose) {
 
         is_deleted:{type:Boolean,required:true,default:false},
 
-        role:{type:String,enum:['admin','user'],default:'user'},
+        role:{type:String,enum:['ADMIN','USER'],default:'USER'},
 
         address:{type:String},
 

@@ -15,7 +15,6 @@
             "findMessageBySenderId":findMessageBySenderId,
             "updateIsReadForMessage":updateIsReadForMessage,
             "findMessageById":findMessageById
-
         };
 
         return api;
@@ -70,6 +69,7 @@
             var findMessageByReceiverIdIdUrl = MESSAGE_SERVICE_URL + "/receiver/" + receiverId;
             return $http.get(findMessageByReceiverIdIdUrl);
         }
+
 
     }
 })();

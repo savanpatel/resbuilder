@@ -42,7 +42,7 @@
             })
             .when("/recruiter/:rid/messages", {
                 templateUrl: "views/message/recruiter.message.list.view.client.html",
-                controller: "MessageListController",
+                controller: "RecruiterMessageListController",
                 controllerAs: "model"
             })
             .when("/user/:uid/messages", {
@@ -103,6 +103,16 @@
             .when("/user/:uid/workexp", {
                 templateUrl: "views/user/user.work.list.view.client.html",
                 controller: "WorkExpController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/contact", {
+                templateUrl: "views/user/user.contact.view.client.html",
+                controller: "UserContactController",
+                controllerAs: "model"
+            })
+            .when("/recruiter/:rid/contact", {
+                templateUrl: "views/recruiter/recruiter.contact.view.client.html",
+                controller: "RecruiterContactController",
                 controllerAs: "model"
             })
             .when("/user/:uid/workexp/:wid", {

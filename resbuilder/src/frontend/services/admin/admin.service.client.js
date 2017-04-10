@@ -10,7 +10,8 @@
 
 
         var api = {
-            "fetchStats":fetchStats
+            "fetchStats":fetchStats,
+            "getAdminInfo": getAdminInfo
         };
 
         return api;
@@ -19,6 +20,13 @@
         {
             var fetchStatsUrl = ADMIN_SERVICE_URL + "/" + adminId + "/stats";
             return $http.get(fetchStatsUrl);
+        }
+
+
+
+        function getAdminInfo() {
+            var getAdminInfoUrl = ADMIN_SERVICE_URL;
+            return $http.get(getAdminInfoUrl);
         }
 
     }
