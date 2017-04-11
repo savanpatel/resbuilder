@@ -177,16 +177,18 @@ module.exports = function (app, mongoose, logger) {
         var deferred = q.defer();
 
         RecruiterModel.findOne({username:username, password:password}, function (err, recruiter) {
-
-            if(err){
-                logger.error("ERROR: [findUserByCredentials]: " + err);
-                deferred.reject(err);
-            } else {
-                deferred.resolve(recruiter);
+            if(!recruiter.is_deleted) {
+                if (err) {
+                    logger.error("ERROR: [findUserByCredentials]: " + err);
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(recruiter);
+                }
+            }
+            else{
+                deferred.reject("recruiter is blocked");
             }
         });
-
-
         return deferred.promise;
     }
 
