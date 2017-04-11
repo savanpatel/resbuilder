@@ -50,7 +50,6 @@ module.exports = function (app, mongoose, logger) {
     function findAllUsers() {
         var deferred = q.defer();
         UserModel.find({},function (err,users) {
-
             if(err) {
                 deferred.abort();
             }
@@ -284,7 +283,6 @@ module.exports = function (app, mongoose, logger) {
     function findUsersForIds(userIdList) {
 
         var deferred = q.defer();
-
         UserModel.find({$and: [{_id:{$in: userIdList}}, {isPublic:true}]}, function (err, users) {
 
             if(err){

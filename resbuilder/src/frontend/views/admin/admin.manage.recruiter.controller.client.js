@@ -6,38 +6,36 @@
 
     angular
         .module("ResumeBuilder")
-        .controller("AdminManageUserController", AdminManageUserController);
+        .controller("AdminManageRecruiterController", AdminManageRecruiterController);
 
-    function AdminManageUserController($location, $routeParams, AdminService, PagerService,UserService) {
+    function AdminManageRecruiterController($location, $routeParams, AdminService, PagerService,UserService) {
 
         var vm = this;
-        var ERROR_REDIRECT = "/unauthorized";
+        var ERROR_REDIRECT = "/";
         var ERR_401 = "Unauthorized";
 
         function init() {
-            vm.userType = "user"
+            vm.userType = "recruiter"
             vm.isCollapsed = false;
             vm.error = null;
 
-            vm.deleteByAdmin = deleteByAdmin;
-
 
             vm.aid = $routeParams['aid'];
+            vm.deleteByAdmin = deleteByAdmin;
 
             vm.update = update;
 
-            var promise = AdminService.getAllUsers(vm.aid);
+            var promise = AdminService.getAllRecruiters(vm.aid);
 
             promise
-                .success(renderUsers)
+                .success(renderRecruiters)
                 .error(errorWhileRendering)
 
         }
         
-        function deleteByAdmin(uid) {
+        function deleteByAdmin(rid) {
 
-
-            var promise = AdminService.deleteUserByAdmin(vm.aid,uid);
+            var promise = AdminService.deleteRecruiterByAdmin(vm.aid,rid);
 
             promise
                 .success(stateAfterDelete)
@@ -45,26 +43,24 @@
             
         }
 
+        function stateAfterUnsuccessfulDelete() {
+            console.log("unsuccessfull delete")
+        }
+        
         function stateAfterDelete() {
 
-            var promise = AdminService.getAllUsers(vm.aid);
+            var promise = AdminService.getAllRecruiters(vm.aid);
 
             promise
-                .success(renderUsers)
+                .success(renderRecruiters)
                 .error(errorWhileRendering)
-
-        }
-
-        function stateAfterUnsuccessfulDelete() {
-
-            console.log("unsuccessful delete")
-
+            
         }
 
         function update(user) {
 
 
-            var promise = AdminService.updateUserByAdmin(vm.aid,user);
+            var promise = AdminService.updateRecruiterByAdmin(vm.aid,user);
 
             promise
                 .success(updatedSuccesfully)
@@ -81,13 +77,11 @@
 
         }
 
-        function renderUsers(users) {
+        function renderRecruiters(users) {
             vm.dummyItems = users
 
             vm.pager = {};
             vm.setPage = setPage;
-            vm.logout = logout;
-
             initController();
         }
 
@@ -96,15 +90,6 @@
         }
 
         init();
-
-        function logout() {
-
-            var promise = AdminService.logout(vm.aid);
-
-            promise.success(onLogoutSuccess);
-            promise.error(onLogoutError);
-        }
-
 
         function setPage(page) {
             if (page < 1 || page > vm.pager.totalPages) {
@@ -123,17 +108,5 @@
             vm.setPage(1);
         }
 
-        function onLogoutSuccess(response) {
-            $location.url("/");
-        }
-
-        function onLogoutError(err) {
-
-            if(err == ERR_401){
-                $location.url(ERROR_REDIRECT);
-            } else{
-                $location.url("/admin/login");
-            }
-        }
     }
 })();

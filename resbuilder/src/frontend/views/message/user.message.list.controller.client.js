@@ -5,12 +5,14 @@
         .module("ResumeBuilder")
         .controller("UserMessageListController", UserMessageListController);
 
-    function UserMessageListController($filter, $location, $routeParams, MessageService, UserService) {
+    function UserMessageListController($filter, $location, $routeParams, MessageService,UserService,ResumeDataService) {
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {
+
+            vm.GetResumeData = GetResumeData;
 
             vm.userId = $routeParams['uid'];
             vm.uid = $routeParams['uid'];
@@ -106,6 +108,14 @@
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
             }
+        }
+
+        function GetResumeData(url) {
+
+            console.log("vghbjnklm")
+            ResumeDataService.setUrl(url);
+            $location.url('/user/'+ vm.uid +'/dashboard/resumeData')
+
         }
 
 

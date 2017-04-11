@@ -75,6 +75,16 @@
                 controller: "ResumeEditController",
                 controllerAs: "model"
             })
+            .when("/admin/:aid/user/:uid/basicprofile", {
+                templateUrl: "views/admin/admin.manage.user-edit.client.html",
+                controller: "BasicProfileAdminEditController",
+                controllerAs: "model"
+            })
+            .when("/admin/:aid/recruiter/:rid/basicprofile", {
+                templateUrl: "views/admin/admin.manage.recruiter-edit.client.html",
+                controller: "RecruiterBasicProfileAdminEditController",
+                controllerAs: "model"
+            })
             .when("/user/:uid/basicprofile", {
                 templateUrl: "views/user/user.basicprofile.edit.view.client.html",
                 controller: "BasicProfileEditController",
@@ -133,6 +143,11 @@
             .when("/admin/:aid/user", {
                 templateUrl: "views/admin/admin.manage.user.view.client.html",
                 controller: "AdminManageUserController",
+                controllerAs: "model"
+            })
+            .when("/admin/:aid/recruiter", {
+                templateUrl: "views/admin/admin.manage.user.view.client.html",
+                controller: "AdminManageRecruiterController",
                 controllerAs: "model"
             })
             .when("/admin/:aid/message", {

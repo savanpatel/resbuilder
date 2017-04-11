@@ -1,23 +1,43 @@
 module.exports = function (app, mongooseAPI) {
+    app.get('/api/admin/:adminId/recruiters',authoriseAdmin,findAllRecruiters);
+    app.get('/api/admin/:adminId/users',authoriseAdmin,findAllUsers);
+    app.get('/api/admin/:adminId/stats',authoriseAdmin,getAllStats);
+    app.put("/api/admin/:adminId/user",authoriseAdmin,updateUserByAdmin);
+    app.put("/api/admin/:adminId/recruiter",authoriseAdmin,updateRecruiterByAdmin);
+    app.delete("/api/admin/:adminId/user/:userId",authoriseAdmin,deleteUserByAdmin);
+    app.delete("/api/admin/:adminId/recruiter/:recruiterId",authoriseAdmin,deleteUserByRecruiter);
 
-    app.get('/api/admin/:adminId/recruiters',findAllRecruiters);
-    app.get('/api/admin/:adminId/users',findAllUsers);
-    app.get('/api/admin/:adminId/stats',getAllStats);
-    app.get('/api/admin/', getAdminInfo);
-    app.get('/api/admin/:adminId/logout, logout');
 
     var UserModel = mongooseAPI.userModelAPI;
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
 
 
-    function getAdminInfo(req, res) {
+    
+    function deleteUserByAdmin(req,res) {
+        var userId = req.params.userId;
+
+        if(userId == null){
+            res.sendStatus(500).send("null/empty user for delete.");
+            return;
+        }
+
+        UserModel.deleteUser(userId)
+            .then(function (status) {
+                console.log("delete done")
+                res.sendStatus(200);
+            },function (err) {
+                console.log(err)
+                res.send(401).send(err);
+            });
+    }
+function getAdminInfo(req, res) {
 
         UserModel.getAdminInfo()
             .then(function (dbAdmin) {
                 if(dbAdmin){
                     var adminInfo = {
                         adminId: dbAdmin._id,
-                    };
+                    }
 
                     res.send(adminInfo);
                 } else{
@@ -27,18 +47,88 @@ module.exports = function (app, mongooseAPI) {
                 res.sendStatus(500).send(err);
             });
     }
+  
+    function deleteUserByRecruiter(req,res) {
+        var recruiterId = req.params.recruiterId;
+        if(recruiterId == null){
+            res.sendStatus(500).send("null/empty user for delete.");
+            return;
+        }
+        RecruiterModel.deleteRecruiter(recruiterId)
+            .then(function (status) {
+            res.sendStatus(status);
+        },function (err) {
+            res.send(401).send(err);
+        });
+    }
 
-
-    function getAllStats(req,res) {
-
+    function updateRecruiterByAdmin(req,res) {
+        var recruiter = req.body;
         var adminId = req.params.adminId;
 
-        var promise = UserModel.isAdmin(adminId);
 
+        if (null == recruiter) {
+            res.sendStatus(500).send("null/empty user for update.");
+            return;
+        }
+
+        RecruiterModel.updateRecruiter(recruiter['_id'], recruiter)
+            .then(function (dbRecruiter) {
+                if (null == dbRecruiter) {
+                    res.sendStatus(500).send("Could not update user.");
+                } else {
+                    res.send(dbRecruiter);
+                }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
+    function authoriseAdmin(req,res,next) {
+
+        console.log("autho")
+        var adminId = req.params.adminId;
+        var promise = UserModel.isAdmin(adminId);
         promise
             .then(function (isadmin) {
-                if(isadmin){
 
+                if(isadmin){
+                    next();
+                }
+                else{
+                    res.send(401);
+                }
+            },function (err) {
+                res.send(401);
+            });
+    }
+
+    function updateUserByAdmin(req, res) {
+
+        var user = req.body;
+        var adminId = req.params.adminId;
+
+                    if (null == user) {
+                        res.sendStatus(500).send("null/empty user for update.");
+                        return;
+                    }
+
+                    UserModel.updateUser(user['_id'], user)
+                        .then(function (dbUser) {
+                            if (null == dbUser) {
+                                res.sendStatus(500).send("Could not update user.");
+                            } else {
+                                res.send(dbUser);
+                            }
+                        }, function (err) {
+                            res.sendStatus(500).send(err);
+                        });
+
+    }
+
+    
+    function getAllStats(req,res) {
+        var adminId = req.params.adminId;
 
                     RecruiterModel
                         .findAllRecruiters()
@@ -71,14 +161,7 @@ module.exports = function (app, mongooseAPI) {
                                 },function(err){
                                     res.send(err)
                                 });
-                        },function(err){
-                        res.send(err)
-                    });
-                }
-
-            },function(err){
-                res.send(err)
-            });
+                        });
     }
 
 
@@ -90,16 +173,6 @@ module.exports = function (app, mongooseAPI) {
         var newParams = req.query;
 
         var dataRequire = newParams['data'];
-
-
-        var promise = UserModel.isAdmin(adminId);
-
-        promise
-            .then(function (isadmin) {
-
-
-                if(isadmin) {
-
 
                     if(dataRequire == -1) {
 
@@ -148,11 +221,6 @@ module.exports = function (app, mongooseAPI) {
                                 res.send(err);
                             });
                     }
-                }
-
-            },function (err) {
-                res.send(500).send('Error User not found');
-            });
     }
 
     function findAllRecruiters(req,res) {
@@ -160,13 +228,6 @@ module.exports = function (app, mongooseAPI) {
         var adminId = req.params.adminId;
         var newParams = req.query;
         var dataRequire = newParams['data'];
-        var promise = UserModel.isAdmin(adminId);
-
-        promise
-            .then(function (isadmin) {
-
-                if(isadmin) {
-
 
                     if(dataRequire == -1) {
 
@@ -220,10 +281,7 @@ module.exports = function (app, mongooseAPI) {
                     }
                 }
 
-            },function (err) {
-                res.send(500).send('Error User not found');
-            });
-    }
+
 
 
     function logout(req, res) {

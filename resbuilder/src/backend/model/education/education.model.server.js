@@ -19,8 +19,6 @@ module.exports = function (app, mongoose, logger) {
     };
 
     return api;
-
-
     /*
      * createEducation: Creates a new Education in mongo db.
      * params: userId, Education object created similar to EducationSchema.
@@ -44,9 +42,6 @@ module.exports = function (app, mongoose, logger) {
 
         return deferred.promise;
     }
-
-
-
 
     /*
      * findEducationById : find education by education id.
@@ -118,8 +113,6 @@ module.exports = function (app, mongoose, logger) {
         return deferred.promise;
     }
 
-
-
     /*
      * deleteEducation: deletes education from database.
      * params: educationId
@@ -138,10 +131,7 @@ module.exports = function (app, mongoose, logger) {
                 deferred.resolve(200);
             }
         });
-
         return deferred.promise;
     }
-
-
 }
 
