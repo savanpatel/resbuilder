@@ -6,7 +6,7 @@
         .module("ResumeBuilder")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($scope, $location, UserService) {
+    function RegisterController(UserService) {
 
 
         var vm = this;

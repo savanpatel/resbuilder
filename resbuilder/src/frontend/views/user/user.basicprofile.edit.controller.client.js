@@ -8,7 +8,7 @@
     function BasicProfileEditController($location, $routeParams, UserService) {
 
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {

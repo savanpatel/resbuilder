@@ -11,8 +11,7 @@
         var vm = this;
 
         var ERR_401 = "Unauthorized";
-        var ERROR_REDIRECT = "/";
-        var ERR_401 = "Unauthorized";
+        var ERROR_REDIRECT = "/unauthorized";
 
         function init() {
 

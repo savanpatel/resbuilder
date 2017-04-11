@@ -7,7 +7,7 @@
 
     function UserMessageListController($filter, $location, $routeParams, MessageService) {
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {
@@ -148,6 +148,7 @@
                 vm.messageList.push(response[m]);
             }
         }
+
 
         function onFindMessageBySenderIdError(err) {
             vm.error = "Could not fetch data. Try after sometime.";

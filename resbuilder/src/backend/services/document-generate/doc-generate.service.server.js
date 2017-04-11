@@ -14,7 +14,23 @@ module.exports = function (app,mongooseAPI) {
     var ResumeModel = mongooseAPI.resumeModelAPI;
     //var filename;
 
-    app.post("/api/generateResume/:uid", createDoc);
+    var auth = authorized;
+
+
+    app.post("/api/generateResume/:uid",auth, createDoc);
+
+
+
+    /*Passport related functions*/
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
+
 
     function createDoc(req, res) {
 
@@ -26,33 +42,6 @@ module.exports = function (app,mongooseAPI) {
         var filename = userId.toString() + "_" + random.toString();
         var data = req.body;
         createDocHelper(req, res,data,filename,userId);
-
-
-        /*promise
-            .then(createPDF)
-            .then(function () {
-
-                console.log("fguhijokpgvhbjnkmgvhbjn")
-                var resume = {
-                    "filename": filename
-                }
-
-                ResumeModel
-                    .createResume(userId,resume)
-                    .then(function (resume) {
-
-                        if(null == resume){
-                            res.sendStatus(500).send("resume not found.");
-                        }
-                        else {
-                            res.json(resume)
-                        }
-                    },function (err) {
-                        logger.error("Can not fetch resumes for user. Error: " + err);
-                        res.send(err);
-                    });
-
-            })*/
     }
 
 
@@ -213,7 +202,6 @@ module.exports = function (app,mongooseAPI) {
 
     }
 
-        //exporter.express(res, doc, 'template-resume');
 
     function createPDF(userReq, userRes,filename,userId) {
 
@@ -259,52 +247,6 @@ module.exports = function (app,mongooseAPI) {
 
             addResume(userReq,userRes,filename,userId)
         });
-        /*return new Promise(function (resolve,reject) {
-
-            var req = require('request');
-            req = req.defaults({
-                agent: false
-            });
-
-            console.log("pdf generate")
-            function a(buf, callback) {
-                console.log("hello1")
-                var r = req.post('http://mirror1.convertonlinefree.com', {
-                    encoding: null,
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.94 Safari/537.36'
-                    }
-                }, function (err, res) {
-                    if (err) {
-                        console.log(err)
-                        callback(err);
-                    }
-                    else {
-                        callback(null, res.body);
-                    }
-
-
-                });
-
-                var form = r.form();
-                form.append('__EVENTTARGET', '');
-                form.append('__EVENTARGUMENT', '');
-                form.append('__VIEWSTATE', '');
-                form.append('ctl00$MainContent$fu', buf, {
-                    filename: 'output.docx',
-                    contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                });
-                form.append('ctl00$MainContent$btnConvert', 'Convert');
-                form.append('ctl00$MainContent$fuZip', '');
-            };
-            a(fs.readFileSync(__dirname + '/../../uploads/docx/'+filename+'.docx'), function (err, data) {
-                console.log("hello2")
-                fs.writeFileSync(__dirname+'/../../uploads/pdf/' + filename + '.pdf', data);
-                resolve()
-            });
-        });
-
-*/
     }
 
 

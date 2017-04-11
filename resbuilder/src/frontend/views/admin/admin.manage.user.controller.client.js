@@ -11,7 +11,7 @@
     function AdminManageUserController($location, $routeParams, AdminService, PagerService) {
 
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {

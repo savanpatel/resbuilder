@@ -12,6 +12,7 @@
     height: 200px;
     width: 100%;
 }
+
 #mycontent-right:after {
     content: "";
     background-color: #000;
@@ -20,6 +21,7 @@
     height: 1200px;
     display: block;
 }
+
 #mycontent-right {
     float: right;
     width: 100%;
