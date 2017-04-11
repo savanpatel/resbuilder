@@ -7,7 +7,7 @@
 
     function EducationController($location, $routeParams, EducationService) {
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {
@@ -81,7 +81,7 @@
         }
 
         function onFindEducationForUserError(err) {
-            vm.error = response;
+            vm.error = err;
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
             }
@@ -110,6 +110,9 @@
 
         function onDeleteEducationError(error) {
             vm.error = "Could not delete the education. Please try after sometime.";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 

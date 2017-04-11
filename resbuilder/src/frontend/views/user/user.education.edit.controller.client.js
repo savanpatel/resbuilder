@@ -7,7 +7,7 @@
 
     function EditEducationController($location, $routeParams, EducationService) {
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {

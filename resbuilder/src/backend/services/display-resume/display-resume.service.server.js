@@ -2,13 +2,22 @@ module.exports = function (app,mongooseAPI) {
 
 
     var fs = require('fs');
-    app.get("/api/displayResumePDF/:resumeId", displayPDF);
-    app.get("/api/displayResumeDOCX/:resumeId",displayDocx);
-    app.get("/api/downloadResumePDF/:resumeId",downloadPDF);
-    app.get("/api/downloadResumeDOCX/:resumeId",downloadDocx);
+    app.get("/api/displayResumePDF/:resumeId", checkAuthorizedRequest, displayPDF);
+    app.get("/api/displayResumeDOCX/:resumeId", checkAuthorizedRequest, displayDocx);
+    app.get("/api/downloadResumePDF/:resumeId", checkAuthorizedRequest, downloadPDF);
+    app.get("/api/downloadResumeDOCX/:resumeId", checkAuthorizedRequest, downloadDocx);
 
     var ResumeModel = mongooseAPI.resumeModelAPI;
 
+    /*Passport related functions*/
+
+    function checkAuthorizedRequest (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
 
     function downloadPDF(req,res) {
         console.log("download PDF")

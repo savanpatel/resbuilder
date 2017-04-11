@@ -140,6 +140,9 @@
                 controller: "AdminMessageController",
                 controllerAs: "model"
             })
+            .when("/unauthorized", {
+                templateUrl: "views/errors/unauthorized.view.client.html",
+            })
             .otherwise({redirectTo : '/login'});
 
 

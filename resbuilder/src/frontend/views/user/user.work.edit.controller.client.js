@@ -7,7 +7,7 @@
 
     function EditWorkExpController($location, $routeParams, WorkExpService) {
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
 

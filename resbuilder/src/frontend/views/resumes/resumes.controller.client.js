@@ -4,11 +4,13 @@
         .module("ResumeBuilder")
         .controller("ResumesController", ResumesController);
 
-    function ResumesController($sce, $scope, $location,$routeParams,ResumeService) {
+    function ResumesController($location, $routeParams, ResumeService) {
 
         var vm = this;
-        function init() {
+        var ERROR_REDIRECT = "/unauthorized";
+        var ERR_401 = "Unauthorized";
 
+        function init() {
 
             vm.isCollapsed = false;
             vm.uid = $routeParams['uid'];
@@ -20,7 +22,6 @@
             promise
                 .success(renderAllResume)
                 .error(errorRenderAllResume)
-
         }
 
         init()
@@ -57,8 +58,11 @@
                 .error(errorRenderAllResume)
         }
 
-        function unsuccessfullDeleted() {
-            vm.error = "Resume not Deleted successfully"
+        function unsuccessfullDeleted(err) {
+            vm.error = "Resume not Deleted successfully";
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
         function renderAllResume(resumes) {
@@ -78,11 +82,13 @@
 
             vm.allResumeUrls = urls;
             console.log(vm.allResumeUrls);
-
         }
 
-        function errorRenderAllResume() {
 
+        function errorRenderAllResume(err) {
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
 

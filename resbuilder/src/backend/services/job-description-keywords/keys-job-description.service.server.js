@@ -8,7 +8,9 @@ module.exports = function (app,mongooseAPI) {
     var q = require('q');
     var Sync = require('sync');
     var Promise = require('es6-promise').Promise;
-    app.get("/api/getResumeData/:userId", createDoc);
+    var auth = authorized;
+
+    app.get("/api/getResumeData/:userId", authorized, createDoc);
 
     var userId;
     var EducationModel = mongooseAPI.educationModelAPI;
@@ -25,6 +27,19 @@ module.exports = function (app,mongooseAPI) {
     var output;
     var Project = [];
     var Work = [];
+
+
+
+    /*Passport related functions*/
+
+    function authorized (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
+
 
     function createDoc(req,res) {
 

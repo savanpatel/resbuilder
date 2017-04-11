@@ -23,7 +23,6 @@ module.exports = function (app, mongooseAPI) {
 
 
     function checkAuthorizedUser (req, res, next) {
-        console.log(req.isAuthenticated());
         if (!req.isAuthenticated()) {
             res.sendStatus(401);
         } else {
