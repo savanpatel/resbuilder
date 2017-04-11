@@ -98,11 +98,7 @@
 
         /*check if var is null or empty.*/
         function isEmptyOrNull(field) {
-            if(null == field || "" == field){
-                return true;
-            }
-
-            return false;
+            return (null == field || "" == field);
         }
 
 
@@ -138,7 +134,6 @@
 
 
 
-        /*redirects to dashboard on successful registration.*/
         function onCreateRecruiterSuccess(response) {
 
             var recruiter = response;

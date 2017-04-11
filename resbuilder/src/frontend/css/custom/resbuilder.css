@@ -180,3 +180,8 @@ tags-input .tags input
     padding-bottom:20px;
 
 }
+
+.message-badge{
+    color:white !important;
+    background-color: #e74c3c !important;
+}
