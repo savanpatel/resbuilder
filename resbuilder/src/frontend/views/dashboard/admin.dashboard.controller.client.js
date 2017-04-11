@@ -20,12 +20,23 @@
 
             vm.aid = $routeParams['aid'];
 
+            vm.logout = logout;
+
            fetchStats(vm.aid);
         }
 
 
         init();
 
+
+
+        function logout() {
+
+            var promise = AdminService.logout(vm.aid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
         /*
          * Fetch the stats for admin like usercount, new messages, recruiter count etc.
@@ -53,5 +64,17 @@
 
 
 
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/admin/login");
+            }
+        }
     }
 })();

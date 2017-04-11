@@ -28,10 +28,21 @@
             }
             vm.pager = {};
             vm.setPage = setPage;
+            vm.logout = logout;
+
             initController();
         }
 
         init();
+
+        function logout() {
+
+            var promise = AdminService.logout(vm.aid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
 
         function setPage(page) {
             if (page < 1 || page > vm.pager.totalPages) {
@@ -52,5 +63,17 @@
             vm.setPage(1);
         }
 
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/admin/login");
+            }
+        }
     }
 })();

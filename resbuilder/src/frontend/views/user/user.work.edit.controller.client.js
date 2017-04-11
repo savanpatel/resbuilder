@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("EditWorkExpController", EditWorkExpController);
 
-    function EditWorkExpController($location, $routeParams, WorkExpService) {
+    function EditWorkExpController($location, $routeParams, WorkExpService, UserService) {
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
@@ -21,10 +21,19 @@
 
             findWorkExpById(vm.workexpId);
             vm.updateWorkExp = updateWorkExp;
+            vm.logout = logout;
         }
 
 
         init();
+
+        function logout() {
+
+            var promise = UserService.logout(vm.userId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
 
         function findWorkExpById(workexpId) {
@@ -75,6 +84,20 @@
             vm.error = "Could not update work experience. Try after sometime. Error:" + err;
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
     }

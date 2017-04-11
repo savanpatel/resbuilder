@@ -15,7 +15,7 @@
             "deleteResume":deleteResume,
             "findResumeforUser":findResumeforUser,
             "findResumeById":findResumeById,
-            "downloadResume":downloadResume
+            "downloadResume":downloadResume,
         };
 
         return api;
@@ -67,5 +67,6 @@
             var findResumeByIdUrl = "/api/resume/" + resumeid;
             return $http.get(findResumeByIdUrl);
         }
+
     }
 })();

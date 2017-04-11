@@ -11,7 +11,8 @@
     function ResumeDataController($scope, $routeParams,
                                   $location, WorkExpService,
                                   ModalService, EducationService,
-                                  ProjectService, ResumeDataService) {
+                                  ProjectService, ResumeDataService,
+                                  UserService) {
 
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
@@ -47,6 +48,14 @@
         }
 
         init();
+
+        function logout() {
+
+            var promise = UserService.logout(vm.uid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
         function getAllEducationDetails(educationList) {
             $scope.school = educationList;
@@ -144,6 +153,19 @@
                 });
             });
 
+        }
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
         }
     }
 })();

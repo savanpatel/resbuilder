@@ -11,7 +11,8 @@
 
         var api = {
             "fetchStats":fetchStats,
-            "getAdminInfo": getAdminInfo
+            "getAdminInfo": getAdminInfo,
+            "logout":logout
         };
 
         return api;
@@ -27,6 +28,12 @@
         function getAdminInfo() {
             var getAdminInfoUrl = ADMIN_SERVICE_URL;
             return $http.get(getAdminInfoUrl);
+        }
+
+
+        function logout(adminId) {
+            var logoutUrl = ADMIN_SERVICE_URL + "/" + adminId + "/logout";
+            return $http.get(logoutUrl);
         }
 
     }

@@ -4,6 +4,7 @@ module.exports = function (app, mongooseAPI) {
     app.get('/api/admin/:adminId/users',findAllUsers);
     app.get('/api/admin/:adminId/stats',getAllStats);
     app.get('/api/admin/', getAdminInfo);
+    app.get('/api/admin/:adminId/logout, logout');
 
     var UserModel = mongooseAPI.userModelAPI;
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
@@ -227,4 +228,8 @@ module.exports = function (app, mongooseAPI) {
     }
 
 
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
 }

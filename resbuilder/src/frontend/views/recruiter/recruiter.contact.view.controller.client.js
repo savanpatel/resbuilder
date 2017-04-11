@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("RecruiterContactController", RecruiterContactController);
 
-    function RecruiterContactController($location, $routeParams, AdminService, MessageService) {
+    function RecruiterContactController($location, $routeParams, AdminService, MessageService, RecruiterService) {
 
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
@@ -19,6 +19,7 @@
             vm.adminId = null;
 
             vm.sendMessage = sendMessage;
+            vm.logout = logout;
 
             getAdminInfo();
 
@@ -28,6 +29,15 @@
 
         init();
 
+
+
+        function logout() {
+
+            var promise = RecruiterService.logout(vm.recruiterId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
         function getAdminInfo() {
 
@@ -83,6 +93,20 @@
 
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
     }

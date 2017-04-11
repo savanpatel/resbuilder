@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("UserMessageListController", UserMessageListController);
 
-    function UserMessageListController($filter, $location, $routeParams, MessageService) {
+    function UserMessageListController($filter, $location, $routeParams, MessageService, UserService) {
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
@@ -21,12 +21,22 @@
             vm.messageList = [];
 
             vm.currentUID = vm.uid;
+            vm.logout = logout;
 
             fetchMessages();
         }
 
 
         init();
+
+
+        function logout() {
+
+            var promise = UserService.logout(vm.userId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
         function fetchMessages() {
             /*fetch messages for user*/
@@ -154,6 +164,20 @@
             vm.error = "Could not fetch data. Try after sometime.";
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
     }

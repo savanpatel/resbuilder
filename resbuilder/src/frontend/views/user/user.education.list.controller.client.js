@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("EducationController", EducationController);
 
-    function EducationController($location, $routeParams, EducationService) {
+    function EducationController($location, $routeParams, EducationService, UserService) {
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
@@ -18,6 +18,8 @@
             vm.createEducation = createEducation;
             vm.deleteEducation = deleteEducation;
             vm.arrayToString = arrayToString;
+            vm.logout = logout;
+
             findEducationForUser();
         }
         init();
@@ -69,6 +71,15 @@
 
 
 
+        function logout() {
+
+            var promise = UserService.logout(vm.userId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
+
 
         /*
          *  Promise handlers
@@ -118,6 +129,19 @@
 
         function arrayToString(array) {
             return array.join(', ');
+        }
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
         }
     }
 })();
