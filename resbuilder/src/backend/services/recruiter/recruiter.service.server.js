@@ -13,7 +13,7 @@ module.exports = function (app, mongooseAPI) {
     app.delete("/api/recruiter/:recruiterId", checkAuthorizedUser, deleteRecruiter);
     app.get("/api/recruiter/:recruiterId/user/skill", checkAuthorizedUser, findUsersBySkill);
     app.get("/api/recruiter/username/:username", checkUsernameAvailable);
-
+    app.get("/api/recruiter/:recruiterId/logout", checkAuthorizedUser, logout);
 
 
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
@@ -280,6 +280,12 @@ module.exports = function (app, mongooseAPI) {
                 res.send({isAvailable:false})
             });
 
+    }
+
+    /*end passport session.*/
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
     }
 
 }

@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("WorkExpController", WorkExpController);
 
-    function WorkExpController($location, $routeParams, WorkExpService) {
+    function WorkExpController($location, $routeParams, WorkExpService, UserService) {
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
@@ -19,12 +19,22 @@
 
             vm.createWorkExp = createWorkExp;
             vm.deleteWorkExp = deleteWorkExp;
+            vm.logout = logout;
 
             findWorkExpForUser(vm.userId);
         }
 
 
         init();
+
+
+        function logout() {
+
+            var promise = UserService.logout(vm.userId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
 
 
@@ -108,6 +118,19 @@
             vm.error = "Could not delete. Try after sometime. Error: " + err;
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
     }

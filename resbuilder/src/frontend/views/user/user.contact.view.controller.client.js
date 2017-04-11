@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("UserContactController", UserContactController);
 
-    function UserContactController($location, $routeParams, AdminService, MessageService) {
+    function UserContactController($location, $routeParams, AdminService, MessageService, UserService) {
 
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
@@ -19,6 +19,7 @@
             vm.adminId = null;
 
             vm.sendMessage = sendMessage;
+            vm.logout = logout;
 
             getAdminInfo();
         }
@@ -53,6 +54,16 @@
 
 
 
+        function logout() {
+
+            var promise = UserService.logout(vm.userId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
+
+
 
         function onGetAdminInfoSuccess(response) {
 
@@ -81,6 +92,20 @@
 
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
     }

@@ -16,6 +16,7 @@
             vm.rid = $routeParams['rid'];
 
             vm.updateRecruiter = updateRecruiter;
+            vm.logout = logout;
 
             var promise = RecruiterService.findRecruiterById(vm.recruiterId);
 
@@ -27,6 +28,14 @@
         init();
 
 
+
+        function logout() {
+
+            var promise = RecruiterService.logout(vm.recruiterId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
         function updateRecruiter(recruiter) {
             vm.error = null;
@@ -67,5 +76,17 @@
             }
         }
 
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
+        }
     }
 })();

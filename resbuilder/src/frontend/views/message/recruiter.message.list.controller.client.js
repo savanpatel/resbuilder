@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("RecruiterMessageListController", RecruiterMessageListController);
 
-    function RecruiterMessageListController($filter, $location, $routeParams, MessageService) {
+    function RecruiterMessageListController($filter, $location, $routeParams, MessageService, RecruiterService) {
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
@@ -25,6 +25,7 @@
 
             vm.selectMessage = selectMessage;
             vm.sendMessage = sendMessage;
+            vm.logout = logout;
 
             fetchMessages();
 
@@ -32,6 +33,15 @@
 
 
         init();
+
+        function logout() {
+
+            var promise = RecruiterService.logout(vm.recruiterId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
 
         function fetchMessages() {
             var promise = MessageService.findMessageBySenderId(vm.recruiterId);
@@ -153,6 +163,20 @@
         function onUpdateIsReadForMessageError(err) {
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
     }

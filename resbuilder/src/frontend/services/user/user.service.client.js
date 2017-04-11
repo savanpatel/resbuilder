@@ -17,7 +17,8 @@
             "updateUser": updateUser,
             "deleteUser": deleteUser,
             "checkUsernameAvailable":checkUsernameAvailable,
-            "findAdminUserByCredentials":findAdminUserByCredentials
+            "findAdminUserByCredentials":findAdminUserByCredentials,
+            "logout":logout
         };
 
         return api;
@@ -102,5 +103,12 @@
             var checkUsernameAvail = USER_SERVICE_URL + "/" + "username/" + username;
             return $http.get(checkUsernameAvail);
         }
+
+
+        function logout(userId) {
+            var logoutUrl = USER_SERVICE_URL + "/" + userId + "/logout";
+            return $http.get(logoutUrl);
+        }
+
     }
 })();

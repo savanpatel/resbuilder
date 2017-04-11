@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("EditEducationController", EditEducationController);
 
-    function EditEducationController($location, $routeParams, EducationService) {
+    function EditEducationController($location, $routeParams, EducationService, UserService) {
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
@@ -19,11 +19,20 @@
             findEducationById(vm.educationId);
 
             vm.updateEducation = updateEducation;
+            vm.logout = logout;
         }
 
 
         init();
 
+
+        function logout() {
+
+            var promise = UserService.logout(vm.userId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
 
         function updateEducation(education) {
@@ -78,6 +87,20 @@
             vm.error = "Update failed!. Please try after sometimes.";
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
     }
