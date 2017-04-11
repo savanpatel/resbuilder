@@ -36,11 +36,6 @@
         }
 
 
-
-
-
-
-
         /*---- Promise functions*/
         function onFindUserSuccess(response) {
 

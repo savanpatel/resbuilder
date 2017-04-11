@@ -50,8 +50,7 @@ module.exports = function (app, mongoose, logger) {
         var deferred = q.defer();
         UserModel.find({},function (err,users) {
 
-            console.log("in modal")
-            console.log(users)
+
             if(err) {
                 deferred.abort();
             }
@@ -286,7 +285,7 @@ module.exports = function (app, mongoose, logger) {
 
         var deferred = q.defer();
 
-        console.log(userIdList);
+
         UserModel.find({$and: [{_id:{$in: userIdList}}, {isPublic:true}]}, function (err, users) {
 
             if(err){

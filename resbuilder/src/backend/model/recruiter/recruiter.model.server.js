@@ -23,8 +23,6 @@ module.exports = function (app, mongoose, logger) {
     };
 
     return api;
-
-
     function findAllRecruiters() {
 
         var deferred = q.defer();
@@ -158,7 +156,7 @@ module.exports = function (app, mongoose, logger) {
 
         var deferred = q.defer();
 
-        ProjectModel.remove({_id:recruiterId}, function (err) {
+        RecruiterModel.remove({_id:recruiterId}, function (err) {
             if(err) {
                 logger.error("Can not delete recuieter with id " + recruiterId + " Error: " + err);
                 deferred.reject(err);

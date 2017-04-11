@@ -15,7 +15,7 @@
             <div ng-show="model.selectedMessage.jobDescriptionUrl">
                 <p ng-show="model.selectedMessage.jobDescriptionUrl">Job Description Url</p>
                 <h6>{{model.selectedMessage.jobDescriptionUrl}}</h6>
-                <a  ng-show="model.selectedMessage.jobDescriptionUrl" class="btn btn-primary btn-xs">Create Resume</a>
+                <a  ng-show="model.selectedMessage.jobDescriptionUrl" ng-click="model.GetResumeData(model.selectedMessage.jobDescriptionUrl)" class="btn btn-primary btn-xs">Create Resume</a>
             </div>
         </div>
 

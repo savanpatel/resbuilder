@@ -12,7 +12,7 @@
                 <div class="list-group-item custom-card-2">
                     <br/>
                     <h4 class="list-group-item-heading col-xs-8">Username</h4>
-                    <h4 class="list-group-item-heading"> Block User</h4>
+                    <h4 class="list-group-item-heading">Block {{model.userType}}</h4>
                     <br/>
                 </div>
             </div>
@@ -20,17 +20,18 @@
     </div>
 
     <hr/>
-    <div class="row">
 
+    <div class="row">
         <div class="col-xs-8 list-group">
             <div class="col-xs-8 col-xs-offset-6 list-group" ng-repeat="item in model.items">
-                <a class="list-group-item custom-card-2">
-                    <h4 class="list-group-item-heading col-xs-6">{{item}}</h4>
-                    <toggle-switch ng-model="item == 1" class="switch-primary"></toggle-switch>
-                </a>
+                <div class="list-group-item custom-card-2">
+                    <h4 class="list-group-item-heading col-xs-6">{{item.username}}</h4>
+                    <toggle-switch ng-change="model.update(item)" ng-model="item.is_deleted" class="switch-primary"></toggle-switch>
+                    <a class="pull-right" ng-click="model.deleteByAdmin(item._id)"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a class="pull-right" href="#/admin/{{model.aid}}/{{model.userType}}/{{item._id}}/basicprofile"><span class="glyphicon glyphicon-cog"></span></a>
+                </div>
             </div>
         </div>
-
     </div>
 
     <div class="row">
