@@ -21,7 +21,7 @@
             </li>
 
             <li>
-                <a href="#/admin/{{model.aid}}/message">Messages</a>
+                <a href="#/admin/{{model.aid}}/message">Messages <span ng-show="model.newMessageCount > 0" class="message-badge badge">{{model.newMessageCount}}</span></a>
             </li>
 
             <li>

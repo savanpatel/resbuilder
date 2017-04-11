@@ -131,7 +131,6 @@
 
 
 
-        /*redirects to dashboard on successful registration.*/
         function onCreateUserSuccess(response) {
 
             var user = response;

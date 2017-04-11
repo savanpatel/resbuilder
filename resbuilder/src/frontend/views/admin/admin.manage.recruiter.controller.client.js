@@ -8,14 +8,16 @@
         .module("ResumeBuilder")
         .controller("AdminManageRecruiterController", AdminManageRecruiterController);
 
-    function AdminManageRecruiterController($location, $routeParams, AdminService, PagerService,UserService) {
+    function AdminManageRecruiterController($location, $routeParams, AdminService, PagerService, MessageService) {
 
         var vm = this;
+
         var ERROR_REDIRECT = "/";
         var ERR_401 = "Unauthorized";
 
         function init() {
-            vm.userType = "recruiter"
+
+            vm.userType = "recruiter";
             vm.isCollapsed = false;
             vm.error = null;
 
@@ -25,67 +27,90 @@
 
             vm.update = update;
 
-            var promise = AdminService.getAllRecruiters(vm.aid);
-
-            promise
-                .success(renderRecruiters)
-                .error(errorWhileRendering)
+            fetchRecruitersInfo(vm.aid);
+            fetchNewMessageCount(vm.aid);
 
         }
-        
+
+
+        /*
+         *  Fetches recruiters info.
+         */
+        function fetchRecruitersInfo(adminId) {
+            var promise = AdminService.getAllRecruiters(adminId);
+
+            promise.success(onFetchRecruitersSuccess);
+            promise.error(onFetchRecruitersError);
+        }
+
+
+
+        /*
+         * Fetches new message count for admin.
+         */
+        function fetchNewMessageCount(adminId) {
+            var promise = MessageService.getNewMessageCountByReceiverId(adminId);
+
+            promise.success(onGetNewMessageCountSuccess);
+            promise.error(onGetNewMessageCountError);
+        }
+
+
+        /*
+         * Delete
+         */
         function deleteByAdmin(rid) {
 
-            var promise = AdminService.deleteRecruiterByAdmin(vm.aid,rid);
+            var promise = AdminService.deleteRecruiterByAdmin(vm.aid, rid);
 
             promise
-                .success(stateAfterDelete)
-                .error(stateAfterUnsuccessfulDelete)
+                .success(onDeleteRecruiterByAdminSuccess)
+                .error(onDeleteRecruiterByAdminError)
             
         }
 
-        function stateAfterUnsuccessfulDelete() {
-            console.log("unsuccessfull delete")
+        function onDeleteRecruiterByAdminError() {
+            console.log("unsuccessful delete")
         }
         
-        function stateAfterDelete() {
+        function onDeleteRecruiterByAdminSuccess() {
 
             var promise = AdminService.getAllRecruiters(vm.aid);
 
             promise
-                .success(renderRecruiters)
-                .error(errorWhileRendering)
+                .success(onFetchRecruitersSuccess)
+                .error(onFetchRecruitersError)
             
         }
 
         function update(user) {
 
-
             var promise = AdminService.updateRecruiterByAdmin(vm.aid,user);
 
             promise
-                .success(updatedSuccesfully)
-                .error(unSuccessfulUpdate)
+                .success(onUpdateRecruiterByAdminSuccess)
+                .error(onUpdateRecruiterByAdminError)
         }
 
-        function updatedSuccesfully() {
+        function onUpdateRecruiterByAdminSuccess() {
             console.log("updated")
 
         }
 
-        function unSuccessfulUpdate() {
+        function onUpdateRecruiterByAdminError() {
             console.log("unSuccessful Update");
 
         }
 
-        function renderRecruiters(users) {
-            vm.dummyItems = users
+        function onFetchRecruitersSuccess(recruiters) {
+            vm.dummyItems = recruiters;
 
             vm.pager = {};
             vm.setPage = setPage;
             initController();
         }
 
-        function errorWhileRendering(err) {
+        function onFetchRecruitersError(err) {
             console.log(err);
         }
 
@@ -108,5 +133,17 @@
             vm.setPage(1);
         }
 
+
+        /*Promise handlers*/
+        function onGetNewMessageCountSuccess(response) {
+            vm.newMessageCount = response.newMessageCount;
+        }
+
+        function onGetNewMessageCountError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
+        }
     }
 })();

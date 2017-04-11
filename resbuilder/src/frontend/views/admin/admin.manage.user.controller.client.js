@@ -8,7 +8,7 @@
         .module("ResumeBuilder")
         .controller("AdminManageUserController", AdminManageUserController);
 
-    function AdminManageUserController($location, $routeParams, AdminService, PagerService,UserService) {
+    function AdminManageUserController($location, $routeParams, AdminService, PagerService, MessageService) {
 
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
@@ -30,10 +30,19 @@
 
             promise
                 .success(renderUsers)
-                .error(errorWhileRendering)
+                .error(errorWhileRendering);
+
+            fetchNewMessageCount(vm.aid);
 
         }
-        
+
+        function fetchNewMessageCount(adminId) {
+            var promise = MessageService.getNewMessageCountByReceiverId(adminId);
+
+            promise.success(onGetNewMessageCountSuccess);
+            promise.error(onGetNewMessageCountError);
+        }
+
         function deleteByAdmin(uid) {
 
 
@@ -133,6 +142,18 @@
                 $location.url(ERROR_REDIRECT);
             } else{
                 $location.url("/admin/login");
+            }
+        }
+
+        /*Promise handlers*/
+        function onGetNewMessageCountSuccess(response) {
+            vm.newMessageCount = response.newMessageCount;
+        }
+
+        function onGetNewMessageCountError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
             }
         }
     }

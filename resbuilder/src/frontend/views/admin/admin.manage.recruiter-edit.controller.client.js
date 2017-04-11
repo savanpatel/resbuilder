@@ -9,7 +9,9 @@
         .module("ResumeBuilder")
         .controller("RecruiterBasicProfileAdminEditController", RecruiterBasicProfileAdminEditController);
 
-    function RecruiterBasicProfileAdminEditController($location, $routeParams, RecruiterService,AdminService) {
+    function RecruiterBasicProfileAdminEditController($location, $routeParams,
+                                                      RecruiterService, AdminService,
+                                                      MessageService) {
         var vm = this;
         var ERROR_REDIRECT = "/";
         var ERR_401 = "Unauthorized";
@@ -26,9 +28,18 @@
 
             promise.success(onFindRecruiterByIdSuccess);
             promise.error(onFindRecruiterByIdError);
+
+            fetchNewMessageCount(vm.aid);
         }
 
         init();
+
+        function fetchNewMessageCount(adminId) {
+            var promise = MessageService.getNewMessageCountByReceiverId(adminId);
+
+            promise.success(onGetNewMessageCountSuccess);
+            promise.error(onGetNewMessageCountError);
+        }
 
         function update(user) {
 
@@ -62,6 +73,17 @@
         }
 
 
+        /*Promise handlers*/
+        function onGetNewMessageCountSuccess(response) {
+            vm.newMessageCount = response.newMessageCount;
+        }
+
+        function onGetNewMessageCountError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
+        }
 
     }
 })();

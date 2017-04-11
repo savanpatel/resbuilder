@@ -6,13 +6,30 @@ module.exports = function (app, mongooseAPI) {
     app.put("/api/admin/:adminId/recruiter",authoriseAdmin,updateRecruiterByAdmin);
     app.delete("/api/admin/:adminId/user/:userId",authoriseAdmin,deleteUserByAdmin);
     app.delete("/api/admin/:adminId/recruiter/:recruiterId",authoriseAdmin,deleteUserByRecruiter);
-
+    app.get('/api/admin/', getAdminInfo);
 
     var UserModel = mongooseAPI.userModelAPI;
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
 
 
-    
+    function getAdminInfo(req, res) {
+
+        UserModel.getAdminInfo()
+            .then(function (dbAdmin) {
+                if(dbAdmin){
+                    var adminInfo = {
+                        adminId: dbAdmin._id,
+                    };
+
+                    res.send(adminInfo);
+                } else{
+                    res.sendStatus(500).send("Could not fetch admin info");
+                }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
     function deleteUserByAdmin(req,res) {
         var userId = req.params.userId;
 

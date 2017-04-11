@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("BasicProfileAdminEditController", BasicProfileAdminEditController);
 
-    function BasicProfileAdminEditController($location, $routeParams, UserService,AdminService) {
+    function BasicProfileAdminEditController($location, $routeParams, UserService, AdminService, MessageService) {
 
         var vm = this;
         var ERROR_REDIRECT = "/";
@@ -21,10 +21,19 @@
             var promise = UserService.findUserById(vm.userId);
             promise.success(onFindUserSuccess);
             promise.error(onFindUserError);
+
+            fetchNewMessageCount(vm.aid);
         }
 
 
         init();
+
+        function fetchNewMessageCount(adminId) {
+            var promise = MessageService.getNewMessageCountByReceiverId(adminId);
+
+            promise.success(onGetNewMessageCountSuccess);
+            promise.error(onGetNewMessageCountError);
+        }
 
         function update(user) {
 
@@ -62,5 +71,16 @@
             }
         }
 
+        /*Promise handlers*/
+        function onGetNewMessageCountSuccess(response) {
+            vm.newMessageCount = response.newMessageCount;
+        }
+
+        function onGetNewMessageCountError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
+        }
     }
 })();
