@@ -8,7 +8,7 @@
         .module("ResumeBuilder")
         .controller("AdminDashBoardController", AdminDashBoardController);
 
-    function AdminDashBoardController($location, $routeParams, AdminService) {
+    function AdminDashBoardController($location, $routeParams, AdminService, MessageService) {
 
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
@@ -19,6 +19,11 @@
             vm.error = null;
 
             vm.aid = $routeParams['aid'];
+            vm.userStats = {
+                userCount:0,
+                recruiterCount:0,
+                newMessageCount:0
+            };
 
             vm.logout = logout;
 
@@ -45,14 +50,33 @@
 
             var promise = AdminService.fetchStats(adminId);
             promise.success(onFetchStatsSuccess);
+            promise.error(onFetchStatsError);
+
+            var promise2 = MessageService.getNewMessageCountByReceiverId(adminId);
+
+            promise2.success(onGetNewMessageCountSuccess);
+            promise2.error(onGetNewMessageCountError);
+
         }
 
 
         /*Promise handlers*/
+        function onGetNewMessageCountSuccess(response) {
+            console.log(response);
+            vm.userStats.newMessageCount = response.newMessageCount;
+        }
+
+        function onGetNewMessageCountError(err) {
+            vm.error = "Could not fetch message count. " + err;
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
+        }
         function onFetchStatsSuccess(response) {
 
             console.log(response)
-            vm.userStats = response;
+            vm.userStats.recruiterCount = response.recruiterCount;
+            vm.userStats.userCount = response.userCount;
         }
 
         function onFetchStatsError(err) {
@@ -65,7 +89,7 @@
 
 
         function onLogoutSuccess(response) {
-            $location.url("/");
+            $location.url("/admin/login");
         }
 
         function onLogoutError(err) {

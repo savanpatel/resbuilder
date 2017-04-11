@@ -59,12 +59,10 @@ module.exports = function (app, mongooseAPI) {
                                     }
 
                                     var countUsers = allUsers.length;
-                                    var countMessages = 0;
 
                                     var stat = {
                                         'userCount':countUsers,
-                                        'recruiterCount':countRecruiter,
-                                        'newMessageCount':countMessages
+                                        'recruiterCount':countRecruiter
                                     }
 
 

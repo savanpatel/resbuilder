@@ -14,7 +14,8 @@
             "findMessageByReceiverId":findMessageByReceiverId,
             "findMessageBySenderId":findMessageBySenderId,
             "updateIsReadForMessage":updateIsReadForMessage,
-            "findMessageById":findMessageById
+            "findMessageById":findMessageById,
+            "getNewMessageCountByReceiverId":getNewMessageCountByReceiverId
         };
 
         return api;
@@ -70,6 +71,11 @@
             return $http.get(findMessageByReceiverIdIdUrl);
         }
 
+        function getNewMessageCountByReceiverId(receiverId) {
+
+            var getNewMessageCountByReceiverIdUrl = MESSAGE_SERVICE_URL + "/newmessagecount/" + receiverId;
+            return $http.get(getNewMessageCountByReceiverIdUrl);
+        }
 
     }
 })();

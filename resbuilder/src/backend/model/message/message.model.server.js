@@ -16,7 +16,8 @@ module.exports = function (app, mongoose, logger) {
         findMessageById:findMessageById,
         findMessageBySenderId:findMessageBySenderId,
         findMessageByReceiverId:findMessageByReceiverId,
-        updateIsReadForMessage: updateIsReadForMessage
+        updateIsReadForMessage: updateIsReadForMessage,
+        getNewMessageCountByReceiverId:getNewMessageCountByReceiverId
     };
 
     return api;
@@ -127,5 +128,20 @@ module.exports = function (app, mongoose, logger) {
         return deferred.promise;
     }
 
+    function getNewMessageCountByReceiverId(receiverId) {
+
+        var deferred = q.defer();
+
+        MessageModel.count({receiverId:receiverId, isRead:false}, function (err, count) {
+            if(err){
+                logger.error("Could not fetch new message count for " + receiverId + ". Error " + err);
+                deferred.reject(err);
+            } else{
+                deferred.resolve(count);
+            }
+        });
+
+        return deferred.promise;
+    }
 }
 
