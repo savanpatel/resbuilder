@@ -6,7 +6,7 @@
 
 
 
-    function ResumeEditController($sce, $window, $location,$routeParams,ResumeService) {
+    function ResumeEditController($location, $routeParams, ResumeService) {
 
         var vm=this;
 

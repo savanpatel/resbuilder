@@ -8,9 +8,16 @@
         .module("ResumeBuilder")
         .controller("ResumeDataController", ResumeDataController);
 
-    function ResumeDataController($sce, $scope,$routeParams, $location,$uibModal,$log,WorkExpService,ModalService,EducationService,ProjectService,ResumeDataService) {
+    function ResumeDataController($scope, $routeParams,
+                                  $location, WorkExpService,
+                                  ModalService, EducationService,
+                                  ProjectService, ResumeDataService,
+                                  UserService) {
 
         var vm = this;
+        var ERROR_REDIRECT = "/unauthorized";
+        var ERR_401 = "Unauthorized";
+
         function init() {
 
             vm.isCollapsed = false;
@@ -42,6 +49,14 @@
 
         init();
 
+        function logout() {
+
+            var promise = UserService.logout(vm.uid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
         function getAllEducationDetails(educationList) {
             $scope.school = educationList;
         }
@@ -64,8 +79,6 @@
                 "education":vm.educationList
             }
 
-            console.log("In button clicked");
-            console.log(resumeData);
             var promise = ResumeDataService.getResumePDF(vm.uid,resumeData);
 
             promise
@@ -80,7 +93,9 @@
         
         function errorRenderingResume(error) {
             vm.error = error;
-            
+            if(error == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
         function onGettingResumeData(data) {
@@ -104,12 +119,16 @@
             vm.software = data['technical']['softwares']
             vm.os = data['technical']['operatingSystems']
         }
-        function OnErrorGettingResumeData() {
-            console.log("Error")
+        function OnErrorGettingResumeData(err) {
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
         
-        function getError() {
-            console.log("Error")
+        function getError(err) {
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
         }
 
         function arrayToString(array) {
@@ -134,6 +153,19 @@
                 });
             });
 
+        }
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
         }
     }
 })();

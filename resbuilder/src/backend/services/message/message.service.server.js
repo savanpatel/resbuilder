@@ -5,11 +5,13 @@
 
 module.exports = function (app, mongooseAPI) {
 
-    app.post("/api/message", createMessage);
-    app.get("/api/message/:messageId", findMessageById);
-    app.put("/api/message/:messageId", updateIsReadForMessage);
-    app.get("/api/message/sender/:senderId", findMessageBySenderId);
-    app.get("/api/message/receiver/:receiverId", findMessageByReceiverId);
+
+    app.post("/api/message", checkAuthorizedUser, createMessage);
+    app.get("/api/message/:messageId", checkAuthorizedUser, findMessageById);
+    app.put("/api/message/:messageId", checkAuthorizedUser, updateIsReadForMessage);
+    app.get("/api/message/sender/:senderId", checkAuthorizedUser, findMessageBySenderId);
+    app.get("/api/message/receiver/:receiverId", checkAuthorizedUser, findMessageByReceiverId);
+    app.get("/api/message/newmessagecount/:receiverId",checkAuthorizedUser, getNewMessageCountByReceiverId);
 
 
 
@@ -19,7 +21,14 @@ module.exports = function (app, mongooseAPI) {
      *  Handlers
      */
 
-    
+
+    function checkAuthorizedUser (req, res, next) {
+        if (!req.isAuthenticated()) {
+            res.sendStatus(401);
+        } else {
+            next();
+        }
+    }
     
 
     /*
@@ -170,5 +179,20 @@ module.exports = function (app, mongooseAPI) {
             }, function (err) {
                 res.sendStatus(500).send(err);
             });
+    }
+
+
+    function getNewMessageCountByReceiverId(req, res) {
+
+        var receiverId = req.params.receiverId;
+        MessageModel.getNewMessageCountByReceiverId(receiverId)
+            .then(function (response) {
+                var out = {
+                    newMessageCount:response
+                };
+                res.send(out);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            })
     }
 }

@@ -5,10 +5,10 @@
         .module("ResumeBuilder")
         .controller("EditProjectController", EditProjectController);
 
-    function EditProjectController($location, $routeParams, ProjectService) {
+    function EditProjectController($location, $routeParams, ProjectService, UserService) {
         var vm = this;
 
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {
@@ -21,6 +21,7 @@
 
 
             vm.updateProject = updateProject;
+            vm.logout = logout;
 
             findProjectById(vm.projectId);
 
@@ -28,6 +29,14 @@
 
 
         init();
+
+        function logout() {
+
+            var promise = UserService.logout(vm.userId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
 
         function findProjectById(projectId) {
@@ -83,6 +92,19 @@
             vm.error = "Could not update project. Error: " + err;
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
     }

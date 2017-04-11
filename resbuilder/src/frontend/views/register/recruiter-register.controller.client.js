@@ -4,7 +4,7 @@
         .module("ResumeBuilder")
         .controller("RecruiterRegisterController", RecruiterRegisterController);
 
-    function RecruiterRegisterController($scope, $location, RecruiterService) {
+    function RecruiterRegisterController(RecruiterService) {
 
 
         var vm = this;

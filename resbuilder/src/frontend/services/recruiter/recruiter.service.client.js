@@ -17,7 +17,8 @@
             "updateRecruiter": updateRecruiter,
             "deleteRecruiter": deleteRecruiter,
             "checkUsernameAvailable":checkUsernameAvailable,
-            "findUsersBySkill":findUsersBySkill
+            "findUsersBySkill":findUsersBySkill,
+            "logout":logout
         };
 
         return api;
@@ -103,6 +104,12 @@
         function findUsersBySkill(recruiterId, skill) {
             var findUsersBySkillUrl = RECRUITER_SERVICE_URL + "/" + recruiterId + "/user/skill?skills=" + skill;
             return $http.get(findUsersBySkillUrl);
+        }
+
+
+        function logout(recruiterId) {
+            var logoutUrl = RECRUITER_SERVICE_URL + "/" + recruiterId + "/logout";
+            return $http.get(logoutUrl);
         }
     }
 })();

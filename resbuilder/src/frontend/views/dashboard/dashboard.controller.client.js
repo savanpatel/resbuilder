@@ -9,10 +9,13 @@
         .controller("DashBoardController", DashBoardController);
 
 
-    function DashBoardController($routeParams, $location, ResumeDataService, ResumeService, TechnicalSkillService, JobSuggestionService) {
+    function DashBoardController($routeParams, $location,
+                                 ResumeDataService, ResumeService,
+                                 TechnicalSkillService, JobSuggestionService,
+                                 UserService) {
 
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {
@@ -22,6 +25,7 @@
             vm.downloadResume = downloadResume;
 
             vm.uid = $routeParams['uid'];
+            vm.logout = logout;
 
             findJobSuggestions(vm.uid);
 
@@ -34,6 +38,14 @@
 
             vm.deleteResume = deleteResume;
 
+        }
+
+        function logout() {
+
+            var promise = UserService.logout(vm.uid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
         }
 
         function downloadResume(resumeid) {
@@ -151,7 +163,7 @@
             fetchJob(technicalSkillList);
         }
 
-        function onFindTechnicalSkillForUserError(response) {
+        function onFindTechnicalSkillForUserError(err) {
 
             var technicalSkillList = ['Java', 'Ruby', 'Python', 'MySQL'];
 
@@ -221,6 +233,19 @@
             }
 
             return a;
+        }
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
         }
     }
 })();

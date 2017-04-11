@@ -5,9 +5,9 @@
         .module("ResumeBuilder")
         .controller("AdminMessageController", AdminMessageController);
 
-    function AdminMessageController($filter, $location, $routeParams, MessageService) {
+    function AdminMessageController($filter, $location, $routeParams, MessageService, AdminService) {
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {
@@ -25,6 +25,7 @@
 
             vm.selectMessage = selectMessage;
             vm.sendMessage = sendMessage;
+            vm.logout = logout;
 
             fetchMessages();
 
@@ -32,6 +33,16 @@
 
 
         init();
+
+        function logout() {
+
+            var promise = AdminService.logout(vm.aid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
+
 
         function fetchMessages() {
             var promise = MessageService.findMessageBySenderId(vm.adminId);
@@ -150,6 +161,19 @@
         function onUpdateIsReadForMessageError(err) {
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/admin/login");
             }
         }
     }

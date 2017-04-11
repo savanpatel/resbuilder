@@ -28,6 +28,7 @@ module.exports = function (app, mongooseAPI, passport) {
     app.get("/api/user/username/:username", checkUsernameAvailable);
     app.get("/api/user/linkedin/callback", passport.authenticate('linkedin', { failureRedirect: '/' }), linkedInSignUp);
     app.get('/api/user/auth/linkedin', passport.authenticate('linkedin'));
+    app.get('/api/user/:userId/logout', auth, logout);
 
 
     var UserModel = mongooseAPI.userModelAPI;
@@ -469,6 +470,13 @@ module.exports = function (app, mongooseAPI, passport) {
                 res.send({isAvailable:false})
             });
 
+    }
+
+
+    /*end passport session.*/
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
     }
 
 }

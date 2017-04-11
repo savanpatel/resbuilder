@@ -5,14 +5,13 @@
         .module("ResumeBuilder")
         .controller("ProjectController", ProjectController);
 
-    function ProjectController($location, $routeParams, TechnicalSkillService, ProjectService) {
+    function ProjectController($location, $routeParams, TechnicalSkillService, ProjectService, UserService) {
 
 
         var vm = this;
 
         var ERR_401 = "Unauthorized";
-        var ERROR_REDIRECT = "/";
-        var ERR_401 = "Unauthorized";
+        var ERROR_REDIRECT = "/unauthorized";
 
         function init() {
 
@@ -23,6 +22,7 @@
             vm.updateTechnicalSkill = updateTechnicalSkill;
             vm.createProject = createProject;
             vm.deleteProject = deleteProject;
+            vm.logout = logout;
 
 
             vm.userId = $routeParams['uid'];
@@ -99,6 +99,15 @@
             var promise = ProjectService.findProjectListForUser(userId);
             promise.success(onFindProjectListForUserSuccess);
             promise.error(onFindProjectListForUserError);
+        }
+
+
+        function logout() {
+
+            var promise = UserService.logout(vm.userId);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
         }
 
 
@@ -210,6 +219,20 @@
             vm.error = "Could not delete the project. Error: " + err;
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
+            }
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
             }
         }
 

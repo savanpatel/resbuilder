@@ -1,5 +1,4 @@
 module.exports = function (app, mongooseAPI) {
-
     app.get('/api/admin/:adminId/recruiters',authoriseAdmin,findAllRecruiters);
     app.get('/api/admin/:adminId/users',authoriseAdmin,findAllUsers);
     app.get('/api/admin/:adminId/stats',authoriseAdmin,getAllStats);
@@ -15,9 +14,6 @@ module.exports = function (app, mongooseAPI) {
 
     
     function deleteUserByAdmin(req,res) {
-
-
-
         var userId = req.params.userId;
 
         if(userId == null){
@@ -34,7 +30,24 @@ module.exports = function (app, mongooseAPI) {
                 res.send(401).send(err);
             });
     }
+function getAdminInfo(req, res) {
 
+        UserModel.getAdminInfo()
+            .then(function (dbAdmin) {
+                if(dbAdmin){
+                    var adminInfo = {
+                        adminId: dbAdmin._id,
+                    }
+
+                    res.send(adminInfo);
+                } else{
+                    res.sendStatus(500).send("Could not fetch admin info");
+                }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+  
     function deleteUserByRecruiter(req,res) {
         var recruiterId = req.params.recruiterId;
         if(recruiterId == null){
@@ -53,6 +66,7 @@ module.exports = function (app, mongooseAPI) {
         var recruiter = req.body;
         var adminId = req.params.adminId;
 
+
         if (null == recruiter) {
             res.sendStatus(500).send("null/empty user for update.");
             return;
@@ -68,9 +82,8 @@ module.exports = function (app, mongooseAPI) {
             }, function (err) {
                 res.sendStatus(500).send(err);
             });
-
-
     }
+
     function authoriseAdmin(req,res,next) {
 
         console.log("autho")
@@ -136,12 +149,10 @@ module.exports = function (app, mongooseAPI) {
                                     }
 
                                     var countUsers = allUsers.length;
-                                    var countMessages = 0;
 
                                     var stat = {
                                         'userCount':countUsers,
-                                        'recruiterCount':countRecruiter,
-                                        'newMessageCount':countMessages
+                                        'recruiterCount':countRecruiter
                                     }
 
 
@@ -273,4 +284,8 @@ module.exports = function (app, mongooseAPI) {
 
 
 
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
 }

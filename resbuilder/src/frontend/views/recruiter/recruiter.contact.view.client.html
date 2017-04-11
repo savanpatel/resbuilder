@@ -1,0 +1,16 @@
+<div ng-include="'./views/menu/recruiter-menu.view.client.html'"></div>
+
+<div class="container container-if-fixed-header">
+
+      <div class="row">
+            <div class="alert alert-dismissible alert-danger" ng-show="model.error">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <a class="alert-link">{{model.error}}</a>.
+            </div>
+            <div class="alert alert-dismissible alert-success" ng-show="model.success">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <strong>Yay!</strong>  <a class="alert-link">Sent message Successfully.</a>.
+            </div>
+      </div>
+      <div ng-include="'./views/message/feedback.view.client.html'"></div>
+</div>

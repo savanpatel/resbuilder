@@ -22,7 +22,8 @@ module.exports = function (app, mongoose, logger) {
         findBlockedUsers:findBlockedUsers,
         findUnBlockedUsers:findUnBlockedUsers,
         findUsersForIds:findUsersForIds,
-        isAdmin: isAdmin
+        isAdmin: isAdmin,
+        getAdminInfo:getAdminInfo
     };
 
     return api;
@@ -35,7 +36,7 @@ module.exports = function (app, mongoose, logger) {
                 deferred.abort()
             }
             else {
-                if(user.role === "admin"){
+                if(user.role === "ADMIN"){
                     deferred.resolve(true)
                 }
                 else {
@@ -49,8 +50,6 @@ module.exports = function (app, mongoose, logger) {
     function findAllUsers() {
         var deferred = q.defer();
         UserModel.find({},function (err,users) {
-
-
             if(err) {
                 deferred.abort();
             }
@@ -284,8 +283,6 @@ module.exports = function (app, mongoose, logger) {
     function findUsersForIds(userIdList) {
 
         var deferred = q.defer();
-
-
         UserModel.find({$and: [{_id:{$in: userIdList}}, {isPublic:true}]}, function (err, users) {
 
             if(err){
@@ -294,6 +291,26 @@ module.exports = function (app, mongoose, logger) {
             } else{
 
                 deferred.resolve(users);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+
+
+    /*
+     *
+     */
+    function getAdminInfo() {
+        var deferred = q.defer();
+
+        UserModel.findOne({role:'ADMIN'}, function (err, dbAdmin) {
+            if(err){
+                logger.log("Error: Can not fetch admin info.");
+                deferred.reject(err);
+            } else {
+                deferred.resolve(dbAdmin);
             }
         });
 

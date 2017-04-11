@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="center-block col-md-8">
+        <legend>We are here to help!</legend>
+        <div class="col-md-6 custom-card-v2 custom-card-2">
+            <h3 >Write Feedback</h3>
+            <hr/>
+            <input type="text" class="form-control" ng-model="model.feedback.subject" placeholder="Subject"/>
+            <br/>
+            <textarea rows="10" class="form-control" ng-model="model.feedback.message" placeholder="How can we help?"></textarea>
+            <br/>
+            <a class="form-control btn btn-success" ng-click="model.sendMessage()">Send</a>
+        </div>
+    </div>
+</div>

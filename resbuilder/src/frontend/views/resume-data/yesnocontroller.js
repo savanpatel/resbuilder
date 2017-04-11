@@ -1,7 +1,3 @@
-/**
- * Created by panktibhalani on 3/30/17.
- */
-
 
 var app = angular.module('ResumeBuilder');
 

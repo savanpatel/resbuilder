@@ -11,7 +11,7 @@
     function RecruiterDashBoardController($location, $routeParams, RecruiterService) {
 
         var vm = this;
-        var ERROR_REDIRECT = "/";
+        var ERROR_REDIRECT = "/unauthorized";
         var ERR_401 = "Unauthorized";
 
         function init() {
@@ -22,11 +22,21 @@
 
             // functions.
             vm.getUsersForSkill = getUsersForSkill;
+            vm.logout = logout;
 
             getRecruiterById(vm.rid);
         }
 
         init();
+
+
+        function logout() {
+
+            var promise = RecruiterService.logout(vm.rid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
 
 
         function getRecruiterById(recruiterId) {
@@ -84,5 +94,17 @@
         }
 
 
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
+        }
     }
 })();
