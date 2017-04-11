@@ -12,24 +12,17 @@ module.exports = function (app, mongooseAPI, passport) {
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-
     app.post("/api/user", createUser);
     app.post("/api/user/login", passport.authenticate('local'), login);
     app.post("/api/recruiter/login", passport.authenticate('local'), login);
     app.get("/api/user/:userId", auth, findUserById);
     app.delete("/api/user/:userId",auth, deleteUser);
     app.put("/api/user/:userId",auth, updateUser);
-
-
-
-
-
     app.put("/api/admin/")
     app.get("/api/user/username/:username", checkUsernameAvailable);
     app.get("/api/user/linkedin/callback", passport.authenticate('linkedin', { failureRedirect: '/' }), linkedInSignUp);
     app.get('/api/user/auth/linkedin', passport.authenticate('linkedin'));
     app.get('/api/user/:userId/logout', auth, logout);
-
 
     var UserModel = mongooseAPI.userModelAPI;
     var WorkExpModel = mongooseAPI.workExpModelAPI;

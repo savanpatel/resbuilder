@@ -224,11 +224,17 @@ module.exports = function (app, mongoose, logger) {
 
         UserModel.findOne({username:username, password:password}, function (err, user) {
 
-            if(err){
-                logger.error("ERROR: [findUserByCredentials]: " + err);
-                deferred.reject(err);
-            } else {
-                deferred.resolve(user);
+            console.log(user)
+            if(!user.is_deleted) {
+                if (err) {
+                    logger.error("ERROR: [findUserByCredentials]: " + err);
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(user);
+                }
+            }
+            else{
+                deferred.reject("user is blocked");
             }
         });
 
