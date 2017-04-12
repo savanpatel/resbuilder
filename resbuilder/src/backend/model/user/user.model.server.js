@@ -240,7 +240,7 @@ module.exports = function (app, mongoose, logger) {
                 }
             }
             else{
-                deferred.reject("password incorrect");
+                deferred.reject("password is incorrect");
             }
         });
 
@@ -262,12 +262,10 @@ module.exports = function (app, mongoose, logger) {
                 deferred.resolve(user);
             }
         });
-
-
         return deferred.promise;
     }
 
-
+    
     function findUserByEmail(email) {
         var deferred = q.defer();
 

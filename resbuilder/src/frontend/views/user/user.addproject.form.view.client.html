@@ -35,7 +35,7 @@
             <div class="form-group">
                     <label for="startdate" class="col-lg-3 control-label">Start Date</label>
                     <div class="col-lg-9">
-                        <input type="number" name="startdate" required class="form-control" id="startdate" ng-model="model.project.startDate" placeholder="MM/YYYY">
+                        <input type="text" name="startdate" required class="form-control" id="startdate" ng-model="model.project.startDate" placeholder="MM/YYYY">
                     </div>
                     <div ng-messages="projectForm.startdate.$touched && projectForm.startdate.$error">
                         <p class="text-warning" ng-message="required">the start date is required.</p>
@@ -76,6 +76,7 @@
                 <br/>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-1">
+                        {{projectForm.$valid}}
                         <a type="submit" ng-click="projectForm.$valid && model.createProject(model.project)" class="btn center-block btn-primary">Save</a>
                     </div>
                 </div>

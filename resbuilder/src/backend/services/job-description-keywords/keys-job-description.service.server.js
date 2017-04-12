@@ -12,23 +12,12 @@ module.exports = function (app,mongooseAPI) {
 
     app.get("/api/getResumeData/:userId", authorized, createDoc);
 
-    var userId;
+
     var EducationModel = mongooseAPI.educationModelAPI;
     var ProjectModel = mongooseAPI.projectModelAPI;
     var TechnicalSkillModel = mongooseAPI.technicalSkillModelAPI;
     var UserModel = mongooseAPI.userModelAPI;
     var WorkExpModel = mongooseAPI.workExpModelAPI;
-    var url;
-    var educationDetails;
-    var projectDetails;
-    var technicalSkillDetails;
-    var userDetails;
-    var workDetails;
-    var output;
-    var Project = [];
-    var Work = [];
-
-
 
     /*Passport related functions*/
 
@@ -42,17 +31,52 @@ module.exports = function (app,mongooseAPI) {
 
     function createDoc(req,res) {
 
-        userId = req.params.userId;
+        var userId = req.params.userId;
         var newParams = req.query;
-        url = newParams['url'];
+        var url = newParams['url'];
 
+        var userDetails = null;
 
+        var technicalSkillDetails = null;
 
-        console.log("vbhjnkm")
-        getKeyWords()
-            .then(getData)
-            .then(getDataAccToKeyWords)
-            .then(function () {
+        var educationDetails = null;
+
+        var output = null;
+
+        console.log("create doc")
+        getKeyWords(url)
+            .then(function (out) {
+
+                return new Promise(function (resolve,reject) {
+                    output = out
+                    getData(userId)
+                        .then(function (jsonOut) {
+                            resolve(jsonOut)
+                        });
+                });
+            })
+            .then(function (jsonOut) {
+                return new Promise(function (resolve,reject) {
+                    userDetails = jsonOut['user']
+                    educationDetails = jsonOut['edu']
+                    technicalSkillDetails = jsonOut['tech']
+
+                    var projectDetails = jsonOut['pro']
+                    var workDetails = jsonOut['work']
+
+                    getDataAccToKeyWords(projectDetails, workDetails, output)
+                        .then(function (jsonOutOne) {
+                            resolve(jsonOutOne);
+                        });
+
+                });
+            })
+            .then(function (jsonOutOne) {
+
+                console.log("json Out")
+
+                var Project = jsonOutOne['projectArray']
+                var Work = jsonOutOne['workArray']
                 var ProjectDetails = []
                 if(Project.length <= 4)
                 {
@@ -107,6 +131,9 @@ module.exports = function (app,mongooseAPI) {
                     "technical":technicalSkillDetails
                 }
 
+                console.log("data")
+                console.log(data)
+
                 res.send(data);
                 return true;
             },function (err) {
@@ -117,7 +144,10 @@ module.exports = function (app,mongooseAPI) {
     }
 
 
-    function getKeyWords() {
+    function getKeyWords(url) {
+        var output;
+
+        console.log("get key words")
 
         return new Promise(function (resolve,reject) {
             var PythonShell = require('python-shell');
@@ -132,16 +162,24 @@ module.exports = function (app,mongooseAPI) {
                 }
                 else {
                     output = results
-                    resolve()
+
+                    resolve(output)
                 }
             });
         });
     }
 
-    function getDataAccToKeyWords(){
+    function getDataAccToKeyWords(projectDetails,workDetails,output){
         return new Promise(function (resolve,reject) {
+
+            console.log("get data key words")
+            console.log(projectDetails)
+            console.log(workDetails)
+
             var a = output[0].substring(1,output[0].length)
-            var res = a.split(" ")
+            var res = a.split(" ");
+            var Project = [];
+            var Work = [];
 
             for (var a in projectDetails) {
 
@@ -195,13 +233,30 @@ module.exports = function (app,mongooseAPI) {
                 return  parseFloat(b.hit) - parseFloat(a.hit);
             });
 
-        resolve()
+
+            var jsonOutOne = {
+
+                'projectArray':Project,
+                'workArray':Work
+            }
+
+        resolve(jsonOutOne)
         });
     }
 
-    function getData() {
+    function getData(userId) {
 
+
+        console.log(userId)
         return new Promise(function (resolve,reject) {
+            console.log(userId)
+            console.log("get data")
+
+            var educationDetails;
+            var projectDetails;
+            var technicalSkillDetails;
+            var userDetails;
+            var workDetails;
 
             EducationModel.findEducationForUser(userId)
                 .then(function (education) {
@@ -211,6 +266,7 @@ module.exports = function (app,mongooseAPI) {
                     }
                     else {
                         educationDetails = education;
+
                         ProjectModel.findProjectForUser(userId)
                             .then(function (project) {
 
@@ -221,6 +277,7 @@ module.exports = function (app,mongooseAPI) {
                                 {
                                     projectDetails = project;
 
+                                    console.log(projectDetails)
                                     TechnicalSkillModel.findTechnicalSkillForUser(userId)
                                         .then(function (techSkill) {
 
@@ -231,6 +288,7 @@ module.exports = function (app,mongooseAPI) {
                                             }
                                             else {
                                                 technicalSkillDetails = techSkill;
+
                                                 UserModel.findUserById(userId)
                                                     .then(function (user) {
 
@@ -241,6 +299,7 @@ module.exports = function (app,mongooseAPI) {
                                                         }
                                                         else {
                                                             userDetails = user;
+
                                                             WorkExpModel.findWorkExpForUser(userId)
                                                                 .then(function (work) {
 
@@ -251,7 +310,15 @@ module.exports = function (app,mongooseAPI) {
                                                                     }
                                                                     else {
                                                                         workDetails = work;
-                                                                        resolve()
+                                                                        var jsonOut = {
+                                                                            "user" : userDetails,
+                                                                            "tech":technicalSkillDetails,
+                                                                            "work":workDetails,
+                                                                            "pro":projectDetails,
+                                                                            "edu":educationDetails
+
+                                                                        }
+                                                                        resolve(jsonOut)
                                                                     }
                                                                 }, function (err) {
                                                                     reject(err)

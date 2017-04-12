@@ -35,8 +35,6 @@
         }
 
 
-
-
         function updateResume(resume, resumeid) {
             var url = RESUME_SERVICE_URL + "/" + resumeid
             return $http.put(url, resume);
