@@ -18,11 +18,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="user.addworkexp.form.view.client.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/frontend/views/user/user.addworkexp.form.view.client.html">
+      <file leaf-file-name="recruiter.model.server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/backend/model/recruiter/recruiter.model.server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="26" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="10" selection-end-column="26" />
+            <state relative-caret-position="250">
+              <caret line="196" column="42" lean-forward="false" selection-start-line="196" selection-start-column="42" selection-end-line="196" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -51,8 +51,8 @@
       <file leaf-file-name="user.model.server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/backend/model/user/user.model.server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="228" column="59" lean-forward="false" selection-start-line="228" selection-start-column="59" selection-end-line="228" selection-end-column="59" />
+            <state relative-caret-position="343">
+              <caret line="242" column="33" lean-forward="false" selection-start-line="242" selection-start-column="33" selection-end-line="242" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -71,8 +71,8 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/backend/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="22" column="23" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+            <state relative-caret-position="180">
+              <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -194,7 +194,6 @@
         <option value="$PROJECT_DIR$/src/frontend/views/message/message.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/message/user.message.list.controller.client.js" />
         <option value="$PROJECT_DIR$/src/frontend/views/admin/delete.js" />
-        <option value="$PROJECT_DIR$/src/backend/model/recruiter/recruiter.model.server.js" />
         <option value="$PROJECT_DIR$/src/backend/services/admin/admin.service.server.js" />
         <option value="$PROJECT_DIR$/src/frontend/app.js" />
         <option value="$PROJECT_DIR$/src/frontend/index.html" />
@@ -210,9 +209,10 @@
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.addworkexp.form.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.education.edit.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.project.list.view.client.html" />
-        <option value="$PROJECT_DIR$/src/backend/package.json" />
         <option value="$PROJECT_DIR$/src/frontend/views/register/register.view.client.html" />
         <option value="$PROJECT_DIR$/src/backend/services/user/user.service.server.js" />
+        <option value="$PROJECT_DIR$/src/backend/package.json" />
+        <option value="$PROJECT_DIR$/src/backend/model/recruiter/recruiter.model.server.js" />
         <option value="$PROJECT_DIR$/src/backend/model/user/user.model.server.js" />
       </list>
     </option>
@@ -492,6 +492,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="recruiter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -615,12 +641,12 @@
       <workItem from="1491804564203" duration="2775000" />
       <workItem from="1491847118937" duration="13541000" />
       <workItem from="1491927007521" duration="2364000" />
-      <workItem from="1491936688791" duration="15817000" />
+      <workItem from="1491936688791" duration="16264000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117206000" />
+    <option name="totallyTimeSpent" value="117653000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="36" width="1280" height="728" extended-state="0" />
@@ -684,6 +710,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -726,6 +753,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -839,14 +867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="18" column="55" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/backend/model/recruiter/recruiter.model.server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="189" column="13" lean-forward="false" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1013,14 +1033,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/backend/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="22" column="23" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/frontend/views/register/register.view.client.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
@@ -1053,10 +1065,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/backend/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="16" column="30" lean-forward="true" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/backend/model/recruiter/recruiter.model.server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="196" column="42" lean-forward="false" selection-start-line="196" selection-start-column="42" selection-end-line="196" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/backend/model/user/user.model.server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="228" column="59" lean-forward="false" selection-start-line="228" selection-start-column="59" selection-end-line="228" selection-end-column="59" />
+        <state relative-caret-position="343">
+          <caret line="242" column="33" lean-forward="false" selection-start-line="242" selection-start-column="33" selection-end-line="242" selection-end-column="33" />
           <folding />
         </state>
       </provider>
