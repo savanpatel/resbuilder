@@ -17,7 +17,6 @@
 
             vm.formatDate = formatDate;
 
-            vm.GetResumeData = GetResumeData;
             vm.success = false;
             vm.messageList = [];
             vm.error = null;

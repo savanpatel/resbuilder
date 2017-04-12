@@ -4,8 +4,8 @@
 
       <div class="row">
            <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
-               <div id="">
-                   <form class="form-horizontal">
+               <div>
+                   <form class="form-horizontal" name="basicProfileForm">
                        <fieldset>
                            <legend>Recruiter Information</legend>
                            <div class="form-group">
@@ -24,35 +24,50 @@
                            <div class="form-group">
                                <label for="companyName" class="col-lg-2 control-label">Company Name</label>
                                <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="companyName" ng-model="model.recruiter.companyname" placeholder="Company Name">
+                                   <input type="text" class="form-control" name="companyname" required id="companyName" ng-model="model.recruiter.companyname" placeholder="Company Name"/>
+                               </div>
+                               <div class="col-sm-8 col-sm-offset-2" ng-messages="basicProfileForm.companyname.$touched && basicProfileForm.companyname.$error">
+                                   <p class="text-warning" ng-message="required">Company Name is required.</p>
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label for="password" class="col-lg-2 control-label">Password</label>
                                <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="password" ng-model="model.recruiter.password" placeholder="Password">
+                                   <input type="text" name="password" required class="form-control" id="password" ng-model="model.recruiter.password" placeholder="Password"/>
+                               </div>
+                               <div class="col-sm-8 col-sm-offset-2" ng-messages="basicProfileForm.password.$touched && basicProfileForm.password.$error">
+                                   <p class="text-warning" ng-message="required">Password is missing.</p>
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label for="firstname" class="col-lg-2 control-label">Website</label>
                                <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="firstname" ng-model="model.recruiter.website" placeholder="Comapny's Website">
+                                   <input type="text" class="form-control" name="website" required id="firstname" ng-model="model.recruiter.website" placeholder="Comapny's Website">
+                               </div>
+                               <div class="col-sm-8 col-sm-offset-2" ng-messages="basicProfileForm.website.$touched && basicProfileForm.website.$error">
+                                   <p class="text-warning" ng-message="required">Website is required.</p>
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label for="inputDescription" class="col-lg-2 control-label">Description</label>
                                <div class="col-lg-10">
-                                   <textarea type="text" ng-model="model.recruiter.description" rows="3" class="form-control" id="inputDescription" placeholder="Description"></textarea>
+                                   <textarea type="text" name="description" required ng-model="model.recruiter.description" rows="3" class="form-control" id="inputDescription" placeholder="Description"></textarea>
+                               </div>
+                               <div class="col-sm-8 col-sm-offset-2" ng-messages="basicProfileForm.description.$touched && basicProfileForm.description.$error">
+                                   <p class="text-warning" ng-message="required">Description is required.</p>
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                                <div class="col-lg-10">
-                                   <input type="email" class="form-control" id="inputEmail" ng-model="model.recruiter.email" placeholder="Email">
+                                   <input type="email" name="email" required class="form-control" id="inputEmail" ng-model="model.recruiter.email" placeholder="Email">
+                               </div>
+                               <div class="col-sm-8 col-sm-offset-2" ng-messages="basicProfileForm.email.$touched && basicProfileForm.email.$error">
+                                   <p class="text-warning" ng-message="required">Email is required.</p>
                                </div>
                            </div>
 
@@ -62,7 +77,7 @@
                            <br/>
                            <div class="form-group">
                                <div class="col-lg-10 col-lg-offset-2">
-                                   <button type="submit" class="btn btn-block btn-primary" ng-click="model.updateRecruiter(model.recruiter)">Update</button>
+                                   <button type="submit" class="btn btn-block btn-primary" ng-click="basicProfileForm.$valid && model.updateRecruiter(model.recruiter)">Update</button>
                                </div>
                            </div>
                        </fieldset>
