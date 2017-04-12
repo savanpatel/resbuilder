@@ -20,11 +20,11 @@ module.exports = function (app, mongooseAPI, passport) {
     app.get("/api/user/:userId", auth, findUserById);
     app.delete("/api/user/:userId",auth, deleteUser);
     app.put("/api/user/:userId",auth, updateUser);
-    app.put("/api/admin/")
     app.get("/api/user/username/:username", checkUsernameAvailable);
     app.get("/api/user/linkedin/callback", passport.authenticate('linkedin', { failureRedirect: '/' }), linkedInSignUp);
     app.get('/api/user/auth/linkedin', passport.authenticate('linkedin'));
     app.get('/api/user/:userId/logout', auth, logout);
+    app.put('/api/user/:userId/updatepassword', auth, updateUserPassword);
 
     var UserModel = mongooseAPI.userModelAPI;
     var WorkExpModel = mongooseAPI.workExpModelAPI;
@@ -392,10 +392,6 @@ module.exports = function (app, mongooseAPI, passport) {
      */
     function updateUser(req, res) {
 
-        if(!req.isAuthenticated()){
-            res.redirect("/");
-            return;
-        }
         var user = req.body;
         var userId = req.params.userId;
 
@@ -406,7 +402,6 @@ module.exports = function (app, mongooseAPI, passport) {
 
         UserModel.updateUser(userId, user)
             .then(function (dbUser) {
-
                 if(null == dbUser){
                     res.sendStatus(500).send("Could not update user.");
                 } else {
@@ -470,6 +465,26 @@ module.exports = function (app, mongooseAPI, passport) {
 
     }
 
+
+
+    function updateUserPassword(req, res) {
+
+        var userId = req.params.userId;
+        var userPasswordInfo = req.body;
+
+        if(null == userPasswordInfo || null == userPasswordInfo.oldPassword ||
+           null == userPasswordInfo.newPassword){
+            res.sendStatus(500).send('Can not update password!');
+            return;
+        }
+
+        UserModel.updateUserPassword(userId, userPasswordInfo.oldPassword, userPasswordInfo.newPassword)
+            .then(function (status) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
 
     /*end passport session.*/
     function logout(req, res) {

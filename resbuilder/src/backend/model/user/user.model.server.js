@@ -23,7 +23,8 @@ module.exports = function (app, mongoose, logger) {
         findUnBlockedUsers:findUnBlockedUsers,
         findUsersForIds:findUsersForIds,
         isAdmin: isAdmin,
-        getAdminInfo:getAdminInfo
+        getAdminInfo:getAdminInfo,
+        updateUserPassword:updateUserPassword
     };
 
     return api;
@@ -173,18 +174,34 @@ module.exports = function (app, mongoose, logger) {
      * params: userId and user object with updated fields.
      * returns: promise.
      */
+    /*
+     * updateUser: updates the user.
+     * params: userId and user object with updated fields.
+     * returns: promise.
+     */
     function updateUser(userId, user) {
 
         var deferred = q.defer();
-        UserModel.update({_id:userId},{$set:user}, function (err, dbUser) {
-            if(err) {
-                logger.error("Can not update user with id " + userId  + " Error: " + err);
+
+        UserModel.findById(userId, function (err, dbUser) {
+
+            if(err){
+                logger.error('Unable to find user.' + err);
                 deferred.reject(err);
-            }
-            else {
-                deferred.resolve(dbUser);
+            } else {
+                user.password = dbUser.password;
+                UserModel.update({_id:userId},{$set:user}, function (err, dbUser) {
+                    if(err) {
+                        logger.error("Can not update user with id " + userId  + " Error: " + err);
+                        deferred.reject(err);
+                    }
+                    else {
+                        deferred.resolve(user);
+                    }
+                });
             }
         });
+
 
         return deferred.promise;
     }
@@ -226,7 +243,7 @@ module.exports = function (app, mongoose, logger) {
         UserModel.findOne({username:username}, function (err, user) {
 
             console.log(user)
-            if(bcrypt.compareSync(password, user.password)){
+            if(user && bcrypt.compareSync(password, user.password)){
                 if (!user.is_deleted) {
                     if (err) {
                         logger.error("ERROR: [findUserByCredentials]: " + err);
@@ -321,6 +338,39 @@ module.exports = function (app, mongoose, logger) {
                 deferred.reject(err);
             } else {
                 deferred.resolve(dbAdmin);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+
+    function updateUserPassword(userId, oldPassword, newPassword) {
+        var deferred = q.defer();
+
+        UserModel.findById(userId, function (err, user) {
+
+            if(err){
+                logger.error(err);
+                deferred.reject(err);
+            } else {
+                if(user && bcrypt.compareSync(oldPassword, user.password)){
+                    user.password = bcrypt.hashSync(newPassword);
+
+                    UserModel.update({_id:userId},{$set:user}, function (err, dbUser) {
+                        if(err) {
+
+                            logger.error("Can not update user with id " + userId  + " Error: " + err);
+                            deferred.reject(err);
+                        }
+                        else {
+
+                            deferred.resolve(user);
+                        }
+                    });
+                } else{
+                    deferred.reject("Old Passwords do not match");
+                }
             }
         });
 

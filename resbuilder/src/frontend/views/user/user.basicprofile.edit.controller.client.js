@@ -17,6 +17,8 @@
             vm.uid = $routeParams['uid'];
             vm.updateUser = updateUser;
             vm.logout = logout;
+            vm.updateUserPassword = updateUserPassword;
+
 
             var promise = UserService.findUserById(vm.userId);
 
@@ -37,6 +39,14 @@
             promise.error(onLogoutError);
         }
 
+
+
+        function updateUserPassword(updatePasswordInfo) {
+            vm.passwordError = null;
+            var promise = UserService.updateUserPassword(vm.userId, updatePasswordInfo);
+            promise.success(onUpdateUserPasswordSuccess);
+            promise.error(onUpdateUserPasswordError);
+        }
 
 
 
@@ -87,6 +97,23 @@
             } else{
                 $location.url("/");
             }
+        }
+
+
+
+        function onUpdateUserPasswordSuccess(response) {
+            vm.passwordError = "Updated successfully";
+            console.log(response);
+        }
+
+        function onUpdateUserPasswordError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
+
+            vm.passwordError = "Failed to update password. Make sure that your old password is correct";
+
         }
     }
 })();
