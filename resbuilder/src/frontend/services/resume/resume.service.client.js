@@ -5,6 +5,7 @@
 
 
 
+    var RESUME_SERVICE_URL = "/api/resume";
 
     function ResumeService($http) {
 
@@ -23,21 +24,22 @@
 
         function downloadResume(resumeId) {
 
-            console.log("/api/downloadResumePDF/"+resumeId)
-            return $http.get("/api/downloadResumePDF/"+resumeId);
+            var url = "/api/downloadResumePDF/"+ resumeId;
+            return $http.get(url);
 
         }
 
         function createResume(resume) {
-            return $http.post("/api/resume", resume);
+            var url = RESUME_SERVICE_URL;
+            return $http.post(url, resume);
         }
 
 
 
 
         function updateResume(resume, resumeid) {
-
-            return $http.put("/api/resume/"+resumeid, resume);
+            var url = RESUME_SERVICE_URL + "/" + resumeid
+            return $http.put(url, resume);
         }
 
 
@@ -45,8 +47,7 @@
 
         function deleteResume(resumeid) {
 
-            console.log(resumeid);
-            var deleteResumeUrl = "/api/resume/" + resumeid;
+            var deleteResumeUrl = RESUME_SERVICE_URL + "/" + resumeid;
             return $http.delete(deleteResumeUrl);
         }
 
@@ -55,7 +56,7 @@
 
         function findResumeforUser(userId) {
 
-            var findResumeListForUserUrl = "/api/resume/user/" + userId;
+            var findResumeListForUserUrl = RESUME_SERVICE_URL + "/user/" + userId;
             console.log(findResumeListForUserUrl)
             console.log(userId)
             return $http.get(findResumeListForUserUrl);
@@ -64,7 +65,7 @@
 
 
         function findResumeById(resumeid) {
-            var findResumeByIdUrl = "/api/resume/" + resumeid;
+            var findResumeByIdUrl = RESUME_SERVICE_URL + "/" + resumeid;
             return $http.get(findResumeByIdUrl);
         }
 
