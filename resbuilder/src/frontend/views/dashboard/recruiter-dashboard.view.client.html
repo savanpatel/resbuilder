@@ -7,17 +7,22 @@
 <div class="container container-if-fixed-header">
 
     <div class="row">
-        <div class="form-group url-pb-class">
-            <label class="control-label"><h3>Search By Skills:</h3></label>
-            <div class="input-group">
-                <input ng-model="model.skill" type="text" class="form-control">
-                <span class="input-group-btn">
-                    <a class="btn btn-success btn-block" ng-click="model.getUsersForSkill(model.skill)">
+        <form name="searchForm">
+            <div class="form-group url-pb-class">
+                <label class="control-label"><h3>Search By Skills:</h3></label>
+                <div ng-messages="searchForm.search.$touched && searchForm.search.$error">
+                    <p class="text-warning" ng-message="required">Enter a skill keyword to search.</p>
+                </div>
+                <div class="input-group">
+                    <input ng-model="model.skill" name="search" required type="text" class="form-control"/>
+                    <span class="input-group-btn">
+                    <a class="btn btn-success btn-block" ng-click="searchForm.$valid && model.getUsersForSkill(model.skill)">
                         Search
                     </a>
                 </span>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <br/>
