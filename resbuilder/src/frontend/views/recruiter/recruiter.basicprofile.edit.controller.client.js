@@ -17,6 +17,7 @@
 
             vm.updateRecruiter = updateRecruiter;
             vm.logout = logout;
+            vm.updateRecruiterPassword = updateRecruiterPassword;
 
             var promise = RecruiterService.findRecruiterById(vm.recruiterId);
             promise.success(onFindRecruiterByIdSuccess);
@@ -26,6 +27,13 @@
         init();
 
 
+
+        function updateRecruiterPassword(passwordInfo) {
+            var promise = RecruiterService.updateRecruiterPassword(vm.recruiterId, passwordInfo);
+            promise.success(onUpdateRecruiterPasswordSuccess);
+            promise.error(onUpdateRecruiterPasswordError);
+
+        }
 
         function logout() {
 
@@ -57,10 +65,12 @@
         }
 
 
+
         function onUpdateSuccess(response) {
             vm.recruiter = response;
             vm.error = "Update successful!";
         }
+
 
         function onUpdateError(err) {
             vm.error = "Could not update user. Try after sometime.";
@@ -80,6 +90,22 @@
             } else{
                 $location.url("/");
             }
+        }
+
+
+        function onUpdateRecruiterPasswordSuccess(response) {
+            vm.passwordError = "Updated successfully";
+            console.log(response);
+        }
+
+        function onUpdateRecruiterPasswordError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            }
+
+            vm.passwordError = "Failed to update password. Make sure that your old password is correct";
+
         }
     }
 })();

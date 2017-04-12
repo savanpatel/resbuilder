@@ -14,13 +14,14 @@ module.exports = function (app, mongooseAPI) {
     app.get("/api/recruiter/:recruiterId/user/skill", checkAuthorizedUser, findUsersBySkill);
     app.get("/api/recruiter/username/:username", checkUsernameAvailable);
     app.get("/api/recruiter/:recruiterId/logout", checkAuthorizedUser, logout);
+    app.put('/api/recruiter/:recruiterId/updatepassword', checkAuthorizedUser, updateRecruiterPassword);
 
 
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
     var UserModel = mongooseAPI.userModelAPI;
     var TechnicalSkillModel = mongooseAPI.technicalSkillModelAPI;
 
-
+    var bcrypt = require("bcrypt-nodejs");
 
     function checkAuthorizedUser (req, res, next) {
         if (!req.isAuthenticated()) {
@@ -108,6 +109,7 @@ module.exports = function (app, mongooseAPI) {
         }
 
 
+        recruiter.password = bcrypt.hashSync(recruiter.password);
         // create user in db.
         RecruiterModel.createRecruiter(recruiter)
             .then(function (dbRecruiter){
@@ -281,6 +283,28 @@ module.exports = function (app, mongooseAPI) {
             });
 
     }
+
+
+
+    function updateRecruiterPassword(req, res) {
+
+        var recruiterId = req.params.recruiterId;
+        var recruiterPasswordInfo = req.body;
+
+        if(null == recruiterPasswordInfo || null == recruiterPasswordInfo.oldPassword ||
+            null == recruiterPasswordInfo.newPassword){
+            res.sendStatus(500).send('Can not update password!');
+            return;
+        }
+
+        RecruiterModel.updateRecruiterPassword(recruiterId, recruiterPasswordInfo.oldPassword, recruiterPasswordInfo.newPassword)
+            .then(function (status) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+    }
+
 
     /*end passport session.*/
     function logout(req, res) {

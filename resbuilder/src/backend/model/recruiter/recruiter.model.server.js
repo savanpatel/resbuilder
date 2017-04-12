@@ -20,7 +20,8 @@ module.exports = function (app, mongoose, logger) {
         findAllRecruiters:findAllRecruiters,
         findBlockedRecruiters:findBlockedRecruiters,
         findUnBlockedRecruiters:findUnBlockedRecruiters,
-        checkUsernameAvailable:checkUsernameAvailable
+        checkUsernameAvailable:checkUsernameAvailable,
+        updateRecruiterPassword:updateRecruiterPassword
     };
 
     return api;
@@ -82,7 +83,6 @@ module.exports = function (app, mongoose, logger) {
 
 
         var deferred = q.defer();
-        recruiter.password = bcrypt.hashSync(recruiter.password);
 
         RecruiterModel.create(recruiter, function (err, dbRecruiter) {
 
@@ -178,9 +178,13 @@ module.exports = function (app, mongoose, logger) {
     function findRecruiterByCredentials(username, password) {
         var deferred = q.defer();
 
+        console.log(password);
+
         RecruiterModel.findOne({username:username}, function (err, recruiter) {
 
-            if(bcrypt.compareSync(password, recruiter.password)) {
+            console.log(recruiter.password);
+            console.log(bcrypt.hashSync(password));
+            if(recruiter && bcrypt.compareSync(password, recruiter.password)) {
                 if (!recruiter.is_deleted) {
                     if (err) {
                         logger.error("ERROR: [findUserByCredentials]: " + err);
@@ -197,6 +201,8 @@ module.exports = function (app, mongoose, logger) {
                 deferred.reject("incorrect password");
             }
         });
+
+
         return deferred.promise;
     }
 
@@ -215,6 +221,38 @@ module.exports = function (app, mongoose, logger) {
             }
         });
 
+
+        return deferred.promise;
+    }
+
+
+    function updateRecruiterPassword(recruiterId, oldPassword, newPassword) {
+        var deferred = q.defer();
+
+        RecruiterModel.findById(recruiterId, function (err, recruiter) {
+
+            if(err){
+                logger.error(err);
+                deferred.reject(err);
+            } else {
+                if(recruiter && bcrypt.compareSync(oldPassword, recruiter.password)){
+                    recruiter.password = bcrypt.hashSync(newPassword);
+
+                    RecruiterModel.update({_id:recruiterId},{$set:recruiter}, function (err, dbRecruiter) {
+                        if(err) {
+                            logger.error("Can not update user with id " + userId  + " Error: " + err);
+                            deferred.reject(err);
+                        }
+                        else {
+
+                            deferred.resolve(recruiter);
+                        }
+                    });
+                } else{
+                    deferred.reject("Old Password do not match");
+                }
+            }
+        });
 
         return deferred.promise;
     }
