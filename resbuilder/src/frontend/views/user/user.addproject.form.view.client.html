@@ -1,10 +1,13 @@
-<form class="form-horizontal">
+<form name="projectForm" class="form-horizontal" novalidate>
     <fieldset>
         <div>
                 <div class="form-group">
                     <label for="title" class="col-lg-3 control-label">Title</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" id="title" ng-model="model.project.title" placeholder="Project Title">
+                        <input name="title" required type="text" class="form-control" id="title" ng-model="model.project.title" placeholder="Project Title">
+                    </div>
+                    <div ng-messages="projectForm.title.$touched && projectForm.title.$error">
+                        <p class="text-warning" ng-message="required">the title for project is required.</p>
                     </div>
                 </div>
 
@@ -22,21 +25,30 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Technologies</label>
                     <div class="col-lg-9">
-                        <tags-input replace-spaces-with-dashes="false" min-length="2" type="text" ng-model="model.project.technologies" placeholder="Technologies"></tags-input>
+                        <tags-input required name="technology" replace-spaces-with-dashes="false" min-length="2" type="text" ng-model="model.project.technologies" placeholder="Technologies"></tags-input>
+                    </div>
+                    <div ng-messages="projectForm.technology.$touched && projectForm.technology.$error">
+                        <p class="text-warning" ng-message="required">the title for technology is required.</p>
                     </div>
                 </div>
 
             <div class="form-group">
                     <label for="startdate" class="col-lg-3 control-label">Start Date</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" id="startdate" ng-model="model.project.startDate" placeholder="MM/YYYY">
+                        <input type="number" name="startdate" required class="form-control" id="startdate" ng-model="model.project.startDate" placeholder="MM/YYYY">
+                    </div>
+                    <div ng-messages="projectForm.startdate.$touched && projectForm.startdate.$error">
+                        <p class="text-warning" ng-message="required">the start date is required.</p>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="enddate" class="col-lg-3 control-label">End Date</label>
                     <div class="col-lg-9">
-                        <input type="text" class="form-control" id="enddate" ng-model="model.project.endDate" placeholder="MM/YYYY">
+                        <input type="text" name="enddate" required class="form-control" id="enddate" ng-model="model.project.endDate" placeholder="MM/YYYY">
+                    </div>
+                    <div ng-messages="projectForm.enddate.$touched && projectForm.enddate.$error">
+                        <p class="text-warning" ng-message="required">the end date is required.</p>
                     </div>
                 </div>
 
@@ -64,7 +76,7 @@
                 <br/>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-1">
-                        <a type="submit" ng-click="model.createProject(model.project)" class="btn center-block btn-primary">Save</a>
+                        <a type="submit" ng-click="projectForm.$valid && model.createProject(model.project)" class="btn center-block btn-primary">Save</a>
                     </div>
                 </div>
             </div>

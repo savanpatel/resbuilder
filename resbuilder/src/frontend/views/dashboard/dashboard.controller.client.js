@@ -23,10 +23,8 @@
             vm.error = null;
             vm.GetResumeData = GetResumeData;
             vm.downloadResume = downloadResume;
-
             vm.uid = $routeParams['uid'];
             vm.logout = logout;
-
             findJobSuggestions(vm.uid);
 
             console.log("ghbjnkml")
@@ -180,30 +178,24 @@
             console.log("SW")
             console.log(sw)
 
-            if(sw === 0)
-            {
+            if(sw === 0) {
 
-                console.log(vm.JobURL)
                 ResumeDataService.setUrl(vm.JobURL);
+                $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
             }
-            else
-            {
+            else {
                 ResumeDataService.setUrl(sw);
+                $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
             }
-
-            $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
-
         }
-
 
         function onGettingResumeData(data) {
             console.log(data)
         }
-        function OnErrorGettingResumeData() {
-            console.log("Error")
+        function OnErrorGettingResumeData(error) {
+            vm.error = "error while rendering data" + error;
+
         }
-
-
 
         function onFetchJobSuccess(response) {
 
