@@ -240,7 +240,7 @@ module.exports = function (app, mongoose, logger) {
                 }
             }
             else{
-                deferred.reject("username and password incorrect");
+                deferred.reject("password incorrect");
             }
         });
 

@@ -8,6 +8,7 @@ module.exports = function (app, mongoose, logger) {
     var q = require('q');
     var RecruiterSchema = require('./recruiter.schema.server')(app, mongoose);
     var RecruiterModel = mongoose.model('Recruiter', RecruiterSchema);
+    var bcrypt = require("bcrypt-nodejs");
 
 
     var api = {
@@ -81,6 +82,7 @@ module.exports = function (app, mongoose, logger) {
 
 
         var deferred = q.defer();
+        recruiter.password = bcrypt.hashSync(recruiter.password);
 
         RecruiterModel.create(recruiter, function (err, dbRecruiter) {
 
@@ -176,17 +178,23 @@ module.exports = function (app, mongoose, logger) {
     function findRecruiterByCredentials(username, password) {
         var deferred = q.defer();
 
-        RecruiterModel.findOne({username:username, password:password}, function (err, recruiter) {
-            if(!recruiter.is_deleted) {
-                if (err) {
-                    logger.error("ERROR: [findUserByCredentials]: " + err);
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(recruiter);
+        RecruiterModel.findOne({username:username}, function (err, recruiter) {
+
+            if(bcrypt.compareSync(password, recruiter.password)) {
+                if (!recruiter.is_deleted) {
+                    if (err) {
+                        logger.error("ERROR: [findUserByCredentials]: " + err);
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(recruiter);
+                    }
+                }
+                else {
+                    deferred.reject("recruiter is blocked");
                 }
             }
             else{
-                deferred.reject("recruiter is blocked");
+                deferred.reject("incorrect password");
             }
         });
         return deferred.promise;
