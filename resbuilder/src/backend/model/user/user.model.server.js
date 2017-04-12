@@ -7,7 +7,7 @@ module.exports = function (app, mongoose, logger) {
     var q = require('q');
     var UserSchema = require('./user.schema.server')(app, mongoose);
     var UserModel = mongoose.model('User', UserSchema);
-
+    var bcrypt = require("bcrypt-nodejs");
 
     var api = {
         createUser:createUser,
@@ -151,6 +151,7 @@ module.exports = function (app, mongoose, logger) {
 
         var deferred = q.defer();
 
+
         UserModel.findOne({username:username}, function (err, dbUser) {
 
             if(err){
@@ -222,19 +223,24 @@ module.exports = function (app, mongoose, logger) {
     function findUserByCredentials(username, password) {
         var deferred = q.defer();
 
-        UserModel.findOne({username:username, password:password}, function (err, user) {
+        UserModel.findOne({username:username}, function (err, user) {
 
             console.log(user)
-            if(!user.is_deleted) {
-                if (err) {
-                    logger.error("ERROR: [findUserByCredentials]: " + err);
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(user);
+            if(bcrypt.compareSync(password, user.password)){
+                if (!user.is_deleted) {
+                    if (err) {
+                        logger.error("ERROR: [findUserByCredentials]: " + err);
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(user);
+                    }
+                }
+                else {
+                    deferred.reject("user is blocked");
                 }
             }
             else{
-                deferred.reject("user is blocked");
+                deferred.reject("username and password incorrect");
             }
         });
 
