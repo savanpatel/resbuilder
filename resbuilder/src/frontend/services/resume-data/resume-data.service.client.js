@@ -1,15 +1,12 @@
-/**
- * Created by panktibhalani on 4/4/17.
- */
-
 (function() {
     angular
         .module("ResumeBuilder")
         .factory("ResumeDataService", ResumeDataService);
 
-    var TECHNICALSKILL_SERVICE_URL = "/api/getResumeData"
+    var RESUME_DATA_SERVICE_URL = "/api/getResumeData";
 
     function ResumeDataService($http) {
+
 
         var api = {
             "getResumeData": getResumeData,
@@ -22,8 +19,9 @@
 
         this.jobDesURl = "";
 
-        function getResumeData(uid,url) {
-            return $http.get("/api/getResumeData/"+uid+"/?url="+url);
+        function getResumeData(uid, url) {
+            var getResumeDataUrl = RESUME_DATA_SERVICE_URL + "/" + uid + "/?url=" + url;
+            return $http.get(getResumeDataUrl);
         }
 
         function setUrl(url) {
@@ -36,9 +34,8 @@
 
 
         function getResumePDF(uid,data) {
-            console.log("In client Service")
-            console.log(data)
-            return $http.post("/api/generateResume/"+uid,data);
+            var url = RESUME_DATA_SERVICE_URL + "/" + uid;
+            return $http.post(url, data);
         }
 
     }

@@ -26,27 +26,32 @@
 
 
         function deleteRecruiterByAdmin(adminId, recruiterId) {
-            return $http.delete("api/admin/" + adminId + "/recruiter/" + recruiterId);
+            var url = ADMIN_SERVICE_URL + "/" + adminId + "/recruiter/" + recruiterId;
+            return $http.delete(url);
         }
 
         function deleteUserByAdmin(adminId, userId) {
-            return $http.delete("api/admin/" + adminId + "/user/" + userId);
+            var url = ADMIN_SERVICE_URL + "/" + adminId + "/user/" + userId;
+            return $http.delete(url);
         }
 
 
         /*fetch all recruiters*/
         function getAllRecruiters(adminId) {
-            return $http.get("/api/admin/" + adminId +"/recruiters?data=-1")
+            var url = ADMIN_SERVICE_URL + "/" + adminId +"/recruiters?data=-1";
+            return $http.get(url)
 
         }
 
-        function updateUserByAdmin(adminId,user) {
-            return $http.put("/api/admin/"+adminId+"/user",user);
+        function updateUserByAdmin(adminId, user) {
+            var url = ADMIN_SERVICE_URL + "/" + adminId + "/user";
+            return $http.put(url , user);
         }
 
 
-        function updateRecruiterByAdmin(adminId,user) {
-            return $http.put("/api/admin/" + adminId + "/recruiter",user);
+        function updateRecruiterByAdmin(adminId, recruiter) {
+            var url = ADMIN_SERVICE_URL + "/" + adminId + "/recruiter";
+            return $http.put(url, recruiter);
         }
 
 
@@ -56,7 +61,8 @@
         }
         function getAllUsers(adminId) {
 
-            return $http.get("/api/admin/" + adminId +"/users?data=-1")
+            var url = ADMIN_SERVICE_URL + "/" + adminId +"/users?data=-1";
+            return $http.get(url);
         }
 
 
