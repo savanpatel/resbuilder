@@ -19,11 +19,9 @@
             vm.logout = logout;
 
             var promise = RecruiterService.findRecruiterById(vm.recruiterId);
-
             promise.success(onFindRecruiterByIdSuccess);
             promise.error(onFindRecruiterByIdError);
         }
-
 
         init();
 
@@ -43,11 +41,6 @@
             promise.success(onUpdateSuccess);
             promise.error(onUpdateError);
         }
-
-
-
-
-
 
 
         /*---- Promise functions*/

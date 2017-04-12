@@ -5,7 +5,7 @@
       <div class="row">
            <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
                <div id="">
-                   <form class="form-horizontal">
+                   <form name="userForm"class="form-horizontal" novalidate>
                        <fieldset>
                            <legend>Basic Information</legend>
                            <div class="form-group">
@@ -24,28 +24,39 @@
                            <div class="form-group">
                                <label for="password" class="col-lg-2 control-label">Password</label>
                                <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="password" ng-model="model.user.password" placeholder="Password">
+                                   <input type="password" class="form-control" id="password" type="password" ng-model="model.user.password" placeholder="Password">
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label for="firstname" class="col-lg-2 control-label">First Name</label>
                                <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="firstname" ng-model="model.user.firstName" placeholder="First Name">
+                                   <input type="text" name="firstname1" required class="form-control" id="firstname" ng-model="model.user.firstName" placeholder="First Name">
+                                   <div ng-messages="userForm.firstname.$touched && userForm.firstname.$error">
+                                       <p class="text-warning" ng-message="required">Your firstname is required.</p>
+                                   </div>
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label for="lastname" class="col-lg-2 control-label">Last Name</label>
                                <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="lastname" ng-model="model.user.lastName" placeholder="Last Name">
+                                   <input type="text" name="lastname" required class="form-control" id="lastname" ng-model="model.user.lastName" placeholder="Last Name">
+                                   <div ng-messages="userForm.lastname.$touched && userForm.lastname.$error">
+                                       <p class="text-warning" ng-message="required">Your lastname is required.</p>
+                                   </div>
                                </div>
+
+
                            </div>
 
                            <div class="form-group">
                                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                                <div class="col-lg-10">
-                                   <input type="email" class="form-control" id="inputEmail" ng-model="model.user.email" placeholder="Email">
+                                   <input name="email1" required type="email" class="form-control" id="inputEmail" ng-model="model.user.email" placeholder="Email">
+                                   <div ng-messages="userForm.email1.$touched && userForm.email1.$error">
+                                       <p class="text-warning" ng-message="required">Your email is required.</p>
+                                   </div>
                                </div>
                            </div>
 
@@ -60,21 +71,32 @@
                            <div class="form-group">
                                <label for="contact" class="col-lg-2 control-label">Contact</label>
                                <div class="col-lg-10">
-                                   <input type="number" class="form-control" id="contact" ng-model="model.user.contact" placeholder="Contact Number">
+                                   <input type="number" name="phonenumber" ng-maxlength="10" ng-minlength="10" class="form-control" id="contact" ng-model="model.user.contact" placeholder="Contact Number">
+                                   <div ng-messages="userForm.phonenumber.$touched && userForm.phonenumber.$error">
+                                       <p class="text-warning" ng-message="minlength">Phone number should be of length 10</p>
+                                       <p class="text-warning" ng-message="maxlength">Phone number should be of length 10</p>
+                                   </div>
                                </div>
                            </div>
 
                            <div class="form-group">
                                <label for="github" class="col-lg-2 control-label">GitHub</label>
                                <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="github" ng-model="model.user.githubUrl" placeholder="GitHub Url">
+                                   <input type="text" name="github" required class="form-control" id="github" ng-model="model.user.githubUrl" placeholder="GitHub Url">
+                                   <div ng-messages="userForm.github.$touched && userForm.github.$error">
+                                       <p class="text-warning" ng-message="required">Github URL is required</p>
+                                   </div>
                                </div>
+
                            </div>
 
                            <div class="form-group">
                                <label for="personalurl" class="col-lg-2 control-label">Personal Website</label>
                                <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="personalurl" ng-model="model.user.personalWebsite" placeholder="Personal Website Url">
+                                   <input type="text" name="personalWebsite" required class="form-control" id="personalurl" ng-model="model.user.personalWebsite" placeholder="Personal Website Url">
+                                   <div ng-messages="userForm.personalWebsite.$touched && userForm.personalWebsite.$error">
+                                       <p class="text-warning" ng-message="required">Github URL is required</p>
+                                   </div>
                                </div>
                            </div>
 
@@ -90,7 +112,7 @@
                            <br/>
                            <div class="form-group">
                                <div class="col-lg-10 col-lg-offset-2">
-                                   <button type="submit" class="btn btn-block btn-primary" ng-click="model.updateUser(model.user)">Update</button>
+                                   <button type="submit" class="btn btn-block btn-primary" ng-click="userForm.$valid && model.updateUser(model.user)">Update</button>
                                </div>
                            </div>
                        </fieldset>

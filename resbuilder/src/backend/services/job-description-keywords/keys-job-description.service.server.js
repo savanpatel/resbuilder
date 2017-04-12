@@ -40,13 +40,15 @@ module.exports = function (app,mongooseAPI) {
         }
     }
 
-
     function createDoc(req,res) {
 
         userId = req.params.userId;
         var newParams = req.query;
         url = newParams['url'];
 
+
+
+        console.log("vbhjnkm")
         getKeyWords()
             .then(getData)
             .then(getDataAccToKeyWords)

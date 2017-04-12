@@ -34,7 +34,7 @@
                                     <input name="username" ng-minlength="5" ng-maxlength="15" type="text" required ng-model="recruiter.username" ng-change="model.checkUsernameAvailability(recruiter.username)" class="form-control" id="inputUsername" placeholder="Username">
                                 </div>
                                 <span class="help-block" ng-show="model.checkUsername">{{model.checkUsername}}</span>
-                                <div ng-messages="recruiterForm.username.$error">
+                                <div ng-messages="recruiterForm.username.$touched && recruiterForm.username.$error">
                                     <p class="text-warning" ng-message="minlength">Your username is too short.</p>
                                     <p class="text-warning" ng-message="maxlength">Your username is too long.</p>
                                     <p class="text-warning" ng-message="required">Your username is required.</p>
@@ -47,7 +47,7 @@
                                     <input name="CompanyName" type="text" ng-model="recruiter.companyname" required class="form-control" id="inputCompanyName" placeholder="Company Name">
                                 </div>
                                 <span class="help-block" ng-show="model.checkCompanyName">{{model.checkCompanyName}}</span>
-                                <div ng-messages="recruiterForm.CompanyName.$error">
+                                <div ng-messages="recruiterForm.CompanyName.$touched && recruiterForm.CompanyName.$error">
                                     <p class="text-warning" ng-message="required">Your company name is required.</p>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                     <input name="password1" required type="password" ng-minlength="5" ng-maxlength="15" ng-model="recruiter.password" class="form-control" id="inputPassword" placeholder="Password">
                                 </div>
                                 <span class="help-block" ng-show="model.checkPassword">{{model.checkPassword}}</span>
-                                <div ng-messages="recruiterForm.password1.$error">
+                                <div ng-messages="recruiterForm.password1.$touched && recruiterForm.password1.$error">
                                     <p class="text-warning" ng-message="minlength">Your password is too short.</p>
                                     <p class="text-warning" ng-message="maxlength">Your password is too long.</p>
                                     <p class="text-warning" ng-message="required">Your password is required.</p>
@@ -93,10 +93,10 @@
                             <div class="form-group">
                                 <div class="input-group col-md-8">
                                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                    <input name="email" type="email" required ng-model="recruiter.email" class="form-control" placeholder="Email">
+                                    <input name="email1" type="email" required ng-model="recruiter.email" class="form-control" placeholder="Email">
                                 </div>
                                 <span class="help-block" ng-show="model.checkEmail">{{model.checkEmail}}</span>
-                                <div ng-messages="recruiterForm.email.$error">
+                                <div ng-messages="recruiterForm.email1.$touched && recruiterForm.email1.$error">
                                     <p class="text-warning" ng-message="required">Your email is required.</p>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                 <div class="col-md-8 center-block">
 
                                     <div>
-                                        <a ng-click="model.registerRecruiter(recruiter)" class="btn btn-block btn-info">Register</a>
+                                        <a ng-click="recruiterForm.$valid && model.registerRecruiter(recruiter)" class="btn btn-block btn-info">Register</a>
                                     </div>
                                     <br/>
                                 </div>
@@ -116,5 +116,5 @@
             </div>
 
         </div>
-    </div> <!-- End row-->
+    </div>
 </div>

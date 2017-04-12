@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-5 col-sm-offset-3">
             <div class="login-border login-box">
-                <form class="userForm">
+                <form name="userForm" novalidate>
                     <fieldset>
                         <div class="card-header">
                             <div class="col-sm-6">
@@ -30,18 +30,27 @@
                             <div class="form-group">
                                 <div class="input-group col-md-8">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" ng-model="user.username" ng-change="model.checkUsernameAvailability(user.username)" class="form-control" id="inputUsername" placeholder="Username">
+                                    <input type="text" name="username" ng-minlength="5" ng-maxlength="15" required ng-model="user.username" ng-change="model.checkUsernameAvailability(user.username)" class="form-control" id="inputUsername" placeholder="Username">
                                 </div>
                                 <span class="help-block" ng-show="model.checkUsername">{{model.checkUsername}}</span>
-
+                                <div ng-messages="userForm.username.$touched && userForm.username.$error">
+                                    <p class="text-warning" ng-message="minlength">Your username is too short.</p>
+                                    <p class="text-warning" ng-message="maxlength">Your username is too long.</p>
+                                    <p class="text-warning" ng-message="required">Your username is required.</p>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="input-group col-md-8">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input type="password" ng-model="user.password" class="form-control" id="inputPassword" placeholder="Password">
+                                    <input name="password1" required type="password" ng-minlength="5" ng-maxlength="15" ng-model="user.password" class="form-control" id="inputPassword" placeholder="Password">
                                 </div>
                                 <span class="help-block" ng-show="model.checkPassword">{{model.checkPassword}}</span>
+                                <div ng-messages="userForm.password1.$touched && userForm.password1.$error">
+                                    <p class="text-warning" ng-message="minlength">Your password is too short.</p>
+                                    <p class="text-warning" ng-message="maxlength">Your password is too long.</p>
+                                    <p class="text-warning" ng-message="required">Your password is required.</p>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -56,31 +65,40 @@
                             <div class="form-group">
                                 <div class="input-group col-md-8">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" ng-model="user.firstName" class="form-control" id="inputFirstName" placeholder="First Name">
+                                    <input type="text" name="firstname" required ng-model="user.firstName" class="form-control" id="inputFirstName" placeholder="First Name">
                                 </div>
                                 <span class="help-block" ng-show="model.checkFirstName">{{model.checkFirstName}}</span>
+                                <div ng-messages="userForm.firstname.$touched && userForm.firstname.$error">
+                                    <p class="text-warning" ng-message="required">Your firstname is required.</p>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="input-group col-md-8">
                                     <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
-                                    <input type="text" ng-model="user.lastName" class="form-control" placeholder="Last Name">
+                                    <input type="text" name="lastname" required ng-model="user.lastName" class="form-control" placeholder="Last Name">
+                                </div>
+                                <div ng-messages="userForm.lastname.$touched && userForm.lastname.$error">
+                                    <p class="text-warning" ng-message="required">Your lastname is required.</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="input-group col-md-8">
                                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                    <input type="email" ng-model="user.email" class="form-control" placeholder="Email">
+                                    <input name="email1" required type="email" ng-model="user.email" class="form-control" placeholder="Email">
                                 </div>
                                 <span class="help-block" ng-show="model.checkEmail">{{model.checkEmail}}</span>
+                                <div ng-messages="userForm.email1.$touched && userForm.email1.$error">
+                                    <p class="text-warning" ng-message="required">Your email is required.</p>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-8 center-block">
 
                                     <div>
-                                        <a ng-click="model.register(user)" class="btn btn-block btn-info">Register</a>
+                                        <a ng-click="userForm.$valid && model.register(user)" class="btn btn-block btn-info">Register</a>
                                     </div>
                                     <br/>
                                 </div>
