@@ -45,7 +45,10 @@
 
 
         function createUser(user) {
-            console.log(user);
+
+            vm.createUserError = null;
+            vm.createUserSuccess = null;
+
             var promise = UserService.createUser(user);
 
             promise.success(onCreateUserSuccess);
@@ -68,6 +71,9 @@
          *
          */
         function registerRecruiter(recruiter) {
+
+            vm.createRecruiterError = null;
+            vm.createRecruiterSuccess = null;
 
             var promise = RecruiterService.createRecruiter(recruiter);
 

@@ -24,29 +24,33 @@
         <br/>
         <br/>
 
-        <div class="col-sm-12" ng-show="model.selectedMessage && model.currentUID != model.selectedMessage.senderId">
-            <h5>Reply</h5>
-            <div class="col-sm-12">
-                <textarea class="col-sm-12" rows="5" ng-model="model.replyMessage.message"></textarea>
+        <form name="replyForm">
+            <div class="col-sm-12" ng-show="model.selectedMessage && model.currentUID != model.selectedMessage.senderId">
+                <h5>Reply</h5>
+                <div class="col-sm-12">
+                    <textarea name="message" required class="col-sm-12" rows="5" ng-model="model.replyMessage.message"></textarea>
+                    <div ng-messages="replyForm.message.$touched && replyForm.message.$error">
+                        <p class="text-warning" ng-message="required">Please write reply.</p>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <div class="col-sm-12">
+                    <a class="btn btn-primary btn-sm" ng-click="replyForm.$valid && model.sendMessage(model.replyMessage)">Send</a>
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-            <div class="col-sm-12">
-                <a class="btn btn-primary btn-sm" ng-click="model.sendMessage(model.replyMessage)">Send</a>
-            </div>
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-        </div>
-
+        </form>
         <h5 ng-show="model.currentUID == model.selectedMessage.senderId" class="label label-info">Sent by You.</h5>
         <br/><br/>
 
