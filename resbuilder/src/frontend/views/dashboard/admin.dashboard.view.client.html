@@ -86,192 +86,224 @@
             <h2 class="text-center">Quick Controls</h2>
         </div>
 
+
         <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="custom-card-v2 custom-card-2">
-                    <div class="col-md-12">
-                        <h3 class="text-center">Create New User</h3>
-                    </div>
+            <form name="createUserForm" novalidate>
+                <div class="col-md-6">
+                    <div class="custom-card-v2 custom-card-2">
+                        <div class="col-md-12">
+                            <h3 class="text-center">Create New User</h3>
+                        </div>
 
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <div ng-show="model.createUserError" class="alert alert-danger" role="alert">
-                                {{model.createUserError}}
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <div ng-show="model.createUserError" class="alert alert-danger" role="alert">
+                                    {{model.createUserError}}
+                                </div>
+                                <div ng-show="model.createUserSuccess" class="alert alert-success" role="alert">
+                                    {{model.createUserSuccess}}
+                                </div>
+                                <br/>
                             </div>
-                            <div ng-show="model.createUserSuccess" class="alert alert-success" role="alert">
-                                {{model.createUserSuccess}}
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" name="username" required ng-model="user.username" autocomplete="off" ng-change="model.checkUsernameAvailability(user.username)" class="form-control" id="inputUsername" placeholder="Username">
                             </div>
-                            <br/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" ng-model="user.username" autocomplete="off" ng-change="model.checkUsernameAvailability(user.username)" class="form-control" id="inputUsername" placeholder="Username">
-                        </div>
-                        <span class="help-block col-sm-8 col-sm-offset-2">{{model.checkUsername}}</span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" ng-model="user.password" class="form-control" id="inputPassword" placeholder="Password">
-                        </div>
-                        <span class="help-block col-sm-8 col-sm-offset-2">{{model.checkPassword}}</span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" ng-model="user.repassword" class="form-control" id="inputRePassword" placeholder="Retype Password">
-                        </div>
-                        <span class="help-block col-sm-8 col-sm-offset-2" ng-show="model.checkRePassword">{{model.checkRePassword}}</span>
-
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" ng-model="user.firstName" class="form-control" id="inputFirstName" placeholder="First Name">
-                        </div>
-                        <span class="help-block col-sm-8 col-sm-offset-2" ng-show="model.checkFirstName">{{model.checkFirstName}}</span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
-                            <input type="text" ng-model="user.lastName" class="form-control" placeholder="Last Name">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input type="email" ng-model="user.email" class="form-control" placeholder="Email">
-                        </div>
-                        <span class="help-block col-sm-8 col-sm-offset-2" ng-show="model.checkEmail">{{model.checkEmail}}</span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-                            <select class="form-control" ng-init="user.role = 'USER'" ng-model="user.role" id="select">
-                                <option >USER</option>
-                                <option>ADMIN</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-8 col-sm-offset-2">
-                            <div>
-                                <a ng-click="model.createUser(user)" class="btn btn-block btn-primary">Create</a>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createUserForm.username.$touched && createUserForm.username.$error">
+                                <p class="text-warning" ng-message="required">Please enter username.</p>
                             </div>
-                            <br/>
+                            <span class="help-block col-sm-8 col-sm-offset-2">{{model.checkUsername}}</span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" name="password" required ng-model="user.password" class="form-control" id="inputPassword" placeholder="Password">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createUserForm.password.$touched && createUserForm.password.$error">
+                                <p class="text-warning" ng-message="required">Please enter password.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" name="repassword" required ng-model="user.repassword" class="form-control" id="inputRePassword" placeholder="Retype Password">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2"
+                                 ng-messages="(createUserForm.repassword.$touched && createUserForm.repassword.$error)">
+                                <p class="text-warning" ng-message="required">Retype password.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" name="firstName" required ng-model="user.firstName" class="form-control" id="inputFirstName" placeholder="First Name">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2"
+                                 ng-messages="(createUserForm.firstName.$touched && createUserForm.firstName.$error)">
+                                <p class="text-warning" ng-message="required">Firstname is required.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
+                                <input type="text" ng-model="user.lastName" class="form-control" placeholder="Last Name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input type="email" name="email" required ng-model="user.email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2"
+                                 ng-messages="(createUserForm.email.$touched && createUserForm.email.$error)">
+                                <p class="text-warning" ng-message="required">Email is required.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+                                <select class="form-control" ng-init="user.role = 'USER'" ng-model="user.role" id="select">
+                                    <option >USER</option>
+                                    <option>ADMIN</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div>
+                                    <a ng-click="createUserForm.$valid && model.createUser(user)" class="btn btn-block btn-primary">Create</a>
+                                </div>
+                                <br/>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
 
+            <form name="createRecruiterForm">
+                <div class="col-md-6">
+                    <div class="custom-card-v2 custom-card-2">
+                        <div class="col-md-12">
+                            <h3 class="text-center">Create New Recruiter</h3>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
 
-            <div class="col-md-6">
-                <div class="custom-card-v2 custom-card-2">
-                    <div class="col-md-12">
-                        <h3 class="text-center">Create New Recruiter</h3>
-                    </div>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <div ng-show="model.createRecruiterError" class="alert alert-danger" role="alert">
-                                {{model.createRecruiterError}}
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <div ng-show="model.createRecruiterError" class="alert alert-danger" role="alert">
+                                    {{model.createRecruiterError}}
+                                </div>
+                                <div ng-show="model.createRecruiterSuccess" class="alert alert-success" role="alert">
+                                    {{model.createRecruiterSuccess}}
+                                </div>
+                                <br/>
                             </div>
-                            <div ng-show="model.createRecruiterSuccess" class="alert alert-success" role="alert">
-                                {{model.createRecruiterSuccess}}
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" name="username" required ng-model="recruiter.username" autocomplete="off" ng-change="model.checkRecruiterUsernameAvailability(recruiter.username)" class="form-control" id="inputUsername" placeholder="Username">
                             </div>
-                            <br/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" ng-model="recruiter.username" autocomplete="off" ng-change="model.checkRecruiterUsernameAvailability(recruiter.username)" class="form-control" id="inputUsername" placeholder="Username">
-                        </div>
-                        <span class="help-block col-sm-8 col-sm-offset-2" ng-show="model.checkRecruiterUsername">{{model.checkRecruiterUsername}}</span>
-
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-circle"></i></span>
-                            <input type="text" ng-model="recruiter.companyname" required class="form-control" id="inputCompanyName" placeholder="Company Name">
-                        </div>
-                        <span class="help-block" ng-show="model.checkCompanyName">{{model.checkCompanyName}}</span>
-
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" ng-model="recruiter.password" class="form-control" id="inputPassword" placeholder="Password">
-                        </div>
-                        <span class="help-block" ng-show="model.checkRecruiterPassword">{{model.checkRecruiterPassword}}</span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" ng-model="recruiter.repassword" class="form-control" id="inputRePassword" placeholder="Retype Password">
-                        </div>
-                        <span class="help-block" ng-show="model.checkRecruiterRePassword">{{model.checkRecruiterRePassword}}</span>
-
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-link"></i></span>
-                            <input type="text" ng-model="recruiter.website" class="form-control" id="inputWebsite" placeholder="Company Website Url">
-                        </div>
-                        <span class="help-block" ng-show="model.checkWebsite">{{model.checkWebsite}}</span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                            <textarea type="text" ng-model="recruiter.description" rows="1" class="form-control" id="inputDescription" placeholder="Description"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group col-sm-8 col-sm-offset-2">
-                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input type="email" ng-model="recruiter.email" class="form-control" placeholder="Email">
-                        </div>
-                        <span class="help-block" ng-show="model.checkRecruiterEmail">{{model.checkRecruiterEmail}}</span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-8 col-sm-offset-2">
-
-                            <div>
-                                <a ng-click="model.registerRecruiter(recruiter)" class="btn btn-block btn-primary">Register</a>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createRecruiterForm.username.$touched && createRecruiterForm.username.$error">
+                                <p class="text-warning" ng-message="required">Please enter username.</p>
                             </div>
-                            <br/>
+                            <span class="help-block col-sm-8 col-sm-offset-2" ng-show="model.checkRecruiterUsername">{{model.checkRecruiterUsername}}</span>
+
                         </div>
-                    </div>
-                    </div>
-            </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-circle"></i></span>
+                                <input type="text" name="companyname" ng-model="recruiter.companyname" required class="form-control" id="inputCompanyName" placeholder="Company Name">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createRecruiterForm.companyname.$touched && createRecruiterForm.companyname.$error">
+                                <p class="text-warning" ng-message="required">Please enter Company Name.</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" name="password" required ng-model="recruiter.password" class="form-control" id="inputPassword" placeholder="Password">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createRecruiterForm.password.$touched && createRecruiterForm.password.$error">
+                                <p class="text-warning" ng-message="required">Please enter password.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" name="repassword" required ng-model="recruiter.repassword" class="form-control" id="inputRePassword" placeholder="Retype Password">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createRecruiterForm.repassword.$touched && createRecruiterForm.repassword.$error">
+                                <p class="text-warning" ng-message="required">Please reenter password.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                                <input type="text" name="website" required ng-model="recruiter.website" class="form-control" id="inputWebsite" placeholder="Company Website Url">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createRecruiterForm.website.$touched && createRecruiterForm.website.$error">
+                                <p class="text-warning" ng-message="required">Please provide website.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                                <textarea type="text" name="description" required ng-model="recruiter.description" rows="1" class="form-control" id="inputDescription" placeholder="Description"></textarea>
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createRecruiterForm.description.$touched && createRecruiterForm.description.$error">
+                                <p class="text-warning" ng-message="required">Please provide description.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group col-sm-8 col-sm-offset-2">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input type="email" name="email" required ng-model="recruiter.email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2" ng-messages="createRecruiterForm.email.$touched && createRecruiterForm.email.$error">
+                                <p class="text-warning" ng-message="required">Please provide email.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+
+                                <div>
+                                    <a ng-click="createRecruiterForm.$valid && model.registerRecruiter(recruiter)" class="btn btn-block btn-primary">Register</a>
+                                </div>
+                                <br/>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+            </form>
         </div>
     </div>
 

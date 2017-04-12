@@ -21,12 +21,15 @@
         return api
 
         this.jobDesURl = "";
+
         function getResumeData(uid,url) {
             return $http.get("/api/getResumeData/"+uid+"/?url="+url);
         }
+
         function setUrl(url) {
             this.jobDesURl = url;
         }
+
         function getUrl() {
             return this.jobDesURl;
         }

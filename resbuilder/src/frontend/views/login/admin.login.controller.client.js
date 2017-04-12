@@ -12,7 +12,7 @@
                 vm.error = null;
 
                 //functions
-                vm.login = login;;
+                vm.login = login;
 
             }
 
