@@ -27,12 +27,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // configure a public directory to host static content
-app.use(express.static(__dirname + '/frontend'));
+app.use(express.static(__dirname + '/../frontend'));
 
 //require ("./test/app.js")(app);
-var mongooseAPI = require("./backend/model/server")(app);
+var mongooseAPI = require("./model/server")(app);
 
-require("./backend/app.js")(app, mongooseAPI, passport);
+require("./app.js")(app, mongooseAPI, passport);
 
 var port = process.env.PORT || 3000;
 app.listen(port);

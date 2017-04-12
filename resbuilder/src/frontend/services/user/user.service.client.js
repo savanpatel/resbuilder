@@ -18,6 +18,7 @@
             "deleteUser": deleteUser,
             "checkUsernameAvailable":checkUsernameAvailable,
             "findAdminUserByCredentials":findAdminUserByCredentials,
+            "updateUserPassword":updateUserPassword,
             "logout":logout
         };
 
@@ -77,6 +78,9 @@
             var postRequestUrl = USER_SERVICE_URL + "/login";
             return $http.post(postRequestUrl, reqBody);
         }
+
+
+
         /*
          * Updates the user with the new user information provided.
          * Returns  promise.
@@ -110,5 +114,11 @@
             return $http.get(logoutUrl);
         }
 
+
+        /*updates user password*/
+        function updateUserPassword(userId, passwordInfo) {
+            var updateUserPasswordUrl = USER_SERVICE_URL + "/" + userId + "/updatepassword";
+            return $http.put(updateUserPasswordUrl, passwordInfo);
+        }
     }
 })();
