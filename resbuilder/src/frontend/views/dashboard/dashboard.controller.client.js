@@ -175,27 +175,23 @@
 
         function GetResumeData(sw) {
 
+
             console.log("SW")
             console.log(sw)
 
             if(sw === 0) {
 
                 ResumeDataService.setUrl(vm.JobURL);
-                $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
+
             }
             else {
+                console.log("create resume")
                 ResumeDataService.setUrl(sw);
-                $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
+
             }
+            $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
         }
 
-        function onGettingResumeData(data) {
-            console.log(data)
-        }
-        function OnErrorGettingResumeData(error) {
-            vm.error = "error while rendering data" + error;
-
-        }
 
         function onFetchJobSuccess(response) {
 

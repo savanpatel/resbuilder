@@ -17,9 +17,7 @@ module.exports = function (app,mongooseAPI) {
     var auth = authorized;
 
 
-    app.post("/api/generateResume/:uid",auth, createDoc);
-
-
+    app.post("/api/getResumeData/:uid",auth, createDoc);
 
     /*Passport related functions*/
 
@@ -34,7 +32,7 @@ module.exports = function (app,mongooseAPI) {
 
     function createDoc(req, res) {
 
-
+        console.log("in create Doc")
         var random = Math.random().toString(36).slice(-8);
 
         var userId = req.params.uid;
@@ -108,8 +106,6 @@ module.exports = function (app,mongooseAPI) {
                 paragraph.addText(lang);
                 paragraph.addText(list_lang);
 
-
-//
 //Web Technologies
                 var lang = docx.createText("Web Technologies:").bold().break()
                 var list_lang = docx.createText(data['technical']['technologies'].join(", ")).tab();
@@ -194,7 +190,10 @@ module.exports = function (app,mongooseAPI) {
                 var output = fs.createWriteStream(__dirname + '/../../uploads/docx/' + filename + '.docx');
                 var exporter = officeClippy.exporter;
                 exporter.local(output, doc);
+
+                console.log("doc created")
                 output.on('finish', function () {
+                    console.log("pdf create")
                     createPDF(req, res,filename,userId);
                 });
 

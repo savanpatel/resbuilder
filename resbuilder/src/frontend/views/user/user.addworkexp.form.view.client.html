@@ -42,7 +42,7 @@
                 <div class="form-group">
                     <label for="startdate" class="col-lg-3 control-label">Start Date</label>
                     <div class="col-lg-9">
-                        <input type="number" name="startdate" required class="form-control" id="startdate" ng-model="model.workexp.startDate" placeholder="MM/YYYY">
+                        <input type="text" name="startdate" required class="form-control" id="startdate" ng-model="model.workexp.startDate" placeholder="MM/YYYY">
                     </div>
                     <div ng-messages="workForm.startdate.$touched && workForm.startdate.$error">
                         <p class="text-warning" ng-message="required">the start date is required.</p>

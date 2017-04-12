@@ -7,10 +7,10 @@ module.exports = function (app, mongooseAPI) {
     app.delete("/api/admin/:adminId/user/:userId",authoriseAdmin,deleteUserByAdmin);
     app.delete("/api/admin/:adminId/recruiter/:recruiterId",authoriseAdmin,deleteUserByRecruiter);
     app.get('/api/admin/', getAdminInfo);
+    app.get('/api/admin/:adminId/logout',authoriseAdmin,logout);
 
     var UserModel = mongooseAPI.userModelAPI;
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
-
 
     function getAdminInfo(req, res) {
 
@@ -20,7 +20,6 @@ module.exports = function (app, mongooseAPI) {
                     var adminInfo = {
                         adminId: dbAdmin._id,
                     };
-
                     res.send(adminInfo);
                 } else{
                     res.sendStatus(500).send("Could not fetch admin info");
@@ -297,9 +296,6 @@ function getAdminInfo(req, res) {
                             });
                     }
                 }
-
-
-
 
     function logout(req, res) {
         req.logOut();
