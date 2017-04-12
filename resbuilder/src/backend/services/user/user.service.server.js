@@ -7,6 +7,8 @@ module.exports = function (app, mongooseAPI, passport) {
 
     var LocalStrategy = require('passport-local').Strategy;
     LinkedInStrategy = require('passport-linkedin').Strategy;
+    var bcrypt = require("bcrypt-nodejs");
+
 
     var auth = authorized;
 
@@ -187,6 +189,8 @@ module.exports = function (app, mongooseAPI, passport) {
                 });
         }
         else {
+
+
             UserModel
                 .findUserByCredentials(username, password)
                 .then(function (user) {
@@ -270,6 +274,7 @@ module.exports = function (app, mongooseAPI, passport) {
 
         var user = req.body;
 
+        user.password = bcrypt.hashSync(user.password);
 
 
         if(null == user){

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c86c043d-edff-4035-8464-46cadb70e136" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/frontend/views/register/register.view.client.html" afterPath="$PROJECT_DIR$/src/frontend/views/register/register.view.client.html" />
-    </list>
+    <list default="true" id="c86c043d-edff-4035-8464-46cadb70e136" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -20,16 +18,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="user.addproject.form.view.client.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/frontend/views/user/user.addproject.form.view.client.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="26" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="10" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="user.addworkexp.form.view.client.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/frontend/views/user/user.addworkexp.form.view.client.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -50,21 +38,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.project.list.view.client.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user.service.server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/backend/services/user/user.service.server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="9" column="42" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.model.server.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/backend/model/user/user.model.server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="228" column="59" lean-forward="false" selection-start-line="228" selection-start-column="59" selection-end-line="228" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.project.list.view.client.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/frontend/views/user/user.project.list.view.client.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="945">
               <caret line="63" column="89" lean-forward="false" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.education.edit.view.client.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/frontend/views/user/user.education.edit.view.client.html">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/backend/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="22" column="23" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="keys-job-description.service.server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/backend/services/job-description-keywords/keys-job-description.service.server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="122" column="39" lean-forward="true" selection-start-line="122" selection-start-column="39" selection-end-line="122" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -73,8 +91,28 @@
       <file leaf-file-name="register.view.client.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/frontend/views/register/register.view.client.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="39" column="38" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="39" selection-end-column="38" />
+            <state relative-caret-position="885">
+              <caret line="98" column="53" lean-forward="false" selection-start-line="98" selection-start-column="53" selection-end-line="98" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.view.client.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/frontend/views/login/login.view.client.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2294">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.dashboard.view.client.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/frontend/views/dashboard/admin.dashboard.view.client.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2744">
+              <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -102,7 +140,6 @@
       <find>old_items</find>
       <find>id</find>
       <find>$scope</find>
-      <find>create</find>
       <find>Create</find>
       <find>admin</find>
       <find>user</find>
@@ -117,6 +154,7 @@
       <find>findUserByCredentials</find>
       <find>login</find>
       <find>passport.authenticate</find>
+      <find>create</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -125,7 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/backend/services/document-generate/doc-generate.service.server.js" />
         <option value="$PROJECT_DIR$/src/frontend/views/resumes/resumes.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/resumes/resume-thumbnail.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/services/resume/resume.service.client.js" />
@@ -158,9 +195,7 @@
         <option value="$PROJECT_DIR$/src/frontend/views/message/user.message.list.controller.client.js" />
         <option value="$PROJECT_DIR$/src/frontend/views/admin/delete.js" />
         <option value="$PROJECT_DIR$/src/backend/model/recruiter/recruiter.model.server.js" />
-        <option value="$PROJECT_DIR$/src/backend/model/user/user.model.server.js" />
         <option value="$PROJECT_DIR$/src/backend/services/admin/admin.service.server.js" />
-        <option value="$PROJECT_DIR$/src/backend/services/user/user.service.server.js" />
         <option value="$PROJECT_DIR$/src/frontend/app.js" />
         <option value="$PROJECT_DIR$/src/frontend/index.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/register/recruiter-register.view.client.html" />
@@ -170,12 +205,15 @@
         <option value="$PROJECT_DIR$/src/frontend/views/dashboard/dashboard.controller.client.js" />
         <option value="$PROJECT_DIR$/src/frontend/views/recruiter/recruiter.basicprofile.edit.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.basicprofile.edit.view.client.html" />
-        <option value="$PROJECT_DIR$/src/frontend/views/register/register.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.addeducation.form.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.addproject.form.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.addworkexp.form.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.education.edit.view.client.html" />
         <option value="$PROJECT_DIR$/src/frontend/views/user/user.project.list.view.client.html" />
+        <option value="$PROJECT_DIR$/src/backend/package.json" />
+        <option value="$PROJECT_DIR$/src/frontend/views/register/register.view.client.html" />
+        <option value="$PROJECT_DIR$/src/backend/services/user/user.service.server.js" />
+        <option value="$PROJECT_DIR$/src/backend/model/user/user.model.server.js" />
       </list>
     </option>
   </component>
@@ -261,32 +299,6 @@
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resbuilder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resbuilder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -311,6 +323,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="register" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="login" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -379,6 +417,10 @@
               <option name="myItemId" value="services" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -401,8 +443,52 @@
               <option name="myItemId" value="services" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="job-description-keywords" />
+              <option name="myItemId" value="resbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resbuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -529,12 +615,12 @@
       <workItem from="1491804564203" duration="2775000" />
       <workItem from="1491847118937" duration="13541000" />
       <workItem from="1491927007521" duration="2364000" />
-      <workItem from="1491936688791" duration="13390000" />
+      <workItem from="1491936688791" duration="15817000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114779000" />
+    <option name="totallyTimeSpent" value="117206000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="36" width="1280" height="728" extended-state="0" />
@@ -542,11 +628,11 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33042097" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32674772" sideWeight="0.50277996" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32674772" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32674772" sideWeight="0.49722" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2494043" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.49722" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -587,20 +673,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/frontend/views/user/user.basicprofile.edit.controller.client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/backend/services/user/education.service.server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/frontend/views/resume-edit/resume-edit.view.client.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -723,14 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/backend/model/user/user.model.server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3435">
-          <caret line="232" column="11" lean-forward="true" selection-start-line="232" selection-start-column="11" selection-end-line="232" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/frontend/services/admin/admin.service.client.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -767,14 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3855">
           <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/backend/services/user/user.service.server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <caret line="13" column="46" lean-forward="false" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -839,22 +895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-405">
           <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/frontend/views/dashboard/admin.dashboard.view.client.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/backend/services/job-description-keywords/keys-job-description.service.server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -925,14 +965,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/frontend/views/register/register.view.client.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="39" column="38" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="39" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/frontend/views/user/user.addproject.form.view.client.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -967,8 +999,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/frontend/views/user/user.project.list.view.client.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="945">
           <caret line="63" column="89" lean-forward="false" selection-start-line="63" selection-start-column="89" selection-end-line="63" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/backend/services/job-description-keywords/keys-job-description.service.server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="122" column="39" lean-forward="true" selection-start-line="122" selection-start-column="39" selection-end-line="122" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/backend/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="22" column="23" lean-forward="false" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frontend/views/register/register.view.client.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="98" column="53" lean-forward="false" selection-start-line="98" selection-start-column="53" selection-end-line="98" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frontend/views/login/login.view.client.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2294">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frontend/views/dashboard/admin.dashboard.view.client.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2744">
+          <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/backend/services/user/user.service.server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="9" column="42" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/backend/model/user/user.model.server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="228" column="59" lean-forward="false" selection-start-line="228" selection-start-column="59" selection-end-line="228" selection-end-column="59" />
           <folding />
         </state>
       </provider>
