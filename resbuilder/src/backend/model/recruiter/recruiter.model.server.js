@@ -21,7 +21,7 @@ module.exports = function (app, mongoose, logger) {
         findBlockedRecruiters:findBlockedRecruiters,
         findUnBlockedRecruiters:findUnBlockedRecruiters,
         checkUsernameAvailable:checkUsernameAvailable,
-        updateRecruiterPasswordByAdmin:updateRecruiterPasswordByAdmin
+        updateRecruiterPasswordByAdmin:updateRecruiterPasswordByAdmin,
         updateRecruiterPassword:updateRecruiterPassword
     };
 
