@@ -164,7 +164,7 @@ module.exports = function (app, mongoose, logger) {
                 deferred.reject(err);
             }
             else {
-                deferred.resolve(dbRecruiter);
+                deferred.resolve(recruiter);
             }
         });
 
