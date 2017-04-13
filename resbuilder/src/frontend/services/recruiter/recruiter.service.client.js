@@ -18,6 +18,7 @@
             "deleteRecruiter": deleteRecruiter,
             "checkUsernameAvailable":checkUsernameAvailable,
             "findUsersBySkill":findUsersBySkill,
+            "updateRecruiterPassword":updateRecruiterPassword,
             "logout":logout
         };
 
@@ -110,6 +111,12 @@
         function logout(recruiterId) {
             var logoutUrl = RECRUITER_SERVICE_URL + "/" + recruiterId + "/logout";
             return $http.get(logoutUrl);
+        }
+
+
+        function updateRecruiterPassword(recruiterId, passwordInfo) {
+            var updateRecruiterPasswordUrl = RECRUITER_SERVICE_URL + "/" + recruiterId + "/updatepassword";
+            return $http.put(updateRecruiterPasswordUrl, passwordInfo);
         }
     }
 })();
