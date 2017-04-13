@@ -17,6 +17,7 @@ module.exports = function (app, mongoose, logger) {
         updateUser:updateUser,
         deleteUser:deleteUser,
         checkUsernameAvailable:checkUsernameAvailable,
+        updateUserPassword:updateUserPassword,
         findUserByEmail:findUserByEmail,
         findAllUsers:findAllUsers,
         findBlockedUsers:findBlockedUsers,
@@ -24,10 +25,43 @@ module.exports = function (app, mongoose, logger) {
         findUsersForIds:findUsersForIds,
         isAdmin: isAdmin,
         getAdminInfo:getAdminInfo,
-        updateUserPassword:updateUserPassword
+        updateUserPasswordByAdmin:updateUserPasswordByAdmin
     };
 
     return api;
+
+
+    function updateUserPasswordByAdmin(userId,newPassWord) {
+
+        var deferred = q.defer();
+        console.log("user")
+        console.log(userId)
+
+        newPassWord = bcrypt.hashSync(newPassWord);
+
+        UserModel.findById(userId, function (err, dbUser) {
+
+            if(err){
+                logger.error('Unable to find user.' + err);
+                deferred.reject(err);
+            } else {
+
+                UserModel.update({_id:userId},{$set:{password:newPassWord}}, function (err, dbUser) {
+                    if(err) {
+                        logger.error("Can not update user with id " + userId  + " Error: " + err);
+                        deferred.reject(err);
+                    }
+                    else {
+                        deferred.resolve("done");
+                    }
+                });
+            }
+        });
+
+
+        return deferred.promise;
+
+    }
 
     function isAdmin(userId) {
 
@@ -376,5 +410,4 @@ module.exports = function (app, mongoose, logger) {
 
         return deferred.promise;
     }
-
 }

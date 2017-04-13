@@ -18,6 +18,10 @@
 
         function init() {
 
+            vm.updateRecruiterPassword = updateRecruiterPassword;
+
+            vm.checkUsernameAvailability = checkUsernameAvailability;
+
             vm.aid = $routeParams['aid'];
             vm.recruiterId = $routeParams['rid'];
             vm.rid = $routeParams['rid'];
@@ -33,6 +37,52 @@
         }
 
         init();
+
+        function checkUsernameAvailability(username){
+
+            var promise = UserService.checkUsernameAvailable(username);
+
+            promise.success(onCheckUsernameAvailableSuccess);
+            promise.error(onCheckUsernameAvailableError);
+
+        }
+
+        /*sets helper message if username is not available.*/
+        function onCheckUsernameAvailableSuccess(response) {
+            if(response.isAvailable == false){
+                vm.checkUsername = "username not available.";
+            }
+            else{
+                vm.checkUsername = "username available";
+            }
+        }
+
+
+        /*sets helper message if username availability check failed.*/
+        function onCheckUsernameAvailableError(response) {
+            vm.checkUsername = null;
+
+        }
+
+        function updateRecruiterPassword(uid,newpassword) {
+            var promise = AdminService.updateRecruiterPassword(vm.aid,uid,newpassword);
+
+            promise
+                .success(passwordUpdated)
+                .error(passwordUpdateError)
+        }
+
+        function passwordUpdated(response) {
+
+            vm.passwordError = "password Updated Successfully"
+
+        }
+
+        function passwordUpdateError(err) {
+            vm.passwordError = "password not Updated Successfully" + err
+        }
+
+
 
         function fetchNewMessageCount(adminId) {
             var promise = MessageService.getNewMessageCountByReceiverId(adminId);

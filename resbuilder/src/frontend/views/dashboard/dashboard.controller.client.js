@@ -47,7 +47,7 @@
         }
 
         function downloadResume(resumeid) {
-            window.open("http://localhost:3000/api/downloadResumePDF/"+resumeid);
+            window.open("/api/downloadResumePDF/"+resumeid);
         }
 
         function deleteResume(index) {
@@ -97,7 +97,7 @@
 
             for(var j = 0;j<loop;j++){
                 var jsonResume = {
-                    "url": "http://localhost:3000/api/displayResumePDF/" + resumes[j]["_id"],
+                    "url": "/api/displayResumePDF/" + resumes[j]["_id"],
                     "_id":resumes[j]["_id"]
                 }
                 urls.push(jsonResume);

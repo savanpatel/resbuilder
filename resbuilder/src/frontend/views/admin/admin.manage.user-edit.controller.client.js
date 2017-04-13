@@ -13,9 +13,11 @@
 
         function init() {
 
+            vm.updateUserPassword = updateUserPassword;
             vm.userId = $routeParams['uid'];
             vm.uid = $routeParams['uid'];
             vm.update = update;
+            vm.checkUsernameAvailability = checkUsernameAvailability;
 
             vm.aid = $routeParams['aid'];
             var promise = UserService.findUserById(vm.userId);
@@ -27,6 +29,50 @@
 
 
         init();
+
+        function checkUsernameAvailability(username){
+
+            var promise = UserService.checkUsernameAvailable(username);
+
+            promise.success(onCheckUsernameAvailableSuccess);
+            promise.error(onCheckUsernameAvailableError);
+
+        }
+
+        /*sets helper message if username is not available.*/
+        function onCheckUsernameAvailableSuccess(response) {
+            if(response.isAvailable == false){
+                vm.checkUsername = "username not available.";
+            }
+            else{
+                vm.checkUsername = "username available";
+            }
+        }
+
+
+        /*sets helper message if username availability check failed.*/
+        function onCheckUsernameAvailableError(response) {
+            vm.checkUsername = null;
+
+        }
+
+        function updateUserPassword(uid,newpassword) {
+            var promise = AdminService.updateUserPassword(vm.aid,uid,newpassword);
+
+            promise
+                .success(passwordUpdated)
+                .error(passwordUpdateError)
+        }
+
+        function passwordUpdated(response) {
+
+            vm.passwordError = "password Updated Successfully"
+
+        }
+
+        function passwordUpdateError(err) {
+            vm.passwordError = "password not Updated Successfully" + err
+        }
 
         function fetchNewMessageCount(adminId) {
             var promise = MessageService.getNewMessageCountByReceiverId(adminId);
@@ -53,9 +99,7 @@
         }
 
         function unSuccessfulUpdate(err) {
-            vm.error = "UnSuccessfully updated"
-            console.log(err);
-
+            vm.error = "UnSuccessfully updated" + err
         }
 
         /*---- Promise functions*/

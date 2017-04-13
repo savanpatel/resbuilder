@@ -1,7 +1,7 @@
 <div ng-include="'./views/menu/admin.menu.view.client.html'"></div>
 <div class="container container-if-fixed-header">
     <div class="row">
-        <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6">
+        <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6 custom-card-2">
             <div id="">
                 <form class="form-horizontal" name="editUserForm">
                     <fieldset>
@@ -14,21 +14,10 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label" for="username">Username</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="username" type="text" placeholder="username" ng-model="model.user.username" disabled="">
+                                <input class="form-control" id="username" type="text" ng-change="model.checkUsernameAvailability(user.username)" placeholder="username" ng-model="model.user.username">
+                                <span class="help-block" ng-show="model.checkUsername">{{model.checkUsername}}</span>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="password" class="col-lg-2 control-label">Password</label>
-                            <div class="col-lg-10">
-                                <input type="text" name="password" required class="form-control" id="password" ng-model="model.user.password" placeholder="Password">
-                            </div>
-                            <div class="col-sm-8 col-sm-offset-2" ng-messages="editUserForm.password.$touched && editUserForm.password.$error">
-                                <p class="text-warning" ng-message="required">Password is missing.</p>
-                            </div>
-                        </div>
-
-
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Make Profile Public</label>
                             <div class="col-lg-10">
@@ -36,9 +25,6 @@
                             </div>
                         </div>
 
-                        <hr/>
-                        <br/>
-                        <br/>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <button type="submit" class="btn btn-block btn-primary" ng-click="editUserForm.$valid && model.update(model.userId)">Update</button>
@@ -48,5 +34,46 @@
                 </form>
             </div>
         </div>
+
+        <div class="col-sm-12 col-xs-12 col-lg-6 col-md-6 custom-card-2">
+            <div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <form name="passwordForm"class="form-horizontal" novalidate>
+                    <fieldset>
+                        <legend class="text-center">Update Password</legend>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <span class="form-control help-block"  ng-show="model.passwordError" ng-model="model.error" disabled="">{{model.passwordError}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="username">New Password</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="newPassword" required id="newPassword" type="password" placeholder="New Password" ng-model="model.newPassword">
+                            </div>
+                            <div ng-messages="passwordForm.newPassword.$touched && passwordForm.newPassword.$error">
+                                <p class="text-warning" ng-message="required">Please provide new password</p>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-2">
+                                <button type="submit" class="btn btn-block btn-primary" ng-click="passwordForm.$valid && model.updateUserPassword(model.userId,model.newPassword)">Update Password</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+
+
     </div>
 </div>
