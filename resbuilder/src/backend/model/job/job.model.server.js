@@ -68,11 +68,9 @@ module.exports = function (app, mongoose, logger) {
      */
     function findJobForUser(userId) {
 
-        console.log("inmodal")
-        console.log(userId)
+
         var deferred = q.defer();
         JobModel.find({userId:userId}, function (err, dbJob) {
-            console.log(dbJob)
             if(err && !dbJob){
                 logger.error("Can not find job for user " + userId + " Error: "+ err);
                 deferred.reject(err);

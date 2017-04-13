@@ -4,7 +4,7 @@
         .module("ResumeBuilder")
         .controller("ResumesController", ResumesController);
 
-    function ResumesController($location, $routeParams, ResumeService) {
+    function ResumesController($location, $routeParams, ResumeService,UserService) {
 
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
@@ -17,6 +17,7 @@
 
             vm.editResume = editResume;
             vm.deleteResume = deleteResume;
+            vm.logout = logout;
             vm.downloadResumePdf = downloadResumePdf;
             vm.downlaodResumeDocx = downlaodResumeDocx;
             var promise = ResumeService.findResumeforUser(vm.uid);
@@ -24,6 +25,27 @@
             promise
                 .success(renderAllResume)
                 .error(errorRenderAllResume)
+        }
+
+        function logout() {
+
+            var promise = UserService.logout(vm.uid);
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
         }
 
         init()

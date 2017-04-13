@@ -12,9 +12,8 @@ module.exports = function (app, mongooseAPI) {
     app.delete("/api/job/:jobId", checkAuthorizedUser, deleteJob);
 
 
-    console.log("in job")
-    var JobModel = mongooseAPI.jobModelAPI;
 
+    var JobModel = mongooseAPI.jobModelAPI;
 
     function checkAuthorizedUser (req, res, next) {
         // if (!req.isAuthenticated()) {
@@ -42,7 +41,7 @@ module.exports = function (app, mongooseAPI) {
         }
 
 
-        console.log(job);
+
         // create job in db.
         JobModel.createJob(job)
             .then(function (dbJob){
@@ -94,7 +93,7 @@ module.exports = function (app, mongooseAPI) {
     function findJobForUser(req, res) {
 
         var userId = req.params.userId;
-        console.log(userId);
+
         if(userId == null){
             res.sendStatus(500).send("null userId");
             return;
