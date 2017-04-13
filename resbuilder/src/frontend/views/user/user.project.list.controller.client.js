@@ -199,6 +199,7 @@
         function onCreateProjectSuccess(response) {
 
             findProjectListForUser(vm.userId);
+            vm.project = null;
         }
 
         function onCreateProjectError(err) {

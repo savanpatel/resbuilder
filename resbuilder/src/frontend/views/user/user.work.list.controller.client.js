@@ -100,6 +100,7 @@
          */
         function onCreateWorkExpSuccess(response) {
             findWorkExpForUser(vm.userId);
+            vm.workexp = null;
         }
 
         function onCreateWorkExpError(err) {

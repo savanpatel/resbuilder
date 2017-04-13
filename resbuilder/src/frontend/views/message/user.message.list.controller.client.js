@@ -21,6 +21,7 @@
             vm.success = false;
             vm.error = null;
             vm.messageList = [];
+            vm.isUser = true;
 
             vm.currentUID = vm.uid;
             vm.logout = logout;
@@ -92,7 +93,7 @@
 
         /*---- Promise functions*/
         function onFindMessageByReceiverIdSuccess(response) {
-            if(response.length == 0){
+            if(response.length == 0 && vm.messageList == 0){
                 vm.error = "No messages!";
             } else{
                 vm.error = null;
@@ -158,7 +159,7 @@
 
         function onFindMessageBySenderIdSuccess(response) {
 
-            if(response.length == 0){
+            if(response.length == 0 && messageList == 0){
                 vm.error = "No messages!";
             } else{
                 vm.error = null;
