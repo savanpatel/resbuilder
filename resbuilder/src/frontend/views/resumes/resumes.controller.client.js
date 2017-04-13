@@ -15,8 +15,10 @@
             vm.isCollapsed = false;
             vm.uid = $routeParams['uid'];
 
+            vm.editResume = editResume;
             vm.deleteResume = deleteResume;
-            vm.downloadResume = downloadResume;
+            vm.downloadResumePdf = downloadResumePdf;
+            vm.downlaodResumeDocx = downlaodResumeDocx;
             var promise = ResumeService.findResumeforUser(vm.uid);
 
             promise
@@ -26,7 +28,17 @@
 
         init()
 
-        function downloadResume(resumeid) {
+        function editResume(rid) {
+            console.log("clicked on resume")
+
+            $location.url("/user/" + vm.uid +"/dashboard/resumeEdit/" +rid);
+
+        }
+        function downlaodResumeDocx(resumeid) {
+            window.open("/api/downloadResumeDOCX/" + resumeid);
+        }
+
+        function downloadResumePdf(resumeid) {
 
             window.open("/api/downloadResumePDF/"+resumeid);
         }

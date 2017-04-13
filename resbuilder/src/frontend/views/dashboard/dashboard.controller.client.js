@@ -21,10 +21,13 @@
         function init() {
             vm.isCollapsed = false;
             vm.error = null;
+            vm.editResume = editResume;
             vm.GetResumeData = GetResumeData;
-            vm.downloadResume = downloadResume;
+            vm.downloadResumePdf = downloadResumePdf;
+            vm.downlaodResumeDocx = downlaodResumeDocx;
             vm.uid = $routeParams['uid'];
             vm.logout = logout;
+
             findJobSuggestions(vm.uid);
 
             console.log("ghbjnkml")
@@ -38,6 +41,13 @@
 
         }
 
+        function editResume(rid) {
+            console.log("clicked on resume")
+
+            $location.url("/user/" + vm.uid +"/dashboard/resumeEdit/" +rid);
+
+        }
+
         function logout() {
 
             var promise = UserService.logout(vm.uid);
@@ -46,7 +56,12 @@
             promise.error(onLogoutError);
         }
 
-        function downloadResume(resumeid) {
+        function downlaodResumeDocx(resumeid) {
+            window.open("/api/downloadResumeDOCX/" + resumeid);
+        }
+
+        function downloadResumePdf(resumeid) {
+
             window.open("/api/downloadResumePDF/"+resumeid);
         }
 

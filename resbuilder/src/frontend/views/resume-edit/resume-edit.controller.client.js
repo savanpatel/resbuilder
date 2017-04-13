@@ -6,13 +6,14 @@
 
 
 
-    function ResumeEditController($location, $routeParams, ResumeService) {
+    function ResumeEditController($location, $routeParams, ResumeService,UserService) {
 
         var vm=this;
 
         function init() {
 
             vm.isCollapsed = false;
+            vm.logout = logout;
             vm.uid = $routeParams['uid'];
             vm.resumeid = $routeParams['resumeid'];
             vm.downlaodDocx = downlaodDocx
@@ -22,6 +23,28 @@
         }
 
         init()
+
+        function logout() {
+
+            var promise = UserService.logout(vm.uid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
+        }
 
         function downlaodDocx() {
             window.open("/api/downloadResumeDOCX/" + vm.resumeid);

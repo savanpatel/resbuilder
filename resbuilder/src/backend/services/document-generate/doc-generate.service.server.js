@@ -56,7 +56,19 @@ module.exports = function (app,mongooseAPI) {
                 paragraph.title().center();
                 doc.addParagraph(paragraph);
 
-                var info = docx.createText(data['user']['contact'] + " | " + data['user']['email'] + " | " + data['user']['githubUrl'])
+                var tempList = [];
+
+                if(data['user']['contact']){
+                    tempList.push(data['user']['contact'])
+                }
+                if(data['user']['email']){
+                    tempList.push(data['user']['email'])
+                }
+                if(data['user']['githubUrl']){
+                    tempList.push(data['user']['githubUrl'])
+                }
+
+                var info = docx.createText(tempList.join(" | "))
 
                 var paragraph = docx.createParagraph()
                 paragraph.addText(info);
@@ -92,41 +104,48 @@ module.exports = function (app,mongooseAPI) {
                     doc.addParagraph(paragraph);
                 }
 
-                var education = docx.createText("TECHNICHAL KNOWLEGDE")
-                education.bold()
-                var paragraph = docx.createParagraph()
-                paragraph.addText(education).thematicBreak();
-                paragraph.heading1();
-                doc.addParagraph(paragraph);
+                if(data['technical']['languages'] && data['technical']['technologies'] && data['technical']['database'] && data['technical']['softwares'] && data['technical']['operatingSystems']) {
 
-                var tabStop = docx.createLeftTabStop(2700);
-                var paragraph = docx.createParagraph().addTabStop(tabStop);
-                var lang = docx.createText("Languages:").bold()
-                var list_lang = docx.createText(data['technical']['languages'].join(", ")).tab();
-                paragraph.addText(lang);
-                paragraph.addText(list_lang);
+                    var education = docx.createText("TECHNICHAL KNOWLEGDE")
+                    education.bold()
+                    var paragraph = docx.createParagraph()
+                    paragraph.addText(education).thematicBreak();
+                    paragraph.heading1();
+                    doc.addParagraph(paragraph);
+
+                    var tabStop = docx.createLeftTabStop(2700);
+                    var paragraph = docx.createParagraph().addTabStop(tabStop);
+                    var lang = docx.createText("Languages:").bold()
+                    var list_lang = docx.createText(data['technical']['languages'].join(", ")).tab();
+                    paragraph.addText(lang);
+                    paragraph.addText(list_lang);
 
 //Web Technologies
-                var lang = docx.createText("Web Technologies:").bold().break()
-                var list_lang = docx.createText(data['technical']['technologies'].join(", ")).tab();
-                paragraph.addText(lang);
-                paragraph.addText(list_lang);
+                    var lang = docx.createText("Web Technologies:").bold().break()
+                    var list_lang = docx.createText(data['technical']['technologies'].join(", ")).tab();
+                    paragraph.addText(lang);
+                    paragraph.addText(list_lang);
 
 // //software
-                var lang = docx.createText("Software:").bold().break()
-                var list_lang = docx.createText(data['technical']['softwares'].join(",")).tab();
-                paragraph.addText(lang);
-                paragraph.addText(list_lang);
+                    var lang = docx.createText("Software:").bold().break()
+                    var list_lang = docx.createText(data['technical']['softwares'].join(",")).tab();
+                    paragraph.addText(lang);
+                    paragraph.addText(list_lang);
 
 
 //Database
+                    var lang = docx.createText("Software:").bold().break()
+                    var list_lang = docx.createText(data['technical']['database'].join(",")).tab();
+                    paragraph.addText(lang);
+                    paragraph.addText(list_lang);
+                    doc.addParagraph(paragraph)
 
-                var lang = docx.createText("Software:").bold().break()
-                var list_lang = docx.createText(data['technical']['database'].join(",")).tab();
-                paragraph.addText(lang);
-                paragraph.addText(list_lang);
-                doc.addParagraph(paragraph)
-
+                    var lang = docx.createText("Operating Systems:").bold().break()
+                    var list_lang = docx.createText(data['technical']['operatingSystems'].join(",")).tab();
+                    paragraph.addText(lang);
+                    paragraph.addText(list_lang);
+                    doc.addParagraph(paragraph)
+                }
                 //Work Experience
                 var education = docx.createText("WORK EXPERIENCE")
                 education.bold()
