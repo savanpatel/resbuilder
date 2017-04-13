@@ -1,17 +1,17 @@
 <div class="row">
     <div class="center-block col-md-8">
         <form name="feedbackForm">
-            <legend>We are here to help!</legend>
+            <legend class="col-md-6">We are here to help!</legend>
             <div class="col-md-6 custom-card-v2 custom-card-2">
                 <h3 >Write Feedback</h3>
                 <hr/>
                 <input type="text" name="subject" required class="form-control" ng-model="model.feedback.subject" placeholder="Subject"/>
-                <div class="col-sm-8 col-sm-offset-2" ng-messages="feedbackForm.subject.$touched && feedbackForm.subject.$error">
+                <div class="col-sm-8" ng-messages="feedbackForm.subject.$touched && feedbackForm.subject.$error">
                     <p class="text-warning" ng-message="required">Subject is required.</p>
                 </div>
                 <br/>
                 <textarea rows="10" name="message" required class="form-control" ng-model="model.feedback.message" placeholder="How can we help?"></textarea>
-                <div class="col-sm-8 col-sm-offset-2" ng-messages="feedbackForm.message.$touched && feedbackForm.message.$error">
+                <div class="col-sm-8" ng-messages="feedbackForm.message.$touched && feedbackForm.message.$error">
                     <p class="text-warning" ng-message="required">Message is required.</p>
                 </div>
                 <br/>

@@ -20,6 +20,7 @@
             vm.success = false;
             vm.messageList = [];
             vm.error = null;
+            vm.isUser = false;
 
             vm.currentUID = vm.rid;
 
@@ -101,7 +102,7 @@
         /*---- Promise functions*/
         function onFindMessageByReceiverIdSuccess(response) {
 
-            if(response.length == 0){
+            if(response.length == 0 && vm.messageList == 0){
                 vm.error = "No messages!";
             } else{
                 vm.error = null;
@@ -120,7 +121,7 @@
 
         function onFindMessageBySenderIdSuccess(response) {
 
-            if(response.length == 0){
+            if(response.length == 0 && vm.messageList > 0){
                 vm.error = "No messages!";
             } else{
                 vm.error = null;

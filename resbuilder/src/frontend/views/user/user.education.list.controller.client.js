@@ -102,6 +102,7 @@
 
         function onCreateEducationSuccess(response) {
             vm.error = "Education Added!";
+            vm.school = null;
             findEducationForUser();
         }
 
