@@ -185,3 +185,13 @@ tags-input .tags input
     color:white !important;
     background-color: #e74c3c !important;
 }
+
+.jumbo-tag-1{
+    font-size:1.5em;
+    color: #c0392b;
+}
+
+.jumbo-tag-2{
+    font-size: 1.5em;
+    color: #f5f5f5;
+}
