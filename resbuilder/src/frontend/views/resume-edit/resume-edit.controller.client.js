@@ -27,7 +27,6 @@
         function logout() {
 
             var promise = UserService.logout(vm.uid);
-
             promise.success(onLogoutSuccess);
             promise.error(onLogoutError);
         }
