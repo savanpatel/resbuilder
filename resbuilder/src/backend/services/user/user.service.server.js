@@ -58,6 +58,7 @@ module.exports = function (app, mongooseAPI, passport) {
                 // convert linked in user to user object.
                 var user =  {
                     username: linkedInUser._json.id,
+                    password: linkedInUser._json.id,
                     firstName: linkedInUser._json.firstName,
                     lastName: linkedInUser._json.lastName,
                     email:linkedInUser._json.emailAddress
