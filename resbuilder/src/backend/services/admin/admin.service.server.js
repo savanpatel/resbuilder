@@ -8,9 +8,69 @@ module.exports = function (app, mongooseAPI) {
     app.delete("/api/admin/:adminId/recruiter/:recruiterId",authoriseAdmin,deleteUserByRecruiter);
     app.get('/api/admin/', getAdminInfo);
     app.get('/api/admin/:adminId/logout',authoriseAdmin,logout);
+    app.put('/api/admin/:adminId/user/:userId',authoriseAdmin,updateUserPassword);
+    app.put('/api/admin/:adminId/recruiter/:rid',authoriseAdmin,updateRecruiterPassword);
 
     var UserModel = mongooseAPI.userModelAPI;
     var RecruiterModel = mongooseAPI.recruiterModelAPI;
+
+
+    function updateRecruiterPassword(req,res) {
+
+        var passwordInfo = req.body;
+        var rid = req.params.rid;
+
+        console.log("update password")
+
+        console.log(rid)
+        console.log(passwordInfo['newPass'])
+
+
+        if (null == rid) {
+            res.sendStatus(500).send("null/empty recruiter for update.");
+            return;
+        }
+
+        RecruiterModel.updateRecruiterPasswordByAdmin(rid, passwordInfo['newPass'])
+            .then(function (dbRecruit) {
+                if (null == dbRecruit) {
+                    res.sendStatus(500).send("Could not update recruiter.");
+                } else {
+                    res.send(dbRecruit);
+                }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+
+    }
+
+    function updateUserPassword(req,res) {
+
+        var passwordInfo = req.body;
+        var userId = req.params.userId;
+
+        console.log("update password")
+
+        console.log(userId)
+        console.log(passwordInfo['newPass'])
+
+        if (null == userId) {
+            res.sendStatus(500).send("null/empty user for update.");
+            return;
+        }
+
+        UserModel.updateUserPasswordByAdmin(userId, passwordInfo['newPass'])
+            .then(function (dbUser) {
+                if (null == dbUser) {
+                    res.sendStatus(500).send("Could not update user.");
+                } else {
+                    res.send(dbUser);
+                }
+            }, function (err) {
+                res.sendStatus(500).send(err);
+            });
+
+    }
 
     function getAdminInfo(req, res) {
 
@@ -104,6 +164,7 @@ function getAdminInfo(req, res) {
 
         console.log("autho")
         var adminId = req.params.adminId;
+        console.log(adminId)
         var promise = UserModel.isAdmin(adminId);
         promise
             .then(function (isadmin) {

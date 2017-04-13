@@ -14,6 +14,8 @@
             "getAllUsers":getAllUsers,
             "getAllRecruiters":getAllRecruiters,
             "updateUserByAdmin":updateUserByAdmin,
+            "updateUserPassword":updateUserPassword,
+            "updateRecruiterPassword":updateRecruiterPassword,
             "updateRecruiterByAdmin":updateRecruiterByAdmin,
             "deleteUserByAdmin":deleteUserByAdmin,
             "deleteRecruiterByAdmin":deleteRecruiterByAdmin,
@@ -23,7 +25,23 @@
 
         return api;
 
+        function updateRecruiterPassword(adminId,userId,newpassword) {
+            var jsonIn = {
+                "newPass": newpassword
+            }
+            console.log("recruiter")
+            var url = ADMIN_SERVICE_URL + "/" + adminId + "/recruiter/" + userId;
+            return $http.put(url,jsonIn);
+        }
 
+
+        function updateUserPassword(adminId,userId,newpassword) {
+            var jsonIn = {
+                "newPass": newpassword
+            }
+            var url = ADMIN_SERVICE_URL + "/" + adminId + "/user/" + userId;
+            return $http.put(url,jsonIn);
+        }
 
         function deleteRecruiterByAdmin(adminId, recruiterId) {
             var url = ADMIN_SERVICE_URL + "/" + adminId + "/recruiter/" + recruiterId;

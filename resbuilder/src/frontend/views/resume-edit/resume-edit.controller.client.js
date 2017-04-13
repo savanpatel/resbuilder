@@ -18,25 +18,17 @@
             vm.downlaodDocx = downlaodDocx
             vm.downloadPDF = downloadPDF;
             vm.deleteResume = deleteResume;
-            vm.pdfuri = "http://localhost:3000/api/displayResumePDF/" + vm.resumeid;
-            console.log(vm.pdfuri)
-
-
+            vm.pdfuri = "/api/displayResumePDF/" + vm.resumeid;
         }
 
         init()
 
-
         function downlaodDocx() {
-            window.open("http://localhost:3000/api/downloadResumeDOCX/" + vm.resumeid);
-
-
+            window.open("/api/downloadResumeDOCX/" + vm.resumeid);
         }
 
         function downloadPDF() {
-
-            window.open("http://localhost:3000/api/downloadResumePDF/" + vm.resumeid);
-
+            window.open("/api/downloadResumePDF/" + vm.resumeid);
         }
 
         function deleteResume() {

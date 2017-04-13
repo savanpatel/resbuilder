@@ -21,10 +21,34 @@ module.exports = function (app, mongoose, logger) {
         findBlockedRecruiters:findBlockedRecruiters,
         findUnBlockedRecruiters:findUnBlockedRecruiters,
         checkUsernameAvailable:checkUsernameAvailable,
+        updateRecruiterPasswordByAdmin:updateRecruiterPasswordByAdmin
         updateRecruiterPassword:updateRecruiterPassword
     };
 
     return api;
+
+    function updateRecruiterPasswordByAdmin(recruiterId,newPassword) {
+
+        console.log("update modal")
+
+        var deferred = q.defer();
+
+        newPassword = bcrypt.hashSync(newPassword);
+        RecruiterModel.update({_id:recruiterId},{$set:{password:newPassword}}, function (err, dbRecruiter) {
+            if(err) {
+                logger.error("Can not update recruiter with id " + recruiterId  + " Error: " + err);
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(dbRecruiter);
+            }
+        });
+
+        return deferred.promise;
+
+    }
+
+
     function findAllRecruiters() {
 
         var deferred = q.defer();
