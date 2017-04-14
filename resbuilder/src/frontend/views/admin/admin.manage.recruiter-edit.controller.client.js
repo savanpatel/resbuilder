@@ -26,7 +26,9 @@
             vm.recruiterId = $routeParams['rid'];
             vm.rid = $routeParams['rid'];
 
+
             vm.update = update;
+            vm.logout = logout;
 
             var promise = RecruiterService.findRecruiterById(vm.recruiterId);
 
@@ -121,6 +123,29 @@
             }
         }
 
+
+        /*ends the session.*/
+        function logout() {
+
+            var promise = AdminService.logout(vm.aid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
+        }
 
         /*Promise handlers*/
         function onGetNewMessageCountSuccess(response) {

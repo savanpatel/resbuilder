@@ -7,8 +7,8 @@
 
     <div class="row">
 
-        <div class="col-xs-8 list-group">
-            <div class="col-xs-8 col-xs-offset-6 list-group">
+        <div class="col-sm-8 list-group">
+            <div class="col-sm-8 col-xs-offset-1 list-group">
                 <div class="list-group-item custom-card-2">
                     <br/>
                     <h4 class="list-group-item-heading col-xs-8">Username</h4>
@@ -22,8 +22,8 @@
     <hr/>
 
     <div class="row">
-        <div class="col-xs-8 list-group">
-            <div class="col-xs-8 col-xs-offset-6 list-group" ng-repeat="item in model.items">
+        <div class="col-sm-8 list-group">
+            <div class="col-sm-8 col-sm-offset-1 ist-group" ng-repeat="item in model.items">
                 <div class="list-group-item custom-card-2">
                     <h4 class="list-group-item-heading col-xs-6">{{item.username}}</h4>
                     <toggle-switch ng-change="model.update(item)" ng-model="item.is_deleted" class="switch-primary"></toggle-switch>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12 col-md-offset-1">
+        <div class="col-sm-12 col-sm-offset-1">
             <!-- pager -->
             <ul ng-if="model.pager.pages.length" class="pagination">
                 <li ng-class="{disabled:model.pager.currentPage === 1}">

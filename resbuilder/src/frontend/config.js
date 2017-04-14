@@ -140,11 +140,6 @@
                 controller: "EditWorkExpController",
                 controllerAs: "model"
             })
-            .when("/admin/login", {
-                templateUrl: "views/login/admin.login.view.client.html",
-                controller: "AdminLoginController",
-                controllerAs: "model"
-            })
             .when("/admin/:aid/dashboard", {
                 templateUrl: "views/dashboard/admin.dashboard.view.client.html",
                 controller: "AdminDashBoardController",
