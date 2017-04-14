@@ -43,7 +43,6 @@ module.exports = function (app,mongooseAPI) {
 
         var output = null;
 
-        console.log("create doc")
         getKeyWords(url)
             .then(function (out) {
 
@@ -73,7 +72,6 @@ module.exports = function (app,mongooseAPI) {
             })
             .then(function (jsonOutOne) {
 
-                console.log("json Out")
 
                 var Project = jsonOutOne['projectArray']
                 var Work = jsonOutOne['workArray']
@@ -131,13 +129,10 @@ module.exports = function (app,mongooseAPI) {
                     "technical":technicalSkillDetails
                 }
 
-                console.log("data")
-                console.log(data)
 
                 res.send(data);
                 return true;
             },function (err) {
-                console.log(err);
                 res.sendStatus(404).send(err);
             });
 
@@ -147,7 +142,6 @@ module.exports = function (app,mongooseAPI) {
     function getKeyWords(url) {
         var output;
 
-        console.log("get key words")
 
         return new Promise(function (resolve,reject) {
             var PythonShell = require('python-shell');
@@ -171,10 +165,6 @@ module.exports = function (app,mongooseAPI) {
 
     function getDataAccToKeyWords(projectDetails,workDetails,output){
         return new Promise(function (resolve,reject) {
-
-            console.log("get data key words")
-            console.log(projectDetails)
-            console.log(workDetails)
 
             var a = output[0].substring(1,output[0].length)
             var res = a.split(" ");
@@ -247,10 +237,7 @@ module.exports = function (app,mongooseAPI) {
     function getData(userId) {
 
 
-        console.log(userId)
         return new Promise(function (resolve,reject) {
-            console.log(userId)
-            console.log("get data")
 
             var educationDetails;
             var projectDetails;
@@ -277,7 +264,6 @@ module.exports = function (app,mongooseAPI) {
                                 {
                                     projectDetails = project;
 
-                                    console.log(projectDetails)
                                     TechnicalSkillModel.findTechnicalSkillForUser(userId)
                                         .then(function (techSkill) {
 

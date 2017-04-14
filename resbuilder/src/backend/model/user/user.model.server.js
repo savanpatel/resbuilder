@@ -34,8 +34,6 @@ module.exports = function (app, mongoose, logger) {
     function updateUserPasswordByAdmin(userId,newPassWord) {
 
         var deferred = q.defer();
-        console.log("user")
-        console.log(userId)
 
         newPassWord = bcrypt.hashSync(newPassWord);
 
@@ -276,7 +274,6 @@ module.exports = function (app, mongoose, logger) {
 
         UserModel.findOne({username:username}, function (err, user) {
 
-            console.log(user)
             if(user && bcrypt.compareSync(password, user.password)){
                 if (!user.is_deleted) {
                     if (err) {

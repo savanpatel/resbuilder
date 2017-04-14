@@ -20,11 +20,6 @@ module.exports = function (app, mongooseAPI) {
         var passwordInfo = req.body;
         var rid = req.params.rid;
 
-        console.log("update password")
-
-        console.log(rid)
-        console.log(passwordInfo['newPass'])
-
 
         if (null == rid) {
             res.sendStatus(500).send("null/empty recruiter for update.");
@@ -49,10 +44,6 @@ module.exports = function (app, mongooseAPI) {
         var passwordInfo = req.body;
         var userId = req.params.userId;
 
-        console.log("update password")
-
-        console.log(userId)
-        console.log(passwordInfo['newPass'])
 
         if (null == userId) {
             res.sendStatus(500).send("null/empty user for update.");
@@ -99,10 +90,8 @@ module.exports = function (app, mongooseAPI) {
 
         UserModel.deleteUser(userId)
             .then(function (status) {
-                console.log("delete done")
                 res.sendStatus(200);
             },function (err) {
-                console.log(err)
                 res.send(401).send(err);
             });
     }
@@ -162,9 +151,7 @@ function getAdminInfo(req, res) {
 
     function authoriseAdmin(req,res,next) {
 
-        console.log("autho")
         var adminId = req.params.adminId;
-        console.log(adminId)
         var promise = UserModel.isAdmin(adminId);
         promise
             .then(function (isadmin) {
