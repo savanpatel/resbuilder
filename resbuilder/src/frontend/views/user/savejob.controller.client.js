@@ -5,7 +5,7 @@
         .module("ResumeBuilder")
         .controller("SaveJobController", SaveJobController);
 
-    function SaveJobController($location, $routeParams, UserService, JobService) {
+    function SaveJobController($location, $routeParams, UserService, JobService,ResumeDataService) {
 
         var vm = this;
         var ERROR_REDIRECT = "/unauthorized";
@@ -16,7 +16,7 @@
             vm.userId = $routeParams['uid'];
             vm.uid = $routeParams['uid'];
 
-
+            vm.GetResumeData = GetResumeData;
             vm.savedJobList  = [];
             vm.noJobsMessage = null;
 
@@ -43,6 +43,12 @@
 
         init();
 
+        function GetResumeData(url) {
+
+            ResumeDataService.setUrl(url);
+            $location.url('/user/'+ vm.uid +'/dashboard/resumeData');
+            
+        }
 
         function saveJob(job) {
             var newJob = angular.copy(job);
