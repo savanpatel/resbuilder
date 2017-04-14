@@ -3,7 +3,7 @@
         .module("ResumeBuilder")
         .factory("JobSuggestionService", JobSuggestionService);
 
-    var JOBSUGGESTION_SERVICE_URL = "https://jobs.github.com/positions.json?";
+    var JOBSUGGESTION_SERVICE_URL = "/api/job/suggest";
 
 
     function JobSuggestionService($http) {
@@ -23,8 +23,7 @@
          */
         function findJob(skills)
         {
-            var skillString = skills.join(',');
-            var findJobUrl = JOBSUGGESTION_SERVICE_URL + "description=" + skills[0];
+            var findJobUrl = JOBSUGGESTION_SERVICE_URL + "/" + skills[0];
             return $http.get(findJobUrl);
         }
     }
