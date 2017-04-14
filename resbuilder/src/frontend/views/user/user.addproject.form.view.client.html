@@ -5,9 +5,9 @@
                     <label for="title" class="col-lg-3 control-label">Title</label>
                     <div class="col-lg-9">
                         <input name="title" required type="text" class="form-control" id="title" ng-model="model.project.title" placeholder="Project Title">
-                    </div>
-                    <div ng-messages="projectForm.title.$touched && projectForm.title.$error">
-                        <p class="text-warning" ng-message="required">the title for project is required.</p>
+                        <div ng-messages="projectForm.title.$touched && projectForm.title.$error">
+                            <p class="text-warning" ng-message="required">the title for project is required.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Team Members</label>
                     <div class="col-lg-9">
-                        <tags-input replace-spaces-with-dashes="false" min-length="2" type="text" ng-model="model.project.teammates" placeholder="Teammates"></tags-input>
+                        <tags-input replace-spaces-with-dashes="false" min-length="1" type="text" ng-model="model.project.teammates" placeholder="Teammates"></tags-input>
                     </div>
                 </div>
 

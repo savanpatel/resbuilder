@@ -91,12 +91,6 @@ module.exports = function (app,mongooseAPI) {
         var c = data['technical']['database'].length;
         var d = data['technical']['operatingSystems'].length;
 
-        console.log(a)
-        console.log(b)
-        console.log(c)
-        console.log(d)
-        console.log(x)
-
         // First College
 
         for (var i = 0; i < data['education'].length; i++) {
@@ -120,8 +114,6 @@ module.exports = function (app,mongooseAPI) {
 
         if (x != 0 || a != 0 || b != 0 || c != 0 || d != 0) {
 
-            console.log("TECHNICAL KNOWLEDGE")
-
             var education = docx.createText("TECHNICAL KNOWLEDGE")
             education.bold()
             var paragraph = docx.createParagraph()
@@ -129,12 +121,12 @@ module.exports = function (app,mongooseAPI) {
             paragraph.heading1();
             doc.addParagraph(paragraph);
         }
+
         var tabStop = docx.createLeftTabStop(2700);
         var paragraph1 = docx.createParagraph().addTabStop(tabStop);
 
         if (a != 0){
 
-            console.log("lang")
             var lang = docx.createText("Languages:").bold()
             var list_lang = docx.createText(data['technical']['languages'].join(", ")).tab();
             paragraph1.addText(lang);
@@ -143,7 +135,6 @@ module.exports = function (app,mongooseAPI) {
 
 //Web Technologies
         if (x != 0) {
-            console.log("tech")
             var lang = docx.createText("Web Technologies:").bold().break()
             var list_lang = docx.createText(data['technical']['technologies'].join(", ")).tab();
             paragraph1.addText(lang)
@@ -152,7 +143,6 @@ module.exports = function (app,mongooseAPI) {
 
 // //software
         if(b != 0) {
-            console.log("soft")
             var lang = docx.createText("Software:").bold().break()
             var list_lang = docx.createText(data['technical']['softwares'].join(", ")).tab();
             paragraph1.addText(lang);
@@ -162,7 +152,6 @@ module.exports = function (app,mongooseAPI) {
 //Database
         if(c != 0) {
 
-            console.log("data")
             var lang = docx.createText("Database:").bold().break()
             var list_lang = docx.createText(data['technical']['database'].join(", ")).tab();
             paragraph1.addText(lang);
@@ -172,7 +161,6 @@ module.exports = function (app,mongooseAPI) {
 
         if(d != 0) {
 
-            console.log("os")
             var lang = docx.createText("Operating Systems:").bold().break()
             var list_lang = docx.createText(data['technical']['operatingSystems'].join(", ")).tab();
             paragraph1.addText(lang);
@@ -255,13 +243,10 @@ module.exports = function (app,mongooseAPI) {
 
 
     function createPDF(userReq, userRes,filename,userId) {
-
-
         var req = require('request');
         req = req.defaults({
             agent: false
         });
-
         function a(buf, callback) {
             var r = req.post('http://mirror1.convertonlinefree.com', {
                 encoding: null,
@@ -298,16 +283,12 @@ module.exports = function (app,mongooseAPI) {
 
 
     function addResume(req,res,filename,userId) {
-
-
         var resume = {
             "filename": filename
         }
-
         ResumeModel
             .createResume(userId,resume)
             .then(function (resume) {
-
                 if(null == resume){
                     res.sendStatus(500).send("resume not found.");
                 }
@@ -318,6 +299,5 @@ module.exports = function (app,mongooseAPI) {
                 logger.error("Can not fetch resumes for user. Error: " + err);
                 res.send(err);
             });
-
     }
 }
