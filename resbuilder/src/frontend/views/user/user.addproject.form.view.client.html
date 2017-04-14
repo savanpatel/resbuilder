@@ -26,9 +26,9 @@
                     <label class="col-lg-3 control-label">Technologies</label>
                     <div class="col-lg-9">
                         <tags-input required name="technology" replace-spaces-with-dashes="false" min-length="2" type="text" ng-model="model.project.technologies" placeholder="Technologies"></tags-input>
-                    </div>
-                    <div ng-messages="projectForm.technology.$touched && projectForm.technology.$error">
-                        <p class="text-warning" ng-message="required">the title for technology is required.</p>
+                        <div ng-messages="projectForm.technology.$touched && projectForm.technology.$error">
+                            <p class="text-warning" ng-message="required">the title for technology is required.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -36,9 +36,9 @@
                     <label for="startdate" class="col-lg-3 control-label">Start Date</label>
                     <div class="col-lg-9">
                         <input type="text" name="startdate" required class="form-control" id="startdate" ng-model="model.project.startDate" placeholder="MM/YYYY">
-                    </div>
-                    <div ng-messages="projectForm.startdate.$touched && projectForm.startdate.$error">
-                        <p class="text-warning" ng-message="required">the start date is required.</p>
+                        <div ng-messages="projectForm.startdate.$touched && projectForm.startdate.$error">
+                            <p class="text-warning" ng-message="required">the start date is required.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -46,9 +46,9 @@
                     <label for="enddate" class="col-lg-3 control-label">End Date</label>
                     <div class="col-lg-9">
                         <input type="text" name="enddate" required class="form-control" id="enddate" ng-model="model.project.endDate" placeholder="MM/YYYY">
-                    </div>
-                    <div ng-messages="projectForm.enddate.$touched && projectForm.enddate.$error">
-                        <p class="text-warning" ng-message="required">the end date is required.</p>
+                        <div ng-messages="projectForm.enddate.$touched && projectForm.enddate.$error">
+                            <p class="text-warning" ng-message="required">the end date is required.</p>
+                        </div>
                     </div>
                 </div>
 
