@@ -22,6 +22,7 @@
 
             vm.isCollapsed = false;
             vm.uid = $routeParams['uid'];
+            vm.createResumeButtonPressed = false;
             var url = ResumeDataService.getUrl();
 
             var promise = ResumeDataService.getResumeData(vm.uid,url);
@@ -71,6 +72,7 @@
 
         function getResumePdf() {
 
+            vm.createResumeButtonPressed = true;
             var resumeData = {
                 "user": vm.userList,
                 "technical":vm.technicalSkillList,
