@@ -5,12 +5,14 @@
 
 module.exports = function (app, mongooseAPI) {
 
+    var request = require('request');
+
     app.post("/api/job", checkAuthorizedUser, createJob);
     app.get("/api/job/:jobId", checkAuthorizedUser, findJobById);
     app.get("/api/job/user/:userId", checkAuthorizedUser, findJobForUser);
     app.put("/api/job/:jobId", checkAuthorizedUser, updateJob);
     app.delete("/api/job/:jobId", checkAuthorizedUser, deleteJob);
-
+    app.get("/api/job/suggest/:skill", checkAuthorizedUser, suggestJob);
 
 
     var JobModel = mongooseAPI.jobModelAPI;
@@ -28,6 +30,19 @@ module.exports = function (app, mongooseAPI) {
      */
 
 
+    function suggestJob(req, res) {
+        var skill = req.params.skill;
+        console.log(skill);
+
+
+        request("https://jobs.github.com/positions.json?description=" + skill, function (err, result, body) {
+            if(err){
+                res.sendStatus(500).send("Could not fetch jobs.");
+            } else{
+                res.send(body);
+            }
+        });
+    }
     /*
      * Handler for POST call /api/user
      */
