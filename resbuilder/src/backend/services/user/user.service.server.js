@@ -33,8 +33,8 @@ module.exports = function (app, mongooseAPI, passport) {
     passport.use(new LocalStrategy({passReqToCallback: true}, localStrategy));
 
     passport.use(new LinkedInStrategy({
-            consumerKey: "86kjumoat02m2u",
-            consumerSecret: "69kv8q36g55rwKtg",
+            consumerKey: process.env.LINKEDIN_API_KEY,
+            consumerSecret: process.env.LINKEDIN_SECRET_KEY,
             callbackURL: "/api/user/linkedin/callback",
             profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline','positions','specialties'],
         },
@@ -118,7 +118,6 @@ module.exports = function (app, mongooseAPI, passport) {
                                     }
                                 }, function (err) {
                                     return done(null, false);
-                                    //res.sendStatus(500).send(err);
                                 });
                         }
                         else{
@@ -130,7 +129,6 @@ module.exports = function (app, mongooseAPI, passport) {
                     }, function (err) {
                         return done(null, false);
                     });
-              //  return done(null, user);
             });
         }
     ));
