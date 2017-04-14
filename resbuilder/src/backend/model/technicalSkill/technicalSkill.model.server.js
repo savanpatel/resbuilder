@@ -150,22 +150,17 @@ module.exports = function (app, mongoose, logger) {
     function findUsersForTechnicalSkill(skill) {
         var deferred = q.defer();
 
-        console.log("skill");
-        console.log(skill)
         TechnicalSkillModel.find({$or : [{languages:{$in:[skill]}},
                 {operatingSystems:{$in:[skill]}},
                 {database:{$in:[skill]}},
                 {technologies:{$in:[skill]}},
                 {softwares:{$in:[skill]}}]},
             function (err, dbTechnicalSkills) {
-                console.log(dbTechnicalSkills)
 
                 if(err){
-                    console.log(err)
                     deferred.reject(err);
                 }
                 else{
-                    console.log("t")
                     deferred.resolve(dbTechnicalSkills);
                 }
         });

@@ -30,7 +30,6 @@ module.exports = function (app, mongoose, logger) {
     function createWorkExp(workExp, userId) {
 
         workExp.userId = userId;
-        console.log("User id is " + userId);
         var deferred = q.defer();
 
         WorkExpModel.create(workExp, function (err, dbWorkExp) {

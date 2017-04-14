@@ -96,8 +96,6 @@ module.exports = function (app, mongooseAPI) {
 
         var userId = req.params.userId;
 
-        console.log("cftvgybhujnkm")
-        console.log(userId)
 
         if(userId == null){
             res.sendStatus(500).send("null userId");

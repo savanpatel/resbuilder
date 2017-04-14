@@ -78,14 +78,11 @@ module.exports = function (app, mongooseAPI) {
             })
             .then(function (dbUsers) {
 
-                console.log(dbUsers);
                 var retList = [];
                 for(var u in dbUsers){
                     var user = JSON.parse(JSON.stringify(dbUsers[u]));
                     user.password = null;
                     retList.push(user);
-                    console.log("list")
-                    console.log(retList);
                 }
 
                 res.send(retList);

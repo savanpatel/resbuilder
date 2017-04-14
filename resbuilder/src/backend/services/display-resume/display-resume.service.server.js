@@ -20,10 +20,7 @@ module.exports = function (app,mongooseAPI) {
     }
 
     function downloadPDF(req,res) {
-        console.log("download PDF")
-        console.log("gvhbjnk")
         var resumeId = req.params.resumeId;
-        console.log(resumeId)
         if(resumeId == null){
             res.sendStatus(500).send("null resumeId");
             return;
@@ -32,7 +29,6 @@ module.exports = function (app,mongooseAPI) {
         ResumeModel
             .findResumeById(resumeId)
             .then(function (resume) {
-                console.log(resume)
                 if(resume == null){
                     res.sendStatus(500).send("null resume");
                     return;
@@ -45,7 +41,6 @@ module.exports = function (app,mongooseAPI) {
                         res.send(err);
                     }
                     else{
-                        console.log(tempFile)
                         res.setHeader('Content-disposition', 'attachment; filename='+ resume.filename+'.pdf')
                         res.contentType("application/pdf");
                         res.download(tempFile);
@@ -59,7 +54,6 @@ module.exports = function (app,mongooseAPI) {
     function downloadDocx(req,res) {
 
         var resumeId = req.params.resumeId;
-        console.log(resumeId)
         if(resumeId == null){
             res.sendStatus(500).send("null resumeId");
             return;
@@ -68,7 +62,6 @@ module.exports = function (app,mongooseAPI) {
         ResumeModel
             .findResumeById(resumeId)
             .then(function (resume) {
-                console.log(resume)
                 if(resume == null){
                     res.sendStatus(500).send("null resume");
                     return;
@@ -79,12 +72,9 @@ module.exports = function (app,mongooseAPI) {
                 fs.readFile(tempFile, function (err,data){
 
                     if(err) {
-                        console.log("error")
-                        console.log(err)
                         res.send(err);
                     }
                     else{
-                        console.log(tempFile)
                         res.contentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
                         res.download(tempFile)
                     }
@@ -95,9 +85,7 @@ module.exports = function (app,mongooseAPI) {
     }
 
     function displayPDF(req,res) {
-        console.log("gvhbjnk")
         var resumeId = req.params.resumeId;
-        console.log(resumeId)
         if(resumeId == null){
             res.sendStatus(500).send("null resumeId");
             return;
@@ -106,25 +94,19 @@ module.exports = function (app,mongooseAPI) {
         ResumeModel
             .findResumeById(resumeId)
             .then(function (resume) {
-                console.log(resume)
                 if(resume == null){
                     res.sendStatus(500).send("null resume");
                     return;
                 }
-                console.log("-----------")
-                console.log(__dirname)
 
                 var presentDir = __dirname + "/../../uploads/pdf/"
                 var tempFile= presentDir +resume.filename+'.pdf'
                 fs.readFile(tempFile, function (err,data){
 
                     if(err) {
-                        console.log("error")
-                        console.log(err)
                         res.send(err);
                     }
                     else{
-                        console.log(tempFile)
                         res.contentType("application/pdf");
                         res.send(data);
                     }
@@ -134,7 +116,6 @@ module.exports = function (app,mongooseAPI) {
 
     function displayDocx(req,res) {
         var resumeId = req.params.resumeId;
-        console.log(resumeId)
         if(resumeId == null){
             res.sendStatus(500).send("null resumeId");
             return;
@@ -143,7 +124,6 @@ module.exports = function (app,mongooseAPI) {
         ResumeModel
             .findResumeById(resumeId)
             .then(function (resume) {
-                console.log(resume)
                 if(resume == null){
                     res.sendStatus(500).send("null resume");
                     return;
@@ -154,12 +134,9 @@ module.exports = function (app,mongooseAPI) {
                 fs.readFile(tempFile, function (err,data){
 
                     if(err) {
-                        console.log("error")
-                        console.log(err)
                         res.send(err);
                     }
                     else{
-                        console.log(tempFile)
                         res.contentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
                         res.send(data);
                     }

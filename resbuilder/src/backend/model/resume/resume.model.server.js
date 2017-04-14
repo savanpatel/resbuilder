@@ -27,14 +27,10 @@ module.exports = function (app, mongoose, logger) {
 
     function createResume(userId, resume) {
 
-        console.log("createResume")
-        console.log(resume)
-        console.log(userId)
         resume.userId = userId;
         var deferred = q.defer();
 
         ResumeModel.create(resume, function (err, dbResume) {
-            console.log(dbResume)
 
             if(err){
                 logger.error('Unable to create resume.' + err);
@@ -50,15 +46,12 @@ module.exports = function (app, mongoose, logger) {
     function findResumeById(resumeId) {
 
         var deferred = q.defer();
-        console.log(resumeId)
         ResumeModel.findById(resumeId, function (err, dbResume) {
 
             if(err){
-                console.log(err)
                 logger.error('Unable to find project. Id: ' + resumeId + "Error: " + err);
                 deferred.reject(err);
             } else {
-                console.log(dbResume)
                 deferred.resolve(dbResume);
             }
         });

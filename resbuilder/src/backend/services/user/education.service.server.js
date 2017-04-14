@@ -44,7 +44,6 @@ module.exports = function (app, mongooseAPI) {
         }
 
 
-        console.log(education);
         // create user in db.
         EducationModel.createEducation(education)
             .then(function (dbEducation){

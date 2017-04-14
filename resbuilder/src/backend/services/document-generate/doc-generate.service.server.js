@@ -32,7 +32,6 @@ module.exports = function (app,mongooseAPI) {
 
     function createDoc(req, res) {
 
-        console.log("in create Doc")
         var random = Math.random().toString(36).slice(-8);
 
         var userId = req.params.uid;
@@ -210,9 +209,7 @@ module.exports = function (app,mongooseAPI) {
                 var exporter = officeClippy.exporter;
                 exporter.local(output, doc);
 
-                console.log("doc created")
                 output.on('finish', function () {
-                    console.log("pdf create")
                     createPDF(req, res,filename,userId);
                 });
 
@@ -229,9 +226,7 @@ module.exports = function (app,mongooseAPI) {
             agent: false
         });
 
-        console.log("pdf generate")
         function a(buf, callback) {
-            console.log("hello1")
             var r = req.post('http://mirror1.convertonlinefree.com', {
                 encoding: null,
                 headers: {
@@ -239,7 +234,6 @@ module.exports = function (app,mongooseAPI) {
                 }
             }, function (err, res) {
                 if (err) {
-                    console.log(err)
                     callback(err);
                 }
                 else {
@@ -260,7 +254,6 @@ module.exports = function (app,mongooseAPI) {
         };
 
         a(fs.readFileSync(__dirname + '/../../uploads/docx/'+filename+'.docx'), function (err, data) {
-            console.log("hello2")
             fs.writeFileSync(__dirname+'/../../uploads/pdf/' + filename + '.pdf', data);
 
             addResume(userReq,userRes,filename,userId)

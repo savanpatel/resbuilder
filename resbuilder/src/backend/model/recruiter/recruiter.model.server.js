@@ -29,7 +29,6 @@ module.exports = function (app, mongoose, logger) {
 
     function updateRecruiterPasswordByAdmin(recruiterId,newPassword) {
 
-        console.log("update modal")
 
         var deferred = q.defer();
 
@@ -202,12 +201,9 @@ module.exports = function (app, mongoose, logger) {
     function findRecruiterByCredentials(username, password) {
         var deferred = q.defer();
 
-        console.log(password);
 
         RecruiterModel.findOne({username:username}, function (err, recruiter) {
 
-            console.log(recruiter.password);
-            console.log(bcrypt.hashSync(password));
             if(recruiter && bcrypt.compareSync(password, recruiter.password)) {
                 if (!recruiter.is_deleted) {
                     if (err) {

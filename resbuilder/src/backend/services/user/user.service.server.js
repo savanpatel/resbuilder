@@ -49,7 +49,6 @@ module.exports = function (app, mongooseAPI, passport) {
 
 
                 var linkedInUser = profile;
-                console.log(linkedInUser);
                 if(null == linkedInUser){
                     res.redirect("/");
                     return;
@@ -83,10 +82,6 @@ module.exports = function (app, mongooseAPI, passport) {
                 }
 
 
-                console.log(workExp);
-                //TODO create user.
-
-                // if user present then just fetch and return, if not then creat one.
                 UserModel.findUserByEmail(user.email)
                     .then(function (dbUser) {
 
@@ -110,19 +105,13 @@ module.exports = function (app, mongooseAPI, passport) {
                                                         var retUser = JSON.parse(JSON.stringify(dbUser2));
                                                         retUser['isNew'] = false;
                                                         return done(null, dbUser2);
-                                                        //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
-                                                        //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
                                                     },
                                                     function (err) {
                                                         var retUser = JSON.parse(JSON.stringify(dbUser2));
                                                         retUser['isNew'] = false;
-                                                        //console.log("redirecting to  " + "/user/" + dbUser2._id + "/dashboard")
-                                                        //res.redirect("/#/user/" + dbUser2._id + "/dashboard");
                                                         return done(null, dbUser2);
                                                     });
                                         } else {
-                                            console.log("CHECK1")
-                                            console.log(dbUser2);
                                             return done(null, dbUser2);
                                         }
 
@@ -135,14 +124,10 @@ module.exports = function (app, mongooseAPI, passport) {
                         else{
                             var retUser = JSON.parse(JSON.stringify(dbUser));
                             retUser['isNew'] = false;
-                            //console.log("redirecting to  " + "/user/" + dbUser._id + "/dashboard")
-
-                            //res.redirect("/#/user/" + dbUser._id + "/dashboard");
                             return done(null, dbUser);
                         }
 
                     }, function (err) {
-                      //  res.sendStatus(500).send(err);
                         return done(null, false);
                     });
               //  return done(null, user);
@@ -154,7 +139,6 @@ module.exports = function (app, mongooseAPI, passport) {
 
     function authorized (req, res, next) {
 
-        console.log(req.body);
         if (!req.isAuthenticated()) {
             res.sendStatus(401);
         } else {
@@ -212,7 +196,6 @@ module.exports = function (app, mongooseAPI, passport) {
 
 
     function serializeUser(user, done) {
-        console.log(user)
         done(null, user);
     }
 

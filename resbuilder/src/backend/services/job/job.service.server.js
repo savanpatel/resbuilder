@@ -32,7 +32,6 @@ module.exports = function (app, mongooseAPI) {
 
     function suggestJob(req, res) {
         var skill = req.params.skill;
-        console.log(skill);
 
 
         request("https://jobs.github.com/positions.json?description=" + skill, function (err, result, body) {
@@ -117,7 +116,6 @@ module.exports = function (app, mongooseAPI) {
         JobModel.findJobForUser(userId)
             .then(function (job) {
 
-                console.log(job);
                 if(null == job){
                     res.sendStatus(500).send("job not found.");
                 } else{
