@@ -60,6 +60,16 @@
                 controller: "DashBoardController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/savejob", {
+                templateUrl: "views/user/savejob.view.client.html",
+                controller: "SaveJobController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/savejob/:jid", {
+                templateUrl: "views/user/savejob.edit.view.client.html",
+                controller: "SaveJobEditController",
+                controllerAs: "model"
+            })
             .when("/user/resumes/:uid", {
                 templateUrl: "views/resumes/resumes.view.client.html",
                 controller: "ResumesController",

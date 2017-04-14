@@ -12,7 +12,7 @@
                 <input ng-model="model.JobURL" type="text" class="form-control">
                 <span class="input-group-btn">
                     <a class="btn btn-success btn-block" ng-click="model.GetResumeData(0)">
-                        Get Resume Data
+                        Create Resume
                     </a>
                 </span>
             </div>
@@ -38,6 +38,7 @@
                         <a href="{{j.url}}">{{j.url}}</a>
                         <hr/>
                         <a ng-click="model.GetResumeData(j.url)"  class="btn btn-primary btn-sm">Generate Resume</a>
+                        <a href="#/user/{{model.uid}}/savejob?jobUrl={{j.url}}&companyName={{j.company}}"  class="btn btn-primary btn-sm">Save Job</a>
                     </div>
                 </div>
             </div>

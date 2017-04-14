@@ -16,11 +16,11 @@ module.exports = function (app, mongooseAPI) {
     var JobModel = mongooseAPI.jobModelAPI;
 
     function checkAuthorizedUser (req, res, next) {
-        // if (!req.isAuthenticated()) {
-        //     res.sendStatus(401);
-        // } else {
+         if (!req.isAuthenticated()) {
+             res.sendStatus(401);
+         } else {
             next();
-        // }
+         }
     }
 
     /*
@@ -76,7 +76,7 @@ module.exports = function (app, mongooseAPI) {
 
                 if(null == dbJob){
                     // job not found
-                    res.send(404);
+                    res.sendStatus(404);
                 }else {
                     // job found.
                     res.send(dbJob);

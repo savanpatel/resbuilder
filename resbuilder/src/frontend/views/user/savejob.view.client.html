@@ -1,0 +1,90 @@
+<div ng-include="'./views/menu/menu.view.client.html'"></div>
+
+<div class="container container-if-fixed-header">
+
+      <div class="row">
+          <div ng-show="model.error" class="alert alert-dismissible well">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <span class="text-success">{{model.error}}</span>
+          </div>
+      </div>
+
+
+    <div class="row">
+           <div class="col-md-6 custom-card-2 card-background-1">
+               <form name="saveJobForm">
+                   <h4 class="jumbo-tag-1 text-center">Save A Job</h4>
+                   <div class="form-group">
+                       <label for="title" class="col-lg-3 control-label">Company Name</label>
+                       <div class="col-lg-9">
+                           <input name="companyName" required type="text" class="form-control" id="title" ng-model="model.job.companyName" placeholder="Company Name">
+                       </div>
+                       <div class="col-md-8 col-md-offset-3" ng-messages="saveJobForm.companyName.$touched && saveJobForm.companyName.$error">
+                           <p class="text-warning" ng-message="required">Company Name is required.</p>
+                       </div>
+                   </div>
+
+                   <div class="form-group">
+                       <label for="jobUrl" class="col-lg-3 control-label">Job Url</label>
+                       <div class="col-lg-9">
+                           <input name="jobUrl" required type="text" class="form-control" id="jobUrl" ng-model="model.job.jobUrl" placeholder="Job Url">
+                       </div>
+                       <div class="col-md-8 col-md-offset-3" ng-messages="saveJobForm.jobUrl.$touched && saveJobForm.jobUrl.$error">
+                           <p class="text-warning" ng-message="required">Job Url is required.</p>
+                       </div>
+                   </div>
+
+                   <div class="form-group">
+                       <label for="note" class="col-lg-3 control-label">Note</label>
+                       <div class="col-lg-9">
+                           <textarea rows="3" name="note" id="note" class="form-control" ng-model="model.job.note" placeholder="Write a note[optional]."></textarea>
+                       </div>
+                   </div>
+
+                   <div class="form-group">
+
+                       <div class="col-md-12">
+                           <br/>
+                       </div>
+                       <a class=" form-control btn btn-success" ng-click="saveJobForm.$valid && model.saveJob(model.job)">Save</a>
+                   </div>
+
+                   <div class="col-md-12">
+                       <br/>
+                   </div>
+               </form>
+           </div>
+
+
+          <div class="col-md-6 custom-card-2">
+              <form name="saveJobForm">
+                  <h3 class="text-center">Saved Jobs</h3>
+
+                  <div>
+                      <span class="col-sm-12 text-warning text-center" ng-show="model.noJobsMessage">{{model.noJobsMessage}}</span>
+                  </div>
+                  <div ng-repeat="sj in model.savedJobList">
+                      <div class="list-group">
+                          <a class="list-group-item clearfix">
+                                  <span>
+                                      <h4>{{sj.companyName}}</h4>
+                                      <p>{{sj.jobUrl}}</p>
+                                      <p>{{sj.note}}</p>
+                                  </span>
+
+                                  <span class="pull-right">
+                                  <button ng-click="model.editJob(sj._id)" class="btn btn-xs btn-info">
+                                      <span><i class="fa fa-pencil"></i></span>
+                                  </button>
+                                  <button ng-click="model.deleteJob(sj._id)" class="btn btn-xs btn-warning">
+                                      <span class="glyphicon glyphicon-trash"></span>
+                                  </button>
+                              </span>
+                          </a>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+
+</div>

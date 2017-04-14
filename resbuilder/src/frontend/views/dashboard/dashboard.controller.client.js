@@ -19,13 +19,13 @@
         var ERR_401 = "Unauthorized";
 
         function init() {
+            vm.uid = $routeParams['uid'];
             vm.isCollapsed = false;
             vm.error = null;
             vm.editResume = editResume;
             vm.GetResumeData = GetResumeData;
             vm.downloadResumePdf = downloadResumePdf;
             vm.downlaodResumeDocx = downlaodResumeDocx;
-            vm.uid = $routeParams['uid'];
             vm.logout = logout;
 
             findJobSuggestions(vm.uid);
@@ -35,7 +35,7 @@
 
             promise
                 .success(renderAllResume)
-                .error(errorRenderAllResume)
+                .error(errorRenderAllResume);
 
             vm.deleteResume = deleteResume;
 
