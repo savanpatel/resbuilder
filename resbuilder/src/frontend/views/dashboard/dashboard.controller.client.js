@@ -30,7 +30,7 @@
 
             findJobSuggestions(vm.uid);
 
-            console.log("ghbjnkml")
+
             var promise = ResumeService.findResumeforUser(vm.uid);
 
             promise
@@ -42,7 +42,7 @@
         }
 
         function editResume(rid) {
-            console.log("clicked on resume")
+
 
             $location.url("/user/" + vm.uid +"/dashboard/resumeEdit/" +rid);
 
@@ -67,13 +67,13 @@
 
         function deleteResume(index) {
 
-            console.log(index);
+
             var array1 = vm.allResumeUrls;
-            console.log(array1);
+
 
             var resume1 = array1[index]
             var resumeId1 = resume1['_id']
-            console.log(resumeId1)
+
             var promise = ResumeService.deleteResume(resumeId1)
 
             promise
@@ -99,8 +99,7 @@
         function renderAllResume(resumes) {
             var urls = []
             var loop = -1;
-            console.log("All resumes");
-            console.log(resumes)
+
             if(resumes.length < 4)
             {
                 loop = resumes.length;
@@ -118,9 +117,9 @@
                 urls.push(jsonResume);
             }
 
-            console.log(urls)
+
             vm.allResumeUrls = urls;
-            console.log(vm.allResumeUrls);
+
 
         }
 
@@ -133,7 +132,7 @@
 
         function findJobSuggestions(userId) {
 
-            console.log("in find job suggestions");
+
             var promise = TechnicalSkillService.findTechnicalSkillForUser(userId);
             promise.success(onFindTechnicalSkillForUserSuccess);
             promise.error(onFindTechnicalSkillForUserError);
@@ -191,8 +190,7 @@
         function GetResumeData(sw) {
 
 
-            console.log("SW")
-            console.log(sw)
+
 
             if(sw === 0) {
 
@@ -200,7 +198,7 @@
 
             }
             else {
-                console.log("create resume")
+
                 ResumeDataService.setUrl(sw);
 
             }
@@ -210,14 +208,14 @@
 
         function onFetchJobSuccess(response) {
 
-            console.log(response);
+
             response = shuffle(response);
             vm.jobList = response.slice(0,4);
-            console.log(vm.jobList);
+
         }
 
         function onFetchJobError(err) {
-            console.log(err);
+
             vm.jobList = null;
 
             if(err == ERR_401){

@@ -56,7 +56,7 @@
             function onLoginSuccess(response) {
 
                 var user = response;
-                console.log(user);
+
 
                 if(user){
                     if(user.role == "ADMIN"){

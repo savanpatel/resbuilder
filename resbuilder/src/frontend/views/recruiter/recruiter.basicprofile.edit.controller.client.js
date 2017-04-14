@@ -95,7 +95,6 @@
 
         function onUpdateRecruiterPasswordSuccess(response) {
             vm.passwordError = "Updated successfully";
-            console.log(response);
         }
 
         function onUpdateRecruiterPasswordError(err) {

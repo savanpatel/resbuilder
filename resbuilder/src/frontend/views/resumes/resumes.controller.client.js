@@ -51,7 +51,7 @@
         init()
 
         function editResume(rid) {
-            console.log("clicked on resume")
+
 
             $location.url("/user/" + vm.uid +"/dashboard/resumeEdit/" +rid);
 
@@ -67,13 +67,13 @@
 
         function deleteResume(index) {
 
-            console.log(index);
+
             var array1 = vm.allResumeUrls;
-            console.log(array1);
+
 
             var resume1 = array1[index]
             var resumeId1 = resume1['_id']
-            console.log(resumeId1)
+
             var promise = ResumeService.deleteResume(resumeId1)
 
             promise
@@ -103,7 +103,7 @@
             var urls = []
             var loop = -1;
 
-            console.log(resumes)
+
             for(var j = 0;j<resumes.length;j++){
 
                 var jsonResume = {
@@ -115,7 +115,7 @@
 
 
             vm.allResumeUrls = urls;
-            console.log(vm.allResumeUrls);
+
         }
 
 

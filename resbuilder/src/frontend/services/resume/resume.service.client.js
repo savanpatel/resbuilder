@@ -55,8 +55,6 @@
         function findResumeforUser(userId) {
 
             var findResumeListForUserUrl = RESUME_SERVICE_URL + "/user/" + userId;
-            console.log(findResumeListForUserUrl)
-            console.log(userId)
             return $http.get(findResumeListForUserUrl);
         }
 

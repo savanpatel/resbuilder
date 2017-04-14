@@ -107,7 +107,7 @@
         function update(user) {
 
 
-            console.log(user)
+
             var promise = AdminService.updateUserByAdmin(vm.aid,vm.user);
 
             promise
@@ -117,7 +117,6 @@
 
         function updatedSuccesfully(response) {
             vm.error = "Successfully updated"
-            console.log("updated")
 
         }
 

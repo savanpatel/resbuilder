@@ -100,7 +100,7 @@
 
         function onGettingResumeData(data) {
 
-            console.log(data);
+
 
             vm.educationList = data['education'];
             vm.projectList = data['project'];
@@ -137,7 +137,7 @@
 
 
         function showModal(sw) {
-            console.log(sw)
+
             ModalService.showModal({
                 templateUrl: "views/resume-data/yesno.html",
                 controller: "YesNoController",

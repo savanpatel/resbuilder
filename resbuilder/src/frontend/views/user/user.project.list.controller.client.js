@@ -58,7 +58,7 @@
          */
         function updateTechnicalSkill(technicalSkill) {
 
-            console.log(technicalSkill);
+
             var newTechnicalSkill = angular.copy(technicalSkill);
 
             newTechnicalSkill.languages = [];
@@ -150,7 +150,6 @@
 
         function onFindTechnicalSkillForUserSuccess(response) {
 
-            console.log("Technical Skill found : " + response);
             vm.technicalSkill = response;
         }
 
@@ -181,7 +180,7 @@
         function onFindProjectListForUserSuccess(response){
             vm.projectList = response;
 
-            console.log(response);
+
             if(null == vm.projectList || vm.projectList.length == 0){
                 vm.noprojects = "You do not have any project. Add some.";
             }
