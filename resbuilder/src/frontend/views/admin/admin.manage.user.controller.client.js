@@ -66,7 +66,8 @@
 
         function stateAfterUnsuccessfulDelete() {
 
-            console.log("unsuccessful delete")
+            vm.error="unsuccessful delete"
+
 
         }
 
@@ -81,13 +82,12 @@
         }
 
         function updatedSuccesfully() {
-            console.log("updated")
+            vm.error = "updated"
 
         }
 
         function unSuccessfulUpdate() {
-            console.log("unSuccessful Update");
-
+            vm.error = "unsuccessfull update"
         }
 
         function renderUsers(users) {
@@ -101,7 +101,7 @@
         }
 
         function errorWhileRendering(err) {
-            console.log(err);
+            vm.error="error while rendering"
         }
 
         init();

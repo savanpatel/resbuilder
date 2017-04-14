@@ -44,7 +44,7 @@
                 var newEducation = angular.copy(education);
                 var courses = [];
                 for (c in education.courses){
-                    console.log(education.courses[c].text);
+
                     courses.push(education.courses[c].text);
                 }
                 newEducation.courses = courses;

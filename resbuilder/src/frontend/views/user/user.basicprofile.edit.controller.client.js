@@ -103,7 +103,7 @@
 
         function onUpdateUserPasswordSuccess(response) {
             vm.passwordError = "Updated successfully";
-            console.log(response);
+
         }
 
         function onUpdateUserPasswordError(err) {

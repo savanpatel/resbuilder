@@ -37,7 +37,7 @@
 
 
         function findWorkExpById(workexpId) {
-            console.log(workexpId);
+
             var promise = WorkExpService.findWorkExpById(workexpId);
             promise.success(onFindWorkExpByIdSuccess);
             promise.error(onFindWorkExpByIdError);

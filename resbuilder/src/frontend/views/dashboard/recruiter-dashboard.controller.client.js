@@ -53,7 +53,7 @@
 
 
         function getUsersForSkill(skill) {
-            console.log(skill);
+
             var promise = RecruiterService.findUsersBySkill(vm.rid, skill);
             promise.success(onFindUsersBySkillSuccess);
             promise.error(onFindUsersBySkillError);

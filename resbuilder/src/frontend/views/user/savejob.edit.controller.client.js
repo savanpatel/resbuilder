@@ -47,7 +47,7 @@
 
         function updateJob(job) {
             var updatedJob = angular.copy(job);
-            console.log(updatedJob);
+
             var promise = JobService.updateJob(vm.savedJobId, updatedJob);
 
             promise.success(onUpdateJobSuccess);

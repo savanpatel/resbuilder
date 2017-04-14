@@ -138,7 +138,7 @@
         }
         function onFetchStatsSuccess(response) {
 
-            console.log(response)
+
             vm.userStats.recruiterCount = response.recruiterCount;
             vm.userStats.userCount = response.userCount;
         }

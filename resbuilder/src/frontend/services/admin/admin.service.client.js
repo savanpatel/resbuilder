@@ -29,7 +29,7 @@
             var jsonIn = {
                 "newPass": newpassword
             }
-            console.log("recruiter")
+
             var url = ADMIN_SERVICE_URL + "/" + adminId + "/recruiter/" + userId;
             return $http.put(url,jsonIn);
         }

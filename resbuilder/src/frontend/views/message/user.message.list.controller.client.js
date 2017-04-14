@@ -113,7 +113,6 @@
 
         function GetResumeData(url) {
 
-            console.log("vghbjnklm")
             ResumeDataService.setUrl(url);
             $location.url('/user/'+ vm.uid +'/dashboard/resumeData')
 
@@ -124,12 +123,12 @@
         {
             if(input == null){ return ""; }
             var _date = $filter('date')(new Date(input), 'dd/MM/yyyy');
-            console.log(_date);
+
             return _date.toUpperCase();
         }
 
         function onUpdateIsReadForMessageSuccess(response){
-            console.log(response);
+
             // do nothing.
         }
 

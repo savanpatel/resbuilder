@@ -101,7 +101,7 @@
         {
             if(input == null){ return ""; }
             var _date = $filter('date')(new Date(input), 'dd/MM/yyyy');
-            console.log(_date);
+
             return _date.toUpperCase();
         }
 

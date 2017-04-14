@@ -71,7 +71,7 @@
 
 
         function onDeleteRecruiterByAdminError() {
-            console.log("unsuccessful delete")
+            vm.error="unsuccessful delete"
         }
         
         function onDeleteRecruiterByAdminSuccess() {
@@ -94,12 +94,11 @@
         }
 
         function onUpdateRecruiterByAdminSuccess() {
-            console.log("updated")
-
+            vm.error="updated"
         }
 
         function onUpdateRecruiterByAdminError() {
-            console.log("unSuccessful Update");
+            vm.error="unSuccessful Update"
 
         }
 
@@ -112,7 +111,7 @@
         }
 
         function onFetchRecruitersError(err) {
-            console.log(err);
+           vm.error("error while rendering recruiters")
         }
 
         init();
