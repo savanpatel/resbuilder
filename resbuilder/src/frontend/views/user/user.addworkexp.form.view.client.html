@@ -5,18 +5,18 @@
                     <label for="company" class="col-lg-3 control-label">Compnay Name</label>
                     <div class="col-lg-9">
                         <input name="company" required type="text" class="form-control" id="company" ng-model="model.workexp.companyName" placeholder="Company Name">
-                    </div>
-                    <div ng-messages="workForm.company.$touched && workForm.company.$error">
-                        <p class="text-warning" ng-message="required">the company name is required.</p>
+                        <div ng-messages="workForm.company.$touched && workForm.company.$error">
+                            <p class="text-warning" ng-message="required">the company name is required.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="title" class="col-lg-3 control-label">Job Title</label>
                     <div class="col-lg-9">
                         <input type="text" name="jobtitle" required  class="form-control" id="title" ng-model="model.workexp.jobTitle" placeholder="Job Title">
-                    </div>
-                    <div ng-messages="workForm.jobtitle.$touched && workForm.jobtitle.$error">
-                        <p class="text-warning" ng-message="required">the Job title is required.</p>
+                        <div ng-messages="workForm.jobtitle.$touched && workForm.jobtitle.$error">
+                            <p class="text-warning" ng-message="required">the Job title is required.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -33,9 +33,9 @@
                    <label class="col-lg-3 control-label">Technologies</label>
                     <div class="col-lg-9">
                         <tags-input required name="technology" replace-spaces-with-dashes="false" min-length="1" type="text" ng-model="model.workexp.technologies" placeholder="Technologies"></tags-input>
-                    </div>
-                    <div ng-messages="workForm.technology.$touched && workForm.technology.$error">
-                        <p class="text-warning" ng-message="required">the technology is required.</p>
+                        <div ng-messages="workForm.technology.$touched && workForm.technology.$error">
+                            <p class="text-warning" ng-message="required">the technology is required.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -43,9 +43,9 @@
                     <label for="startdate" class="col-lg-3 control-label">Start Date</label>
                     <div class="col-lg-9">
                         <input type="text" name="startdate" required class="form-control" id="startdate" ng-model="model.workexp.startDate" placeholder="MM/YYYY">
-                    </div>
-                    <div ng-messages="workForm.startdate.$touched && workForm.startdate.$error">
-                        <p class="text-warning" ng-message="required">the start date is required.</p>
+                        <div ng-messages="workForm.startdate.$touched && workForm.startdate.$error">
+                            <p class="text-warning" ng-message="required">the start date is required.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -53,9 +53,9 @@
                     <label for="enddate" class="col-lg-3 control-label">End Date</label>
                     <div class="col-lg-9">
                         <input type="text" name="enddate" required class="form-control" id="enddate" ng-model="model.workexp.endDate" placeholder="MM/YYYY">
-                    </div>
-                    <div ng-messages="workForm.enddate.$touched && workForm.enddate.$error">
-                        <p class="text-warning" ng-message="required">the end date is required.</p>
+                        <div ng-messages="workForm.enddate.$touched && workForm.enddate.$error">
+                            <p class="text-warning" ng-message="required">the end date is required.</p>
+                        </div>
                     </div>
                 </div>
 
