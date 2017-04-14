@@ -51,7 +51,22 @@
             <ng-include src="'views/resume-data/work-exp.view.client.html'"></ng-include>
         </div>
     </div>
+
+    <div ng-show="model.createResumeButtonPressed" class="row">
+        <div id="loader">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="lading"></div>
+        </div>
+    </div>
 </div>
+
 <div class="text-center">
 <a href="" ng-click="model.getResumePdf()" class="btn btn-primary btn-lg">Create Resume</a>
 </div>
