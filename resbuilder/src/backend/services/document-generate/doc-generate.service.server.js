@@ -103,9 +103,7 @@ module.exports = function (app,mongooseAPI) {
                     doc.addParagraph(paragraph);
                 }
 
-                if(data['technical']['languages'] && data['technical']['technologies'] && data['technical']['database'] && data['technical']['softwares'] && data['technical']['operatingSystems']) {
-
-                    var education = docx.createText("TECHNICHAL KNOWLEGDE")
+                   var education = docx.createText("TECHNICHAL KNOWLEGDE")
                     education.bold()
                     var paragraph = docx.createParagraph()
                     paragraph.addText(education).thematicBreak();
@@ -144,7 +142,7 @@ module.exports = function (app,mongooseAPI) {
                     paragraph.addText(lang);
                     paragraph.addText(list_lang);
                     doc.addParagraph(paragraph)
-                }
+
                 //Work Experience
                 var education = docx.createText("WORK EXPERIENCE")
                 education.bold()
