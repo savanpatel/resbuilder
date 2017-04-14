@@ -4,7 +4,7 @@
         .module("ResumeBuilder")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope, $location, UserService, WorkExpService, RecruiterService) {
+    function LoginController($location, UserService, RecruiterService) {
 
             var vm = this;
 
@@ -56,8 +56,15 @@
             function onLoginSuccess(response) {
 
                 var user = response;
+                console.log(user);
+
                 if(user){
-                    $location.url("/user/" + user._id + "/dashboard")
+                    if(user.role == "ADMIN"){
+                        $location.url("/admin/" + user._id + "/dashboard")
+                    } else {
+                        $location.url("/user/" + user._id + "/dashboard");
+                    }
+
                 } else{
                     vm.error = "Invalid Credentials.";
                 }

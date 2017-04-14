@@ -18,6 +18,7 @@
             vm.uid = $routeParams['uid'];
             vm.update = update;
             vm.checkUsernameAvailability = checkUsernameAvailability;
+            vm.logout = logout;
 
             vm.aid = $routeParams['aid'];
             var promise = UserService.findUserById(vm.userId);
@@ -49,6 +50,28 @@
             }
         }
 
+        /*ends the session.*/
+        function logout() {
+
+            var promise = AdminService.logout(vm.aid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
+        }
 
         /*sets helper message if username availability check failed.*/
         function onCheckUsernameAvailableError(response) {

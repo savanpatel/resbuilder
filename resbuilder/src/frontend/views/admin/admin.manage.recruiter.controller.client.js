@@ -24,7 +24,7 @@
 
             vm.aid = $routeParams['aid'];
             vm.deleteByAdmin = deleteByAdmin;
-
+            vm.logout = logout;
             vm.update = update;
 
             fetchRecruitersInfo(vm.aid);
@@ -68,6 +68,7 @@
                 .error(onDeleteRecruiterByAdminError)
             
         }
+
 
         function onDeleteRecruiterByAdminError() {
             console.log("unsuccessful delete")
@@ -134,7 +135,32 @@
         }
 
 
-        /*Promise handlers*/
+
+        /*ends the session.*/
+        function logout() {
+
+            var promise = AdminService.logout(vm.aid);
+
+            promise.success(onLogoutSuccess);
+            promise.error(onLogoutError);
+        }
+
+
+        function onLogoutSuccess(response) {
+            $location.url("/");
+        }
+
+        function onLogoutError(err) {
+
+            if(err == ERR_401){
+                $location.url(ERROR_REDIRECT);
+            } else{
+                $location.url("/");
+            }
+        }
+
+
+
         function onGetNewMessageCountSuccess(response) {
             vm.newMessageCount = response.newMessageCount;
         }
@@ -145,5 +171,8 @@
                 $location.url(ERROR_REDIRECT);
             }
         }
+
+
+
     }
 })();

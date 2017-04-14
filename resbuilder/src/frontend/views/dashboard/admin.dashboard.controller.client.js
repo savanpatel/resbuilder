@@ -153,7 +153,7 @@
 
 
         function onLogoutSuccess(response) {
-            $location.url("/admin/login");
+            $location.url("/");
         }
 
         function onLogoutError(err) {
@@ -161,7 +161,7 @@
             if(err == ERR_401){
                 $location.url(ERROR_REDIRECT);
             } else{
-                $location.url("/admin/login");
+                $location.url("/");
             }
         }
 
