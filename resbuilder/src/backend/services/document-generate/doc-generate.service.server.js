@@ -46,102 +46,140 @@ module.exports = function (app,mongooseAPI) {
     function createDocHelper(req, res,data,filename,userId) {
 
 
-                var docx = officeClippy.docx;
-                var doc = docx.create();
-                var title = docx.createText(data['user']['firstName'] + " " + data['user']['lastName']);
-                title.bold();
-                var paragraph = docx.createParagraph();
-                paragraph.addText(title)
-                paragraph.title().center();
-                doc.addParagraph(paragraph);
+        var docx = officeClippy.docx;
+        var doc = docx.create();
+        var title = docx.createText(data['user']['firstName'] + " " + data['user']['lastName']);
+        title.bold();
+        var paragraph = docx.createParagraph();
+        paragraph.addText(title)
+        paragraph.title().center();
+        doc.addParagraph(paragraph);
 
-                var tempList = [];
 
-                if(data['user']['contact']){
-                    tempList.push(data['user']['contact'])
-                }
-                if(data['user']['email']){
-                    tempList.push(data['user']['email'])
-                }
-                if(data['user']['githubUrl']){
-                    tempList.push(data['user']['githubUrl'])
-                }
 
-                var info = docx.createText(tempList.join(" | "))
+        var tempList = [];
 
-                var paragraph = docx.createParagraph()
-                paragraph.addText(info);
-                paragraph.center().thematicBreak();
-                doc.addParagraph(paragraph);
+        if (data['user']['contact']) {
+            tempList.push(data['user']['contact'])
+        }
+        if (data['user']['email']) {
+            tempList.push(data['user']['email'])
+        }
+        if (data['user']['githubUrl']) {
+            tempList.push(data['user']['githubUrl'])
+        }
 
-                // Education added
+        var info = docx.createText(tempList.join(" | "))
 
-                var education = docx.createText("EDUCATION")
-                education.bold()
-                var paragraph = docx.createParagraph()
-                paragraph.addText(education).thematicBreak();
-                paragraph.heading1();
-                doc.addParagraph(paragraph);
+        var paragraph = docx.createParagraph()
+        paragraph.addText(info);
+        paragraph.center().thematicBreak();
+        doc.addParagraph(paragraph);
 
-                // First College
+        // Education added
 
-                for (var i = 0; i < data['education'].length; i++) {
-                    var tabStop = docx.createMaxRightTabStop();
-                    var paragraph = docx.createParagraph().addTabStop(tabStop);
-                    var leftText = docx.createText(data['education'][i]['school']).bold();
-                    var rightText = docx.createText(data['education'][i]['startYear'] + " – " + data['education'][i]['endYear']).tab();
-                    paragraph.addText(leftText);
-                    paragraph.addText(rightText);
-                    var college = docx.createText(data['education'][i]['degree'] + " in " + data['education'][i]['field'])
-                    var degree_date = docx.createText("GPA: " + data['education'][i]['grade']).tab();
-                    college.break();
-                    paragraph.addText(college);
-                    paragraph.addText(degree_date);
-                    var course = docx.createText("Relevant Courses: " + data['education'][i]['courses'].join(", "));
-                    course.break();
-                    paragraph.addText(course)
-                    doc.addParagraph(paragraph);
-                }
+        var education = docx.createText("EDUCATION")
+        education.bold()
+        var paragraph = docx.createParagraph()
+        paragraph.addText(education).thematicBreak();
+        paragraph.heading1();
+        doc.addParagraph(paragraph);
 
-                   var education = docx.createText("TECHNICHAL KNOWLEGDE")
-                    education.bold()
-                    var paragraph = docx.createParagraph()
-                    paragraph.addText(education).thematicBreak();
-                    paragraph.heading1();
-                    doc.addParagraph(paragraph);
+        var x = data['technical']['technologies'].length;
+        var a = data['technical']['languages'].length;
+        var b = data['technical']['softwares'].length;
+        var c = data['technical']['database'].length;
+        var d = data['technical']['operatingSystems'].length;
 
-                    var tabStop = docx.createLeftTabStop(2700);
-                    var paragraph = docx.createParagraph().addTabStop(tabStop);
-                    var lang = docx.createText("Languages:").bold()
-                    var list_lang = docx.createText(data['technical']['languages'].join(", ")).tab();
-                    paragraph.addText(lang);
-                    paragraph.addText(list_lang);
+        console.log(a)
+        console.log(b)
+        console.log(c)
+        console.log(d)
+        console.log(x)
+
+        // First College
+
+        for (var i = 0; i < data['education'].length; i++) {
+            var tabStop = docx.createMaxRightTabStop();
+            var paragraph = docx.createParagraph().addTabStop(tabStop);
+            var leftText = docx.createText(data['education'][i]['school']).bold();
+            var rightText = docx.createText(data['education'][i]['startYear'] + " – " + data['education'][i]['endYear']).tab();
+            paragraph.addText(leftText);
+            paragraph.addText(rightText);
+            var college = docx.createText(data['education'][i]['degree'] + " in " + data['education'][i]['field'])
+            var degree_date = docx.createText("GPA: " + data['education'][i]['grade']).tab();
+            college.break();
+            paragraph.addText(college);
+            paragraph.addText(degree_date);
+            var course = docx.createText("Relevant Courses: " + data['education'][i]['courses'].join(", "));
+            course.break();
+            paragraph.addText(course)
+            doc.addParagraph(paragraph);
+        }
+
+
+        if (x != 0 || a != 0 || b != 0 || c != 0 || d != 0) {
+
+            console.log("TECHNICAL KNOWLEDGE")
+
+            var education = docx.createText("TECHNICAL KNOWLEDGE")
+            education.bold()
+            var paragraph = docx.createParagraph()
+            paragraph.addText(education).thematicBreak();
+            paragraph.heading1();
+            doc.addParagraph(paragraph);
+        }
+        var tabStop = docx.createLeftTabStop(2700);
+        var paragraph1 = docx.createParagraph().addTabStop(tabStop);
+
+        if (a != 0){
+
+            console.log("lang")
+            var lang = docx.createText("Languages:").bold()
+            var list_lang = docx.createText(data['technical']['languages'].join(", ")).tab();
+            paragraph1.addText(lang);
+            paragraph1.addText(list_lang);
+        }
 
 //Web Technologies
-                    var lang = docx.createText("Web Technologies:").bold().break()
-                    var list_lang = docx.createText(data['technical']['technologies'].join(", ")).tab();
-                    paragraph.addText(lang);
-                    paragraph.addText(list_lang);
+        if (x != 0) {
+            console.log("tech")
+            var lang = docx.createText("Web Technologies:").bold().break()
+            var list_lang = docx.createText(data['technical']['technologies'].join(", ")).tab();
+            paragraph1.addText(lang)
+            paragraph1.addText(list_lang);
+        }
 
 // //software
-                    var lang = docx.createText("Software:").bold().break()
-                    var list_lang = docx.createText(data['technical']['softwares'].join(",")).tab();
-                    paragraph.addText(lang);
-                    paragraph.addText(list_lang);
-
+        if(b != 0) {
+            console.log("soft")
+            var lang = docx.createText("Software:").bold().break()
+            var list_lang = docx.createText(data['technical']['softwares'].join(", ")).tab();
+            paragraph1.addText(lang);
+            paragraph1.addText(list_lang);
+        }
 
 //Database
-                    var lang = docx.createText("Software:").bold().break()
-                    var list_lang = docx.createText(data['technical']['database'].join(",")).tab();
-                    paragraph.addText(lang);
-                    paragraph.addText(list_lang);
-                    doc.addParagraph(paragraph)
+        if(c != 0) {
 
-                    var lang = docx.createText("Operating Systems:").bold().break()
-                    var list_lang = docx.createText(data['technical']['operatingSystems'].join(",")).tab();
-                    paragraph.addText(lang);
-                    paragraph.addText(list_lang);
-                    doc.addParagraph(paragraph)
+            console.log("data")
+            var lang = docx.createText("Database:").bold().break()
+            var list_lang = docx.createText(data['technical']['database'].join(", ")).tab();
+            paragraph1.addText(lang);
+            paragraph1.addText(list_lang);
+
+        }
+
+        if(d != 0) {
+
+            console.log("os")
+            var lang = docx.createText("Operating Systems:").bold().break()
+            var list_lang = docx.createText(data['technical']['operatingSystems'].join(", ")).tab();
+            paragraph1.addText(lang);
+            paragraph1.addText(list_lang);
+
+        }
+        doc.addParagraph(paragraph1)
 
                 //Work Experience
                 var education = docx.createText("WORK EXPERIENCE")
