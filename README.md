@@ -1,6 +1,9 @@
 ## Resume Builder ##
 Parse job description url and tailor resume for user from profile.
 
+## Link to website ##
+http://ec2-52-34-186-114.us-west-2.compute.amazonaws.com/#/
+
 
 ## Motivation ##
 Tailoring resume for each job can be pain consuming lot of time. What if there was a system that would do it for us by just giving a job description url?
@@ -18,7 +21,7 @@ Python
  1. Install Pyhton.
  2. Install pip if not present.
  3. Install BeautifulSoup for crawler in python.
-	 3. `pip install beautifulsoup4`
+    `pip install beautifulsoup4`
  
 NodeJS
  Install node js and then to install required npm packages,
