@@ -20,7 +20,7 @@
         this.jobDesURl = "";
 
         function getResumeData(uid, url) {
-            var getResumeDataUrl = RESUME_DATA_SERVICE_URL + "/" + uid + "/?url=" + url;
+            var getResumeDataUrl = RESUME_DATA_SERVICE_URL + "/" + uid + "?url=" + url;
             return $http.get(getResumeDataUrl);
         }
 
