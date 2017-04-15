@@ -192,6 +192,7 @@
 
             if(vm.JobURL == null || vm.JobURL == ""){
                 vm.error = "Empty job description";
+                return;
             }
 
             if(sw === 0) {
