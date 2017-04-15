@@ -9,6 +9,11 @@
     {{model.error}}
 </div>
 <div class="container">
+    <div class="form-group">
+        <div class="col-lg-12">
+            <span class="form-control help-block"  ng-show="model.error" ng-model="model.error" disabled="">{{model.error}}</span>
+        </div>
+    </div>
     <div class="row mt40">
 <section>
     <ng-include src="'views/resumes/resume-thumbnail.view.client.html'"></ng-include>

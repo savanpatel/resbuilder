@@ -15,6 +15,8 @@
             vm.isCollapsed = false;
             vm.uid = $routeParams['uid'];
 
+            vm.error = null;
+
             vm.editResume = editResume;
             vm.deleteResume = deleteResume;
             vm.logout = logout;
@@ -104,6 +106,9 @@
             var loop = -1;
 
 
+            if(resumes.length == 0){
+                vm.error = "No resumes yet!";
+            }
             for(var j = 0;j<resumes.length;j++){
 
                 var jsonResume = {
