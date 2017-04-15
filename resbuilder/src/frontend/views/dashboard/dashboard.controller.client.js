@@ -190,7 +190,9 @@
         function GetResumeData(sw) {
 
 
-
+            if(vm.JobURL == null || vm.JobURL == ""){
+                vm.error = "Empty job description";
+            }
 
             if(sw === 0) {
 
