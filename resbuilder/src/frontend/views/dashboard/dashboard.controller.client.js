@@ -189,15 +189,16 @@
 
         function GetResumeData(sw) {
 
-
-            if(vm.JobURL == null || vm.JobURL == ""){
-                vm.error = "Empty job description";
-                return;
-            }
-
             if(sw === 0) {
 
-                ResumeDataService.setUrl(vm.JobURL);
+                if(vm.JobURL == null || vm.JobURL == ""){
+                    vm.error = "Empty job description";
+                    return;
+                }
+                else {
+
+                    ResumeDataService.setUrl(vm.JobURL);
+                }
 
             }
             else {
